@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity"
+            android:label="@string/title_activity_activity" >
+        </activity>
+        <activity
+            android:name=".collection"
+            android:label="@string/title_activity_collection" >
+        </activity>
     </application>
 
 </manifest>
