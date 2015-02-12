@@ -2,13 +2,19 @@
 <resources>
 
     <string name="app_name">DinGo</string>
-
     <string name="action_settings">Settings</string>
+
+    <!-- Demo Text -->
     <string name="title_activity_activity">activity</string>
     <string name="title_activity_collection">collection</string>
-
     <string name="display_fragment">Hello fragment</string>
     <string name="collection">Collection</string>
     <string name="external_activity">External Activity</string>
 
+    <!-- ActionBar Titles -->
+    <string name="customerView_1">Eat &amp; Drink</string>
+
+    <string name="tab1_text">All</string>
+    <string name="tab2_text">Dings</string>
+    <string name="tab3_text">Map</string>
 </resources>

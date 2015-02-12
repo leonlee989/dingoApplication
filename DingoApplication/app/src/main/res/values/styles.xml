@@ -14,6 +14,12 @@
         <item name="android:background">@color/red</item>
     </style>
 
+    <!-- ActionBar title text -->
+    <style name="styleActionBarTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <!-- ActionBar Tab style -->
     <style name="CustomActionBarTab"
         parent="@style/Widget.AppCompat.ActionBar.TabView">
