@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">DinGo</string>
+    <string name="app_name">DingGo</string>
     <string name="action_settings">Settings</string>
 
     <!-- Demo Text -->
@@ -13,8 +13,11 @@
 
     <!-- ActionBar Titles -->
     <string name="customerView_1">Eat &amp; Drink</string>
-
     <string name="tab1_text">All</string>
     <string name="tab2_text">Dings</string>
     <string name="tab3_text">Map</string>
+    <string name="title_activity_customer">CustomerActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_eat_drink">EatDrinkActivity</string>
+
 </resources>
