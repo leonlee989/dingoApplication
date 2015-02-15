@@ -3,6 +3,8 @@ package com.example.leon.dingoapplication;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,59 +26,96 @@ public class CustomerActivity extends ListActivity {
 
         // Customized title as TextView in the ActionBar
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.actionbar_custom);
+        actionBar.setCustomView(R.layout.actionbar_landing_custom);
 
-        // Set title text for activity
-        TextView title = (TextView) findViewById(R.id.customer_home_title);
+        // Set image for activity action bar
+        ImageView image = (ImageView) findViewById(R.id.actionbar_icon);
+        image.setImageResource(R.drawable.bell);
+
+        // Set Font for title text
+        TextView title = (TextView) findViewById(R.id.actionbar_title);
+        Typeface normalFont = Typeface.createFromAsset(getAssets(), getResources().getString(R.string.font_normal));
+        title.setTypeface(normalFont);
+
+        // Set title text for activity action bar
         title.setText(getResources().getString(R.string.app_name));
 
-        /**
-         * Default setting of values for list view
-         * TO BE REMOVED
-         */
-        String[] values = new String[] { "Eat & Drink", "Watch", "Play",
-                "Buy", "Dinged", "Preferences"};
+        // Menu context to be display on customer landing page
+        final int noOfOptions = 6;
+        String[] values = new String[noOfOptions];
+        for (int i=0; i < noOfOptions; ++i) {
+            String resName = "customer_optionText_" + (i+1);
+            int resId = getResources().getIdentifier(resName, "string", getPackageName());
 
-        final MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, values);
+            values[i] = getResources().getString(resId);
+        }
+
+        final CustomerArrayAdapter adapter = new CustomerArrayAdapter(this, values);
         setListAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        String item = (String) getListAdapter().getItem(position);
-        Toast.makeText(CustomerActivity.this, item + " selected", Toast.LENGTH_LONG).show();
+        // Actions for individual actions
+        switch (position) {
+            case 0:
+                Intent intent = new Intent(CustomerActivity.this, EatDrinkActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                String item = (String) getListAdapter().getItem(position);
+                Toast.makeText(CustomerActivity.this, item + " selected", Toast.LENGTH_LONG).show();
+        }
     }
     /**
-     * Demonstration for ArrayAdapter by default
+     * ArrayAdapter class to display rows of option for customer landing page
      */
-    private class MySimpleArrayAdapter extends ArrayAdapter<String> {
+    private class CustomerArrayAdapter extends ArrayAdapter<String> {
         private final Context context;
         private final String[] values;
 
-        public MySimpleArrayAdapter(Context context, String[] values) {
-            super(context, R.layout.customer_landing_row, values);
+        public CustomerArrayAdapter(Context context, String[] values) {
+            super(context, R.layout.landing_row, values);
             this.context = context;
             this.values = values;
         }
-
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View rowView = inflater.inflate(R.layout.customer_landing_row, parent, false);
+            View rowView = inflater.inflate(R.layout.landing_row, parent, false);
 
+            // Set label for different options
             TextView label = (TextView) rowView.findViewById(R.id.landing_label);
+            Typeface normalFont = Typeface.createFromAsset(getAssets(), getResources().getString(R.string.font_normal));
+            label.setTypeface(normalFont);
+
+            // Set value for label
+            label.setText(values[position]);
+
+            // Changing to the different icons
             ImageView imageIcon = (ImageView) rowView.findViewById(R.id.landing_icon);
-
-            String s = values[position];
-
-            label.setText(s);
-            if (s.startsWith("Watch") || s.startsWith("Dinged")) {
-                imageIcon.setImageResource(R.drawable.minus);
-            } else {
-                imageIcon.setImageResource(R.drawable.plus);
+            switch (position) {
+                case 0:
+                    imageIcon.setImageResource(R.drawable.meal);
+                    break;
+                case 1:
+                    imageIcon.setImageResource(R.drawable.watch);
+                    break;
+                case 2:
+                    imageIcon.setImageResource(R.drawable.play);
+                    break;
+                case 3:
+                    imageIcon.setImageResource(R.drawable.buy);
+                    break;
+                case 4:
+                    imageIcon.setImageResource(R.drawable.ding);
+                    break;
+                case 5:
+                    imageIcon.setImageResource(R.drawable.preferences);
+                    break;
             }
 
             return rowView;

@@ -3,12 +3,17 @@ package com.example.leon.dingoapplication;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +40,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_eat_drink);
 
         // Create the adapter that will return a fragment for each of the three primary sections
@@ -47,6 +51,12 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
         // Customized title as TextView in the ActionBar
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.actionbar_custom);
+
+        // Set title text for activity action bar
+        TextView title = (TextView) findViewById(R.id.actionbar_home_title);
+        Typeface normalFont = Typeface.createFromAsset(getAssets(), getResources().getString(R.string.font_normal));
+        title.setTypeface(normalFont);
+        title.setText(getResources().getString(R.string.customer_optionText_1));
 
         // Specify that the home/up button should not be enables since there is no hierarchical parent
         actionBar.setHomeButtonEnabled(false);
@@ -69,10 +79,12 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
 
         // For each of the section, add a tab to the action bar
         for (int i = 0; i < mAppSectionPagerAdapter.getCount(); i++) {
+
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mAppSectionPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
+
         }
 
     }
@@ -130,7 +142,7 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
         @Override
         public CharSequence getPageTitle(int position) {
             // Dynamic return of title name according to the tab number from string.xml
-            String tabString = "tab" + (position + 1) + "_text";
+            String tabString = "eatDrink_tabText_" + (position + 1);
             int resID = mContext.getResources()
                     .getIdentifier(tabString, "string", mContext.getPackageName());
             return mContext.getResources().getString(resID);

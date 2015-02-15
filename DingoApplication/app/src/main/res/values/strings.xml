@@ -4,20 +4,30 @@
     <string name="app_name">DingGo</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Font -->
+    <string name="font_normal">fonts/Nexa Light.otf</string>
+
     <!-- Demo Text -->
     <string name="title_activity_activity">activity</string>
     <string name="title_activity_collection">collection</string>
     <string name="display_fragment">Hello fragment</string>
     <string name="collection">Collection</string>
     <string name="external_activity">External Activity</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Customer landing page -->
+    <string name="customer_optionText_1">Eat &amp; Drink</string>
+    <string name="customer_optionText_2">Watch</string>
+    <string name="customer_optionText_3">Play</string>
+    <string name="customer_optionText_4">Buy</string>
+    <string name="customer_optionText_5">Dinged</string>
+    <string name="customer_optionText_6">Preferences</string>
 
     <!-- ActionBar Titles -->
-    <string name="customerView_1">Eat &amp; Drink</string>
-    <string name="tab1_text">All</string>
-    <string name="tab2_text">Dings</string>
-    <string name="tab3_text">Map</string>
+    <string name="eatDrink_tabText_1">All</string>
+    <string name="eatDrink_tabText_2">Dings</string>
+    <string name="eatDrink_tabText_3">Map</string>
     <string name="title_activity_customer">CustomerActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_eat_drink">EatDrinkActivity</string>
 
 </resources>
