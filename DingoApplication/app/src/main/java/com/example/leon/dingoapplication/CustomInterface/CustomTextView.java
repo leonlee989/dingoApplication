@@ -1,9 +1,11 @@
-package com.example.leon.dingoapplication;
+package com.example.leon.dingoapplication.CustomInterface;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import com.example.leon.dingoapplication.R;
 
 /**
  * Created by Leon on 15/2/2015.

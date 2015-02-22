@@ -1,4 +1,4 @@
-package com.example.leon.dingoapplication;
+package com.example.leon.dingoapplication.Activities;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
@@ -6,14 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.leon.dingoapplication.R;
 
 public class CustomerActivity extends ListActivity {
 
@@ -86,6 +91,11 @@ public class CustomerActivity extends ListActivity {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View rowView = inflater.inflate(R.layout.landing_row, parent, false);
+
+            // Adjust resolution
+            RelativeLayout layout = (RelativeLayout) rowView.findViewById(R.id.rowId);
+            Display display = getWindowManager().getDefaultDisplay();
+            layout.getLayoutParams().height = (display.getHeight() - 35*6) /6;
 
             // Set label for different options
             TextView label = (TextView) rowView.findViewById(R.id.landing_label);

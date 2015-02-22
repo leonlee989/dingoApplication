@@ -1,4 +1,4 @@
-package com.example.leon.dingoapplication;
+package com.example.leon.dingoapplication.Activities;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.leon.dingoapplication.R;
 
 
 public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener {

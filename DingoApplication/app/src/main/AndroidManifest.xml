@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/dingoTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,15 +17,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CollectionActivity"
+            android:name=".Activities.CollectionActivity"
             android:label="@string/collection" >
         </activity>
         <activity
-            android:name=".CustomerActivity"
+            android:name=".Activities.CustomerActivity"
             android:label="@string/title_activity_customer" >
         </activity>
         <activity
-            android:name=".EatDrinkActivity"
+            android:name=".Activities.EatDrinkActivity"
             android:label="@string/title_activity_eat_drink" >
         </activity>
     </application>
