@@ -5,7 +5,10 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.leon.dingoapplication.Bootstrap;
+import com.example.leon.dingoapplication.Constants;
 import com.example.leon.dingoapplication.R;
 
 public class MainActivity extends FragmentActivity {
@@ -13,6 +16,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bootstrap initialization = new Bootstrap(this);
         setContentView(R.layout.activity_main);
 
         // When login button is clicked
@@ -21,6 +25,10 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 EditText usernameControl = (EditText) findViewById(R.id.username);
                 String username = usernameControl.getText().toString();
+
+                // Determine constant valuable work: TO BE REMOVED
+                int i = Constants.merchantManager.getMerchantList().size();
+                Toast.makeText(MainActivity.this, "Size: " + i, Toast.LENGTH_LONG).show();
 
                 // Determine customer or merchant activity to access
                 if (username.equalsIgnoreCase("customer")) {

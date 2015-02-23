@@ -1,5 +1,7 @@
 package com.example.leon.dingoapplication;
 
+import com.example.leon.dingoapplication.Manager.MerchantManager;
+
 import java.text.SimpleDateFormat;
 
 /**
@@ -7,4 +9,5 @@ import java.text.SimpleDateFormat;
  */
 public class Constants {
     public static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    public static MerchantManager merchantManager = new MerchantManager();
 }
