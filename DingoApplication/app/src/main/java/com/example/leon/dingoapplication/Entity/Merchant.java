@@ -28,6 +28,10 @@ public class Merchant {
      */
     String merchantName;
     /**
+     * Type of merchant
+     */
+    String merchantType;
+    /**
      * Address of the shop
      */
     Address address;
@@ -42,14 +46,16 @@ public class Merchant {
      * @param image
      * @param companyName
      * @param merchantName
+     * @param merchantType
      * @param address
      */
     public Merchant(String merchantId, Bitmap image, String companyName, String merchantName,
-                    Address address) {
+                    String merchantType, Address address) {
         this.merchantId = merchantId;
         this.image = image;
         this.companyName = companyName;
         this.merchantName = merchantName;
+        this.merchantType = merchantType;
         this.address = address;
 
         this.dealList = new ArrayList<Deal>();
@@ -61,15 +67,17 @@ public class Merchant {
      * @param image
      * @param companyName
      * @param merchantName
+     * @param merchantType
      * @param address
      * @param dealList
      */
     public Merchant(String merchantId, Bitmap image, String companyName, String merchantName,
-                    Address address, ArrayList<Deal> dealList) {
+                    String merchantType, Address address, ArrayList<Deal> dealList) {
         this.merchantId = merchantId;
         this.image = image;
         this.companyName = companyName;
         this.merchantName = merchantName;
+        this.merchantType = merchantType;
         this.address = address;
 
         this.dealList = dealList;
@@ -137,6 +145,22 @@ public class Merchant {
      */
     public void setMerchantName(String merchantName) {
         this.merchantName = merchantName;
+    }
+
+    /**
+     * Get the type of the merchant
+     * @return merchantType
+     */
+    public String getMerchantType() {
+        return this.merchantType;
+    }
+
+    /**
+     * Set the type of the merchant
+     * @param merchantType
+     */
+    public void setMerchantType(String merchantType) {
+        this.merchantType = merchantType;
     }
 
     /**
