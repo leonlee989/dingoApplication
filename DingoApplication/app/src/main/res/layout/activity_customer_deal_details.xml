@@ -1,17 +1,197 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentTop="true"
     tools:context="com.example.leon.dingoapplication.Activities.CustomerDealDetailsActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dealImage"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/dealImage" />
+    <TextView
+        android:id="@+id/companyName"
+        android:layout_width="wrap_content"
+        android:layout_height="80px"
+        android:layout_alignLeft="@+id/dealImage"
+        android:layout_alignRight="@+id/dealImage"
+        android:layout_alignBottom="@+id/dealImage"
+        android:gravity="bottom|center_horizontal"
+        android:textSize="38px"
+        android:textColor="@color/white"
+        android:background="@drawable/gradientbackground"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/dealImage"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/merchantDescription"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Description"
+            android:gravity="center_horizontal"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+            <LinearLayout
+                android:layout_width="0dp"
+                tools:ignore="Suspicious0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:layout_weight="3">
+                <TextView
+                    android:id="@+id/merchantAddress"
+                    android:text="Address"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+                <TextView
+                    android:id="@+id/merchantWebAddress"
+                    android:text="Web Address"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+
+                <TextView
+                    android:id="@+id/merchantMobileNumber"
+                    android:text="Mobile Number"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+            </LinearLayout>
+            <com.google.android.gms.maps.MapView
+                xmlns:map="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/mapview"
+                android:layout_width="0dp"
+                tools:ignore="Suspicious0dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <View style="@style/hDivider"/>
+        <TextView
+            android:id="@+id/discount"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Discount"
+            android:gravity="center_horizontal"
+            android:padding="10dp"/>
+        <View style="@style/hDivider"/>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:orientation="horizontal">
+            <TableRow>
+                <TextView
+                    android:id="@+id/seats"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="8"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:layout_column="0"/>
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <View style="@style/vDivider" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/timeleft"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="0h25m"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:layout_column="1"/>
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <View style="@style/vDivider" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/redeemBy"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="2:00PM"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:layout_column="2"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/seatsText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Seats Left"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:layout_column="0"/>
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <View style="@style/vDivider" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/timeleftText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="to claim"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:layout_column="1"/>
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <View style="@style/vDivider" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/redeemByText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="to redeem by"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:layout_column="2"/>
+            </TableRow>
+        </TableLayout>
+        <View style="@style/hDivider"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/dingFor"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Ding For"
+                android:padding="10dp"
+                android:gravity="center"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/dingItButton"
+            android:background="@color/red"
+            android:text="Ding It!"
+            android:padding="15dp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 </RelativeLayout>
