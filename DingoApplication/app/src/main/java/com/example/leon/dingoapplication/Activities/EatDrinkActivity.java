@@ -3,6 +3,7 @@ package com.example.leon.dingoapplication.Activities;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -15,13 +16,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.leon.dingoapplication.Fragments.CustomerViewAll;
+import com.example.leon.dingoapplication.Fragments.CustomerViewDings;
+import com.example.leon.dingoapplication.Fragments.CustomerViewMap;
 import com.example.leon.dingoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener,
-        CustomerViewAll.OnFragmentInteractionListener {
+        CustomerViewAll.OnDealFragmentInteractionListener,
+        CustomerViewMap.OnMapFragmentInteractionListener,
+        CustomerViewDings.OnDingsFragmentInteractionListener{
 
     /*
     PagerAdapter that will provide fragments for each of the three primary section of the application
@@ -104,11 +109,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
         // Actions when the tab is reselected
     }
 
-    @Override
-    public void onFragmentInteraction(String id) {
-
-    }
-
     /*
     a @link FragmentPagerAdapter that returns a fragment corresponding to one of the primary
     sections of the app.
@@ -153,26 +153,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
         }
     }
 
-    public static class CustomerViewDings extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.customer_view_dings, container, false);
-
-            return rootView;
-        }
-    }
-
-    public static class CustomerViewMap extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.customer_view_map, container, false);
-
-            return rootView;
-        }
-    }
-
     /**
      * A placeholder fragment containing default view in a section.
      * To be removed
@@ -192,6 +172,21 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
 
             return rootView;
         }
+    }
+
+    @Override
+    public void onDealFragmentInteraction(String id) {
+
+    }
+
+    @Override
+    public void onDingsFragmentInteraction(String id) {
+
+    }
+
+    @Override
+    public void onMapFragmentInteraction() {
+
     }
 
     @Override

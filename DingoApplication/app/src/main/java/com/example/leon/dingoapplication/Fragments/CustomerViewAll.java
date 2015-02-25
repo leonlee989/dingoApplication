@@ -33,7 +33,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnDealFragmentInteractionListener}
  * interface.
  */
 public class CustomerViewAll extends Fragment implements AbsListView.OnItemClickListener {
@@ -41,7 +41,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     /**
      * Fragment listener for the activity that calls this fragment
      */
-    private OnFragmentInteractionListener mListener;
+    private OnDealFragmentInteractionListener mListener;
 
     /**
      * The fragment's ListView/GridView.
@@ -73,7 +73,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         View view = inflater.inflate(R.layout.customer_all_tab, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView = (AbsListView) view.findViewById(R.id.dealList);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -88,10 +88,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      */
     @Override
     public void onAttach(Activity activity) {
-        Toast.makeText(getActivity(), "Attached", Toast.LENGTH_LONG).show();
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnDealFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -103,7 +102,6 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      */
     @Override
     public void onDetach() {
-        Toast.makeText(getActivity(), "Detached", Toast.LENGTH_LONG).show();
         super.onDetach();
         mListener = null;
     }
@@ -121,7 +119,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             Deal deal = Constants.dealManager.getDeal(position);
-            mListener.onFragmentInteraction(deal.getReferenceCode());
+            mListener.onDealFragmentInteraction(deal.getReferenceCode());
             //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(getActivity().getBaseContext(), CustomerDealDetailsActivity.class);
@@ -142,18 +140,16 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             ((TextView) emptyView).setText(emptyText);
         }
     }
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnDealFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        public void onDealFragmentInteraction(String id);
     }
-
     /**
      * Custom ArrayAdapter to display deal details in a list view
      */

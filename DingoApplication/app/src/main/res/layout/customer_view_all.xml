@@ -32,7 +32,7 @@
             android:textColor="@color/white" />
         </RelativeLayout>
 
-    <ListView android:id="@android:id/list"
+    <ListView android:id="@+id/dealList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/dealHeader"/>
