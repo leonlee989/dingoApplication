@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.leon.dingoapplication.Fragments.CustomerViewAll;
 import com.example.leon.dingoapplication.Fragments.CustomerViewDings;
@@ -26,7 +27,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener,
         CustomerViewAll.OnDealFragmentInteractionListener,
         CustomerViewMap.OnMapFragmentInteractionListener,
-        CustomerViewDings.OnDingsFragmentInteractionListener{
+        CustomerViewDings.OnDingsFragmentInteractionListener,
+        View.OnClickListener {
 
     /*
     PagerAdapter that will provide fragments for each of the three primary section of the application
@@ -176,17 +178,23 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
 
     @Override
     public void onDealFragmentInteraction(String id) {
-
+        // Fragment interaction from all deals fragment
     }
 
     @Override
     public void onDingsFragmentInteraction(String id) {
-
+        // Fragment interaction from Dings Fragment
     }
 
     @Override
     public void onMapFragmentInteraction() {
+        // Fragment interaction from Map Fragment
+    }
 
+    @Override
+    public void onClick(View v) {
+        // For advanced filtering feature in Map Fragment
+        Toast.makeText(this, "Advanced Filtering", Toast.LENGTH_LONG).show();
     }
 
     @Override

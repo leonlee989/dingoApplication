@@ -1,6 +1,8 @@
 package com.example.leon.dingoapplication.Fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.net.Uri;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leon.dingoapplication.R;
@@ -47,6 +50,7 @@ public class CustomerViewMap extends Fragment {
 
         // Inflate the layout for this fragment
         View view = (RelativeLayout) inflater.inflate(R.layout.customer_view_map, container, false);
+
         initializeMap();
         return view;
     }

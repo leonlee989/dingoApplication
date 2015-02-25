@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">DingGo</string>
-    <string name="action_settings">Settings</string>
+    <string name="advancedFilter"><u>Advanced Filter</u></string>
 
     <!-- Font -->
     <string name="font_normal">fonts/Nexa Light.otf</string>
@@ -43,5 +43,7 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_merchant">MerchantActivity</string>
+    <string name="title_activity_ding_adeal">DingADeal</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

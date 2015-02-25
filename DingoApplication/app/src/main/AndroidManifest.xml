@@ -59,6 +59,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.leon.dingoapplication.Activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".Activities.DingADeal"
+            android:label="@string/title_activity_ding_adeal"
+            android:parentActivityName=".Activities.MerchantActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.leon.dingoapplication.Activities.MerchantActivity" />
+        </activity>
     </application>
 
 </manifest>

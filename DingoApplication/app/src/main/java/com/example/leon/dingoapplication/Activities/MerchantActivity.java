@@ -3,6 +3,7 @@ package com.example.leon.dingoapplication.Activities;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -62,6 +63,10 @@ public class MerchantActivity extends ListActivity {
     public void onListItemClick(ListView l, View v, int position, long id) {
         // Action for individual actions
         switch(position) {
+            case 0:
+                Intent intent = new Intent(MerchantActivity.this, DingADeal.class);
+                startActivity(intent);
+                break;
             default:
                 String item = (String) getListAdapter().getItem(position);
                 Toast.makeText(MerchantActivity.this, item + " selected", Toast.LENGTH_LONG).show();
