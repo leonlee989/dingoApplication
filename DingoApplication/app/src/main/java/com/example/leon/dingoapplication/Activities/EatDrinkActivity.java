@@ -19,10 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.leon.dingoapplication.Fragments.CustomerViewAll;
 import com.example.leon.dingoapplication.R;
 
 
-public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener {
+public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener,
+        CustomerViewAll.OnFragmentInteractionListener {
 
     /*
     PagerAdapter that will provide fragments for each of the three primary section of the application
@@ -107,6 +109,11 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
         // Actions when the tab is reselected
     }
 
+    @Override
+    public void onFragmentInteraction(String id) {
+
+    }
+
     /*
     a @link FragmentPagerAdapter that returns a fragment corresponding to one of the primary
     sections of the app.
@@ -148,18 +155,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
             int resID = mContext.getResources()
                     .getIdentifier(tabString, "string", mContext.getPackageName());
             return mContext.getResources().getString(resID);
-        }
-    }
-
-    // Fragment that display all deals available for customers
-    public static class CustomerViewAll extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.customer_view_all, container, false);
-
-
-            return rootView;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.leon.dingoapplication.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Initialize Constant Object
         Bootstrap initialization = new Bootstrap(this);
         setContentView(R.layout.activity_main);
 
@@ -25,10 +27,6 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 EditText usernameControl = (EditText) findViewById(R.id.username);
                 String username = usernameControl.getText().toString();
-
-                // Determine constant valuable work: TO BE REMOVED
-                int i = Constants.merchantManager.getMerchantList().size();
-                Toast.makeText(MainActivity.this, "Size: " + i, Toast.LENGTH_LONG).show();
 
                 // Determine customer or merchant activity to access
                 if (username.equalsIgnoreCase("customer")) {

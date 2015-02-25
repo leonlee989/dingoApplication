@@ -151,6 +151,6 @@ public class TierDiscount extends Deal {
 
     @Override
     public String toString() {
-        return "$" + discountAmount + " off $" + this.tierAmount + "spent";
+        return "$" + (long) this.discountAmount + " off $" + (long) this.tierAmount + " spent";
     }
 }

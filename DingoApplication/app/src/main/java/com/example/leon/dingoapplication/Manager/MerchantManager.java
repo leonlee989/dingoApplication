@@ -39,6 +39,15 @@ public class MerchantManager {
     }
 
     /**
+     * Retrieve Merchant Object by Index
+     * @param index
+     * @return merchant
+     */
+    public Merchant getMerchant(int index) {
+        return this.merchantList.get(index);
+    }
+
+    /**
      * Set the list of merchant
      * @param merchantList
      */
