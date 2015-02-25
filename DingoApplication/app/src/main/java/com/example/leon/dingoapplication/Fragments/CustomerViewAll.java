@@ -2,6 +2,7 @@ package com.example.leon.dingoapplication.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,11 +13,11 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.leon.dingoapplication.Activities.CustomerDealDetailsActivity;
 import com.example.leon.dingoapplication.Constants;
 import com.example.leon.dingoapplication.Entity.Deal;
 import com.example.leon.dingoapplication.Entity.Merchant;
@@ -119,10 +120,13 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            Merchant merchant = Constants.merchantManager.getMerchant(position);
-            mListener.onFragmentInteraction(merchant.getMerchantId());
-            Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(),
-                    Toast.LENGTH_LONG).show();
+            Deal deal = Constants.dealManager.getDeal(position);
+            mListener.onFragmentInteraction(deal.getReferenceCode());
+            //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(getActivity().getBaseContext(), CustomerDealDetailsActivity.class);
+            intent.putExtra("deal_referenceCode", deal.getReferenceCode());
+            startActivity(intent);
         }
     }
 
