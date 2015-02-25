@@ -1,22 +1,23 @@
 package com.example.leon.dingoapplication.Activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.leon.dingoapplication.Bootstrap;
 import com.example.leon.dingoapplication.Constants;
 import com.example.leon.dingoapplication.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bootstrap initialization = new Bootstrap(this);
         setContentView(R.layout.activity_main);
 
         // When login button is clicked
@@ -73,5 +74,9 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
