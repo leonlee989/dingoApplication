@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -18,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leon.dingoapplication.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class CustomerActivity extends ListActivity {
 
@@ -38,8 +39,6 @@ public class CustomerActivity extends ListActivity {
 
         // Set Font for title text
         TextView title = (TextView) findViewById(R.id.actionbar_title);
-        Typeface normalFont = Typeface.createFromAsset(getAssets(), getResources().getString(R.string.font_normal));
-        title.setTypeface(normalFont);
 
         // Set title text for activity action bar
         title.setText(getResources().getString(R.string.app_name));
@@ -98,8 +97,6 @@ public class CustomerActivity extends ListActivity {
 
             // Set label for different options
             TextView label = (TextView) rowView.findViewById(R.id.landing_label);
-            Typeface normalFont = Typeface.createFromAsset(getAssets(), getResources().getString(R.string.font_normal));
-            label.setTypeface(normalFont);
 
             // Set value for label
             label.setText(values[position]);
@@ -129,5 +126,10 @@ public class CustomerActivity extends ListActivity {
 
             return rowView;
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

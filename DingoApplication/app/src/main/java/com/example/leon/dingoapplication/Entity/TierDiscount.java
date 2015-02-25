@@ -18,13 +18,14 @@ public class TierDiscount extends Deal {
     double discountAmount;
 
     /**
-     * Constructor to initialize a TierDiscount Object
+     * Constructor to initialize a TierDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param tierAmount
      * @param discountAmount
      */
-    public TierDiscount(String referenceCode, double tierAmount, double discountAmount) {
-        super(referenceCode);
+    public TierDiscount(String referenceCode, Merchant merchant, double tierAmount, double discountAmount) {
+        super(referenceCode, merchant);
         this.tierAmount = tierAmount;
         this.discountAmount = discountAmount;
     }
@@ -32,13 +33,14 @@ public class TierDiscount extends Deal {
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param tierAmount
      * @param discountAmount
      */
-    public TierDiscount(String referenceCode, Date createdAt,
+    public TierDiscount(String referenceCode, Merchant merchant, Date createdAt,
                         double tierAmount, double discountAmount) {
-        super(referenceCode, createdAt);
+        super(referenceCode, merchant, createdAt);
 
         this.tierAmount = tierAmount;
         this.discountAmount = discountAmount;
@@ -47,13 +49,14 @@ public class TierDiscount extends Deal {
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param activated
      * @param tierAmount
      * @param discountAmount
      */
-    public TierDiscount(String referenceCode, boolean activated,
+    public TierDiscount(String referenceCode, Merchant merchant, boolean activated,
                         double tierAmount, double discountAmount) {
-        super(referenceCode, activated);
+        super(referenceCode, merchant, activated);
 
         this.tierAmount = tierAmount;
         this.discountAmount = discountAmount;
@@ -62,14 +65,15 @@ public class TierDiscount extends Deal {
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param activated
      * @param tierAmount
      * @param discountAmount
      */
-    public TierDiscount(String referenceCode, Date createdAt, boolean activated,
+    public TierDiscount(String referenceCode, Merchant merchant, Date createdAt, boolean activated,
                         double tierAmount, double discountAmount) {
-        super(referenceCode, createdAt, activated);
+        super(referenceCode, merchant, createdAt, activated);
 
         this.tierAmount = tierAmount;
         this.discountAmount = discountAmount;
@@ -78,14 +82,15 @@ public class TierDiscount extends Deal {
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param activatedDate
      * @param closureDate
      * @param tierAmount
      * @param discountAmount
      */
-    public TierDiscount(String referenceCode, Date activatedDate, Date closureDate,
+    public TierDiscount(String referenceCode, Merchant merchant, Date activatedDate, Date closureDate,
                         double tierAmount, double discountAmount) {
-        super(referenceCode, activatedDate, closureDate);
+        super(referenceCode, merchant, activatedDate, closureDate);
 
         this.tierAmount = tierAmount;
         this.discountAmount = discountAmount;
@@ -94,15 +99,16 @@ public class TierDiscount extends Deal {
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param activatedDate
      * @param closureDate
      * @param tierAmount
      * @param discountAmount
      */
-    public TierDiscount(String referenceCode, Date createdAt, Date activatedDate, Date closureDate,
+    public TierDiscount(String referenceCode, Merchant merchant, Date createdAt, Date activatedDate, Date closureDate,
                         double tierAmount, double discountAmount) {
-        super(referenceCode, createdAt, activatedDate, closureDate);
+        super(referenceCode, merchant, createdAt, activatedDate, closureDate);
 
         this.tierAmount = tierAmount;
         this.discountAmount = discountAmount;

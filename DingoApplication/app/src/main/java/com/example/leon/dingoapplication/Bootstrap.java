@@ -41,11 +41,11 @@ public class Bootstrap {
                 company_peach_garden, merchantName_peach_garden, merchantType_peach_garden,
                 address_peach_garden);
 
-        // Deals available for Peach Garden
-        PercentageDiscount deal1_peach_garden = new PercentageDiscount("PG1", true, 50);
-        peach_garden.addDeal(deal1_peach_garden);
-
         Constants.merchantManager.addMerchant(peach_garden);
+
+        // Deals available for Peach Garden
+        PercentageDiscount deal1_peach_garden = new PercentageDiscount("PG1", peach_garden, true, 50);
+        Constants.dealManager.addDeal(deal1_peach_garden);
 
         // Merchant details for Pho Street
         String merchantId_pho_street = "merchant02";
@@ -58,11 +58,11 @@ public class Bootstrap {
                 company_pho_street, merchantName_pho_street, merchantType_pho_street,
                 address_pho_street);
 
-        // Deals available for Pho Street Restaurant
-        PercentageDiscount deal1_pho_street = new PercentageDiscount("PS1", true, 50);
-        pho_street.addDeal(deal1_pho_street);
-
         Constants.merchantManager.addMerchant(pho_street);
+
+        // Deals available for Pho Street Restaurant
+        PercentageDiscount deal1_pho_street = new PercentageDiscount("PS1", pho_street, true, 50);
+        Constants.dealManager.addDeal(deal1_pho_street);
 
         // Merchant details for Lerk Thai
         String merchantId_lerk_thai = "merchant03";
@@ -74,13 +74,14 @@ public class Bootstrap {
         Merchant lerk_thai = new Merchant(merchantId_lerk_thai, image_lerk_thai, company_lerk_thai,
                 merchantName_lerk_thai, merchantType_lerk_thai, address_lerk_thai);
 
-        // Deals available for Lerk Thai Restaurant
-        TierDiscount deal1_lerk_thai = new TierDiscount("lt1", true, 20, 10);
-        lerk_thai.addDeal(deal1_lerk_thai);
-        PercentageDiscount deal2_lerk_thai = new PercentageDiscount("t2", true, 40);
-        lerk_thai.addDeal(deal2_lerk_thai);
-
         Constants.merchantManager.addMerchant(lerk_thai);
+
+        // Deals available for Lerk Thai Restaurant
+        TierDiscount deal1_lerk_thai = new TierDiscount("lt1", lerk_thai, true, 20, 10);
+        Constants.dealManager.addDeal(deal1_lerk_thai);
+
+        PercentageDiscount deal2_lerk_thai = new PercentageDiscount("t2", lerk_thai, true, 40);
+        Constants.dealManager.addDeal(deal2_lerk_thai);
 
         // Merchant details for Griddy Waffles
         String merchantId_griddy_waffles = "merchant04";
@@ -93,11 +94,11 @@ public class Bootstrap {
                 company_griddy_waffles, merchantName_griddy_waffles, merchantType_griddy_waffles,
                 address_griddy_waffles);
 
-        // Deals available for Griddy Waffles
-        TierDiscount deal1_griddy_waffles = new TierDiscount("gw1", true, 10, 50);
-        griddy_waffles.addDeal(deal1_griddy_waffles);
-
         Constants.merchantManager.addMerchant(griddy_waffles);
+
+        // Deals available for Griddy Waffles
+        TierDiscount deal1_griddy_waffles = new TierDiscount("gw1", griddy_waffles, true, 10, 50);
+        Constants.dealManager.addDeal(deal1_griddy_waffles);
 
         // Merchant details for Texas Chicken
         String merchantId_texas_chicken = "merchant05";
@@ -110,12 +111,12 @@ public class Bootstrap {
                 company_texas_chicken, merchantName_texas_chicken, merchantType_texas_chicken,
                 address_texas_chicken);
 
-        // Deals available for Texas Chicken
-        PercentageDiscount deal1_texas_chicken = new PercentageDiscount("tc1", true, 20);
-        merchant_texas_chicken.addDeal(deal1_texas_chicken);
-        TierDiscount deal2_texas_chicken = new TierDiscount("tc2", true, 10, 30);
-        merchant_texas_chicken.addDeal(deal2_texas_chicken);
-
         Constants.merchantManager.addMerchant(merchant_texas_chicken);
+
+        // Deals available for Texas Chicken
+        PercentageDiscount deal1_texas_chicken = new PercentageDiscount("tc1", merchant_texas_chicken, true, 20);
+        Constants.dealManager.addDeal(deal1_texas_chicken);
+        TierDiscount deal2_texas_chicken = new TierDiscount("tc2", merchant_texas_chicken, true, 10, 30);
+        Constants.dealManager.addDeal(deal2_texas_chicken);
     }
 }

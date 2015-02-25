@@ -34,11 +34,19 @@ public abstract class Deal {
     Date createdAt;
 
     /**
+     * Merchant that is involve in the deal
+     */
+    Merchant merchant;
+
+    /**
      * Constructor to initialize a Deal Object with the following parameters:
      * @param referenceCode
+     * @param merchant
      */
-    public Deal(String referenceCode) {
+    public Deal(String referenceCode, Merchant merchant) {
         this.referenceCode = referenceCode;
+
+        this.merchant = merchant;
         activated = false;
         createdAt = new Date();
 
@@ -49,10 +57,12 @@ public abstract class Deal {
     /**
      * Constructor to initialize the object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      */
-    public Deal (String referenceCode, Date createdAt) {
+    public Deal (String referenceCode, Merchant merchant, Date createdAt) {
         this.referenceCode = referenceCode;
+        this.merchant = merchant;
         this.activated = false;
         this.createdAt = createdAt;
 
@@ -63,10 +73,12 @@ public abstract class Deal {
     /**
      * Constructor to initialize Deal object with the following parameters:
      * @param referenceCode
+     * @param merchant
      * @param activated
      */
-    public Deal(String referenceCode, boolean activated) {
+    public Deal(String referenceCode, Merchant merchant, boolean activated) {
         this.referenceCode = referenceCode;
+        this.merchant = merchant;
         setActivated(activated);
         this.createdAt = new Date();
 
@@ -77,11 +89,13 @@ public abstract class Deal {
     /**
      * Constructor to initialize Deal object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param activated
      */
-    public Deal(String referenceCode, Date createdAt, boolean activated) {
+    public Deal(String referenceCode, Merchant merchant, Date createdAt, boolean activated) {
         this.referenceCode = referenceCode;
+        this.merchant = merchant;
         this.createdAt = createdAt;
         setActivated(activated);
 
@@ -92,11 +106,13 @@ public abstract class Deal {
     /**
      * Constructor to initialized Deal object with the following parameters:
      * @param referenceCode
+     * @param merchant
      * @param activatedDate
      * @param closureDate
      */
-    public Deal(String referenceCode, Date activatedDate, Date closureDate) {
+    public Deal(String referenceCode, Merchant merchant, Date activatedDate, Date closureDate) {
         this.referenceCode = referenceCode;
+        this.merchant = merchant;
         this.createdAt = new Date();
 
         setActivatedDate(activatedDate);
@@ -106,12 +122,14 @@ public abstract class Deal {
     /**
      * Constructor to initialized Deal object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param activatedDate
      * @param closureDate
      */
-    public Deal(String referenceCode, Date createdAt, Date activatedDate, Date closureDate) {
+    public Deal(String referenceCode, Merchant merchant, Date createdAt, Date activatedDate, Date closureDate) {
         this.referenceCode = referenceCode;
+        this.merchant = merchant;
         this.createdAt = createdAt;
 
         setActivatedDate(activatedDate);
@@ -132,6 +150,22 @@ public abstract class Deal {
      */
     public void setReferenceCode(String referenceCode) {
         this.referenceCode = referenceCode;
+    }
+
+    /**
+     * Get the merchant who offers this deal
+     * @return merchant
+     */
+    public Merchant getMerchant() {
+        return  this.merchant;
+    }
+
+    /**
+     * Set the merchant who offered this deal
+     * @param merchant
+     */
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 
     /**

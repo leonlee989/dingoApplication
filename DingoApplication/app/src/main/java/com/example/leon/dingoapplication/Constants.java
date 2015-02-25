@@ -2,6 +2,8 @@ package com.example.leon.dingoapplication;
 
 import android.content.Context;
 import android.graphics.Typeface;
+
+import com.example.leon.dingoapplication.Manager.DealManager;
 import com.example.leon.dingoapplication.Manager.MerchantManager;
 
 import java.text.SimpleDateFormat;
@@ -14,4 +16,5 @@ public class Constants {
     public static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
     public static MerchantManager merchantManager = new MerchantManager();
+    public static DealManager dealManager = new DealManager();
 }

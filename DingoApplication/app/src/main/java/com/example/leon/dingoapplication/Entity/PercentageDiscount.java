@@ -16,21 +16,23 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object
      * @param referenceCode
+     * @param merchant
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, int percentage) {
-        super(referenceCode);
+    public PercentageDiscount(String referenceCode, Merchant merchant, int percentage) {
+        super(referenceCode, merchant);
         this.percentage = percentage;
     }
 
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Date createdAt, int percentage) {
-        super(referenceCode, createdAt);
+    public PercentageDiscount(String referenceCode, Merchant merchant, Date createdAt, int percentage) {
+        super(referenceCode, merchant, createdAt);
 
         this.percentage = percentage;
     }
@@ -38,11 +40,12 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param activated
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, boolean activated, int percentage) {
-        super(referenceCode, activated);
+    public PercentageDiscount(String referenceCode, Merchant merchant, boolean activated, int percentage) {
+        super(referenceCode, merchant, activated);
 
         this.percentage = percentage;
     }
@@ -50,13 +53,14 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param activated
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Date createdAt, boolean activated,
+    public PercentageDiscount(String referenceCode, Merchant merchant, Date createdAt, boolean activated,
                               int percentage) {
-        super(referenceCode, createdAt, activated);
+        super(referenceCode, merchant, createdAt, activated);
 
         this.percentage = percentage;
     }
@@ -64,13 +68,14 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param activatedDate
      * @param closureDate
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Date activatedDate, Date closureDate,
+    public PercentageDiscount(String referenceCode, Merchant merchant, Date activatedDate, Date closureDate,
                               int percentage) {
-        super(referenceCode, activatedDate, closureDate);
+        super(referenceCode, merchant, activatedDate, closureDate);
 
         this.percentage = percentage;
     }
@@ -78,14 +83,15 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param merchant
      * @param createdAt
      * @param activatedDate
      * @param closureDate
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Date createdAt, Date activatedDate,
+    public PercentageDiscount(String referenceCode, Merchant merchant, Date createdAt, Date activatedDate,
                               Date closureDate, int percentage) {
-        super(referenceCode, createdAt, activatedDate, closureDate);
+        super(referenceCode, merchant, createdAt, activatedDate, closureDate);
 
         this.percentage = percentage;
     }

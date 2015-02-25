@@ -35,10 +35,6 @@ public class Merchant {
      * Address of the shop
      */
     Address address;
-    /**
-     * Deals associated with the merchant
-     */
-    ArrayList<Deal> dealList;
 
     /**
      * Constructor to initialize Merchant Object
@@ -57,30 +53,6 @@ public class Merchant {
         this.merchantName = merchantName;
         this.merchantType = merchantType;
         this.address = address;
-
-        this.dealList = new ArrayList<Deal>();
-    }
-
-    /**
-     * Constructor to initialize Merchant Object with the following parameters
-     * @param merchantId
-     * @param image
-     * @param companyName
-     * @param merchantName
-     * @param merchantType
-     * @param address
-     * @param dealList
-     */
-    public Merchant(String merchantId, Bitmap image, String companyName, String merchantName,
-                    String merchantType, Address address, ArrayList<Deal> dealList) {
-        this.merchantId = merchantId;
-        this.image = image;
-        this.companyName = companyName;
-        this.merchantName = merchantName;
-        this.merchantType = merchantType;
-        this.address = address;
-
-        this.dealList = dealList;
     }
 
     /**
@@ -188,49 +160,5 @@ public class Merchant {
      */
     public void setAddress(String houseNumber, String streetName, String unitNumber, int postalCode) {
         this.address = new Address(houseNumber, streetName, unitNumber, postalCode);
-    }
-
-    /**
-     * Get the list of the deals offered by the merchant
-     * @return dealList
-     */
-    public ArrayList<Deal> getDealList() {
-        return this.dealList;
-    }
-
-    /**
-     * Set the list of the deals offered by the merchant
-     * @param dealList
-     */
-    public void setDealList(ArrayList<Deal> dealList) {
-        this.dealList = dealList;
-    }
-
-    /**
-     * Add a deal offered by the merchant
-     * @param deal
-     */
-    public void addDeal(Deal deal) {
-        dealList.add(deal);
-    }
-
-    /**
-     * Remove an existing deal offered by the merchant
-     * @param removeDeal
-     */
-    public void removeDeal(Deal removeDeal) throws DealNotFoundException {
-        boolean dealRemoved = false;
-
-        for (int i=0; i < dealList.size(); i++) {
-            Deal deal = dealList.get(i);
-            if (deal.getReferenceCode().equalsIgnoreCase(removeDeal.getReferenceCode())) {
-                dealList.remove(i);
-                dealRemoved = true;
-            }
-        }
-
-        if (!dealRemoved) {
-            throw new DealNotFoundException(removeDeal);
-        }
     }
 }

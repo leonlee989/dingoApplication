@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    tools:context="com.example.leon.dingoapplication.Fragments.CustomerViewAll">
+    tools:context="com.example.leon.dingoapplication.Activities.EatDrinkActivity">
 
     <ImageView
         android:layout_width="80dp"
@@ -39,6 +39,9 @@
             android:layout_below="@+id/merchantType"
             android:layout_marginTop="10dp">
 
+            <TextView android:id="@+id/dealDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             </LinearLayout>>
 
         </RelativeLayout>

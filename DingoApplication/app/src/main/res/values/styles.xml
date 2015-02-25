@@ -32,7 +32,6 @@
         parent="@style/Widget.AppCompat.ActionBar.TabText">
 
         <item name="android:textColor">@drawable/tab_text_color</item>
-        <item name="android:typeface">monospace</item>
         <item name="android:textSize">15dp</item>
         </style>
 

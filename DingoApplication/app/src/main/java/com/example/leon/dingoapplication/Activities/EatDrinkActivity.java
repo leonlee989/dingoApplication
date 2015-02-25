@@ -3,17 +3,12 @@ package com.example.leon.dingoapplication.Activities;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +16,8 @@ import android.widget.TextView;
 
 import com.example.leon.dingoapplication.Fragments.CustomerViewAll;
 import com.example.leon.dingoapplication.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener,
@@ -58,8 +55,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
 
         // Set title text for activity action bar
         TextView title = (TextView) findViewById(R.id.actionbar_home_title);
-        Typeface normalFont = Typeface.createFromAsset(getAssets(), getResources().getString(R.string.font_normal));
-        title.setTypeface(normalFont);
         title.setText(getResources().getString(R.string.customer_optionText_1));
 
         // Specify that the home/up button should not be enables since there is no hierarchical parent
@@ -197,5 +192,10 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
 
             return rootView;
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

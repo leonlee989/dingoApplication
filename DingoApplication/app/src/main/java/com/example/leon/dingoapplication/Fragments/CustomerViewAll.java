@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +23,8 @@ import com.example.leon.dingoapplication.Entity.Merchant;
 import com.example.leon.dingoapplication.R;
 
 import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * A fragment representing a list of Items.
@@ -62,7 +63,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAdapter = new DealArrayAdapter(getActivity().getApplicationContext(),
-                Constants.merchantManager.getMerchantList());
+                Constants.dealManager.getDealList());
     }
 
     @Override
@@ -152,11 +153,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     /**
      * Custom ArrayAdapter to display deal details in a list view
      */
-    private class DealArrayAdapter extends ArrayAdapter<Merchant> {
+    private class DealArrayAdapter extends ArrayAdapter<Deal> {
         private final Context context;
-        private final ArrayList<Merchant> values;
+        private final ArrayList<Deal> values;
 
-        public DealArrayAdapter(Context context, ArrayList<Merchant> values) {
+        public DealArrayAdapter(Context context, ArrayList<Deal> values) {
             super(context, R.layout.customer_view_all_row, values);
             this.context = context;
             this.values = values;
@@ -171,12 +172,13 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
          */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = getActivity().getLayoutInflater();
 
             View rowView = inflater.inflate(R.layout.customer_view_all_row, parent, false);
 
-            Merchant merchant = values.get(position);
+            Deal deal = values.get(position);
+            Merchant merchant = deal.getMerchant();
+
             ImageView image = (ImageView) rowView.findViewById(R.id.merchantLogo);
             image.setImageBitmap(merchant.getImage());
 
@@ -186,14 +188,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             TextView merchantType = (TextView) rowView.findViewById(R.id.merchantType);
             merchantType.setText(merchant.getMerchantType());
 
-            ArrayList<Deal> dealList = merchant.getDealList();
-            for (Deal deal:dealList) {
-                TextView dealTextView = new TextView(getActivity());
-                dealTextView.setText(deal.toString());
-                dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
-                LinearLayout container = (LinearLayout) rowView.findViewById(R.id.dealList);
-                container.addView(dealTextView);
-            }
+            TextView dealTextView = (TextView) rowView.findViewById(R.id.dealDetail);
+            dealTextView.setText(deal.toString());
+            dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
 
             return rowView;
         }
