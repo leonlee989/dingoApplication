@@ -23,6 +23,12 @@
     <string name="customer_optionText_5">Dinged</string>
     <string name="customer_optionText_6">Preferences</string>
 
+    <!-- Merchant landing page -->
+    <string name="merchant_optionText_1">Ding a Deal</string>
+    <string name="merchant_optionText_2">Ongoing Deals</string>
+    <string name="merchant_optionText_3">Ding Statistics</string>
+    <string name="merchant_optionText_4">Settings</string>
+
     <!-- ActionBar Titles -->
     <string name="eatDrink_tabText_1">All</string>
     <string name="eatDrink_tabText_2">Dings</string>

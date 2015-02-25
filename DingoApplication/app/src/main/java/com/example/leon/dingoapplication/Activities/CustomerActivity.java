@@ -93,7 +93,7 @@ public class CustomerActivity extends ListActivity {
             // Adjust resolution
             RelativeLayout layout = (RelativeLayout) rowView.findViewById(R.id.rowId);
             Display display = getWindowManager().getDefaultDisplay();
-            layout.getLayoutParams().height = (display.getHeight() - 35*6) /6;
+            layout.getLayoutParams().height = (display.getHeight() - 40*6) /6;
 
             // Set label for different options
             TextView label = (TextView) rowView.findViewById(R.id.landing_label);

@@ -38,6 +38,8 @@ public class MainActivity extends FragmentActivity {
                 } else if (username.equalsIgnoreCase("merchant")) {
 
                     // Start activity for merchant view
+                    Intent intent = new Intent(MainActivity.this, MerchantActivity.class);
+                    startActivity(intent);
 
                 } else {
                     // Toast box appear for invalid input
