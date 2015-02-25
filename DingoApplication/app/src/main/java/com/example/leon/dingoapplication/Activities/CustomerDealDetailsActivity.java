@@ -122,13 +122,7 @@ public class CustomerDealDetailsActivity extends Activity {
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
             map.animateCamera(cameraUpdate);
         }
-
-
-
     }
-
-
-
 
     @Override
     protected void attachBaseContext(Context newBase) {
