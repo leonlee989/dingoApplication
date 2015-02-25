@@ -29,5 +29,9 @@
     <string name="eatDrink_tabText_3">Map</string>
     <string name="title_activity_customer">CustomerActivity</string>
     <string name="title_activity_eat_drink">EatDrinkActivity</string>
+    <string name="title_activity_customer_deal_details">CustomerDealDetailsActivity</string>
+
+    <!--DealDetails-->
+    <string name="dealImage">dealImage</string>
 
 </resources>
