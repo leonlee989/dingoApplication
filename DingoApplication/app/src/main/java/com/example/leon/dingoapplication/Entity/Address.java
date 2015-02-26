@@ -87,4 +87,10 @@ public class Address {
     public void setPostalCode(int postalCode) {
         this.postalCode = postalCode;
     }
+
+    public String toString() {
+        return this.houseNumber + " " + this.streetName + " " + this.unitNumber + " Singapore " +
+                this.postalCode;
+    }
+
 }

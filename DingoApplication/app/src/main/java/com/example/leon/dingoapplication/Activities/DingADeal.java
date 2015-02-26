@@ -1,12 +1,15 @@
 package com.example.leon.dingoapplication.Activities;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.leon.dingoapplication.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class DingADeal extends FragmentActivity {
 
@@ -33,5 +36,10 @@ public class DingADeal extends FragmentActivity {
         // Set sub title for the action bar sub title
         TextView subTitle = (TextView) findViewById(R.id.merchant_actionbar_subtitle);
         subTitle.setText("Merchant");
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

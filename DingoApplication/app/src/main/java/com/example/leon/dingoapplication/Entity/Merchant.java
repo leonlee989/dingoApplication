@@ -1,10 +1,14 @@
 package com.example.leon.dingoapplication.Entity;
 
 import android.graphics.Bitmap;
+import android.location.Geocoder;
 
+import com.example.leon.dingoapplication.Activities.MainActivity;
 import com.example.leon.dingoapplication.ErrorHandling.DealNotFoundException;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Merchant object
@@ -15,6 +19,12 @@ public class Merchant {
      * Merchant Id to identity a specific merchant
      */
     String merchantId;
+
+    /**
+     * Password for merchant to login
+     */
+    String password;
+
     /**
      * Logo for company
      */
@@ -31,28 +41,75 @@ public class Merchant {
      * Type of merchant
      */
     String merchantType;
+
     /**
      * Address of the shop
      */
     Address address;
 
     /**
+     * Short description of the merchant
+     */
+    String merchantDescription;
+
+    /**
+     * Contact number for the merchant
+     */
+    int contactNumber;
+
+    /**
+     * Website of the merchant
+     */
+    String website;
+
+    /**
+     * Get Longitude and latitude of the address
+     */
+    LatLng latLng;
+
+    /**
      * Constructor to initialize Merchant Object
      * @param merchantId
+     * @param password
      * @param image
      * @param companyName
      * @param merchantName
+     * @param merchantDescription
      * @param merchantType
      * @param address
+     * @param contactNumber
+     * @param website
      */
-    public Merchant(String merchantId, Bitmap image, String companyName, String merchantName,
-                    String merchantType, Address address) {
+    public Merchant(String merchantId, String password, Bitmap image, String companyName,
+                    String merchantName, String merchantDescription, String merchantType,
+                    Address address, int contactNumber, String website) {
         this.merchantId = merchantId;
+        this.password = password;
         this.image = image;
         this.companyName = companyName;
         this.merchantName = merchantName;
+        this.merchantDescription = merchantDescription;
         this.merchantType = merchantType;
         this.address = address;
+        this.contactNumber = contactNumber;
+        this.website = website;
+    }
+
+    public Merchant(String merchantId, String password, Bitmap image, String companyName,
+                    String merchantName, String merchantDescription, String merchantType,
+                    Address address, int contactNumber, String website, LatLng latLng) {
+        this.merchantId = merchantId;
+        this.password = password;
+        this.image = image;
+        this.companyName = companyName;
+        this.merchantName = merchantName;
+        this.merchantDescription = merchantDescription;
+        this.merchantType = merchantType;
+        this.address = address;
+        this.contactNumber = contactNumber;
+        this.website = website;
+
+        this.latLng = latLng;
     }
 
     /**
@@ -69,6 +126,22 @@ public class Merchant {
      */
     public void setMerchantId(String merchantId) {
         this.merchantId = merchantId;
+    }
+
+    /**
+     * Get the password of the merchant
+     * @return password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the password of the merchant
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
@@ -120,6 +193,22 @@ public class Merchant {
     }
 
     /**
+     * Retrieve the short description of the merchant
+     * @return merchantDescription
+     */
+    public String getMerchantDescription() {
+        return merchantDescription;
+    }
+
+    /**
+     * Set the short description of the merchant
+     * @param merchantDescription
+     */
+    public void setMerchantDescription(String merchantDescription) {
+        this.merchantDescription = merchantDescription;
+    }
+
+    /**
      * Get the type of the merchant
      * @return merchantType
      */
@@ -160,5 +249,53 @@ public class Merchant {
      */
     public void setAddress(String houseNumber, String streetName, String unitNumber, int postalCode) {
         this.address = new Address(houseNumber, streetName, unitNumber, postalCode);
+    }
+
+    /**
+     * Get the contact number of the merchant
+     * @return contactNumber
+     */
+    public int getContactNumber() {
+        return contactNumber;
+    }
+
+    /**
+     * Set the contact number of the merchant
+     * @param contactNumber
+     */
+    public void setContactNumber(int contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    /**
+     * Retrieve the website of the merchant
+     * @return
+     */
+    public String getWebsite() {
+        return website;
+    }
+
+    /**
+     * Set the website of the merchant
+     * @param website
+     */
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    /**
+     * Get the longitude and latitude of the address
+     * @return
+     */
+    public LatLng getLatLng() {
+        return latLng;
+    }
+
+    /**
+     * Set the longitude and latitude of the address
+     * @param latLng
+     */
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
     }
 }

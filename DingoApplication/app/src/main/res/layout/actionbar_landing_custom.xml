@@ -19,6 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_toRightOf="@+id/actionbar_icon"
+                android:layout_marginLeft="-20dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/white"
                 android:textSize="25dp" />

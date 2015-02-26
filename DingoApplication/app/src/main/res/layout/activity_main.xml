@@ -35,7 +35,7 @@ tools:context="com.example.leon.dingoapplication.Activities.MainActivity" >
         android:layout_marginRight="30dp"
         android:layout_marginTop="70dp"
         android:textSize="20dp"
-        android:hint="Username"
+        android:hint="@string/hint_username"
         android:gravity="center" />
 
     <EditText android:id="@+id/password"
@@ -49,13 +49,13 @@ tools:context="com.example.leon.dingoapplication.Activities.MainActivity" >
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         android:textSize="20dp"
-        android:hint="Password"
+        android:hint="@string/hint_password"
         android:gravity="center"/>
 
     <Button android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login_button"
         android:layout_below="@+id/password"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
