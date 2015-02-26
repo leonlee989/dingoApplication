@@ -15,13 +15,15 @@ import com.example.leon.dingoapplication.Constants;
 import com.example.leon.dingoapplication.Entity.Address;
 import com.example.leon.dingoapplication.Entity.Deal;
 import com.example.leon.dingoapplication.Entity.Merchant;
+import com.example.leon.dingoapplication.Entity.PercentageDiscount;
+import com.example.leon.dingoapplication.Entity.TierDiscount;
 import com.example.leon.dingoapplication.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.model.LatLng;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -69,6 +71,7 @@ public class CustomerDealDetailsActivity extends Activity {
             //resize image resolution to device resolution
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(metrics.widthPixels,height);
             imageView.setLayoutParams(layoutParams);
+            System.out.println("LayoutParams: "+layoutParams);
             imageView.setImageResource(R.drawable.peachgardendealdetail);
             //imageView.setImageBitmap(deal.getImage);
 
@@ -84,19 +87,24 @@ public class CustomerDealDetailsActivity extends Activity {
             //get & set merchant companyname, description, address, web address, mobile no.
             mCompanyName.setText(merchant.getCompanyName());
 
-            mDescriptionTextView.setText("Peach Garden @ Chinatown Point is renown for their " +
-                    "quality culinary offerings and distinguished fine dining experience");
-            //mDescriptionTextView.setText(merchant.getDescription);
+            mDescriptionTextView.setText(merchant.getMerchantDescription());
 
             Address mAddress = merchant.getAddress();
             mAddressTextView.setText(mAddress.getUnitNumber() + "\n" + mAddress.getHouseNumber() + " " +
                     mAddress.getStreetName()+ "\n" + "Singapore " + mAddress.getPostalCode());
 
-            mWebAddressTextView.setText("peachgarden.com.sg");
-            //mWebAddressTextView.setText(merchant.getWebAddress);
+            mWebAddressTextView.setText(merchant.getWebsite());
 
-            mMobileNumber.setText("67020603");
-            //mMobileNumber.setText(merchant.getContactNumber);
+            mMobileNumber.setText(String.valueOf(merchant.getContactNumber()));
+
+            if(deal instanceof PercentageDiscount){
+                double pDiscount = ((PercentageDiscount) deal).getPercentage();
+                dDiscount.setText(String.valueOf(pDiscount) + "% Off");
+            } else if(deal instanceof TierDiscount){
+                double tierAmount = ((TierDiscount) deal).getTierAmount();
+                double tDiscount =  ((TierDiscount) deal).getDiscountAmount();
+                dDiscount.setText("Spend " + String.valueOf(tierAmount) + "get $" + String.valueOf(tDiscount) + "Off");
+            }
 
             // Gets the MapView from the XML layout and creates it
             mapView = (MapView) findViewById(R.id.mapview);

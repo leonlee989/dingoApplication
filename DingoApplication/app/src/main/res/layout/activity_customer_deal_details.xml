@@ -1,12 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignParentBottom="true"
-    android:layout_alignParentTop="true"
     tools:context="com.example.leon.dingoapplication.Activities.CustomerDealDetailsActivity">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:id="@+id/dealImage"
         android:layout_alignParentTop="true"
@@ -14,7 +14,7 @@
         android:contentDescription="@string/dealImage" />
     <TextView
         android:id="@+id/companyName"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="80px"
         android:layout_alignLeft="@+id/dealImage"
         android:layout_alignRight="@+id/dealImage"
@@ -25,49 +25,59 @@
         android:background="@drawable/gradientbackground"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/dealImage"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/dingItButton"
+        android:id="@+id/details"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/merchantDescription"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:ignore="Suspicious0dp"
+            android:layout_weight="20"
+            android:layout_width="fill_parent"
             android:text="Description"
-            android:gravity="center_horizontal"
-            android:padding="10dp"/>
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center_horizontal"/>
+            <!--android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            -->
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            tools:ignore="Suspicious0dp"
             android:orientation="horizontal"
-            android:weightSum="5">
+            android:layout_weight="30">
+            <!--android:weightSum="5"-->
             <LinearLayout
                 android:layout_width="0dp"
                 tools:ignore="Suspicious0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
-                android:layout_weight="3">
+                android:layout_weight="55">
+                <!--android:layout_weight="3"-->
                 <TextView
                     android:id="@+id/merchantAddress"
                     android:text="Address"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
                 <TextView
                     android:id="@+id/merchantWebAddress"
                     android:text="Web Address"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
 
                 <TextView
                     android:id="@+id/merchantMobileNumber"
                     android:text="Mobile Number"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
             </LinearLayout>
@@ -76,22 +86,28 @@
                 android:id="@+id/mapview"
                 android:layout_width="0dp"
                 tools:ignore="Suspicious0dp"
-                android:layout_height="match_parent"
+                android:layout_height="fill_parent"
                 android:layout_alignParentRight="true"
-                android:layout_weight="2"/>
+                android:layout_weight="45"/>
         </LinearLayout>
         <View style="@style/hDivider"/>
         <TextView
             android:id="@+id/discount"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             android:text="Discount"
-            android:gravity="center_horizontal"
-            android:padding="10dp"/>
+            android:gravity="center_horizontal|center_vertical"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:padding="2dp"
+            android:layout_height="0dp"
+            tools:ignore="Suspicious0dp"
+            android:layout_weight="10"
+            android:layout_width="fill_parent"/>
         <View style="@style/hDivider"/>
         <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            tools:ignore="Suspicious0dp"
+            android:layout_weight="15"
+            android:layout_width="fill_parent"
             android:stretchColumns="*"
             android:orientation="horizontal">
             <TableRow>
@@ -100,12 +116,14 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="8"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:paddingBottom="1dp"
+                    android:paddingTop="5dp"
                     android:layout_column="0"/>
                 <LinearLayout
                     android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="fill_parent"
                     android:gravity="center">
                     <View style="@style/vDivider" />
                 </LinearLayout>
@@ -114,12 +132,14 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="0h25m"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:paddingBottom="1dp"
+                    android:paddingTop="5dp"
                     android:layout_column="1"/>
                 <LinearLayout
                     android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="fill_parent"
                     android:gravity="center">
                     <View style="@style/vDivider" />
                 </LinearLayout>
@@ -128,8 +148,10 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="2:00PM"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:paddingBottom="1dp"
+                    android:paddingTop="5dp"
                     android:layout_column="2"/>
             </TableRow>
             <TableRow>
@@ -139,11 +161,12 @@
                     android:layout_width="wrap_content"
                     android:text="Seats Left"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="1dp"
                     android:layout_column="0"/>
                 <LinearLayout
                     android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="fill_parent"
                     android:gravity="center">
                     <View style="@style/vDivider" />
                 </LinearLayout>
@@ -153,11 +176,12 @@
                     android:layout_width="wrap_content"
                     android:text="to claim"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="1dp"
                     android:layout_column="1"/>
                 <LinearLayout
                     android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="fill_parent"
                     android:gravity="center">
                     <View style="@style/vDivider" />
                 </LinearLayout>
@@ -167,31 +191,39 @@
                     android:layout_width="wrap_content"
                     android:text="to redeem by"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="1dp"
                     android:layout_column="2"/>
             </TableRow>
+            <View style="@style/hDivider"/>
         </TableLayout>
-        <View style="@style/hDivider"/>
         <LinearLayout
+            android:layout_height="0dp"
+            tools:ignore="Suspicious0dp"
+            android:layout_weight="15"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/dingFor"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Ding For"
-                android:padding="10dp"
-                android:gravity="center"/>
+                android:text="Ding For:"/>
+            <com.example.leon.dingoapplication.CustomInterface.HorizontalNumberPicker
+                android:id ="@+id/horizontal_number_picker"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width ="wrap_content"
+                android:layout_height ="wrap_content" />
         </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/dingItButton"
-            android:background="@color/red"
-            android:text="Ding It!"
-            android:padding="15dp"
-            android:textColor="@color/white"/>
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/dingItButton"
+        android:background="@color/red"
+        android:text="Ding It!"
+        android:padding="15dp"
+        android:textColor="@color/white"/>
 </RelativeLayout>
