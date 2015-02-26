@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">DingGo</string>
-    <string name="advancedFilter"><u>Advanced Filter</u></string>
 
     <!-- Font -->
     <string name="font_normal">fonts/Nexa Light.otf</string>
@@ -14,6 +13,9 @@
     <string name="collection">Collection</string>
     <string name="external_activity">External Activity</string>
     <string name="hello_world">Hello world!</string>
+
+    <!-- Login Page -->
+    <string name="registerText"><u>Register for DingGo</u></string>
 
     <!-- Customer landing page -->
     <string name="customer_optionText_1">Eat &amp; Drink</string>
@@ -29,6 +31,9 @@
     <string name="merchant_optionText_3">Ding Statistics</string>
     <string name="merchant_optionText_4">Settings</string>
 
+    <!-- Map Fragment -->
+    <string name="advancedFilter"><u>Advanced Filter</u></string>
+
     <!-- ActionBar Titles -->
     <string name="eatDrink_tabText_1">All</string>
     <string name="eatDrink_tabText_2">Dings</string>
@@ -40,10 +45,10 @@
     <!--DealDetails-->
     <string name="dealImage">dealImage</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_merchant">MerchantActivity</string>
-    <string name="title_activity_ding_adeal">DingADeal</string>
+    <string name="title_activity_merchant">Merchant</string>
+    <string name="title_activity_ding_adeal">Ding A Deal</string>
     <string name="action_settings">Settings</string>
 
 </resources>

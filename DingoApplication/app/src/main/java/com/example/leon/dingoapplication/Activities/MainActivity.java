@@ -6,13 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.leon.dingoapplication.Bootstrap;
 import com.example.leon.dingoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,36 +45,30 @@ public class MainActivity extends FragmentActivity {
 
                 } else {
                     // Toast box appear for invalid input
+                    Toast.makeText(MainActivity.this, "Invalid username/password.\nPlease try again",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
-        // Demonstration of a collection-browsing activity
-        findViewById(R.id.collection_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CollectionActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        //Demonstration of navigating to external activities
-        findViewById(R.id.external_activity_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    /*
-                    Create an intent that ask user to pick a photo, but using
-                    FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, ensures that relaunching
-                    the application from the device home screen does not return
-                    to the external activity
-                    */
-                Intent externalActivityIntent = new Intent(Intent.ACTION_PICK);
-                externalActivityIntent.setType("image/*");
-                externalActivityIntent.addFlags(
-                        Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(externalActivityIntent);
+    }
 
-            }
-        });
+    /**
+     * Demonstration of navigating to external activities
+     */
+    @Override
+    public void onClick(View v) {
+        /*
+            Create an intent that ask user to pick a photo, but using
+            FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, ensures that relaunching
+            the application from the device home screen does not return
+            to the external activity
+        */
+        Intent externalActivityIntent = new Intent(Intent.ACTION_PICK);
+        externalActivityIntent.setType("image/*");
+        externalActivityIntent.addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(externalActivityIntent);
     }
 
     @Override
