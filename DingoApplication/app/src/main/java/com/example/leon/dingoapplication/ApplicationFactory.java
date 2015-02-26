@@ -21,7 +21,7 @@ public class ApplicationFactory {
 
         try {
             address = geocoder.getFromLocationName(strAddress, 1);
-            if (address == null) {
+            if (address == null || address.size() <= 0) {
                 return null;
             }
             Address location = address.get(0);
