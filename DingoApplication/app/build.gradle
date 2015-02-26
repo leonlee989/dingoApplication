@@ -2,12 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'Android'
-            keyPassword 'dinggo'
-            storeFile file('E:/Resporitory/Github/dingoApplication/Deployment/DingGo.jks')
-            storePassword 'dinggo'
-        }
     }
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
