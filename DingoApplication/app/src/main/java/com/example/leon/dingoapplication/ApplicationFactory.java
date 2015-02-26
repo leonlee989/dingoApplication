@@ -1,10 +1,19 @@
 package com.example.leon.dingoapplication;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.IOException;
+import java.util.List;
+
 /**
  * Created by Leon on 26/2/2015.
  */
 public class ApplicationFactory {
-/*
+
     public static LatLng getLocationFromAddress(String strAddress, Context context) {
         Geocoder geocoder = new Geocoder(context);
         List<Address> address = null;
@@ -23,5 +32,5 @@ public class ApplicationFactory {
         }
 
         return latLng;
-    }*/
+    }
 }
