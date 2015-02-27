@@ -4,8 +4,10 @@ package com.example.leon.dingoapplication.Activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,6 +39,7 @@ public class CustomerDealDetailsActivity extends Activity {
     Deal deal;
     MapView mapView;
     GoogleMap map;
+    String discount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,6 @@ public class CustomerDealDetailsActivity extends Activity {
             mMobileNumber = (TextView) findViewById(R.id.merchantMobileNumber);
             dDiscount = (TextView) findViewById(R.id.discount);
 
-
             //get & set merchant companyname, description, address, web address, mobile no.
             mCompanyName.setText(merchant.getCompanyName());
 
@@ -99,11 +101,13 @@ public class CustomerDealDetailsActivity extends Activity {
 
             if(deal instanceof PercentageDiscount){
                 double pDiscount = ((PercentageDiscount) deal).getPercentage();
-                dDiscount.setText(String.valueOf(pDiscount) + "% Off");
+                discount = String.valueOf(pDiscount) + "% Off";
+                dDiscount.setText(discount);
             } else if(deal instanceof TierDiscount){
                 double tierAmount = ((TierDiscount) deal).getTierAmount();
                 double tDiscount =  ((TierDiscount) deal).getDiscountAmount();
-                dDiscount.setText("Spend " + String.valueOf(tierAmount) + "get $" + String.valueOf(tDiscount) + "Off");
+                discount = "Spend $" + String.valueOf(tierAmount) + " get $" + String.valueOf(tDiscount) + " Off";
+                dDiscount.setText(discount);
             }
 
             // Gets the MapView from the XML layout and creates it
@@ -129,6 +133,19 @@ public class CustomerDealDetailsActivity extends Activity {
             // Updates the location and zoom of the MapView
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
             map.animateCamera(cameraUpdate);
+
+            findViewById(R.id.dingItButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CustomerDealDetailsActivity.this, CustomerDingedDeal.class);
+                    intent.putExtra("deal_referenceCode", deal.getReferenceCode());
+                    intent.putExtra("mCompanyName", merchant.getCompanyName());
+                    if(!discount.isEmpty()) {
+                        intent.putExtra("discountString", discount);
+                    }
+                    startActivity(intent);
+                }
+            });
         }
     }
 

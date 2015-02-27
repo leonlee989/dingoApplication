@@ -53,5 +53,6 @@
     <string name="title_activity_merchant">Merchant</string>
     <string name="title_activity_ding_adeal">Ding A Deal</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_customer_dinged_deal">CustomerDingedDeal</string>
 
 </resources>

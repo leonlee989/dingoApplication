@@ -29,7 +29,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/dingoThemeLogin">
+            android:theme="@style/dingoThemeLogin" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,6 +67,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.leon.dingoapplication.Activities.MerchantActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.CustomerDingedDeal"
+            android:label="@string/title_activity_customer_dinged_deal" >
         </activity>
     </application>
 
