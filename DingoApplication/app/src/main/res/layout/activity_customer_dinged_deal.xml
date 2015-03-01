@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.example.leon.dingoapplication.Activities.CustomerDingedDeal">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="20dp">
+
+        <TextView
+            android:text="You Dinged a Deal!!"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="15"
+            android:textSize="30dp"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+        <TextView
+            android:text="Go to"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:textSize="16dp"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+        <TextView
+            android:id="@+id/mCNameTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+        <TextView
+            android:text="for"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:textSize="16dp"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+        <TextView
+            android:id="@+id/dDiscountTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+        <ImageView
+            android:id="@+id/qrCodeImageView"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="40"
+            android:layout_margin="10dp"
+            tools:ignore="Suspicious0dp"
+            android:gravity="center"/>
+        <TextView
+            android:text="Show this screen to your waiter/ waitress"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:textSize="20dp"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
