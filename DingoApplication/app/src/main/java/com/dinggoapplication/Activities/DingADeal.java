@@ -70,7 +70,7 @@ public class DingADeal extends FragmentActivity {
             switch (position) {
                 case 0:
                     CharSequence[] valueList = new CharSequence[]{"Everyone", "Members", "Special"};
-                    ListDialogFragment listDialogFragment = new ListDialogFragment("Assign To", valueList);
+                    ListDialogFragment listDialogFragment = ListDialogFragment.newInstance("Assign To", valueList);
 
                     listDialogFragment.show(getFragmentManager(), "Assign");
                     break;

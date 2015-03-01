@@ -18,20 +18,27 @@ import java.util.ArrayList;
  * Created by Leon on 1/3/2015.
  */
 public class ListDialogFragment extends DialogFragment {
-    String title;
-    CharSequence[] valueList;
 
-    public ListDialogFragment(String title, CharSequence[] valueList) {
-        this.title = title;
-        this.valueList = valueList;
+    public static ListDialogFragment newInstance(String title, CharSequence[] valueList) {
+        ListDialogFragment dialogFragment = new ListDialogFragment();
+        Bundle args = new Bundle();
+
+        args.putString("title", title);
+        args.putCharSequenceArray("values", valueList);
+        dialogFragment.setArguments(args);
+        return dialogFragment;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        final String title = getArguments().getString("title");
+        final CharSequence[] valueList = getArguments().getCharSequenceArray("values");
+
         builder.setTitle(title)
                 .setItems(valueList, new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getActivity(), valueList[which], Toast.LENGTH_LONG).show();
