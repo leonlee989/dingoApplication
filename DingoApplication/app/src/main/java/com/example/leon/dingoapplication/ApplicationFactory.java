@@ -3,6 +3,8 @@ package com.example.leon.dingoapplication;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -21,6 +23,7 @@ public class ApplicationFactory {
 
         try {
             address = geocoder.getFromLocationName(strAddress, 1);
+
             if (address == null || address.size() <= 0) {
                 return null;
             }

@@ -3,6 +3,8 @@ package com.example.leon.dingoapplication;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.leon.dingoapplication.Entity.Address;
 import com.example.leon.dingoapplication.Entity.Merchant;
@@ -55,8 +57,8 @@ public class Bootstrap {
         int contactNumber_peach_garden = 67020603;
 
         String website_peach_garden = "peachgarden.com.sg";
-        LatLng latLng_peachgarden = new LatLng(43.1, -87.9);
-        //LatLng latLng_peachgarden = ApplicationFactory.getLocationFromAddress(address_peach_garden.toString(), mContext);
+        //LatLng latLng_peachgarden = new LatLng(43.1, -87.9);
+        LatLng latLng_peachgarden = ApplicationFactory.getLocationFromAddress(address_peach_garden.toString(), mContext);
         if (latLng_peachgarden == null) {
             latLng_peachgarden = new LatLng(1.3000, 103.8000);
         }
@@ -95,8 +97,8 @@ public class Bootstrap {
         int contactNumber_pho_street = 64659909;
 
         String website_pho_street = "http://phostreet.com.sg/";
-        LatLng latLng_pho_street = new LatLng(43.1, -87.9);
-        //LatLng latLng_pho_street = ApplicationFactory.getLocationFromAddress(address_pho_street.toString(), mContext);
+        //LatLng latLng_pho_street = new LatLng(43.1, -87.9);
+        LatLng latLng_pho_street = ApplicationFactory.getLocationFromAddress(address_pho_street.toString(), mContext);
         if (latLng_pho_street == null) {
             latLng_pho_street = new LatLng(1.3000, 103.8000);
         }
@@ -135,8 +137,8 @@ public class Bootstrap {
         int contactNumber_lerk_thai = 68523333;
 
         String website_lerk_thai = "http://www.lerkthai.com.sg/";
-        LatLng latLng_lerk_thai = new LatLng(43.1, -87.9);
-        //LatLng latLng_lerk_thai = ApplicationFactory.getLocationFromAddress(address_lerk_thai.toString(), mContext);
+        //LatLng latLng_lerk_thai = new LatLng(43.1, -87.9);
+        LatLng latLng_lerk_thai = ApplicationFactory.getLocationFromAddress(address_lerk_thai.toString(), mContext);
         if (latLng_lerk_thai == null) {
             latLng_lerk_thai = new LatLng(1.3000, 103.8000);
         }
@@ -179,8 +181,9 @@ public class Bootstrap {
         int contactNumber_griddy_waffles = 64659465;
 
         String website_griddy_waffles = "http://griddy.com.sg/";
-        LatLng latLng_griddy_waffles = new LatLng(43.1, -87.9);
-        //LatLng latLng_griddy_waffles = ApplicationFactory.getLocationFromAddress(address_griddy_waffles.toString(), mContext);
+        //LatLng latLng_griddy_waffles = new LatLng(43.1, -87.9);
+        LatLng latLng_griddy_waffles = ApplicationFactory.getLocationFromAddress(address_griddy_waffles.toString(), mContext);
+
         if (latLng_griddy_waffles == null) {
             latLng_griddy_waffles = new LatLng(1.3000, 103.8000);
         }
@@ -220,8 +223,8 @@ public class Bootstrap {
         int contactNumber_texas_chicken = 66342130;
 
         String website_texas_chicken = "http://www.texaschicken.com.sg/";
-        LatLng latLng_texas_chicken = new LatLng(43.1, -87.9);
-        //LatLng latLng_texas_chicken = ApplicationFactory.getLocationFromAddress(address_texas_chicken.toString(), mContext);
+        //LatLng latLng_texas_chicken = new LatLng(43.1, -87.9);
+        LatLng latLng_texas_chicken = ApplicationFactory.getLocationFromAddress(address_texas_chicken.toString(), mContext);
         if (latLng_texas_chicken == null) {
             latLng_texas_chicken = new LatLng(1.3000, 103.8000);
         }
@@ -230,7 +233,7 @@ public class Bootstrap {
                 password_texas_chicken, image_texas_chicken, company_texas_chicken,
                 merchantName_texas_chicken, merchantDescription_texas_chicken,
                 merchantType_texas_chicken, address_texas_chicken, contactNumber_texas_chicken,
-                website_texas_chicken);
+                website_texas_chicken, latLng_texas_chicken);
 
         Constants.merchantManager.addMerchant(merchant_texas_chicken);
 
@@ -239,5 +242,6 @@ public class Bootstrap {
         Constants.dealManager.addDeal(deal1_texas_chicken);
         TierDiscount deal2_texas_chicken = new TierDiscount("tc2", merchant_texas_chicken, true, 10, 30);
         Constants.dealManager.addDeal(deal2_texas_chicken);
+
     }
 }

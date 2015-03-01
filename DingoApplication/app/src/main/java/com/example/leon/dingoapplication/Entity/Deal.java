@@ -1,6 +1,8 @@
 
 package com.example.leon.dingoapplication.Entity;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 /**

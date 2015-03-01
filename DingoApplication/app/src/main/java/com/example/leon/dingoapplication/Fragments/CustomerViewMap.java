@@ -8,6 +8,7 @@ import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.leon.dingoapplication.Constants;
+import com.example.leon.dingoapplication.Entity.Deal;
+import com.example.leon.dingoapplication.Entity.Merchant;
 import com.example.leon.dingoapplication.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -112,7 +119,7 @@ public class CustomerViewMap extends Fragment {
         // Set current location tracking on map view
         mMap.setOnMyLocationChangeListener(myLocationChangeListener);
 
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        setAllDeals();
     }
 
     /**
@@ -125,8 +132,23 @@ public class CustomerViewMap extends Fragment {
             LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
 
             if(mMap != null){
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 16.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 14.0f));
             }
         }
     };
+
+    public void setAllDeals() {
+        // Sample displaying
+        ArrayList<Deal> dealList = Constants.dealManager.getDealList();
+
+        for (Deal deal: dealList) {
+            Merchant merchant = deal.getMerchant();
+
+            mMap.addMarker(new MarkerOptions()
+                    .position(merchant.getLatLng())
+                    .title(merchant.getCompanyName())
+                    .snippet(deal.toString())
+                    .icon(BitmapDescriptorFactory.fromBitmap(merchant.getImage())));
+        }
+    }
 }
