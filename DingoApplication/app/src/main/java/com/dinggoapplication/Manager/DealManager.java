@@ -1,6 +1,7 @@
 package com.dinggoapplication.Manager;
 
 import com.dinggoapplication.Entity.Deal;
+import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.ErrorHandling.DealNotFoundException;
 
 import java.util.ArrayList;
@@ -90,5 +91,19 @@ public class DealManager {
         if (!dealRemoved) {
             throw new DealNotFoundException(removeDeal);
         }
+    }
+
+    public ArrayList<Deal> retrieveDealByMerchant(String merchantId) {
+        ArrayList<Deal> merchantList = new ArrayList<Deal>();
+
+        for (Deal deal : this.dealList) {
+            Merchant merchant = deal.getMerchant();
+
+            if (merchant.getMerchantId().equalsIgnoreCase(merchantId)) {
+                merchantList.add(deal);
+            }
+        }
+
+        return merchantList;
     }
 }

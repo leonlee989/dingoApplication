@@ -56,6 +56,9 @@
     <string name="dingadeal_optionText_5">Use by 2h 00m</string>
     <string name="dingadeal_optionText_6">Mystery Deal</string>
 
+    <!-- Merchant: Ongoing Deal -->
+    <string name="ongoing_title">Ongoing Deals</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_merchant">Merchant</string>

@@ -53,6 +53,10 @@
             android:label="@string/title_activity_customer_deal_details" >
         </activity>
         <activity
+            android:name=".Activities.CustomerDingedDeal"
+            android:label="@string/title_activity_customer_dinged_deal" >
+        </activity>
+        <activity
             android:name=".Activities.MerchantActivity"
             android:label="@string/title_activity_merchant"
             android:parentActivityName=".Activities.MainActivity" >
@@ -69,8 +73,12 @@
                 android:value="com.dinggoapplication.Activities.MerchantActivity" />
         </activity>
         <activity
-            android:name=".Activities.CustomerDingedDeal"
-            android:label="@string/title_activity_customer_dinged_deal" >
+            android:name=".Activities.OngoingDeal"
+            android:label="Ongoing Deal"
+            android:parentActivityName=".Activities.MerchantActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinggoapplication.Activities.MerchantActivity" />
         </activity>
     </application>
 

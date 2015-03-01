@@ -64,8 +64,12 @@ public class MerchantActivity extends ListActivity {
         // Action for individual actions
         switch(position) {
             case 0:
-                Intent intent = new Intent(MerchantActivity.this, DingADeal.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(MerchantActivity.this, DingADeal.class);
+                startActivity(intent1);
+                break;
+            case 1:
+                Intent intent2 = new Intent(MerchantActivity.this, OngoingDeal.class);
+                startActivity(intent2);
                 break;
             default:
                 String item = (String) getListAdapter().getItem(position);

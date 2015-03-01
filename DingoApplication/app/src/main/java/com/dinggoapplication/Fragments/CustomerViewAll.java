@@ -155,7 +155,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         private final ArrayList<Deal> values;
 
         public DealArrayAdapter(Context context, ArrayList<Deal> values) {
-            super(context, R.layout.customer_view_all_row, values);
+            super(context, R.layout.deal_view_row, values);
             this.context = context;
             this.values = values;
         }
@@ -171,7 +171,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getActivity().getLayoutInflater();
 
-            View rowView = inflater.inflate(R.layout.customer_view_all_row, parent, false);
+            View rowView = inflater.inflate(R.layout.deal_view_row, parent, false);
 
             Deal deal = values.get(position);
             Merchant merchant = deal.getMerchant();
@@ -188,6 +188,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             TextView dealTextView = (TextView) rowView.findViewById(R.id.dealDetail);
             dealTextView.setText(deal.toString());
             dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
+
+            TextView additionInfo = (TextView) rowView.findViewById(R.id.addtionalInfo);
+            additionInfo.setText("500 m");
 
             return rowView;
         }

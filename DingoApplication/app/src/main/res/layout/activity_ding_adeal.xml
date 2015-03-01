@@ -37,6 +37,7 @@
         android:background="@color/red"
         android:text="Ding Go!"
         android:padding="15dp"
+        android:onClick="dingGo"
         android:textColor="@color/white"/>
 
 </RelativeLayout>

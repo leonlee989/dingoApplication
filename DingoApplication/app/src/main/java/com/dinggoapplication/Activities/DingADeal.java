@@ -1,6 +1,8 @@
 package com.dinggoapplication.Activities;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;;
 
+import com.dinggoapplication.Fragments.Dialogs.DingConfirmationDialogFragment;
+import com.dinggoapplication.Fragments.Dialogs.ListDialogFragment;
 import com.dinggoapplication.R;
 
 import java.util.ArrayList;
@@ -57,15 +61,26 @@ public class DingADeal extends FragmentActivity {
         ListView list = (ListView) findViewById(R.id.dingadeal_List);
         list.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView text = (TextView) view.findViewById(R.id.option_label);
-                Toast.makeText(DingADeal.this, text.getText(), Toast.LENGTH_LONG).show();
-            }
-        });
+        list.setOnItemClickListener(itemActions);
     }
 
+    AdapterView.OnItemClickListener itemActions = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            switch (position) {
+                case 0:
+                    CharSequence[] valueList = new CharSequence[]{"Everyone", "Members", "Special"};
+                    ListDialogFragment listDialogFragment = new ListDialogFragment("Assign To", valueList);
+
+                    listDialogFragment.show(getFragmentManager(), "Assign");
+                    break;
+                default:
+                    TextView text = (TextView) view.findViewById(R.id.option_label);
+                    Toast.makeText(DingADeal.this, text.getText(), Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
     /**
      * Method to call upon to set up the option available for ding a deal
      * @return
@@ -94,6 +109,12 @@ public class DingADeal extends FragmentActivity {
         adapter.addOption(option6);
 
         return adapter;
+    }
+
+    public void dingGo(View view) {
+        // Display dialog box
+        DingConfirmationDialogFragment dialogFragment = new DingConfirmationDialogFragment();
+        dialogFragment.show(getFragmentManager(), "Alert");
     }
 
     /**
