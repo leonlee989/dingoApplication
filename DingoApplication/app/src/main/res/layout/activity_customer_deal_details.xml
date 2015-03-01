@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignParentBottom="true"
-    tools:context="com.example.leon.dingoapplication.Activities.CustomerDealDetailsActivity">
+    tools:context="com.dinggoapplication.Activities.CustomerDealDetailsActivity">
 
     <ImageView
         android:layout_width="fill_parent"
@@ -209,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Ding For:"/>
-            <com.example.leon.dingoapplication.CustomInterface.HorizontalNumberPicker
+            <com.dinggoapplication.CustomInterface.HorizontalNumberPicker
                 android:id ="@+id/horizontal_number_picker"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"

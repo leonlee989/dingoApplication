@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.leon.dingoapplication" >
+    package="com.dinggoapplication" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -58,7 +58,7 @@
             android:parentActivityName=".Activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.leon.dingoapplication.Activities.MainActivity" />
+                android:value="com.dinggoapplication.Activities.MainActivity" />
         </activity>
         <activity
             android:name=".Activities.DingADeal"
@@ -66,7 +66,7 @@
             android:parentActivityName=".Activities.MerchantActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.leon.dingoapplication.Activities.MerchantActivity" />
+                android:value="com.dinggoapplication.Activities.MerchantActivity" />
         </activity>
         <activity
             android:name=".Activities.CustomerDingedDeal"

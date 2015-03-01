@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.example.leon.dingoapplication.Activities.CustomerDingedDeal">
+    tools:context="com.dinggoapplication.Activities.CustomerDingedDeal">
 
     <LinearLayout
         android:orientation="vertical"

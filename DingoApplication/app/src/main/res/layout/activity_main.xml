@@ -4,7 +4,7 @@ android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizo
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 android:paddingBottom="@dimen/activity_vertical_margin"
-tools:context="com.example.leon.dingoapplication.Activities.MainActivity" >
+tools:context="com.dinggoapplication.Activities.MainActivity" >
 
     <ImageView android:id="@+id/appIcon"
         android:layout_width="60dp"

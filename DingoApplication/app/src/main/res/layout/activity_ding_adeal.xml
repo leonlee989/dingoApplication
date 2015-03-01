@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.example.leon.dingoapplication.Activities.DingADeal">
+    tools:context="com.dinggoapplication.Activities.DingADeal">
 
 
     <TextView android:id="@+id/dingadealtitle"
