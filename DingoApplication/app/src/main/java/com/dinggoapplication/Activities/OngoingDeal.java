@@ -30,7 +30,7 @@ public class OngoingDeal extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ongoingdeal);
+        setContentView(R.layout.activity_ongoingdeal);
 
         // Set up the action bar
         final ActionBar actionBar = getActionBar();

@@ -19,6 +19,7 @@
     <string name="hint_password">Password</string>
     <string name="login_button">Login</string>
     <string name="registerText"><u>Register for DingGo</u></string>
+    <string name="facebookText">Connect us with Facebook</string>
 
     <!-- Customer landing page -->
     <string name="customer_optionText_1">Eat &amp; Drink</string>

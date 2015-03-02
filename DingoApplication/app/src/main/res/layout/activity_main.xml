@@ -10,7 +10,7 @@ tools:context="com.dinggoapplication.Activities.MainActivity" >
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/bellred"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
 
@@ -33,7 +33,7 @@ tools:context="com.dinggoapplication.Activities.MainActivity" >
         android:layout_below="@+id/app_name"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:textSize="20dp"
         android:hint="@string/hint_username"
         android:gravity="center" />
@@ -65,7 +65,7 @@ tools:context="com.dinggoapplication.Activities.MainActivity" >
         android:textColor="@color/white"
         android:textSize="20dp"/>
 
-    <TextView
+    <TextView android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login"
@@ -75,5 +75,47 @@ tools:context="com.dinggoapplication.Activities.MainActivity" >
         android:onClick="onClick"
         android:clickable="true"
         android:textSize="15dp" />
+
+    <View android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:background="#90909090"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_above="@+id/facebook"
+        android:id="@+id/separator2" />
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/facebook"
+        android:layout_marginBottom="-4dp"
+        android:text="Or"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:gravity="center"/>
+
+    <LinearLayout android:id="@+id/facebook"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:src="@drawable/facebook"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView android:id="@+id/facebookText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/facebook_color"
+            android:text="@string/facebookText"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:onClick="onClick"
+            android:clickable="true"/>
+    </LinearLayout>
 
 </RelativeLayout>

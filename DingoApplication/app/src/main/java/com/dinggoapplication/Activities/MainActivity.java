@@ -13,7 +13,7 @@ import com.dinggoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener{
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +57,43 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      */
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.register) {
         /*
             Create an intent that ask user to pick a photo, but using
             FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, ensures that relaunching
             the application from the device home screen does not return
             to the external activity
         */
-        Intent externalActivityIntent = new Intent(Intent.ACTION_PICK);
-        externalActivityIntent.setType("image/*");
-        externalActivityIntent.addFlags(
-                Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(externalActivityIntent);
+            /*
+            Intent externalActivityIntent = new Intent(Intent.ACTION_PICK);
+            externalActivityIntent.setType("image/*");
+            externalActivityIntent.addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(externalActivityIntent);
+            */
+            register();
+
+        } else if (v.getId() == R.id.facebookText) {
+            facebookLogin();
+        }
     }
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    /**
+     * ToDo: Register a new account with a new layout 
+     */
+    public void register() {
+        Toast.makeText(this, "Register an account", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * ToDo: Facebook integration to cater for facebook login
+     */
+    public void facebookLogin() {
+        Toast.makeText(this, "Facebook Login", Toast.LENGTH_LONG).show();
     }
 }
