@@ -91,7 +91,7 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
                             .setTabListener(this));
 
         }
-
+        mViewPager.setCurrentItem(1);
     }
 
     @Override

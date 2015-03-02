@@ -1,6 +1,9 @@
 package com.dinggoapplication.Fragments;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,13 +12,17 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.dinggoapplication.Activities.CustomerDealDetailsActivity;
+import com.dinggoapplication.Constants;
+import com.dinggoapplication.Entity.Deal;
+import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
 
-import com.dinggoapplication.Fragments.dummy.DummyContent;
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -28,6 +35,9 @@ import com.dinggoapplication.Fragments.dummy.DummyContent;
  */
 public class CustomerViewDings extends Fragment implements AbsListView.OnItemClickListener {
 
+    /**
+     * Fragment interaction listener on its parent activity
+     */
     private OnDingsFragmentInteractionListener mListener;
 
     /**
@@ -47,22 +57,40 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
      */
     public CustomerViewDings() {}
 
+    /**
+     * Deal list to retrieve based on Preference Activity set by customer
+     */
+    public ArrayList<Deal> dealList;
+
+    /**
+     * Upon fragment creation
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity().getApplicationContext(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        // ToDo: Retrieve category and value from the settings in Preference Activity set by the customers
+        this.dealList = Constants.dealManager
+                .retrieveDealByCategory("Merchant Type", "Western Food");
+
+        mAdapter = new DingArrayAdapter(getActivity(), dealList);
     }
 
+    /**
+     * On view created on fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.customer_dings_tab, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(R.id.dingList);
+        mListView = (AbsListView) view.findViewById(R.id.dealList);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -71,6 +99,10 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
         return view;
     }
 
+    /**
+     * On fragment attach
+     * @param activity
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -82,6 +114,9 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
         }
     }
 
+    /**
+     * On fragment detached
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -89,13 +124,22 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
     }
 
 
+    /**
+     * On every item click on the list view
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onDingsFragmentInteraction(DummyContent.ITEMS.get(position).id);
-            Toast.makeText(getActivity(), DummyContent.ITEMS.get(position).id, Toast.LENGTH_LONG).show();
+            Deal deal = this.dealList.get(position);
+            mListener.onDingsFragmentInteraction(deal.getReferenceCode());
+
+            Intent intent = new Intent(getActivity().getBaseContext(), CustomerDealDetailsActivity.class);
+            intent.putExtra("deal_referenceCode", deal.getReferenceCode());
+            startActivity(intent);
         }
     }
 
@@ -126,4 +170,58 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
         public void onDingsFragmentInteraction(String id);
     }
 
+    /**
+     * Custom ArrayAdapter class
+     */
+    public class DingArrayAdapter extends ArrayAdapter<Deal> {
+        private  final Context context;
+        private  final ArrayList<Deal> values;
+
+        /**
+         * Constructor to initialize DingArrayAdapter
+         * @param context
+         * @param values
+         */
+        public DingArrayAdapter(Context context, ArrayList<Deal> values) {
+            super(context, R.layout.deal_view_row, values);
+            this.context = context;
+            this.values = values;
+
+        }
+
+        /**
+         * Customized view for different deals
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+
+            View rowView = inflater.inflate(R.layout.deal_view_row, parent, false);
+
+            Deal deal = values.get(position);
+            Merchant merchant = deal.getMerchant();
+
+            ImageView image = (ImageView) rowView.findViewById(R.id.merchantLogo);
+            image.setImageBitmap(merchant.getImage());
+
+            TextView companyName = (TextView) rowView.findViewById(R.id.companyName);
+            companyName.setText(merchant.getCompanyName());
+
+            TextView merchantType = (TextView) rowView.findViewById(R.id.merchantType);
+            merchantType.setText(merchant.getMerchantType());
+
+            TextView dealTextView = (TextView) rowView.findViewById(R.id.dealDetail);
+            dealTextView.setText(deal.toString());
+            dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
+
+            TextView additionInfo = (TextView) rowView.findViewById(R.id.addtionalInfo);
+            additionInfo.setText("500 m");
+
+            return rowView;
+        }
+    }
 }

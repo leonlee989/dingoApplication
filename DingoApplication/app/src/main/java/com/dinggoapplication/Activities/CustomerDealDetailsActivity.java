@@ -58,7 +58,6 @@ public class CustomerDealDetailsActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Toast.makeText(this, extras.getString("deal_referenceCode"), Toast.LENGTH_LONG).show();
 
             //get deal
             deal = Constants.dealManager.getDeal(extras.getString("deal_referenceCode"));

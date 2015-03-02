@@ -93,6 +93,11 @@ public class DealManager {
         }
     }
 
+    /**
+     * Retrieve list of deals offered by provided merchant id
+     * @param merchantId
+     * @return
+     */
     public ArrayList<Deal> retrieveDealByMerchant(String merchantId) {
         ArrayList<Deal> merchantList = new ArrayList<Deal>();
 
@@ -104,6 +109,27 @@ public class DealManager {
             }
         }
 
+        return merchantList;
+    }
+
+    /**
+     * Retrieve list of deals by providing a specific category with a value
+     * @param category
+     * @param value
+     * @return
+     */
+    public ArrayList<Deal> retrieveDealByCategory(String category, String value) {
+        ArrayList<Deal> merchantList = new ArrayList<Deal>();
+
+        if (category.equalsIgnoreCase("Merchant Type")) {
+            for (Deal deal : this.dealList) {
+                Merchant merchant = deal.getMerchant();
+
+                if (merchant.getMerchantType().equalsIgnoreCase(value)) {
+                    merchantList.add(deal);
+                }
+            }
+        }
         return merchantList;
     }
 }

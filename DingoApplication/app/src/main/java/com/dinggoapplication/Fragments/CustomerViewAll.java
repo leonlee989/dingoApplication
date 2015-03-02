@@ -52,6 +52,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     private ListAdapter mAdapter;
 
     /**
+     * All available deals in the system
+     */
+    private ArrayList<Deal> dealList;
+
+    /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
@@ -60,8 +65,8 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new DealArrayAdapter(getActivity().getApplicationContext(),
-                Constants.dealManager.getDealList());
+        this.dealList = Constants.dealManager.getDealList();
+        mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
     }
 
     @Override
@@ -115,7 +120,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            Deal deal = Constants.dealManager.getDeal(position);
+            Deal deal = this.dealList.get(position);
             mListener.onDealFragmentInteraction(deal.getReferenceCode());
             //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
 
@@ -137,6 +142,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             ((TextView) emptyView).setText(emptyText);
         }
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

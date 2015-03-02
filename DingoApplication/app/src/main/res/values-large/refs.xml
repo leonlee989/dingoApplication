@@ -16,6 +16,6 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
-    <item name="customer_dings_tab" type="layout">@layout/customer_view_dings</item>
+    <item name="customer_dings_tab" type="layout">@layout/customer_view_all</item>
 
 </resources>
