@@ -53,8 +53,8 @@ public class DingConfirmationDialogFragment extends DialogFragment {
         // Set the builder contents
         builder.setMessage("Once confirmed, deal is on!")
                 .setTitle("Confirmation")
-                .setPositiveButton("Yes", response_yes)
-                .setNegativeButton("No", response_no);
+                .setPositiveButton(R.string.response_yes, response_yes)
+                .setNegativeButton(R.string.response_no, response_no);
 
         return builder.create();
     }

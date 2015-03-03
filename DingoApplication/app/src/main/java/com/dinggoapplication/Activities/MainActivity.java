@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     /**
-     * ToDo: Register a new account with a new layout 
+     * ToDo: Register a new account with a new layout
      */
     public void register() {
         Toast.makeText(this, "Register an account", Toast.LENGTH_LONG).show();

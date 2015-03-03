@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;;
 
+import com.dinggoapplication.Fragments.Dialogs.CustomLayoutDialogFragment;
 import com.dinggoapplication.Fragments.Dialogs.DingConfirmationDialogFragment;
 import com.dinggoapplication.Fragments.Dialogs.ListDialogFragment;
 import com.dinggoapplication.R;
@@ -73,6 +74,36 @@ public class DingADeal extends FragmentActivity {
                     ListDialogFragment listDialogFragment = ListDialogFragment.newInstance("Assign To", valueList);
 
                     listDialogFragment.show(getFragmentManager(), "Assign");
+                    break;
+                case 1:
+                    CustomLayoutDialogFragment percentageDialog = CustomLayoutDialogFragment
+                            .newInstance(R.layout.dialog_number_picker,
+                                    getResources().getString(R.string.percentageGive1),
+                                    getResources().getString(R.string.percentageGive2), 100, 1);
+
+                    percentageDialog.show(getFragmentManager(), "Percentage");
+                    break;
+                case 2:
+                    CustomLayoutDialogFragment maxSeatDialog =
+                            CustomLayoutDialogFragment.newInstance(R.layout.dialog_number_picker,
+                                    getResources().getString(R.string.maxSeatText1),
+                                    getResources().getString(R.string.maxSeatText2), 100, 1);
+
+                    maxSeatDialog.show(getFragmentManager(), "maxSeat");
+                    break;
+                case 3:
+                    CustomLayoutDialogFragment endTimeDialog = CustomLayoutDialogFragment
+                            .newInstance(R.layout.dialog_time_picker,
+                                    getResources().getString(R.string.endText));
+
+                    endTimeDialog.show(getFragmentManager(), "endTime");
+                    break;
+                case 4:
+                    CustomLayoutDialogFragment useByTimeDialog = CustomLayoutDialogFragment
+                            .newInstance(R.layout.dialog_time_picker,
+                                    getResources().getString(R.string.useByText));
+
+                    useByTimeDialog.show(getFragmentManager(), "useByTime");
                     break;
                 default:
                     TextView text = (TextView) view.findViewById(R.id.option_label);

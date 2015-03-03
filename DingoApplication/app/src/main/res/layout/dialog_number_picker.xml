@@ -3,8 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <NumberPicker android:id="@+id/digit_1"
+    <RelativeLayout android:id="@+id/dialogNumberPickerContainer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></NumberPicker>
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center" >
+
+        <TextView android:id="@+id/dialog_text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:textSize="15dp"/>
+
+        <NumberPicker android:id="@+id/numberpicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/dialog_text_1"
+            android:layout_marginLeft="20dp"></NumberPicker>
+
+        <TextView android:id="@+id/dialog_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/numberpicker"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:textSize="15dp"/>
+    </RelativeLayout>
 
 </LinearLayout>
