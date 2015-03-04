@@ -241,7 +241,7 @@ public class Merchant {
      * @param unitNumber
      * @param postalCode
      */
-    public void setAddress(String houseNumber, String streetName, String unitNumber, int postalCode) {
+    public void setAddress(String houseNumber, String streetName, String unitNumber, String postalCode) {
         this.address = new Address(houseNumber, streetName, unitNumber, postalCode);
     }
 
