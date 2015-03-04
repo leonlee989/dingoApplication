@@ -202,7 +202,7 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
 
             View rowView = inflater.inflate(R.layout.deal_view_row, parent, false);
 
-            Deal deal = values.get(position);
+            Deal deal = values.get((values.size()-1) - position);
             Merchant merchant = deal.getMerchant();
 
             ImageView image = (ImageView) rowView.findViewById(R.id.merchantLogo);
