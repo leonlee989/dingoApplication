@@ -77,6 +77,7 @@ public class CustomLayoutDialogFragment extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             Toast.makeText(getActivity(), "Yes", Toast.LENGTH_LONG).show();
+
         }
     };
 

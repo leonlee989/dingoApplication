@@ -120,8 +120,57 @@ public class Bootstrap {
                 pho_pho, true, 50);
         Constants.dealManager.addDeal(deal1_pho_pho);
 
+
+        // TODO: Merchant details for Four Seasons Chicken
+        String merchantId_fourseason_chicken = "merchant03";
+
+        String password_fourseason_chicken = "123";
+
+        Bitmap image_fourseason_chicken = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.fourseasonschicken);
+
+        String company_fourseason_chicken = "Four Seasons Chicken";
+
+        String merchantName_fourseason_chicken = "Hyden Sim.";
+
+        String merchantDescription_fourseason_chicken = "Four Seasons Chicken offered freshly " +
+                "prepared, high quality, delicious chicken and tenders with all your favorite " +
+                "classic sides at a great value";
+
+        String merchantType_fourseason_chicken = "Western Food";
+
+        Address address_fourseason_chicken = new Address("23", "Serangoon Central", "#XX-XX, " +
+                "Nex", "556083");
+
+        int contactNumber_fourseason_chicken = 66342130;
+
+        String website_fourseason_chicken = "http://www.fourchicken.com.sg/";
+        //LatLng latLng_fourseason_chicken = new LatLng(1.3506, 103.8718);
+        LatLng latLng_fourseason_chicken = ApplicationFactory.getLocationFromAddress(address_fourseason_chicken.toString(), mContext);
+        if (latLng_fourseason_chicken == null) {
+            latLng_fourseason_chicken = new LatLng(1.3000, 103.8000);
+        }
+
+        Merchant merchant_fourseason_chicken = new Merchant(merchantId_fourseason_chicken,
+                password_fourseason_chicken, image_fourseason_chicken, company_fourseason_chicken,
+                merchantName_fourseason_chicken, merchantDescription_fourseason_chicken,
+                merchantType_fourseason_chicken, address_fourseason_chicken, contactNumber_fourseason_chicken,
+                website_fourseason_chicken, latLng_fourseason_chicken);
+
+        Constants.merchantManager.addMerchant(merchant_fourseason_chicken);
+
+        // Deals available for Texas Chicken
+        Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.coverfourseasonschicken);
+        PercentageDiscount deal1_fourseason_chicken = new PercentageDiscount("tc1", coverImage_four_chicken,
+                merchant_fourseason_chicken, true, 20);
+        Constants.dealManager.addDeal(deal1_fourseason_chicken);
+        TierDiscount deal2_fourseason_chicken = new TierDiscount("tc2", coverImage_four_chicken,
+                merchant_fourseason_chicken, true, 10, 30);
+        Constants.dealManager.addDeal(deal2_fourseason_chicken);
+
         // TODO: Merchant details for Gold Thai
-        String merchantId_gold_thai = "merchant03";
+        String merchantId_gold_thai = "merchant04";
 
         String password_gold_thai = "123";
 
@@ -168,7 +217,7 @@ public class Bootstrap {
         Constants.dealManager.addDeal(deal2_gold_thai);
 
         // TODO: Merchant details for Griddy & Souffles
-        String merchantId_griddy_souffles = "merchant04";
+        String merchantId_griddy_souffles = "merchant05";
 
         String password_griddy_souffles = "123";
 
@@ -209,54 +258,6 @@ public class Bootstrap {
         TierDiscount deal1_griddy_souffles = new TierDiscount("GW1", coverImage_waffles_souffles,
                 griddy_souffles, true, 10, 50);
         Constants.dealManager.addDeal(deal1_griddy_souffles);
-
-        // TODO: Merchant details for Four Seasons Chicken
-        String merchantId_fourseason_chicken = "merchant05";
-
-        String password_fourseason_chicken = "123";
-
-        Bitmap image_fourseason_chicken = BitmapFactory.decodeResource(mContext.getResources(),
-                R.drawable.fourseasonschicken);
-
-        String company_fourseason_chicken = "Four Seasons Chicken";
-
-        String merchantName_fourseason_chicken = "Hyden Sim.";
-
-        String merchantDescription_fourseason_chicken = "Four Seasons Chicken offered freshly " +
-                "prepared, high quality, delicious chicken and tenders with all your favorite " +
-                "classic sides at a great value";
-
-        String merchantType_fourseason_chicken = "Western Food";
-
-        Address address_fourseason_chicken = new Address("23", "Serangoon Central", "#XX-XX, " +
-                "Nex", "556083");
-
-        int contactNumber_fourseason_chicken = 66342130;
-
-        String website_fourseason_chicken = "http://www.fourchicken.com.sg/";
-        //LatLng latLng_fourseason_chicken = new LatLng(1.3506, 103.8718);
-        LatLng latLng_fourseason_chicken = ApplicationFactory.getLocationFromAddress(address_fourseason_chicken.toString(), mContext);
-        if (latLng_fourseason_chicken == null) {
-            latLng_fourseason_chicken = new LatLng(1.3000, 103.8000);
-        }
-
-        Merchant merchant_fourseason_chicken = new Merchant(merchantId_fourseason_chicken,
-                password_fourseason_chicken, image_fourseason_chicken, company_fourseason_chicken,
-                merchantName_fourseason_chicken, merchantDescription_fourseason_chicken,
-                merchantType_fourseason_chicken, address_fourseason_chicken, contactNumber_fourseason_chicken,
-                website_fourseason_chicken, latLng_fourseason_chicken);
-
-        Constants.merchantManager.addMerchant(merchant_fourseason_chicken);
-
-        // Deals available for Texas Chicken
-        Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(mContext.getResources(),
-                R.drawable.coverfourseasonschicken);
-        PercentageDiscount deal1_fourseason_chicken = new PercentageDiscount("tc1", coverImage_four_chicken,
-                merchant_fourseason_chicken, true, 20);
-        Constants.dealManager.addDeal(deal1_fourseason_chicken);
-        TierDiscount deal2_fourseason_chicken = new TierDiscount("tc2", coverImage_four_chicken,
-                merchant_fourseason_chicken, true, 10, 30);
-        Constants.dealManager.addDeal(deal2_fourseason_chicken);
 
     }
 }

@@ -92,11 +92,12 @@ public class DingConfirmationDialogFragment extends DialogFragment {
                 }
             }
 
+            // ToDo: To be removed
             /* For static display purpose */
-            Bitmap coverImage_gold_thai = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(),
-                    R.drawable.covergoldthai);
+            Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(getActivity().getApplicationContext()
+                            .getResources(), R.drawable.coverfourseasonschicken);
             Merchant merchant = Constants.merchantManager.getMerchant(2);
-            PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_gold_thai,
+            PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_four_chicken,
                     merchant, 20);
 
             Constants.dealManager.addDeal(additionalDeal);
