@@ -8,7 +8,7 @@ public class Address {
     String houseNumber;
     String streetName;
     String unitNumber;
-    int postalCode;
+    String postalCode;
 
     /**
      * Constructor that initialize Address Object with the following parameters:
@@ -17,7 +17,7 @@ public class Address {
      * @param unitNumber
      * @param postalCode
      */
-    public Address(String houseNumber, String streetName, String unitNumber, int postalCode) {
+    public Address(String houseNumber, String streetName, String unitNumber, String postalCode) {
         this.houseNumber = houseNumber;
         this.streetName = streetName;
         this.unitNumber = unitNumber;
@@ -76,7 +76,7 @@ public class Address {
      * Get postal code for the address
      * @return postalCode
      */
-    public int getPostalCode() {
+    public String getPostalCode() {
         return this.postalCode;
     }
 
@@ -84,7 +84,7 @@ public class Address {
      * Set postal code for the address
      * @param postalCode
      */
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 

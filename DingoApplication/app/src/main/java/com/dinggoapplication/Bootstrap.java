@@ -33,43 +33,43 @@ public class Bootstrap {
     public void initializeEntity() {
 
         // TODO: Merchant details for Peach Garden
-        String merchantId_peach_garden = "merchant01";
+        String merchantId_oriental_garden = "merchant01";
 
-        String password_peach_garden = "123";
+        String password_oriental_garden = "123";
 
-        Bitmap image_peach_garden = BitmapFactory.decodeResource(mContext.getResources(),
-                R.drawable.peachgarden);
+        Bitmap image_oriental_garden = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.orientalgarden);
 
-        String company_peach_garden = "Peach Garden";
+        String company_oriental_garden = "Oriental Garden";
 
-        String merchantName_peach_garden = "Veronica Tan";
+        String merchantName_oriental_garden = "Veronica Tan";
 
-        String merchantDescription_peach_garden = "Peach Garden @ Chinatown Point is renown for " +
+        String merchantDescription_oriental_garden = "Oriental Garden @ Chinatown Point is renown for " +
                 "their quality culinary offerings and distinguished fine dining experience";
 
-        String merchantType_peach_garden = "Chinese Food";
+        String merchantType_oriental_garden = "Chinese Food";
 
-        Address address_peach_garden = new Address("301", "Upper Thomson Rd",
-                "#01-88 Thomson Plaza", 574408);
+        Address address_oriental_garden = new Address("22", "New Bridge Road Rd",
+                "#XX-XX Chinatown point", "059413");
 
-        int contactNumber_peach_garden = 67020603;
+        int contactNumber_oriental_garden = 61234567;
 
-        String website_peach_garden = "peachgarden.com.sg";
-        //LatLng latLng_peachgarden = new LatLng(43.1, -87.9);
-        LatLng latLng_peachgarden = ApplicationFactory.getLocationFromAddress(address_peach_garden.toString(), mContext);
-        if (latLng_peachgarden == null) {
-            latLng_peachgarden = new LatLng(1.3000, 103.8000);
+        String website_oriental_garden = "orientalgarden.com.sg";
+        LatLng latLng_orientalgarden = new LatLng(1.2852, 103.8449);
+        //LatLng latLng_peachgarden = ApplicationFactory.getLocationFromAddress(address_peach_garden.toString(), mContext);
+        if (latLng_orientalgarden == null) {
+            latLng_orientalgarden = new LatLng(1.3000, 103.8000);
         }
 
-        Merchant peach_garden = new Merchant(merchantId_peach_garden, password_peach_garden,
-                image_peach_garden, company_peach_garden, merchantName_peach_garden,
-                merchantDescription_peach_garden, merchantType_peach_garden, address_peach_garden,
-                contactNumber_peach_garden, website_peach_garden, latLng_peachgarden);
+        Merchant oriental_garden = new Merchant(merchantId_oriental_garden, password_oriental_garden,
+                image_oriental_garden, company_oriental_garden, merchantName_oriental_garden,
+                merchantDescription_oriental_garden, merchantType_oriental_garden, address_oriental_garden,
+                contactNumber_oriental_garden, website_oriental_garden, latLng_orientalgarden);
 
-        Constants.merchantManager.addMerchant(peach_garden);
+        Constants.merchantManager.addMerchant(oriental_garden);
 
         // Deals available for Peach Garden
-        PercentageDiscount deal1_peach_garden = new PercentageDiscount("PG1", peach_garden, true, 50);
+        PercentageDiscount deal1_peach_garden = new PercentageDiscount("OG1", oriental_garden, true, 50);
         Constants.dealManager.addDeal(deal1_peach_garden);
 
         // TODO: Merchant details for Pho Street
@@ -78,9 +78,9 @@ public class Bootstrap {
         String password_pho_street = "123";
 
         Bitmap image_pho_street = BitmapFactory.decodeResource(mContext.getResources(),
-                R.drawable.phostreet);
+                R.drawable.phopho);
 
-        String company_pho_street = "Pho Street";
+        String company_pho_street = "Pho Pho";
 
         String merchantName_pho_street = "Unknown Owner";
 
@@ -90,13 +90,13 @@ public class Bootstrap {
 
         String merchantType_pho_street = "Vietnamese Food";
 
-        Address address_pho_street = new Address("311", "New Upper Changi Road", "#B1-40", 467360);
+        Address address_pho_street = new Address("82", "Tanah Merah Kechil Ave", "#XX-XX", "465515");
 
-        int contactNumber_pho_street = 64659909;
+        int contactNumber_pho_street = 61234567;
 
-        String website_pho_street = "http://phostreet.com.sg/";
-        //LatLng latLng_pho_street = new LatLng(43.1, -87.9);
-        LatLng latLng_pho_street = ApplicationFactory.getLocationFromAddress(address_pho_street.toString(), mContext);
+        String website_pho_street = "http://phopho.com.sg/";
+        LatLng latLng_pho_street = new LatLng(1.3285, 103.9445);
+        //LatLng latLng_pho_street = ApplicationFactory.getLocationFromAddress(address_pho_street.toString(), mContext);
         if (latLng_pho_street == null) {
             latLng_pho_street = new LatLng(1.3000, 103.8000);
         }
@@ -109,7 +109,7 @@ public class Bootstrap {
         Constants.merchantManager.addMerchant(pho_street);
 
         // Deals available for Pho Street Restaurant
-        PercentageDiscount deal1_pho_street = new PercentageDiscount("PS1", pho_street, true, 50);
+        PercentageDiscount deal1_pho_street = new PercentageDiscount("PP1", pho_street, true, 50);
         Constants.dealManager.addDeal(deal1_pho_street);
 
         // TODO: Merchant details for Lerk Thai
@@ -118,25 +118,25 @@ public class Bootstrap {
         String password_lerk_thai = "123";
 
         Bitmap image_lerk_thai = BitmapFactory.decodeResource(mContext.getResources(),
-                R.drawable.lerkthai);
+                R.drawable.goldthai);
 
-        String company_lerk_thai = "Lerk Thai";
+        String company_lerk_thai = "Gold Thai";
 
         String merchantName_lerk_thai = "Select Group Limited";
 
-        String merchantDescription_lerk_thai = "Lerk Thai @ Senoko Crescent offers a bountiful mix " +
+        String merchantDescription_lerk_thai = "Gold Thai @ Senoko Crescent offers a bountiful mix " +
                 "of authentic Thai cuisine, with the plethora of dips and pastes used in our cuisine " +
                 "and level of spiciness adjusted to local palates";
 
         String merchantType_lerk_thai = "Thai Food";
 
-        Address address_lerk_thai = new Address("36", "Senoko Crescent", "", 758282 );
+        Address address_lerk_thai = new Address("1", "Senoko Crescent", "", "758282");
 
-        int contactNumber_lerk_thai = 68523333;
+        int contactNumber_lerk_thai = 61234567;
 
-        String website_lerk_thai = "http://www.lerkthai.com.sg/";
-        //LatLng latLng_lerk_thai = new LatLng(43.1, -87.9);
-        LatLng latLng_lerk_thai = ApplicationFactory.getLocationFromAddress(address_lerk_thai.toString(), mContext);
+        String website_lerk_thai = "http://www.goldthai.com.sg/";
+        LatLng latLng_lerk_thai = new LatLng(1.4649, 103.8066);
+        //LatLng latLng_lerk_thai = ApplicationFactory.getLocationFromAddress(address_lerk_thai.toString(), mContext);
         if (latLng_lerk_thai == null) {
             latLng_lerk_thai = new LatLng(1.3000, 103.8000);
         }
@@ -149,10 +149,10 @@ public class Bootstrap {
         Constants.merchantManager.addMerchant(lerk_thai);
 
         // Deals available for Lerk Thai Restaurant
-        TierDiscount deal1_lerk_thai = new TierDiscount("LT1", lerk_thai, true, 20, 10);
+        TierDiscount deal1_lerk_thai = new TierDiscount("GT1", lerk_thai, true, 20, 10);
         Constants.dealManager.addDeal(deal1_lerk_thai);
 
-        PercentageDiscount deal2_lerk_thai = new PercentageDiscount("LT2", lerk_thai, true, 40);
+        PercentageDiscount deal2_lerk_thai = new PercentageDiscount("GT2", lerk_thai, true, 40);
         Constants.dealManager.addDeal(deal2_lerk_thai);
 
         // TODO: Merchant details for Griddy Waffles
@@ -161,24 +161,22 @@ public class Bootstrap {
         String password_griddy_waffles = "123";
 
         Bitmap image_griddy_waffles = BitmapFactory.decodeResource(mContext.getResources(),
-                R.drawable.griddywaffles);
+                R.drawable.wafflessouffleslogo);
 
-        String company_griddy_waffles = "Griddy Waffles";
+        String company_griddy_waffles = "Waffles & Souffles";
 
-        String merchantName_griddy_waffles = "SM Ong";
+        String merchantName_griddy_waffles = "Ong Mei Kan";
 
-        String merchantDescription_griddy_waffles = "Griddy Waffles offers sweet and savoury " +
-                "waffles artfully crafted to be visual and gastronomic delights as well as an " +
-                "international cuisine that will take customers around the world with a menu that " +
-                "is constantly refreshed every few months";
+        String merchantDescription_griddy_waffles = "Waffles & Souffles offers sweet and savoury " +
+                "waffles artfully crafted to be visual and gastronomic delights";
 
         String merchantType_griddy_waffles = "Western Food";
 
-        Address address_griddy_waffles = new Address("3", "Gateway Drive", "#B2-K12 Westgate", 608532);
+        Address address_griddy_waffles = new Address("10", "Orchard Rd", "#XX-XX Orchard Rd", "238841");
 
-        int contactNumber_griddy_waffles = 64659465;
+        int contactNumber_griddy_waffles = 61234567;
 
-        String website_griddy_waffles = "http://griddy.com.sg/";
+        String website_griddy_waffles = "http://griddysouffles.com.sg/";
         //LatLng latLng_griddy_waffles = new LatLng(43.1, -87.9);
         LatLng latLng_griddy_waffles = ApplicationFactory.getLocationFromAddress(address_griddy_waffles.toString(), mContext);
 
@@ -203,25 +201,25 @@ public class Bootstrap {
         String password_texas_chicken = "123";
 
         Bitmap image_texas_chicken = BitmapFactory.decodeResource(mContext.getResources(),
-                R.drawable.texaschicken);
+                R.drawable.fourseasonschicken);
 
-        String company_texas_chicken = "Texas Chicken";
+        String company_texas_chicken = "Four Seasons Chicken";
 
-        String merchantName_texas_chicken = "George W. Church Sr.";
+        String merchantName_texas_chicken = "Hyden Sim.";
 
-        String merchantDescription_texas_chicken = "Texas Chicken @ Seletar Mall offered freshly " +
+        String merchantDescription_texas_chicken = "Four Seasons Chicken offered freshly " +
                 "prepared, high quality, delicious chicken and tenders with all your favorite " +
                 "classic sides at a great value";
 
         String merchantType_texas_chicken = "Western Food";
 
-        Address address_texas_chicken = new Address("33", "Sengkang Ave West", "#B1-06/07, " +
-                "The Seletar Mall", 797653);
+        Address address_texas_chicken = new Address("23", "Serangoon Central", "#XX-XX, " +
+                "Nex", "556083");
 
         int contactNumber_texas_chicken = 66342130;
 
-        String website_texas_chicken = "http://www.texaschicken.com.sg/";
-        //LatLng latLng_texas_chicken = new LatLng(43.1, -87.9);
+        String website_texas_chicken = "http://www.fourchicken.com.sg/";
+        //LatLng latLng_texas_chicken = new LatLng(1.3506, 103.8718);
         LatLng latLng_texas_chicken = ApplicationFactory.getLocationFromAddress(address_texas_chicken.toString(), mContext);
         if (latLng_texas_chicken == null) {
             latLng_texas_chicken = new LatLng(1.3000, 103.8000);
