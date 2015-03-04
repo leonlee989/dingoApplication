@@ -53,7 +53,8 @@
         </activity>
         <activity
             android:name=".Activities.CustomerDealDetailsActivity"
-            android:label="@string/title_activity_customer_deal_details" >
+            android:label="@string/title_activity_customer_deal_details"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Activities.CustomerDingedDeal"
@@ -70,7 +71,8 @@
         <activity
             android:name=".Activities.DingADeal"
             android:label="@string/title_activity_ding_adeal"
-            android:parentActivityName=".Activities.MerchantActivity" >
+            android:parentActivityName=".Activities.MerchantActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinggoapplication.Activities.MerchantActivity" />
