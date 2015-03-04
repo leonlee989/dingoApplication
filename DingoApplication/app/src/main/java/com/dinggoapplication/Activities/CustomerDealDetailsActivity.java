@@ -74,8 +74,7 @@ public class CustomerDealDetailsActivity extends Activity {
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(metrics.widthPixels,height);
             imageView.setLayoutParams(layoutParams);
             System.out.println("LayoutParams: "+layoutParams);
-            imageView.setImageResource(R.drawable.peachgardendealdetail);
-            //imageView.setImageBitmap(deal.getImage);
+            imageView.setImageBitmap(deal.getCoverImage());
 
             //get xml elements
             mCompanyName = (TextView) findViewById(R.id.companyName);

@@ -1,5 +1,7 @@
 package com.dinggoapplication.Entity;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 /**
@@ -16,11 +18,12 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Merchant merchant, int percentage) {
-        super(referenceCode, merchant);
+    public PercentageDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, int percentage) {
+        super(referenceCode, coverImage, merchant);
         this.percentage = percentage;
     }
 
@@ -31,8 +34,8 @@ public class PercentageDiscount extends Deal {
      * @param createdAt
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Merchant merchant, Date createdAt, int percentage) {
-        super(referenceCode, merchant, createdAt);
+    public PercentageDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, int percentage) {
+        super(referenceCode, coverImage, merchant, createdAt);
 
         this.percentage = percentage;
     }
@@ -40,12 +43,13 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param activated
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Merchant merchant, boolean activated, int percentage) {
-        super(referenceCode, merchant, activated);
+    public PercentageDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, boolean activated, int percentage) {
+        super(referenceCode, coverImage, merchant, activated);
 
         this.percentage = percentage;
     }
@@ -53,14 +57,15 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param createdAt
      * @param activated
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Merchant merchant, Date createdAt, boolean activated,
+    public PercentageDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, boolean activated,
                               int percentage) {
-        super(referenceCode, merchant, createdAt, activated);
+        super(referenceCode, coverImage, merchant, createdAt, activated);
 
         this.percentage = percentage;
     }
@@ -68,14 +73,15 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param activatedDate
      * @param closureDate
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Merchant merchant, Date activatedDate, Date closureDate,
+    public PercentageDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date activatedDate, Date closureDate,
                               int percentage) {
-        super(referenceCode, merchant, activatedDate, closureDate);
+        super(referenceCode, coverImage, merchant, activatedDate, closureDate);
 
         this.percentage = percentage;
     }
@@ -83,15 +89,16 @@ public class PercentageDiscount extends Deal {
     /**
      * Constructor to initialize PercentageDiscount Object with the following parameters
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param createdAt
      * @param activatedDate
      * @param closureDate
      * @param percentage
      */
-    public PercentageDiscount(String referenceCode, Merchant merchant, Date createdAt, Date activatedDate,
+    public PercentageDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, Date activatedDate,
                               Date closureDate, int percentage) {
-        super(referenceCode, merchant, createdAt, activatedDate, closureDate);
+        super(referenceCode, coverImage, merchant, createdAt, activatedDate, closureDate);
 
         this.percentage = percentage;
     }

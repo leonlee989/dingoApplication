@@ -1,6 +1,8 @@
 
 package com.dinggoapplication.Entity;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 /**
@@ -13,6 +15,10 @@ public abstract class Deal {
      */
     String referenceCode;
 
+    /**
+     * Cover image for the merchant products
+     */
+    Bitmap coverImage;
     /**
      *  Boolean to determine whether the deal is activated or not
      */
@@ -41,10 +47,12 @@ public abstract class Deal {
     /**
      * Constructor to initialize a Deal Object with the following parameters:
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      */
-    public Deal(String referenceCode, Merchant merchant) {
+    public Deal(String referenceCode, Bitmap coverImage, Merchant merchant) {
         this.referenceCode = referenceCode;
+        this.coverImage = coverImage;
 
         this.merchant = merchant;
         activated = false;
@@ -57,11 +65,13 @@ public abstract class Deal {
     /**
      * Constructor to initialize the object with the following parameters
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param createdAt
      */
-    public Deal (String referenceCode, Merchant merchant, Date createdAt) {
+    public Deal (String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt) {
         this.referenceCode = referenceCode;
+        this.coverImage = coverImage;
         this.merchant = merchant;
         this.activated = false;
         this.createdAt = createdAt;
@@ -73,11 +83,13 @@ public abstract class Deal {
     /**
      * Constructor to initialize Deal object with the following parameters:
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param activated
      */
-    public Deal(String referenceCode, Merchant merchant, boolean activated) {
+    public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, boolean activated) {
         this.referenceCode = referenceCode;
+        this.coverImage = coverImage;
         this.merchant = merchant;
         setActivated(activated);
         this.createdAt = new Date();
@@ -89,12 +101,14 @@ public abstract class Deal {
     /**
      * Constructor to initialize Deal object with the following parameters
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param createdAt
      * @param activated
      */
-    public Deal(String referenceCode, Merchant merchant, Date createdAt, boolean activated) {
+    public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, boolean activated) {
         this.referenceCode = referenceCode;
+        this.coverImage = coverImage;
         this.merchant = merchant;
         this.createdAt = createdAt;
         setActivated(activated);
@@ -106,12 +120,14 @@ public abstract class Deal {
     /**
      * Constructor to initialized Deal object with the following parameters:
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param activatedDate
      * @param closureDate
      */
-    public Deal(String referenceCode, Merchant merchant, Date activatedDate, Date closureDate) {
+    public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, Date activatedDate, Date closureDate) {
         this.referenceCode = referenceCode;
+        this.coverImage = coverImage;
         this.merchant = merchant;
         this.createdAt = new Date();
 
@@ -122,13 +138,15 @@ public abstract class Deal {
     /**
      * Constructor to initialized Deal object with the following parameters
      * @param referenceCode
+     * @param coverImage
      * @param merchant
      * @param createdAt
      * @param activatedDate
      * @param closureDate
      */
-    public Deal(String referenceCode, Merchant merchant, Date createdAt, Date activatedDate, Date closureDate) {
+    public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, Date activatedDate, Date closureDate) {
         this.referenceCode = referenceCode;
+        this.coverImage = coverImage;
         this.merchant = merchant;
         this.createdAt = createdAt;
 
@@ -150,6 +168,22 @@ public abstract class Deal {
      */
     public void setReferenceCode(String referenceCode) {
         this.referenceCode = referenceCode;
+    }
+
+    /**
+     * Get the cover image for the merchant
+     * @return coverImage
+     */
+    public Bitmap getCoverImage() {
+        return coverImage;
+    }
+
+    /**
+     * Set the cover image for the merchant
+     * @param coverImage
+     */
+    public void setCoverImage(Bitmap coverImage) {
+        this.coverImage = coverImage;
     }
 
     /**

@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dinggoapplication.Activities.DingADeal;
+import com.dinggoapplication.Activities.EatDrinkActivity;
+import com.dinggoapplication.Activities.OngoingDeal;
+import com.dinggoapplication.Constants;
+import com.dinggoapplication.Entity.Merchant;
+import com.dinggoapplication.Entity.PercentageDiscount;
 import com.dinggoapplication.R;
 
 /**
@@ -83,13 +91,24 @@ public class DingConfirmationDialogFragment extends DialogFragment {
                         break;
                 }
             }
+
+            /* For static display purpose */
+            Bitmap coverImage_gold_thai = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(),
+                    R.drawable.covergoldthai);
+            Merchant merchant = Constants.merchantManager.getMerchant(2);
+            PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_gold_thai,
+                    merchant, 20);
+
+            Constants.dealManager.addDeal(additionalDeal);
+            Intent intent = new Intent(getActivity(), OngoingDeal.class);
+            startActivity(intent);
         }
     };
 
     DialogInterface.OnClickListener response_no = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            Toast.makeText(getActivity(), "No", Toast.LENGTH_LONG).show();
+            // Nothing Happen
         }
     };
 }

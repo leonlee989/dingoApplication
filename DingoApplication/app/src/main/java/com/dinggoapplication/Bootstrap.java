@@ -32,7 +32,7 @@ public class Bootstrap {
 
     public void initializeEntity() {
 
-        // TODO: Merchant details for Peach Garden
+        // TODO: Merchant details for Oriental Garden
         String merchantId_oriental_garden = "merchant01";
 
         String password_oriental_garden = "123";
@@ -68,176 +68,195 @@ public class Bootstrap {
 
         Constants.merchantManager.addMerchant(oriental_garden);
 
-        // Deals available for Peach Garden
-        PercentageDiscount deal1_peach_garden = new PercentageDiscount("OG1", oriental_garden, true, 50);
+        // Deals available for Oriental Garden
+        Bitmap coverImage_oriental_garden = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.coverorientalgarden);
+
+        PercentageDiscount deal1_peach_garden = new PercentageDiscount("OG1", coverImage_oriental_garden,
+                oriental_garden, true, 50);
         Constants.dealManager.addDeal(deal1_peach_garden);
 
-        // TODO: Merchant details for Pho Street
-        String merchantId_pho_street = "merchant02";
+        // TODO: Merchant details for Pho Pho
+        String merchantId_pho_pho = "merchant02";
 
-        String password_pho_street = "123";
+        String password_pho_pho = "123";
 
-        Bitmap image_pho_street = BitmapFactory.decodeResource(mContext.getResources(),
+        Bitmap image_pho_pho = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.phopho);
 
-        String company_pho_street = "Pho Pho";
+        String company_pho_pho = "Pho Pho";
 
-        String merchantName_pho_street = "Unknown Owner";
+        String merchantName_pho_pho = "Unknown Owner";
 
-        String merchantDescription_pho_street = "Pho Street determines to bringing you delicious " +
+        String merchantDescription_pho_pho = "Pho Street determines to bringing you delicious " +
                 "and authentic Vietnamese cuisine. Freshest ingredients are carefully selected to " +
                 "deliver unique flavors that complement their aromatic dishes";
 
-        String merchantType_pho_street = "Vietnamese Food";
+        String merchantType_pho_pho = "Vietnamese Food";
 
-        Address address_pho_street = new Address("82", "Tanah Merah Kechil Ave", "#XX-XX", "465515");
+        Address address_pho_pho = new Address("82", "Tanah Merah Kechil Ave", "#XX-XX", "465515");
 
-        int contactNumber_pho_street = 61234567;
+        int contactNumber_pho_pho = 61234567;
 
-        String website_pho_street = "http://phopho.com.sg/";
-        LatLng latLng_pho_street = new LatLng(1.3285, 103.9445);
-        //LatLng latLng_pho_street = ApplicationFactory.getLocationFromAddress(address_pho_street.toString(), mContext);
-        if (latLng_pho_street == null) {
-            latLng_pho_street = new LatLng(1.3000, 103.8000);
+        String website_pho_pho = "http://phopho.com.sg/";
+        LatLng latLng_pho_pho = new LatLng(1.3285, 103.9445);
+        //LatLng latLng_pho_pho = ApplicationFactory.getLocationFromAddress(address_pho_pho.toString(), mContext);
+        if (latLng_pho_pho == null) {
+            latLng_pho_pho = new LatLng(1.3000, 103.8000);
         }
 
-        Merchant pho_street = new Merchant(merchantId_pho_street, password_pho_street,
-                image_pho_street, company_pho_street, merchantName_pho_street,
-                merchantDescription_pho_street, merchantType_pho_street, address_pho_street,
-                contactNumber_pho_street, website_pho_street, latLng_pho_street);
+        Merchant pho_pho = new Merchant(merchantId_pho_pho, password_pho_pho,
+                image_pho_pho, company_pho_pho, merchantName_pho_pho,
+                merchantDescription_pho_pho, merchantType_pho_pho, address_pho_pho,
+                contactNumber_pho_pho, website_pho_pho, latLng_pho_pho);
 
-        Constants.merchantManager.addMerchant(pho_street);
+        Constants.merchantManager.addMerchant(pho_pho);
 
-        // Deals available for Pho Street Restaurant
-        PercentageDiscount deal1_pho_street = new PercentageDiscount("PP1", pho_street, true, 50);
-        Constants.dealManager.addDeal(deal1_pho_street);
+        // Deals available for Pho Pro Restaurant
+        Bitmap coverImage_pho_pho = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.coverpho);
 
-        // TODO: Merchant details for Lerk Thai
-        String merchantId_lerk_thai = "merchant03";
+        PercentageDiscount deal1_pho_pho = new PercentageDiscount("PP1", coverImage_pho_pho,
+                pho_pho, true, 50);
+        Constants.dealManager.addDeal(deal1_pho_pho);
 
-        String password_lerk_thai = "123";
+        // TODO: Merchant details for Gold Thai
+        String merchantId_gold_thai = "merchant03";
 
-        Bitmap image_lerk_thai = BitmapFactory.decodeResource(mContext.getResources(),
+        String password_gold_thai = "123";
+
+        Bitmap image_gold_thai = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.goldthai);
 
-        String company_lerk_thai = "Gold Thai";
+        String company_gold_thai = "Gold Thai";
 
-        String merchantName_lerk_thai = "Select Group Limited";
+        String merchantName_gold_thai = "Select Group Limited";
 
-        String merchantDescription_lerk_thai = "Gold Thai @ Senoko Crescent offers a bountiful mix " +
+        String merchantDescription_gold_thai = "Gold Thai @ Senoko Crescent offers a bountiful mix " +
                 "of authentic Thai cuisine, with the plethora of dips and pastes used in our cuisine " +
                 "and level of spiciness adjusted to local palates";
 
-        String merchantType_lerk_thai = "Thai Food";
+        String merchantType_gold_thai = "Thai Food";
 
-        Address address_lerk_thai = new Address("1", "Senoko Crescent", "", "758282");
+        Address address_gold_thai = new Address("1", "Senoko Crescent", "", "758282");
 
-        int contactNumber_lerk_thai = 61234567;
+        int contactNumber_gold_thai = 61234567;
 
-        String website_lerk_thai = "http://www.goldthai.com.sg/";
-        LatLng latLng_lerk_thai = new LatLng(1.4649, 103.8066);
-        //LatLng latLng_lerk_thai = ApplicationFactory.getLocationFromAddress(address_lerk_thai.toString(), mContext);
-        if (latLng_lerk_thai == null) {
-            latLng_lerk_thai = new LatLng(1.3000, 103.8000);
+        String website_gold_thai = "http://www.goldthai.com.sg/";
+        LatLng latLng_gold_thai = new LatLng(1.4649, 103.8066);
+        //LatLng latLng_gold_thai = ApplicationFactory.getLocationFromAddress(address_gold_thai.toString(), mContext);
+        if (latLng_gold_thai == null) {
+            latLng_gold_thai = new LatLng(1.3000, 103.8000);
         }
 
-        Merchant lerk_thai = new Merchant(merchantId_lerk_thai, password_lerk_thai, image_lerk_thai,
-                company_lerk_thai, merchantName_lerk_thai, merchantDescription_lerk_thai,
-                merchantType_lerk_thai, address_lerk_thai, contactNumber_lerk_thai,
-                website_lerk_thai, latLng_lerk_thai);
+        Merchant gold_thai = new Merchant(merchantId_gold_thai, password_gold_thai, image_gold_thai,
+                company_gold_thai, merchantName_gold_thai, merchantDescription_gold_thai,
+                merchantType_gold_thai, address_gold_thai, contactNumber_gold_thai,
+                website_gold_thai, latLng_gold_thai);
 
-        Constants.merchantManager.addMerchant(lerk_thai);
+        Constants.merchantManager.addMerchant(gold_thai);
 
-        // Deals available for Lerk Thai Restaurant
-        TierDiscount deal1_lerk_thai = new TierDiscount("GT1", lerk_thai, true, 20, 10);
-        Constants.dealManager.addDeal(deal1_lerk_thai);
+        // Deals available for Gold Thai Restaurant
+        Bitmap coverImage_gold_thai = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.covergoldthai);
+        TierDiscount deal1_gold_thai = new TierDiscount("GT1", coverImage_gold_thai,
+                gold_thai, true, 20, 10);
+        Constants.dealManager.addDeal(deal1_gold_thai);
 
-        PercentageDiscount deal2_lerk_thai = new PercentageDiscount("GT2", lerk_thai, true, 40);
-        Constants.dealManager.addDeal(deal2_lerk_thai);
+        PercentageDiscount deal2_gold_thai = new PercentageDiscount("GT2", coverImage_gold_thai,
+                gold_thai, true, 40);
+        Constants.dealManager.addDeal(deal2_gold_thai);
 
-        // TODO: Merchant details for Griddy Waffles
-        String merchantId_griddy_waffles = "merchant04";
+        // TODO: Merchant details for Griddy & Souffles
+        String merchantId_griddy_souffles = "merchant04";
 
-        String password_griddy_waffles = "123";
+        String password_griddy_souffles = "123";
 
-        Bitmap image_griddy_waffles = BitmapFactory.decodeResource(mContext.getResources(),
+        Bitmap image_griddy_souffles = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.wafflessouffleslogo);
 
-        String company_griddy_waffles = "Waffles & Souffles";
+        String company_griddy_souffles = "Waffles & Souffles";
 
-        String merchantName_griddy_waffles = "Ong Mei Kan";
+        String merchantName_griddy_souffles = "Ong Mei Kan";
 
-        String merchantDescription_griddy_waffles = "Waffles & Souffles offers sweet and savoury " +
+        String merchantDescription_griddy_souffles = "Waffles & Souffles offers sweet and savoury " +
                 "waffles artfully crafted to be visual and gastronomic delights";
 
-        String merchantType_griddy_waffles = "Western Food";
+        String merchantType_griddy_souffles = "Western Food";
 
-        Address address_griddy_waffles = new Address("10", "Orchard Rd", "#XX-XX Orchard Rd", "238841");
+        Address address_griddy_souffles = new Address("10", "Orchard Rd", "#XX-XX Orchard Plaza", "238841");
 
-        int contactNumber_griddy_waffles = 61234567;
+        int contactNumber_griddy_souffles = 61234567;
 
-        String website_griddy_waffles = "http://griddysouffles.com.sg/";
-        //LatLng latLng_griddy_waffles = new LatLng(43.1, -87.9);
-        LatLng latLng_griddy_waffles = ApplicationFactory.getLocationFromAddress(address_griddy_waffles.toString(), mContext);
+        String website_griddy_souffles = "http://griddysouffles.com.sg/";
+        //LatLng latLng_griddy_souffles = new LatLng(43.1, -87.9);
+        LatLng latLng_griddy_souffles = ApplicationFactory.getLocationFromAddress(address_griddy_souffles.toString(), mContext);
 
-        if (latLng_griddy_waffles == null) {
-            latLng_griddy_waffles = new LatLng(1.3000, 103.8000);
+        if (latLng_griddy_souffles == null) {
+            latLng_griddy_souffles = new LatLng(1.3000, 103.8000);
         }
 
-        Merchant griddy_waffles = new Merchant(merchantId_griddy_waffles, password_griddy_waffles,
-                image_griddy_waffles, company_griddy_waffles, merchantName_griddy_waffles,
-                merchantDescription_griddy_waffles, merchantType_griddy_waffles,
-                address_griddy_waffles, contactNumber_griddy_waffles, website_griddy_waffles, latLng_griddy_waffles);
+        Merchant griddy_souffles = new Merchant(merchantId_griddy_souffles, password_griddy_souffles,
+                image_griddy_souffles, company_griddy_souffles, merchantName_griddy_souffles,
+                merchantDescription_griddy_souffles, merchantType_griddy_souffles,
+                address_griddy_souffles, contactNumber_griddy_souffles, website_griddy_souffles, latLng_griddy_souffles);
 
-        Constants.merchantManager.addMerchant(griddy_waffles);
+        Constants.merchantManager.addMerchant(griddy_souffles);
 
-        // Deals available for Griddy Waffles
-        TierDiscount deal1_griddy_waffles = new TierDiscount("GW1", griddy_waffles, true, 10, 50);
-        Constants.dealManager.addDeal(deal1_griddy_waffles);
+        // Deals available for Griddy & Souffles
+        Bitmap coverImage_waffles_souffles = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.coverwafflessouffles);
+        TierDiscount deal1_griddy_souffles = new TierDiscount("GW1", coverImage_waffles_souffles,
+                griddy_souffles, true, 10, 50);
+        Constants.dealManager.addDeal(deal1_griddy_souffles);
 
-        // TODO: Merchant details for Texas Chicken
-        String merchantId_texas_chicken = "merchant05";
+        // TODO: Merchant details for Four Seasons Chicken
+        String merchantId_fourseason_chicken = "merchant05";
 
-        String password_texas_chicken = "123";
+        String password_fourseason_chicken = "123";
 
-        Bitmap image_texas_chicken = BitmapFactory.decodeResource(mContext.getResources(),
+        Bitmap image_fourseason_chicken = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.fourseasonschicken);
 
-        String company_texas_chicken = "Four Seasons Chicken";
+        String company_fourseason_chicken = "Four Seasons Chicken";
 
-        String merchantName_texas_chicken = "Hyden Sim.";
+        String merchantName_fourseason_chicken = "Hyden Sim.";
 
-        String merchantDescription_texas_chicken = "Four Seasons Chicken offered freshly " +
+        String merchantDescription_fourseason_chicken = "Four Seasons Chicken offered freshly " +
                 "prepared, high quality, delicious chicken and tenders with all your favorite " +
                 "classic sides at a great value";
 
-        String merchantType_texas_chicken = "Western Food";
+        String merchantType_fourseason_chicken = "Western Food";
 
-        Address address_texas_chicken = new Address("23", "Serangoon Central", "#XX-XX, " +
+        Address address_fourseason_chicken = new Address("23", "Serangoon Central", "#XX-XX, " +
                 "Nex", "556083");
 
-        int contactNumber_texas_chicken = 66342130;
+        int contactNumber_fourseason_chicken = 66342130;
 
-        String website_texas_chicken = "http://www.fourchicken.com.sg/";
-        //LatLng latLng_texas_chicken = new LatLng(1.3506, 103.8718);
-        LatLng latLng_texas_chicken = ApplicationFactory.getLocationFromAddress(address_texas_chicken.toString(), mContext);
-        if (latLng_texas_chicken == null) {
-            latLng_texas_chicken = new LatLng(1.3000, 103.8000);
+        String website_fourseason_chicken = "http://www.fourchicken.com.sg/";
+        //LatLng latLng_fourseason_chicken = new LatLng(1.3506, 103.8718);
+        LatLng latLng_fourseason_chicken = ApplicationFactory.getLocationFromAddress(address_fourseason_chicken.toString(), mContext);
+        if (latLng_fourseason_chicken == null) {
+            latLng_fourseason_chicken = new LatLng(1.3000, 103.8000);
         }
 
-        Merchant merchant_texas_chicken = new Merchant(merchantId_texas_chicken,
-                password_texas_chicken, image_texas_chicken, company_texas_chicken,
-                merchantName_texas_chicken, merchantDescription_texas_chicken,
-                merchantType_texas_chicken, address_texas_chicken, contactNumber_texas_chicken,
-                website_texas_chicken, latLng_texas_chicken);
+        Merchant merchant_fourseason_chicken = new Merchant(merchantId_fourseason_chicken,
+                password_fourseason_chicken, image_fourseason_chicken, company_fourseason_chicken,
+                merchantName_fourseason_chicken, merchantDescription_fourseason_chicken,
+                merchantType_fourseason_chicken, address_fourseason_chicken, contactNumber_fourseason_chicken,
+                website_fourseason_chicken, latLng_fourseason_chicken);
 
-        Constants.merchantManager.addMerchant(merchant_texas_chicken);
+        Constants.merchantManager.addMerchant(merchant_fourseason_chicken);
 
         // Deals available for Texas Chicken
-        PercentageDiscount deal1_texas_chicken = new PercentageDiscount("tc1", merchant_texas_chicken, true, 20);
-        Constants.dealManager.addDeal(deal1_texas_chicken);
-        TierDiscount deal2_texas_chicken = new TierDiscount("tc2", merchant_texas_chicken, true, 10, 30);
-        Constants.dealManager.addDeal(deal2_texas_chicken);
+        Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.coverfourseasonschicken);
+        PercentageDiscount deal1_fourseason_chicken = new PercentageDiscount("tc1", coverImage_four_chicken,
+                merchant_fourseason_chicken, true, 20);
+        Constants.dealManager.addDeal(deal1_fourseason_chicken);
+        TierDiscount deal2_fourseason_chicken = new TierDiscount("tc2", coverImage_four_chicken,
+                merchant_fourseason_chicken, true, 10, 30);
+        Constants.dealManager.addDeal(deal2_fourseason_chicken);
 
     }
 }
