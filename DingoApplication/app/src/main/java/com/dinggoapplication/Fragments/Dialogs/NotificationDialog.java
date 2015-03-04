@@ -16,10 +16,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dinggoapplication.Activities.DingADeal;
-import com.dinggoapplication.Activities.EatDrinkActivity;
 import com.dinggoapplication.Activities.OngoingDeal;
 import com.dinggoapplication.Constants;
 import com.dinggoapplication.Entity.Merchant;
@@ -27,9 +25,9 @@ import com.dinggoapplication.Entity.PercentageDiscount;
 import com.dinggoapplication.R;
 
 /**
- * Created by Leon on 1/3/2015.
+ * Created by Leon on 4/3/2015.
  */
-public class DingConfirmationDialogFragment extends DialogFragment {
+public class NotificationDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
@@ -59,10 +57,9 @@ public class DingConfirmationDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         // Set the builder contents
-        builder.setMessage("Once confirmed, deal is on!")
-                .setTitle("Confirmation")
-                .setPositiveButton(R.string.response_yes, response_yes)
-                .setNegativeButton(R.string.response_no, response_no);
+        builder.setMessage("You’ve got a Ding from Gold Thai!!")
+                .setTitle("Notification")
+                .setPositiveButton(R.string.response_yes, response_yes);
 
         return builder.create();
     }
@@ -70,46 +67,8 @@ public class DingConfirmationDialogFragment extends DialogFragment {
     DialogInterface.OnClickListener response_yes = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-
-            ListView lv = (ListView) getActivity().findViewById(R.id.dingadeal_List);
-            ListAdapter adapter = lv.getAdapter();
-
-            for (int i=0; i < adapter.getCount(); i++) {
-                DingADeal.DingADealOptions option = (DingADeal.DingADealOptions) adapter.getItem(i);
-                View view = adapter.getView(i, null, null);
-
-                switch (option.getValue()) {
-                    case SELECTOR:
-                        TextView value = (TextView) view.findViewById(R.id.option_label);
-
-                        Log.w("Merchant", value.getText().toString());
-                        break;
-                    case TOGGLE:
-                        Switch switch_control = (Switch) view.findViewById(R.id.toggle);
-
-                        Log.w("Merchant", "" + switch_control.isChecked());
-                        break;
-                }
-            }
-
-            /* For static display purpose */
-            Bitmap coverImage_gold_thai = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(),
-                    R.drawable.covergoldthai);
-            Merchant merchant = Constants.merchantManager.getMerchant(2);
-            PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_gold_thai,
-                    merchant, 20);
-
-            Constants.dealManager.addDeal(additionalDeal);
-            Constants.newItemAdded = true;
-            Intent intent = new Intent(getActivity(), OngoingDeal.class);
-            startActivity(intent);
+           // Dismiss dialog box
         }
     };
 
-    DialogInterface.OnClickListener response_no = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            // Nothing Happen
-        }
-    };
 }

@@ -6,7 +6,7 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
     defaultConfig {
-        applicationId "com.dingoapplication"
+        applicationId "com.dinggoapplication"
         minSdkVersion 17
         targetSdkVersion 21
         versionCode 4

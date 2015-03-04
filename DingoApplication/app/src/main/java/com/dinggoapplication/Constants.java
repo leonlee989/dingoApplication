@@ -14,4 +14,7 @@ public class Constants {
 
     public static MerchantManager merchantManager = new MerchantManager();
     public static DealManager dealManager = new DealManager();
+
+    // ToDo: To be removed
+    public static boolean newItemAdded = false;
 }

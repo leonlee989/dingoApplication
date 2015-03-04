@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dinggoapplication.Constants;
+import com.dinggoapplication.Fragments.Dialogs.NotificationDialog;
 import com.dinggoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -55,6 +57,13 @@ public class CustomerActivity extends ListActivity {
 
         final CustomerArrayAdapter adapter = new CustomerArrayAdapter(this, values);
         setListAdapter(adapter);
+
+        // ToDo: To removed, Dialog appear only when a new item is added into the deal list
+        if (Constants.newItemAdded) {
+            Constants.newItemAdded = false;
+            NotificationDialog notiDialog = new NotificationDialog();
+            notiDialog.show(getFragmentManager(), "Notification");
+        }
     }
 
     @Override
