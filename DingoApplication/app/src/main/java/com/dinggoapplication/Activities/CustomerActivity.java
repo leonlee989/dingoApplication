@@ -65,6 +65,10 @@ public class CustomerActivity extends ListActivity {
                 Intent intent = new Intent(CustomerActivity.this, EatDrinkActivity.class);
                 startActivity(intent);
                 break;
+            case 5:
+                Intent iPreferences = new Intent(CustomerActivity.this, CustomerPreferences.class);
+                startActivity(iPreferences);
+                break;
             default:
                 String item = (String) getListAdapter().getItem(position);
                 Toast.makeText(CustomerActivity.this, item + " selected", Toast.LENGTH_LONG).show();

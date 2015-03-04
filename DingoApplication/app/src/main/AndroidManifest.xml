@@ -83,6 +83,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinggoapplication.Activities.MerchantActivity" />
         </activity>
+        <activity
+            android:name=".Activities.CustomerPreferences"
+            android:label="@string/title_activity_customer_preferences" >
+        </activity>
     </application>
 
 </manifest>
