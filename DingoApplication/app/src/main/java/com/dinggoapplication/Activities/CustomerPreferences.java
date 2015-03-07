@@ -3,6 +3,7 @@ package com.dinggoapplication.Activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,18 +40,28 @@ public class CustomerPreferences extends Activity {
         // Instantiate custom adapter
         CustomAdapter adapter =  initializeOptions();
 
+        /*SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("key", "value");
+        editor.commit();*/
         // Instantiate list view and bind the adapter
         ListView listView = (ListView) findViewById(R.id.preferencesListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(itemActions);
+
+
     }
     AdapterView.OnItemClickListener itemActions = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch(position) {
+                case 6:
+                    Intent intent = new Intent(CustomerPreferences.this, CustomerPreferenceManageNotifications.class);
+                    startActivity(intent);
+                    break;
                 case 7:
-                    TextView eat = (TextView) view.findViewById(R.id.pOptionLabel);
-                    Toast.makeText(CustomerPreferences.this, eat.getText(), Toast.LENGTH_SHORT).show();
+                    Intent eat = new Intent(CustomerPreferences.this, CustomerPreferenceEat.class);
+                    startActivity(eat);
                     break;
                 default:
                     TextView text = (TextView) view.findViewById(R.id.pOptionLabel);
@@ -138,7 +149,6 @@ public class CustomerPreferences extends Activity {
             View view = convertView;
             PreferenceItem item = preferencesList.get(position);
 
-            //if (view == null) {
                 switch(item.getValue()) {
                     case HEADER:
                         view = inflater.inflate(R.layout.preferences_header, parent, false);
@@ -153,9 +163,10 @@ public class CustomerPreferences extends Activity {
                         break;
                     case TOGGLE:
                         view = inflater.inflate(R.layout.preferences_toggle_row, parent, false);
+                        //need to solve bug where toggle row is replaced when page is scrolled
                         break;
                 }
-            //}
+
             TextView option_label =  (TextView) view.findViewById(R.id.pOptionLabel);
             option_label.setText(preferencesList.get(position).getOptionName());
             return view;

@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dinggoapplication.Activities.CustomerPreferenceManageNotifications">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:button="@null"
+            android:text="Preferred Deals"
+            android:drawableRight="@android:drawable/btn_radio"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:button="@null"
+            android:drawableRight="@android:drawable/btn_radio"/>
+    </RadioGroup>
+</RelativeLayout>

@@ -78,5 +78,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_customer_dinged_deal">CustomerDingedDeal</string>
     <string name="title_activity_customer_preferences">CustomerPreferences</string>
+    <string name="title_activity_customer_preference_manage_deals">CustomerPreferenceManageDeals
+    </string>
+    <string name="title_activity_customer_preference_buy">CustomerPreferenceBuy</string>
 
 </resources>
