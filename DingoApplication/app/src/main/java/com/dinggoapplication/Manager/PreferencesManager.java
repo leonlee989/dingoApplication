@@ -4,6 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.dinggoapplication.ObjectSerializer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 /**
  * Created by siungee on 06/03/15.
  */
@@ -34,23 +40,47 @@ public class PreferencesManager {
         }
         return sInstance;
     }
-
-    /*public void setValue(long value) {
-        mPref.edit()
-                .putLong(KEY_VALUE, value)
-                .commit();
+    public synchronized SharedPreferences getSPInstance() {
+        return mPref;
     }
+
     public void setValue(String key, ArrayList arrayList) {
         try {
-            editor.putString(key, ObjectSerializer.serialize(currentTasks));
+            editor.putString(key, ObjectSerializer.serialize(arrayList))
+                    .commit();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setValue(String key, LinkedHashMap arrayList) {
+        try {
+            editor.putString(key, ObjectSerializer.serialize(arrayList))
+                    .commit();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public long getValue() {
-        return mPref.getLong(KEY_VALUE, 0);
+    /*public Object getValue(String key) {
+        Object object = new Object();
+        try {
+            object = (Object) ObjectSerializer.deserialize(mPref.getString(key, ""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return object;
     }*/
+    public LinkedHashMap getValue(String key) {
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        try {
+            linkedHashMap = (LinkedHashMap) ObjectSerializer.deserialize(mPref.getString(key, ""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return linkedHashMap;
+    }
 
     public void remove(String key) {
         mPref.edit()
@@ -63,4 +93,5 @@ public class PreferencesManager {
                 .clear()
                 .commit();
     }
+
 }

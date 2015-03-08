@@ -1,12 +1,19 @@
 package com.dinggoapplication;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  * Created by siungee on 06/03/15.
  */
 
 public class ObjectSerializer {
 
-    /*private static final org.apache.commons.logging.Log log = LogFactory.getLog(ObjectSerializer.class);
+    //private static final Log log = LogManager.getLogger(ObjectSerializer.class);
 
     public static String serialize(Serializable obj) throws IOException {
         if (obj == null) return "";
@@ -52,6 +59,21 @@ public class ObjectSerializer {
             bytes[i/2] += (c - 'a');
         }
         return bytes;
-    }*/
+    }
 
+}
+
+class WrappedIOException {
+
+    public static IOException wrap(final Throwable e) {
+        return wrap(e.getMessage(), e);
+    }
+
+    public static IOException wrap(final String message, final Throwable e) {
+        final IOException wrappedException = new IOException(message + " [" +
+                e.getMessage() + "]");
+        wrappedException.setStackTrace(e.getStackTrace());
+        wrappedException.initCause(e);
+        return wrappedException;
+    }
 }

@@ -2,6 +2,7 @@ package com.dinggoapplication;
 
 import com.dinggoapplication.Manager.DealManager;
 import com.dinggoapplication.Manager.MerchantManager;
+import com.dinggoapplication.Manager.PreferencesManager;
 
 import java.text.SimpleDateFormat;
 
@@ -14,6 +15,8 @@ public class Constants {
 
     public static MerchantManager merchantManager = new MerchantManager();
     public static DealManager dealManager = new DealManager();
+
+    public static PreferencesManager preferencesManager;
 
     // ToDo: To be removed
     public static boolean newItemAdded = false;

@@ -3,22 +3,35 @@ package com.dinggoapplication.Activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.dinggoapplication.Constants;
+import com.dinggoapplication.Manager.PreferencesManager;
+import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class CustomerPreferenceEat extends Activity {
+
+    PreferencesManager preferenceManager;
+    SharedPreferences sp;
+    CustomAdapter adapter;
+    LinkedHashMap<String,Boolean> eatToggleStateList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +48,31 @@ public class CustomerPreferenceEat extends Activity {
         TextView title = (TextView) findViewById(R.id.actionbar_home_title);
         title.setText("Buy");
 
+        //Instantiate preference manager and shared preferences
+        preferenceManager = Constants.preferencesManager.getInstance();
+        sp = preferenceManager.getSPInstance();
+
         // Instantiate custom adapter
         ArrayList<String> buyOptions = new ArrayList<String>(Arrays.asList("All",
                 "Chinese", "French", "Fusion", "Halal", "Indonesian", "Italian",
                 "Japanese", "Korean", "Thai", "Seafood", "Others"));
-        CustomAdapter adapter =  new CustomAdapter(buyOptions);
+
+        // Instantiate custom adapter
+        if (adapter == null) {
+            adapter = new CustomAdapter(buyOptions);
+            if (sp.contains("eatToggleState")) {
+                try {
+                    eatToggleStateList = (LinkedHashMap<String, Boolean>) ObjectSerializer.deserialize(sp.getString("eatToggleState", ""));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                eatToggleStateList = new LinkedHashMap<String, Boolean>();
+                for (String optionName: buyOptions) {
+                    eatToggleStateList.put(optionName, false);
+                }
+            }
+        }
 
         // Instantiate list view and bind the adapter
         ListView listView = (ListView) findViewById(R.id.eatListView);
@@ -92,13 +125,23 @@ public class CustomerPreferenceEat extends Activity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = convertView;
+            final String optionName = buyOptionList.get(position);
 
-            if(view==null){
-                view = inflater.inflate(R.layout.preferences_eat_toggle_row, parent, false);
-            }
+            view = inflater.inflate(R.layout.preferences_eat_toggle_row, parent, false);
+
+            Switch toggle = (Switch) view.findViewById(R.id.eatToggle);
+            toggle.setChecked(eatToggleStateList.get(optionName));
 
             TextView buyToggleTV =  (TextView) view.findViewById(R.id.eatToggleTV);
-            buyToggleTV.setText(buyOptionList.get(position));
+            buyToggleTV.setText(optionName);
+
+            toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    eatToggleStateList.put(optionName, isChecked);
+                }
+            });
+
+
             return view;
         }
     }
@@ -106,6 +149,40 @@ public class CustomerPreferenceEat extends Activity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        try {
+            state.putString("eatToggleState", ObjectSerializer.serialize(eatToggleStateList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        try {
+            eatToggleStateList = (LinkedHashMap<String, Boolean>) ObjectSerializer.deserialize(savedInstanceState.getString("eatToggleState"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //save toggle state to shared preferences
+        preferenceManager.setValue("eatToggleState", eatToggleStateList);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //save toggle state to shared preferences
+        preferenceManager.setValue("eatToggleState", eatToggleStateList);
     }
 
 }

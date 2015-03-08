@@ -259,5 +259,7 @@ public class Bootstrap {
                 griddy_souffles, true, 10, 50);
         Constants.dealManager.addDeal(deal1_griddy_souffles);
 
+        Constants.preferencesManager.initializeInstance(mContext);
+
     }
 }
