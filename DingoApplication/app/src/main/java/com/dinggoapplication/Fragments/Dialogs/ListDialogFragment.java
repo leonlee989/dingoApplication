@@ -1,5 +1,6 @@
 package com.dinggoapplication.Fragments.Dialogs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -19,12 +20,28 @@ import java.util.ArrayList;
  */
 public class ListDialogFragment extends DialogFragment {
 
-    public static ListDialogFragment newInstance(String title, CharSequence[] valueList) {
+    DialogListener mListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // Verify that the host activity implements the callback interface
+        try {
+            mListener = (DialogListener) activity;
+        } catch (ClassCastException e){
+            // The activity doesn't implement the interface, hence throw exception
+            throw new ClassCastException(activity.toString() + " must implement CustomLayoutDialogListener");
+        }
+    }
+
+    public static ListDialogFragment newInstance(String title, CharSequence[] valueList, int position) {
         ListDialogFragment dialogFragment = new ListDialogFragment();
         Bundle args = new Bundle();
 
         args.putString("title", title);
         args.putCharSequenceArray("values", valueList);
+        args.putInt("position", position);
         dialogFragment.setArguments(args);
         return dialogFragment;
     }
@@ -41,7 +58,8 @@ public class ListDialogFragment extends DialogFragment {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), valueList[which], Toast.LENGTH_LONG).show();
+                        getArguments().putCharSequence("selection", valueList[which]);
+                        mListener.onDialogPositiveClick(ListDialogFragment.this, getArguments().getInt("position"));
                     }
                 });
 

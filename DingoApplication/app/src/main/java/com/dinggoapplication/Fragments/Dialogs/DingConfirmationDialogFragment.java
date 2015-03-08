@@ -97,6 +97,7 @@ public class DingConfirmationDialogFragment extends DialogFragment {
             Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(getActivity().getApplicationContext()
                             .getResources(), R.drawable.coverfourseasonschicken);
             Merchant merchant = Constants.merchantManager.getMerchant(2);
+
             PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_four_chicken,
                     merchant, 20);
 

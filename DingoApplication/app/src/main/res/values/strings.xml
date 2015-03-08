@@ -64,12 +64,15 @@
     <string name="response_yes">Yes</string>
     <string name="response_no">No</string>
 
+    <string name="tieredGive1">$</string>
+    <string name="tieredGive2">\u0020Off $</string>
+    <string name="tieredGive3">\u0020Spent</string>
     <string name="percentageGive1"></string>
-    <string name="percentageGive2"> % Off Total Bill</string>
-    <string name="maxSeatText1">Max </string>
-    <string name="maxSeatText2"> Seats Issuable</string>
-    <string name="useByText">Use by</string>
-    <string name="endText">End</string>
+    <string name="percentageGive2">\u0020% Off Total Bill</string>
+    <string name="maxSeatText1">Max\u0020</string>
+    <string name="maxSeatText2">\u0020Seats Issuable</string>
+    <string name="useByText">Use by\u0020</string>
+    <string name="endText">End\u0020</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
