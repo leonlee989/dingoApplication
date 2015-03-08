@@ -3,6 +3,8 @@ package com.dinggoapplication.Fragments.Dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,6 +30,9 @@ import com.dinggoapplication.R;
  * Created by Leon on 4/3/2015.
  */
 public class NotificationDialog extends DialogFragment {
+    private NotificationManager mNotification;
+    private int notifyId = 1;
+
     @Override
     public void onStart() {
         super.onStart();
@@ -53,7 +58,7 @@ public class NotificationDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+        
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         // Set the builder contents
@@ -67,7 +72,7 @@ public class NotificationDialog extends DialogFragment {
     DialogInterface.OnClickListener response_yes = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-           // Dismiss dialog box
+            mNotification.cancel(notifyId);
         }
     };
 

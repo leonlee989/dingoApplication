@@ -3,12 +3,18 @@ package com.dinggoapplication.Fragments.Dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -30,6 +36,8 @@ import com.dinggoapplication.R;
  * Created by Leon on 1/3/2015.
  */
 public class DingConfirmationDialogFragment extends DialogFragment {
+    private SharedPreferences sharedPreferences;
+
     @Override
     public void onStart() {
         super.onStart();
@@ -55,6 +63,8 @@ public class DingConfirmationDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Retrieve Merchant Id From savedinstances
+        sharedPreferences = getActivity().getSharedPreferences("MerchantData", Context.MODE_PRIVATE);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -94,16 +104,44 @@ public class DingConfirmationDialogFragment extends DialogFragment {
 
             // ToDo: To be removed
             /* For static display purpose */
+            String merchantId = sharedPreferences.getString("merchantId", "");
+            Merchant merchant = Constants.merchantManager.getMerchant(merchantId);
+
             Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(getActivity().getApplicationContext()
                             .getResources(), R.drawable.coverfourseasonschicken);
-            Merchant merchant = Constants.merchantManager.getMerchant(2);
 
             PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_four_chicken,
                     merchant, 20);
 
             Constants.dealManager.addDeal(additionalDeal);
             Constants.newItemAdded = true;
+
+            // ToDo: Testing for notification
+            NotificationManager mNotification = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            int notifyId = 1;
+
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(getActivity())
+                    .setSmallIcon(R.drawable.app_icon)
+                    .setContentTitle("New Ding!")
+                    .setContentText("You’ve got a Ding from " + merchant.getCompanyName() + "!!");
+
+            // Create an explicit intent for an activity in the app
             Intent intent = new Intent(getActivity(), OngoingDeal.class);
+
+            // The stack builder object will contain an artificial back stack for the started
+            // Activity. This ensures that navigating backward from the Activity leads out of
+            // the application to the home screen
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+            // Adds the back stack for the intetn
+            stackBuilder.addParentStack(OngoingDeal.class);
+            // Adds the Intent that starts the Activity to the top of the stack
+            stackBuilder.addNextIntent(intent);
+            PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            // mId allows to update the notification later on
+            mNotification.notify(notifyId, mBuilder.build());
+
             startActivity(intent);
         }
     };

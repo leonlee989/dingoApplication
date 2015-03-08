@@ -48,6 +48,21 @@ public class MerchantManager {
     }
 
     /**
+     * Retrieve merchant by merchantId
+     * @param merchantId
+     * @return
+     */
+    public Merchant getMerchant(String merchantId) {
+        for (Merchant merchant:merchantList) {
+            if (merchant.getMerchantId().equalsIgnoreCase(merchantId)) {
+                return merchant;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Set the list of merchant
      * @param merchantList
      */

@@ -2,6 +2,7 @@ package com.dinggoapplication.Activities;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -27,10 +28,16 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class OngoingDeal extends FragmentActivity {
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ongoingdeal);
+
+        // Retrieve Merchant Id From savedinstances
+        sharedPreferences = getSharedPreferences("MerchantData", Context.MODE_PRIVATE);
+        String merchantId = sharedPreferences.getString("merchantId", "");
 
         // Set up the action bar
         final ActionBar actionBar = getActionBar();
@@ -45,7 +52,7 @@ public class OngoingDeal extends FragmentActivity {
         // Set title text for activity action bar
         title.setText("Ongoing Deals");
 
-        ArrayList<Deal> dealListByMerchant = Constants.dealManager.retrieveDealByMerchant("merchant03");
+        ArrayList<Deal> dealListByMerchant = Constants.dealManager.retrieveDealByMerchant(merchantId);
         final OngoingDealArrayAdapter adapter = new OngoingDealArrayAdapter(this, dealListByMerchant);
 
         ListView list = (ListView) findViewById(R.id.ongoing_deal_list);

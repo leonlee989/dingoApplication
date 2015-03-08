@@ -2,6 +2,7 @@ package com.dinggoapplication.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -37,6 +38,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     startActivity(intent);
 
                 } else if (username.equalsIgnoreCase("merchant")) {
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("MerchantData", Context.MODE_PRIVATE);
+
+                    // Todo: Predefine MerchantZ
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("merchantId", "merchant03");
+                    editor.commit();
 
                     // Start activity for merchant view
                     Intent intent = new Intent(MainActivity.this, MerchantActivity.class);

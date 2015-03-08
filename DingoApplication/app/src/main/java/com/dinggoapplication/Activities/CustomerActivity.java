@@ -2,6 +2,7 @@ package com.dinggoapplication.Activities;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,6 +62,7 @@ public class CustomerActivity extends ListActivity {
         // ToDo: To removed, Dialog appear only when a new item is added into the deal list
         if (Constants.newItemAdded) {
             Constants.newItemAdded = false;
+
             NotificationDialog notiDialog = new NotificationDialog();
             notiDialog.show(getFragmentManager(), "Notification");
         }
