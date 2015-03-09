@@ -97,80 +97,92 @@ ADDED from AndroidManifest.xml:42:9
 		ADDED from AndroidManifest.xml:43:13
 activity#com.dinggoapplication.Activities.CustomerActivity
 ADDED from AndroidManifest.xml:46:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:49:13
 	android:label
 		ADDED from AndroidManifest.xml:48:13
 	android:name
 		ADDED from AndroidManifest.xml:47:13
 activity#com.dinggoapplication.Activities.EatDrinkActivity
-ADDED from AndroidManifest.xml:50:9
+ADDED from AndroidManifest.xml:51:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:54:13
 	android:label
+		ADDED from AndroidManifest.xml:53:13
+	android:name
 		ADDED from AndroidManifest.xml:52:13
-	android:name
-		ADDED from AndroidManifest.xml:51:13
 activity#com.dinggoapplication.Activities.CustomerDealDetailsActivity
-ADDED from AndroidManifest.xml:54:9
+ADDED from AndroidManifest.xml:56:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:59:13
+	android:label
+		ADDED from AndroidManifest.xml:58:13
+	android:name
 		ADDED from AndroidManifest.xml:57:13
-	android:label
-		ADDED from AndroidManifest.xml:56:13
-	android:name
-		ADDED from AndroidManifest.xml:55:13
 activity#com.dinggoapplication.Activities.CustomerDingedDeal
-ADDED from AndroidManifest.xml:59:9
-	android:label
-		ADDED from AndroidManifest.xml:61:13
-	android:name
-		ADDED from AndroidManifest.xml:60:13
-activity#com.dinggoapplication.Activities.MerchantActivity
-ADDED from AndroidManifest.xml:63:9
-	android:label
-		ADDED from AndroidManifest.xml:65:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:66:13
-	android:name
-		ADDED from AndroidManifest.xml:64:13
-meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:67:13
-	android:name
-		ADDED from AndroidManifest.xml:68:17
-	android:value
-		ADDED from AndroidManifest.xml:69:17
-activity#com.dinggoapplication.Activities.DingADeal
-ADDED from AndroidManifest.xml:71:9
+ADDED from AndroidManifest.xml:61:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:64:13
+	android:label
+		ADDED from AndroidManifest.xml:63:13
+	android:name
+		ADDED from AndroidManifest.xml:62:13
+activity#com.dinggoapplication.Activities.MerchantActivity
+ADDED from AndroidManifest.xml:66:9
+	android:label
+		ADDED from AndroidManifest.xml:68:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:69:13
+	android:name
+		ADDED from AndroidManifest.xml:67:13
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:70:13
+	android:name
+		ADDED from AndroidManifest.xml:71:17
+	android:value
+		ADDED from AndroidManifest.xml:72:17
+activity#com.dinggoapplication.Activities.DingADeal
+ADDED from AndroidManifest.xml:74:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:78:13
+	android:label
+		ADDED from AndroidManifest.xml:76:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:77:13
+	android:name
 		ADDED from AndroidManifest.xml:75:13
-	android:label
-		ADDED from AndroidManifest.xml:73:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:74:13
-	android:name
-		ADDED from AndroidManifest.xml:72:13
 activity#com.dinggoapplication.Activities.OngoingDeal
-ADDED from AndroidManifest.xml:80:9
+ADDED from AndroidManifest.xml:83:9
 	android:label
-		ADDED from AndroidManifest.xml:82:13
+		ADDED from AndroidManifest.xml:85:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:83:13
+		ADDED from AndroidManifest.xml:86:13
 	android:name
-		ADDED from AndroidManifest.xml:81:13
+		ADDED from AndroidManifest.xml:84:13
 activity#com.dinggoapplication.Activities.CustomerPreferences
-ADDED from AndroidManifest.xml:88:9
-	android:label
-		ADDED from AndroidManifest.xml:90:13
-	android:name
-		ADDED from AndroidManifest.xml:89:13
-activity#com.dinggoapplication.Activities.CustomerPreferenceManageNotifications
-ADDED from AndroidManifest.xml:92:9
-	android:label
+ADDED from AndroidManifest.xml:91:9
+	android:screenOrientation
 		ADDED from AndroidManifest.xml:94:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:93:13
-activity#com.dinggoapplication.Activities.CustomerPreferenceEat
+	android:name
+		ADDED from AndroidManifest.xml:92:13
+activity#com.dinggoapplication.Activities.CustomerPreferenceManageNotifications
 ADDED from AndroidManifest.xml:96:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:99:13
 	android:label
 		ADDED from AndroidManifest.xml:98:13
 	android:name
 		ADDED from AndroidManifest.xml:97:13
+activity#com.dinggoapplication.Activities.CustomerPreferenceEat
+ADDED from AndroidManifest.xml:101:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:104:13
+	android:label
+		ADDED from AndroidManifest.xml:103:13
+	android:name
+		ADDED from AndroidManifest.xml:102:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
