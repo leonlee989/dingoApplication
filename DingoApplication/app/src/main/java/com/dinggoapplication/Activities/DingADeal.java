@@ -81,17 +81,23 @@ public class DingADeal extends Activity implements DialogListener {
 
         CustomDingADealAdapter adapter = new CustomDingADealAdapter();
 
-        DingADealOptions option1 = new DingADealOptions(RowType.SELECTOR, "Choose Who To Ding To");
+        DingADealOptions option1 = new DingADealOptions(getResources().getString(R.string.dingadeal_optionText_1),
+                RowType.SELECTOR, "Choose Who To Ding To");
         adapter.addOption(option1);
-        DingADealOptions option2 = new DingADealOptions(RowType.SELECTOR, "Choose A Discount Type");
+        DingADealOptions option2 = new DingADealOptions(getResources().getString(R.string.dingadeal_optionText_2),
+                RowType.SELECTOR, "Choose A Discount Type");
         adapter.addOption(option2);
-        DingADealOptions option3 = new DingADealOptions(RowType.SELECTOR, "# Of Seats To Allocate");
+        DingADealOptions option3 = new DingADealOptions(getResources().getString(R.string.dingadeal_optionText_3),
+                RowType.SELECTOR, "# Of Seats To Allocate");
         adapter.addOption(option3);
-        DingADealOptions option4 = new DingADealOptions(RowType.SELECTOR, "Ding To Be Use By");
+        DingADealOptions option4 = new DingADealOptions(getResources().getString(R.string.dingadeal_optionText_4),
+                RowType.SELECTOR, "Ding To Be Use By");
         adapter.addOption(option4);
-        DingADealOptions option5 = new DingADealOptions(RowType.SELECTOR, "Ding To Be End By");
+        DingADealOptions option5 = new DingADealOptions(getResources().getString(R.string.dingadeal_optionText_5),
+                RowType.SELECTOR, "Ding To Be End By");
         adapter.addOption(option5);
-        DingADealOptions option6 = new DingADealOptions("Mystery Deal", RowType.TOGGLE, "Select A Deal");
+        DingADealOptions option6 = new DingADealOptions(getResources().getString(R.string.dingadeal_optionText_6),
+                RowType.TOGGLE, "Select A Deal");
         adapter.addOption(option6);
 
         return adapter;
