@@ -33,6 +33,8 @@ public class CustomerPreferenceEat extends Activity {
     SharedPreferences sp;
     CustomAdapter adapter;
     LinkedHashMap<String,Boolean> eatToggleStateList;
+    RangeSeekBar<Integer> rangeSeekBar;
+    ArrayList<Integer> eatBudgetRange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +81,36 @@ public class CustomerPreferenceEat extends Activity {
         ListView listView = (ListView) findViewById(R.id.eatListView);
         listView.setAdapter(adapter);
 
-        // Setup the range seek bar from layout
-        RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar<Integer>) findViewById(R.id.eatRangeSeekBar);
-        // To implement saving of selected Max & Min value by user to savedInstance & sharedpreferences
-        rangeSeekBar.setSelectedMaxValue(100);
-        rangeSeekBar.setSelectedMinValue(5);
+        if (rangeSeekBar == null) {
+            // Setup the range seek bar from layout
+            rangeSeekBar = (RangeSeekBar<Integer>) findViewById(R.id.eatRangeSeekBar);
+            if (sp.contains("eatBudget") && sp.getString("eatBudget", "")!=null) {
+                try {
+                    eatBudgetRange = (ArrayList<Integer>) ObjectSerializer.deserialize(sp.getString("eatBudget", ""));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                eatBudgetRange = new ArrayList<Integer>();
+                //position 0 = min range value
+                eatBudgetRange.add(0, 5);
+                //position 1 = max range value
+                eatBudgetRange.add(1, 100);
+            }
+        }
+
+        rangeSeekBar.setSelectedMinValue(eatBudgetRange.get(0));
+        rangeSeekBar.setSelectedMaxValue(eatBudgetRange.get(1));
+        rangeSeekBar.setOnRangeSeekBarChangeListener(
+            new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+                @Override
+                public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
+                    // handle changed range values
+                    eatBudgetRange.set(0, minValue);
+                    eatBudgetRange.set(1, maxValue);
+                }
+            }
+        );
 
     }
     private class CustomAdapter extends BaseAdapter {
@@ -163,6 +190,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onSaveInstanceState(state);
         try {
             state.putString("eatToggleState", ObjectSerializer.serialize(eatToggleStateList));
+            state.putString("eatBudget", ObjectSerializer.serialize(eatBudgetRange));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -173,6 +201,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onRestoreInstanceState(savedInstanceState);
         try {
             eatToggleStateList = (LinkedHashMap<String, Boolean>) ObjectSerializer.deserialize(savedInstanceState.getString("eatToggleState"));
+            eatBudgetRange = (ArrayList<Integer>) ObjectSerializer.deserialize(savedInstanceState.getString("eatBudget"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -183,6 +212,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onStop();
         //save toggle state to shared preferences
         preferenceManager.setValue("eatToggleState", eatToggleStateList);
+        preferenceManager.setValue("eatBudget", eatBudgetRange);
     }
 
     @Override
@@ -190,6 +220,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onDestroy();
         //save toggle state to shared preferences
         preferenceManager.setValue("eatToggleState", eatToggleStateList);
+        preferenceManager.setValue("eatBudget", eatBudgetRange);
     }
 
 }

@@ -98,7 +98,7 @@ public class Bootstrap {
 
         int contactNumber_pho_pho = 61234567;
 
-        String website_pho_pho = "http://phopho.com.sg/";
+        String website_pho_pho = "phopho.com.sg";
         LatLng latLng_pho_pho = new LatLng(1.3285, 103.9445);
         //LatLng latLng_pho_pho = ApplicationFactory.getLocationFromAddress(address_pho_pho.toString(), mContext);
         if (latLng_pho_pho == null) {
@@ -144,7 +144,7 @@ public class Bootstrap {
 
         int contactNumber_fourseason_chicken = 66342130;
 
-        String website_fourseason_chicken = "http://www.fourchicken.com.sg/";
+        String website_fourseason_chicken = "www.fourchicken.com.sg";
         //LatLng latLng_fourseason_chicken = new LatLng(1.3506, 103.8718);
         LatLng latLng_fourseason_chicken = ApplicationFactory.getLocationFromAddress(address_fourseason_chicken.toString(), mContext);
         if (latLng_fourseason_chicken == null) {
@@ -191,7 +191,7 @@ public class Bootstrap {
 
         int contactNumber_gold_thai = 61234567;
 
-        String website_gold_thai = "http://www.goldthai.com.sg/";
+        String website_gold_thai = "www.goldthai.com.sg";
         LatLng latLng_gold_thai = new LatLng(1.4649, 103.8066);
         //LatLng latLng_gold_thai = ApplicationFactory.getLocationFromAddress(address_gold_thai.toString(), mContext);
         if (latLng_gold_thai == null) {
@@ -237,7 +237,7 @@ public class Bootstrap {
 
         int contactNumber_griddy_souffles = 61234567;
 
-        String website_griddy_souffles = "http://griddysouffles.com.sg/";
+        String website_griddy_souffles = "griddysouffles.com.sg";
         //LatLng latLng_griddy_souffles = new LatLng(43.1, -87.9);
         LatLng latLng_griddy_souffles = ApplicationFactory.getLocationFromAddress(address_griddy_souffles.toString(), mContext);
 

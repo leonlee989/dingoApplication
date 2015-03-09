@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dinggoapplication.Constants;
 import com.dinggoapplication.Entity.Address;
@@ -40,6 +39,7 @@ public class CustomerDealDetailsActivity extends Activity {
     MapView mapView;
     GoogleMap map;
     String discount;
+    LatLng mLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +118,7 @@ public class CustomerDealDetailsActivity extends Activity {
             map.setMyLocationEnabled(true);
 
             GoogleMapOptions options = new GoogleMapOptions();
-            options.mapType(GoogleMap.MAP_TYPE_NORMAL)
-                    .liteMode(true);
+            options.mapType(GoogleMap.MAP_TYPE_NORMAL);
 
             // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
             try {
@@ -127,9 +126,9 @@ public class CustomerDealDetailsActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            mLatLng = merchant.getLatLng();
             // Updates the location and zoom of the MapView
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 10);
             map.animateCamera(cameraUpdate);
 
             findViewById(R.id.dingItButton).setOnClickListener(new View.OnClickListener() {

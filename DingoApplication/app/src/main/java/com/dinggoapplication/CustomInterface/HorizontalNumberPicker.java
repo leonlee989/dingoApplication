@@ -18,7 +18,7 @@ public class HorizontalNumberPicker extends LinearLayout implements OnClickListe
     TextView pickerText;
 
     int nStart = 0;
-    int nEnd = 10;
+    int nEnd = 30;
 
     public HorizontalNumberPicker(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -31,7 +31,7 @@ public class HorizontalNumberPicker extends LinearLayout implements OnClickListe
         minus = (Button) findViewById(R.id.minusButton);
         pickerText = (TextView) findViewById(R.id.pickerNumberText);
 
-        pickerText.setText("0");
+        pickerText.setText("2");
         plus.setOnClickListener(this);
         minus.setOnClickListener(this);
     }
