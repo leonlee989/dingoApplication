@@ -45,11 +45,13 @@
         </activity>
         <activity
             android:name=".Activities.CustomerActivity"
-            android:label="@string/title_activity_customer" >
+            android:label="@string/title_activity_customer"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Activities.EatDrinkActivity"
-            android:label="@string/title_activity_eat_drink" >
+            android:label="@string/title_activity_eat_drink"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Activities.CustomerDealDetailsActivity"
@@ -58,7 +60,8 @@
         </activity>
         <activity
             android:name=".Activities.CustomerDingedDeal"
-            android:label="@string/title_activity_customer_dinged_deal" >
+            android:label="@string/title_activity_customer_dinged_deal"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Activities.MerchantActivity"
@@ -87,15 +90,18 @@
         </activity>
         <activity
             android:name=".Activities.CustomerPreferences"
-            android:label="@string/title_activity_customer_preferences" >
+            android:label="@string/title_activity_customer_preferences"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Activities.CustomerPreferenceManageNotifications"
-            android:label="@string/title_activity_customer_preference_manage_deals" >
+            android:label="@string/title_activity_customer_preference_manage_deals"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Activities.CustomerPreferenceEat"
-            android:label="@string/title_activity_customer_preference_buy" >
+            android:label="@string/title_activity_customer_preference_eat"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

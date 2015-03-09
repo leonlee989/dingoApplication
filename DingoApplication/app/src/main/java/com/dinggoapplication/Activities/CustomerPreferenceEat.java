@@ -15,6 +15,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.dinggoapplication.Constants;
+import com.dinggoapplication.CustomInterface.RangeSeekBar;
 import com.dinggoapplication.Manager.PreferencesManager;
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
@@ -66,9 +67,9 @@ public class CustomerPreferenceEat extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
+            } else {
                 eatToggleStateList = new LinkedHashMap<String, Boolean>();
-                for (String optionName: buyOptions) {
+                for (String optionName : buyOptions) {
                     eatToggleStateList.put(optionName, false);
                 }
             }
@@ -77,8 +78,14 @@ public class CustomerPreferenceEat extends Activity {
         // Instantiate list view and bind the adapter
         ListView listView = (ListView) findViewById(R.id.eatListView);
         listView.setAdapter(adapter);
-    }
 
+        // Setup the range seek bar from layout
+        RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar<Integer>) findViewById(R.id.eatRangeSeekBar);
+        // To implement saving of selected Max & Min value by user to savedInstance & sharedpreferences
+        rangeSeekBar.setSelectedMaxValue(100);
+        rangeSeekBar.setSelectedMinValue(5);
+
+    }
     private class CustomAdapter extends BaseAdapter {
 
         ArrayList<String> buyOptionList;
