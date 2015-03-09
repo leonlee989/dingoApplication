@@ -63,6 +63,12 @@ public class CustomerPreferences extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+                toggleStateList.put("Eat", false);
+                toggleStateList.put("Drink", false);
+                toggleStateList.put("Watch", false);
+                toggleStateList.put("Play", false);
+                toggleStateList.put("Buy", false);
             }
         }
 
@@ -77,7 +83,7 @@ public class CustomerPreferences extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             switch(position) {
-                case 6:
+                case 5:
                     Intent intent = new Intent(CustomerPreferences.this, CustomerPreferenceManageNotifications.class);
                     startActivity(intent);
                     break;
@@ -111,12 +117,6 @@ public class CustomerPreferences extends Activity {
         adapter.addOption(new PreferenceItem("Watch", false));
         adapter.addOption(new PreferenceItem("Play", false));
         adapter.addOption(new PreferenceItem("Buy", false));
-
-        toggleStateList.put("Eat", false);
-        toggleStateList.put("Drink", false);
-        toggleStateList.put("Watch", false);
-        toggleStateList.put("Play", false);
-        toggleStateList.put("Buy", false);
 
         adapter.addOption(new PreferenceItem("Support", RowType.HEADER));
         adapter.addOption(new PreferenceItem("Feedback", RowType.SELECTOR));

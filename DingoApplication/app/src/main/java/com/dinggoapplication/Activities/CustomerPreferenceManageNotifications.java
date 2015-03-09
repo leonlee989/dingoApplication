@@ -1,16 +1,18 @@
 package com.dinggoapplication.Activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.dinggoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class CustomerPreferenceManageNotifications extends ActionBarActivity {
+public class CustomerPreferenceManageNotifications extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class CustomerPreferenceManageNotifications extends ActionBarActivity {
         TextView title = (TextView) findViewById(R.id.actionbar_home_title);
         title.setText("Manage Notifications");
 
+        // Get the values for the controls
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBarProximity);
+        seekBar.setMax(150);
 
     }
 

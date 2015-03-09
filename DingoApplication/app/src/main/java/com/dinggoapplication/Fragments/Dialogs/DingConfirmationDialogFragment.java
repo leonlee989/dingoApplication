@@ -81,9 +81,12 @@ public class DingConfirmationDialogFragment extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialog, int which) {
 
+            boolean isContinue = true;
+
             ListView lv = (ListView) getActivity().findViewById(R.id.dingadeal_List);
             ListAdapter adapter = lv.getAdapter();
 
+            iterateAllOptions:
             for (int i=0; i < adapter.getCount(); i++) {
                 DingADeal.DingADealOptions option = (DingADeal.DingADealOptions) adapter.getItem(i);
                 View view = adapter.getView(i, null, null);
@@ -92,7 +95,11 @@ public class DingConfirmationDialogFragment extends DialogFragment {
                     case SELECTOR:
                         TextView value = (TextView) view.findViewById(R.id.option_label);
 
-                        Log.w("Merchant", value.getText().toString());
+                        if (value.getText().toString().equalsIgnoreCase("")) {
+                            isContinue = false;
+                            break iterateAllOptions;
+                        }
+
                         break;
                     case TOGGLE:
                         Switch switch_control = (Switch) view.findViewById(R.id.toggle);
@@ -100,49 +107,55 @@ public class DingConfirmationDialogFragment extends DialogFragment {
                         Log.w("Merchant", "" + switch_control.isChecked());
                         break;
                 }
+
             }
 
-            // ToDo: To be removed
-            /* For static display purpose */
-            String merchantId = sharedPreferences.getString("merchantId", "");
-            Merchant merchant = Constants.merchantManager.getMerchant(merchantId);
+            if (!isContinue) {
+                Toast.makeText(getActivity(), "Please enter all field to Ding A Deal", Toast.LENGTH_LONG).show();
+            } else {
 
-            Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(getActivity().getApplicationContext()
-                            .getResources(), R.drawable.coverfourseasonschicken);
+                // ToDo: To be removed
+                /* For static display purpose */
+                String merchantId = sharedPreferences.getString("merchantId", "");
+                Merchant merchant = Constants.merchantManager.getMerchant(merchantId);
 
-            PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_four_chicken,
-                    merchant, 20);
+                Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(getActivity().getApplicationContext()
+                        .getResources(), R.drawable.coverfourseasonschicken);
 
-            Constants.dealManager.addDeal(additionalDeal);
-            Constants.newItemAdded = true;
+                PercentageDiscount additionalDeal = new PercentageDiscount("GT1", coverImage_four_chicken,
+                        merchant, 20);
 
-            // ToDo: Testing for notification
-            NotificationManager mNotification = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-            int notifyId = 1;
+                Constants.dealManager.addDeal(additionalDeal);
+                Constants.newItemAdded = true;
 
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(getActivity())
-                    .setSmallIcon(R.drawable.app_icon)
-                    .setContentTitle("New Ding!")
-                    .setContentText("You’ve got a Ding from " + merchant.getCompanyName() + "!!");
+                // ToDo: Testing for notification
+                NotificationManager mNotification = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                int notifyId = 1;
 
-            // Create an explicit intent for an activity in the app
-            Intent intent = new Intent(getActivity(), OngoingDeal.class);
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getActivity())
+                                .setSmallIcon(R.drawable.app_icon)
+                                .setContentTitle("New Ding!")
+                                .setContentText("You’ve got a Ding from " + merchant.getCompanyName() + "!!");
 
-            // The stack builder object will contain an artificial back stack for the started
-            // Activity. This ensures that navigating backward from the Activity leads out of
-            // the application to the home screen
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
-            // Adds the back stack for the intetn
-            stackBuilder.addParentStack(OngoingDeal.class);
-            // Adds the Intent that starts the Activity to the top of the stack
-            stackBuilder.addNextIntent(intent);
-            PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                // Create an explicit intent for an activity in the app
+                Intent intent = new Intent(getActivity(), OngoingDeal.class);
 
-            // mId allows to update the notification later on
-            mNotification.notify(notifyId, mBuilder.build());
+                // The stack builder object will contain an artificial back stack for the started
+                // Activity. This ensures that navigating backward from the Activity leads out of
+                // the application to the home screen
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+                // Adds the back stack for the intetn
+                stackBuilder.addParentStack(OngoingDeal.class);
+                // Adds the Intent that starts the Activity to the top of the stack
+                stackBuilder.addNextIntent(intent);
+                PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            startActivity(intent);
+                // mId allows to update the notification later on
+                mNotification.notify(notifyId, mBuilder.build());
+
+                startActivity(intent);
+            }
         }
     };
 

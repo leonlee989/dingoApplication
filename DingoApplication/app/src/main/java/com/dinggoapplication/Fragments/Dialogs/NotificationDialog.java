@@ -59,6 +59,7 @@ public class NotificationDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        mNotification = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         // Set the builder contents

@@ -1,6 +1,7 @@
 package com.dinggoapplication.Activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -37,7 +38,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Ding A Deal object
  *  Created by Leon on 02/28/2015.
  */
-public class DingADeal extends FragmentActivity implements DialogListener {
+public class DingADeal extends Activity implements DialogListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,6 @@ public class DingADeal extends FragmentActivity implements DialogListener {
         // Set list view to the adapter
         ListView list = (ListView) findViewById(R.id.dingadeal_List);
         list.setAdapter(adapter);
-
         list.setOnItemClickListener(itemActions);
     }
 
@@ -91,15 +91,17 @@ public class DingADeal extends FragmentActivity implements DialogListener {
         adapter.addOption(option4);
         DingADealOptions option5 = new DingADealOptions(RowType.SELECTOR, "Ding To Be End By");
         adapter.addOption(option5);
-        DingADealOptions option6 = new DingADealOptions(RowType.TOGGLE, "Select A Deal");
+        DingADealOptions option6 = new DingADealOptions("Mystery Deal", RowType.TOGGLE, "Select A Deal");
         adapter.addOption(option6);
 
         return adapter;
     }
 
     AdapterView.OnItemClickListener itemActions = new AdapterView.OnItemClickListener() {
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             switch (position) {
                 case 0:
                     CharSequence[] valueList = new CharSequence[]{"Everyone", "Nearby Users", "Members", "Custom"};
@@ -121,6 +123,7 @@ public class DingADeal extends FragmentActivity implements DialogListener {
 
                     break;
                 case 2:
+
                     CustomLayoutDialogFragment maxSeatDialog =
                             CustomLayoutDialogFragment.newInstance(R.layout.dialog_number_picker,
                                     "Select a value",
@@ -130,6 +133,7 @@ public class DingADeal extends FragmentActivity implements DialogListener {
                     maxSeatDialog.show(getFragmentManager(), "maxSeat");
                     break;
                 case 3:
+
                     CustomLayoutDialogFragment endTimeDialog = CustomLayoutDialogFragment
                             .newInstance(R.layout.dialog_time_picker, "Select a time",
                                     getResources().getString(R.string.endText), position);
@@ -137,6 +141,7 @@ public class DingADeal extends FragmentActivity implements DialogListener {
                     endTimeDialog.show(getFragmentManager(), "endTime");
                     break;
                 case 4:
+
                     CustomLayoutDialogFragment useByTimeDialog = CustomLayoutDialogFragment
                             .newInstance(R.layout.dialog_time_picker, "Select a time",
                                     getResources().getString(R.string.useByText), position);
@@ -144,10 +149,15 @@ public class DingADeal extends FragmentActivity implements DialogListener {
                     useByTimeDialog.show(getFragmentManager(), "useByTime");
                     break;
                 case 5:
+
                     CharSequence[] dealList = {"Normal Deal", "Seasonal Deal", "Mystery Deal"};
                     ListDialogFragment useDeal = ListDialogFragment.newInstance("Select a deal",
                             dealList, position);
+
+                    useDeal.show(getFragmentManager(), "DealType");
+                    break;
                 default:
+
                     TextView text = (TextView) view.findViewById(R.id.option_label);
                     Toast.makeText(DingADeal.this, text.getText(), Toast.LENGTH_LONG).show();
                     break;
@@ -165,18 +175,11 @@ public class DingADeal extends FragmentActivity implements DialogListener {
      * Custom adapter extended to BaseAdapter to display different row layout in a layout
      */
     public class CustomDingADealAdapter extends BaseAdapter {
-        /**
-         * Type item 1 index
-         */
-        private static final int TYPE_ITEM_1 = 0;
-        /**
-         * Type item last index
-         */
-        private static final int TYPE_ITEM_FINAL = 1;
+
         /**
          * Maximum count of option types available
          */
-        private static final int TYPE_MAX_COUNT = TYPE_ITEM_FINAL + 1;
+        private static final int TYPE_MAX_COUNT = 2;
 
         /**
          * A list of options available for selection
@@ -219,10 +222,9 @@ public class DingADeal extends FragmentActivity implements DialogListener {
             return this.TYPE_MAX_COUNT;
         }
 
-        @Override
-        public int getItemViewType(int position) {
+        public RowType getViewType(int position) {
             // Return 0 if row type is seletor, and 1 if row type is otherwise
-            return optionList.get(position).getValue() == RowType.SELECTOR ? TYPE_ITEM_1 : TYPE_ITEM_FINAL;
+            return optionList.get(position).getValue();
         }
 
         @Override
@@ -243,15 +245,15 @@ public class DingADeal extends FragmentActivity implements DialogListener {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View rowView = convertView;
-            int option = getItemViewType(position);
+            RowType option = getViewType(position);
 
             if (rowView == null) {
                 // Switch the row type layout according to the type item
                 switch (option) {
-                    case TYPE_ITEM_1:
+                    case SELECTOR:
                         rowView = inflater.inflate(R.layout.dingadel_selection_row, parent, false);
                         break;
-                    case TYPE_ITEM_FINAL:
+                    case TOGGLE:
                         rowView = inflater.inflate(R.layout.dingadeal_toggle_row, parent, false);
                         break;
                 }

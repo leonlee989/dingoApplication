@@ -1,6 +1,7 @@
 package com.dinggoapplication.Activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -26,7 +27,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by Leon on 1/3/2015.
  */
-public class OngoingDeal extends FragmentActivity {
+public class OngoingDeal extends Activity {
 
     private SharedPreferences sharedPreferences;
 

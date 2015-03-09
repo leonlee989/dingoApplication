@@ -74,6 +74,14 @@
     <string name="useByText">Use by\u0020</string>
     <string name="endText">End\u0020</string>
 
+    <!-- Preferences - Notification Management -->
+    <string name="AlertTitle">Alert Me</string>
+    <string name="AlertRadio_1">Preferred Deals</string>
+    <string name="AlertRadio_2">All Deals</string>
+    <string name="AlertRadio_3">No to be missed Deals</string>
+    <string name="AlertRadio_4">No Deals</string>
+    <string name="ProximityTitle">Deal Proximity</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_merchant">Merchant</string>
