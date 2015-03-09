@@ -91,6 +91,8 @@
     <string name="title_activity_customer_preferences">CustomerPreferences</string>
     <string name="title_activity_customer_preference_manage_deals">CustomerPreferenceManageDeals
     </string>
-    <string name="title_activity_customer_preference_buy">CustomerPreferenceBuy</string>
+    <string name="title_activity_customer_preference_eat">CustomerPreferenceEat</string>
+    <string name="demo_min_label">Min</string>
+    <string name="demo_max_label">Max</string>
 
 </resources>

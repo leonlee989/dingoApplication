@@ -7,9 +7,12 @@
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/eatLinearlayout"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,13 +24,11 @@
             android:layout_marginBottom="10dp"
             android:id="@+id/pBudget" />
 
-        <SeekBar
-            android:layout_width="match_parent"
+        <com.dinggoapplication.CustomInterface.RangeSeekBar
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/budgetSeekBar" />
-
+            android:id="@+id/eatRangeSeekBar"
+            android:layout_marginBottom="20dp"/>
         <View style="@style/hDivider"/>
     </LinearLayout>
 

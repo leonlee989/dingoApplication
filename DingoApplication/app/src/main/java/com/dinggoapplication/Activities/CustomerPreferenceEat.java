@@ -15,6 +15,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.dinggoapplication.Constants;
+import com.dinggoapplication.CustomInterface.RangeSeekBar;
 import com.dinggoapplication.Manager.PreferencesManager;
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
@@ -32,6 +33,8 @@ public class CustomerPreferenceEat extends Activity {
     SharedPreferences sp;
     CustomAdapter adapter;
     LinkedHashMap<String,Boolean> eatToggleStateList;
+    RangeSeekBar<Integer> rangeSeekBar;
+    ArrayList<Integer> eatBudgetRange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,9 @@ public class CustomerPreferenceEat extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
+            } else {
                 eatToggleStateList = new LinkedHashMap<String, Boolean>();
-                for (String optionName: buyOptions) {
+                for (String optionName : buyOptions) {
                     eatToggleStateList.put(optionName, false);
                 }
             }
@@ -77,8 +80,39 @@ public class CustomerPreferenceEat extends Activity {
         // Instantiate list view and bind the adapter
         ListView listView = (ListView) findViewById(R.id.eatListView);
         listView.setAdapter(adapter);
-    }
 
+        if (rangeSeekBar == null) {
+            // Setup the range seek bar from layout
+            rangeSeekBar = (RangeSeekBar<Integer>) findViewById(R.id.eatRangeSeekBar);
+            if (sp.contains("eatBudget") && sp.getString("eatBudget", "")!=null) {
+                try {
+                    eatBudgetRange = (ArrayList<Integer>) ObjectSerializer.deserialize(sp.getString("eatBudget", ""));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                eatBudgetRange = new ArrayList<Integer>();
+                //position 0 = min range value
+                eatBudgetRange.add(0, 5);
+                //position 1 = max range value
+                eatBudgetRange.add(1, 100);
+            }
+        }
+
+        rangeSeekBar.setSelectedMinValue(eatBudgetRange.get(0));
+        rangeSeekBar.setSelectedMaxValue(eatBudgetRange.get(1));
+        rangeSeekBar.setOnRangeSeekBarChangeListener(
+            new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+                @Override
+                public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
+                    // handle changed range values
+                    eatBudgetRange.set(0, minValue);
+                    eatBudgetRange.set(1, maxValue);
+                }
+            }
+        );
+
+    }
     private class CustomAdapter extends BaseAdapter {
 
         ArrayList<String> buyOptionList;
@@ -156,6 +190,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onSaveInstanceState(state);
         try {
             state.putString("eatToggleState", ObjectSerializer.serialize(eatToggleStateList));
+            state.putString("eatBudget", ObjectSerializer.serialize(eatBudgetRange));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -166,6 +201,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onRestoreInstanceState(savedInstanceState);
         try {
             eatToggleStateList = (LinkedHashMap<String, Boolean>) ObjectSerializer.deserialize(savedInstanceState.getString("eatToggleState"));
+            eatBudgetRange = (ArrayList<Integer>) ObjectSerializer.deserialize(savedInstanceState.getString("eatBudget"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -176,6 +212,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onStop();
         //save toggle state to shared preferences
         preferenceManager.setValue("eatToggleState", eatToggleStateList);
+        preferenceManager.setValue("eatBudget", eatBudgetRange);
     }
 
     @Override
@@ -183,6 +220,7 @@ public class CustomerPreferenceEat extends Activity {
         super.onDestroy();
         //save toggle state to shared preferences
         preferenceManager.setValue("eatToggleState", eatToggleStateList);
+        preferenceManager.setValue("eatBudget", eatBudgetRange);
     }
 
 }
