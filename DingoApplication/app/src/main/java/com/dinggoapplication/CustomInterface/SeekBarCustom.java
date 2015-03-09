@@ -2,6 +2,8 @@ package com.dinggoapplication.CustomInterface;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
@@ -23,9 +25,20 @@ public class SeekBarCustom extends SeekBar {
 
     @Override
     protected synchronized void onDraw(Canvas canvas) {
-        int thumb_x = (this.getProgress()/this.getMax()) * this.getWidth();
-        int middle = this.getHeight()/2;
-        canvas.drawText("Test", thumb_x,middle, null);
+
+        String text = Integer.toString(this.getProgress()) + " KM";
+
+        Paint paint = new Paint();
+        paint.setColor(Color.GRAY);
+        paint.setTextSize(40);
+        paint.setStyle(Paint.Style.FILL);
+
+        int thumb_x = (int) (((double)this.getProgress()/this.getMax()) * (double)this.getWidth() - 20.0);
+        int middle = (this.getHeight()/2) - 80;
+
         super.onDraw(canvas);
+
+        canvas.drawText(text, thumb_x, middle, paint);
+
     }
 }

@@ -112,10 +112,10 @@
         android:layout_below="@id/alertRadioGroup"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="30dp"
         android:textSize="20dp"/>
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/proximityContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
@@ -142,20 +142,22 @@
             android:gravity="center"
             android:text="150 km" />
 
-        <com.dinggoapplication.CustomInterface.SeekBarCustom android:id="@+id/seekBarProximity"
+        <SeekBar android:id="@+id/seekBarProximity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/maxValue"
             android:layout_toRightOf="@id/minValue"/>
 
-        <TextView
-            android:id="@+id/curentValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/seekBarProximity"
-            android:gravity="center"
-            android:text="20 km"/>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/currentValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/proximityContainer"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:text=""/>
 
     <View android:id="@+id/separator5"
         android:layout_height="1px"
@@ -163,6 +165,6 @@
         android:background="#90909090"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/seekBarProximity" />
+        android:layout_below="@+id/proximityContainer" />
 
 </RelativeLayout>
