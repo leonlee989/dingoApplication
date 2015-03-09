@@ -118,7 +118,7 @@ public class CustomerDealDetailsActivity extends Activity {
             map.setMyLocationEnabled(true);
 
             GoogleMapOptions options = new GoogleMapOptions();
-            options.mapType(GoogleMap.MAP_TYPE_NORMAL);
+            options.mapType(GoogleMap.MAP_TYPE_NORMAL).liteMode(true);
 
             // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
             try {
