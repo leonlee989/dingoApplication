@@ -181,21 +181,21 @@ public class Bootstrap {
 
         String merchantName_gold_thai = "Select Group Limited";
 
-        String merchantDescription_gold_thai = "Gold Thai @ Senoko Crescent offers a bountiful mix " +
+        String merchantDescription_gold_thai = "Gold Thai @ Thanon Witthayu offers a bountiful mix " +
                 "of authentic Thai cuisine, with the plethora of dips and pastes used in our cuisine " +
                 "and level of spiciness adjusted to local palates";
 
         String merchantType_gold_thai = "Thai Food";
 
-        Address address_gold_thai = new Address("1", "Senoko Crescent", "", "758282");
+        Address address_gold_thai = new Address("", "Thanon Witthayu", ", Khwaeng Lumphini, Khet Pathum Wan, Krung Thep Maha Nakhon", "10330");
 
         int contactNumber_gold_thai = 61234567;
 
         String website_gold_thai = "www.goldthai.com.sg";
-        LatLng latLng_gold_thai = new LatLng(1.4649, 103.8066);
+        LatLng latLng_gold_thai = new LatLng(13.7475, 100.5472);
         //LatLng latLng_gold_thai = ApplicationFactory.getLocationFromAddress(address_gold_thai.toString(), mContext);
         if (latLng_gold_thai == null) {
-            latLng_gold_thai = new LatLng(1.3000, 103.8000);
+            latLng_gold_thai = new LatLng(13.7475, 100.5472);
         }
 
         Merchant gold_thai = new Merchant(merchantId_gold_thai, password_gold_thai, image_gold_thai,
@@ -216,8 +216,55 @@ public class Bootstrap {
                 gold_thai, true, 40);
         Constants.dealManager.addDeal(deal2_gold_thai);
 
+        // TODO: Merchant details for Lerk Thai
+        String merchantId_lerk_thai = "merchant05";
+
+        String password_lerk_thai = "123";
+
+        Bitmap image_lerk_thai = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.lerkthai);
+
+        String company_lerk_thai = "Lerk Thai";
+
+        String merchantName_lerk_thai = "Select Group Limited";
+
+        String merchantDescription_lerk_thai = "Gold Thai @ Witthayu Road offers a bountiful mix " +
+                "of authentic Thai cuisine, with the plethora of dips and pastes used in our cuisine " +
+                "and level of spiciness adjusted to local palates";
+
+        String merchantType_lerk_thai = "Thai Food";
+
+        Address address_lerk_thai = new Address("1", "Witthayu Road", " Khwaeng Lumphini Krung Thep Maha Nakhon", "758282");
+
+        int contactNumber_lerk_thai = 61234567;
+
+        String website_lerk_thai = "www.lerkthai.com.sg";
+        LatLng latLng_lerk_thai = new LatLng(13.7480911, 100.54860510000003);
+        //LatLng latLng_lerk_thai = ApplicationFactory.getLocationFromAddress(address_lerk_thai.toString(), mContext);
+        if (latLng_lerk_thai == null) {
+            latLng_lerk_thai = new LatLng(13.7475, 100.5472);
+        }
+
+        Merchant lerk_thai = new Merchant(merchantId_lerk_thai, password_lerk_thai, image_lerk_thai,
+                company_lerk_thai, merchantName_lerk_thai, merchantDescription_lerk_thai,
+                merchantType_lerk_thai, address_lerk_thai, contactNumber_lerk_thai,
+                website_lerk_thai, latLng_lerk_thai);
+
+        Constants.merchantManager.addMerchant(lerk_thai);
+
+        // Deals available for Gold Thai Restaurant
+        Bitmap coverImage_lerk_thai = BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.covergoldthai);
+        TierDiscount deal1_lerk_thai = new TierDiscount("LT1", coverImage_lerk_thai,
+                lerk_thai, true, 100, 50);
+        Constants.dealManager.addDeal(deal1_lerk_thai);
+
+        PercentageDiscount deal2_lerk_thai = new PercentageDiscount("LT2", coverImage_lerk_thai,
+                lerk_thai, true, 20);
+        Constants.dealManager.addDeal(deal2_lerk_thai);
+
         // TODO: Merchant details for Griddy & Souffles
-        String merchantId_griddy_souffles = "merchant05";
+        String merchantId_griddy_souffles = "merchant06";
 
         String password_griddy_souffles = "123";
 

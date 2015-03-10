@@ -9,8 +9,8 @@ android {
         applicationId "com.dinggoapplication"
         minSdkVersion 17
         targetSdkVersion 21
-        versionCode 8
-        versionName "1.8"
+        versionCode 9
+        versionName "1.9"
     }
     buildTypes {
         release {

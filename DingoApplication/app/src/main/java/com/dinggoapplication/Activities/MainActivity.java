@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                     // Todo: Predefine MerchantZ
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("merchantId", "merchant03");
+                    editor.putString("merchantId", "merchant04");
                     editor.commit();
 
                     // Start activity for merchant view

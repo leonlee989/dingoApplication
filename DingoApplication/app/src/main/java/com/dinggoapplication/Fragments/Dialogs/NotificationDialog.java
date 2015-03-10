@@ -63,7 +63,7 @@ public class NotificationDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         // Set the builder contents
-        builder.setMessage("You’ve got a Ding from Four Seasons Chicken!!")
+        builder.setMessage("You’ve got a Ding from Gold Thai!!")
                 .setTitle("Notification")
                 .setPositiveButton(R.string.response_yes, response_yes);
 

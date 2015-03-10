@@ -120,7 +120,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            Deal deal = this.dealList.get(position);
+            Deal deal = this.dealList.get((this.dealList.size()-1) - position);
             mListener.onDealFragmentInteraction(deal.getReferenceCode());
             //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
 

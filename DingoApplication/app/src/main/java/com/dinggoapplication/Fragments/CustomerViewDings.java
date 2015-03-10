@@ -72,7 +72,7 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
 
         // ToDo: Retrieve category and value from the settings in Preference Activity set by the customers
         this.dealList = Constants.dealManager
-                .retrieveDealByCategory("Merchant Type", "Western Food");
+                .retrieveDealByCategory("Merchant Type", "Thai Food");
 
         mAdapter = new DingArrayAdapter(getActivity(), dealList);
     }
@@ -134,7 +134,7 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
-            Deal deal = this.dealList.get(position);
+            Deal deal = this.dealList.get((this.dealList.size()-1) - position);
             mListener.onDingsFragmentInteraction(deal.getReferenceCode());
 
             Intent intent = new Intent(getActivity().getBaseContext(), CustomerDealDetailsActivity.class);
