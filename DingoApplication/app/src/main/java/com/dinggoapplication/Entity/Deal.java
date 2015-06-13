@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) Technify Pte Ltd - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+ * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+ */
 
 package com.dinggoapplication.Entity;
 
@@ -44,6 +51,7 @@ public abstract class Deal {
      */
     Merchant merchant;
 
+    
     /**
      * Constructor to initialize a Deal Object with the following parameters:
      * @param referenceCode
