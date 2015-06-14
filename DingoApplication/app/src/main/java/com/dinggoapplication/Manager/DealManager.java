@@ -15,25 +15,25 @@ import com.dinggoapplication.ErrorHandling.DealNotFoundException;
 import java.util.ArrayList;
 
 /**
- * Deal Manager
+ * Deal Manager class that handles all deals in the application
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by Leon on 25/2/2015.
  */
 public class DealManager {
-    /**
-     * A list of deal available
-     */
+    /** A list of deal available */
     ArrayList<Deal> dealList;
 
     /**
      * Default constructor to initialize DealManager
      */
     public DealManager() {
-        dealList = new ArrayList<Deal>();
+        dealList = new ArrayList<>();
     }
 
     /**
      * Retrieve the whole list of deals
-     * @return
+     * @return  A list deals available in the system
      */
     public ArrayList<Deal> getDealList() {
         return this.dealList;
@@ -41,8 +41,8 @@ public class DealManager {
 
     /**
      * Get a single deal by the position of the array
-     * @param index
-     * @return
+     * @param index     The position of the deal in the list
+     * @return          Deal object that contains all the details of the deal
      */
     public Deal getDeal(int index) {
         return dealList.get(index);
@@ -50,8 +50,8 @@ public class DealManager {
 
     /**
      * Get a single deal by reference code
-     * @param id
-     * @return
+     * @param id    Reference code of the deal
+     * @return      Deal object that contains all the details of the deal
      */
     public Deal getDeal(String id) {
         for(int i=0; i < this.dealList.size(); i++) {
@@ -66,7 +66,7 @@ public class DealManager {
 
     /**
      * Set the deals for the manager
-     * @param dealList
+     * @param dealList  A new of deals
      */
     public void setDealList(ArrayList<Deal> dealList) {
         this.dealList = dealList;
@@ -74,7 +74,7 @@ public class DealManager {
 
     /**
      * Add deals to the manager
-     * @param deal
+     * @param deal  Add a new deal into the list
      */
     public void addDeal(Deal deal) {
         dealList.add(deal);
@@ -82,7 +82,7 @@ public class DealManager {
 
     /**
      * Remove a deal from deal manager
-     * @param removeDeal
+     * @param removeDeal    Remove a particular deal from the list
      * @throws DealNotFoundException
      */
     public void removeDeal(Deal removeDeal) throws DealNotFoundException {
@@ -102,12 +102,12 @@ public class DealManager {
     }
 
     /**
-     * Retrieve list of deals offered by provided merchant id
-     * @param merchantId
-     * @return
+     * Retrieve list of deals offered by the respective merchant
+     * @param merchantId    ID of the merchant who offers the deal
+     * @return              The list of deals offered by the merchants
      */
     public ArrayList<Deal> retrieveDealByMerchant(String merchantId) {
-        ArrayList<Deal> merchantList = new ArrayList<Deal>();
+        ArrayList<Deal> merchantList = new ArrayList<>();
 
         for (Deal deal : this.dealList) {
             Merchant merchant = deal.getMerchant();
@@ -122,12 +122,12 @@ public class DealManager {
 
     /**
      * Retrieve list of deals by providing a specific category with a value
-     * @param category
-     * @param value
-     * @return
+     * @param category  Category of the deal
+     * @param value     Value to retrieve deal by the category given
+     * @return          A list of deals filtered by category
      */
     public ArrayList<Deal> retrieveDealByCategory(String category, String value) {
-        ArrayList<Deal> merchantList = new ArrayList<Deal>();
+        ArrayList<Deal> merchantList = new ArrayList<>();
 
         if (category.equalsIgnoreCase("Merchant Type")) {
             for (Deal deal : this.dealList) {

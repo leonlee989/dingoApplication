@@ -15,24 +15,24 @@ import java.util.ArrayList;
 
 /**
  * Manager object to handle all merchant in the system
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by Leon on 23/2/2015.
  */
 public class MerchantManager {
-    /**
-     * List of merchant available in the system
-     */
+    /** List of merchant available in the system */
     ArrayList<Merchant> merchantList;
 
     /**
      * Default constructor to initialize MerchantManager Object
      */
     public MerchantManager() {
-        this.merchantList = new ArrayList<Merchant>();
+        this.merchantList = new ArrayList<>();
     }
 
     /**
      * Constructor to initialize MerchantManager Object with the following parameters
-     * @param merchantList
+     * @param merchantList  A list of merchant available in the system
      */
     public MerchantManager(ArrayList<Merchant> merchantList) {
         this.merchantList = merchantList;
@@ -40,7 +40,7 @@ public class MerchantManager {
 
     /**
      * Get the list of merchant
-     * @return
+     * @return  The list of merchant available in the class
      */
     public ArrayList<Merchant> getMerchantList() {
         return this.merchantList;
@@ -48,8 +48,8 @@ public class MerchantManager {
 
     /**
      * Retrieve Merchant Object by Index
-     * @param index
-     * @return merchant
+     * @param index         Position of the merchant in the list
+     * @return merchant     Merchant object that contains all details about the merchant
      */
     public Merchant getMerchant(int index) {
         return this.merchantList.get(index);
@@ -57,8 +57,8 @@ public class MerchantManager {
 
     /**
      * Retrieve merchant by merchantId
-     * @param merchantId
-     * @return
+     * @param merchantId    ID of a particular merchant
+     * @return              Merchant object with the ID
      */
     public Merchant getMerchant(String merchantId) {
         for (Merchant merchant:merchantList) {
@@ -72,7 +72,7 @@ public class MerchantManager {
 
     /**
      * Set the list of merchant
-     * @param merchantList
+     * @param merchantList  A new list of merchant to be replaced
      */
     public void setMerchantList(ArrayList<Merchant> merchantList){
         this.merchantList = merchantList;
@@ -80,7 +80,7 @@ public class MerchantManager {
 
     /**
      * Add a new merchant into the list
-     * @param merchant
+     * @param merchant  New merchant object to be added into the list
      */
     public void addMerchant(Merchant merchant) {
         this.merchantList.add(merchant);
@@ -88,7 +88,7 @@ public class MerchantManager {
 
     /**
      * Remove merchant with the merchant ID as the parameter
-     * @param merchantId
+     * @param merchantId    ID of the merchant to be removed
      * @throws MerchantNotFoundException
      */
     public void removeMerchant(String merchantId) throws MerchantNotFoundException {
@@ -99,6 +99,8 @@ public class MerchantManager {
             Merchant merchant = merchantList.get(i);
             if (merchant.getMerchantId().equalsIgnoreCase(merchantId)) {
                 merchantList.remove(i);
+
+                removedMerchant = true;
             }
         }
 
@@ -109,7 +111,7 @@ public class MerchantManager {
 
     /**
      * Remove merchant with the merchant object as a parameter
-     * @param removeMerchant
+     * @param removeMerchant    Merchant object to be removed
      * @throws MerchantNotFoundException
      */
     public void removeMerchant(Merchant removeMerchant) throws MerchantNotFoundException {
@@ -119,6 +121,8 @@ public class MerchantManager {
             Merchant merchant = merchantList.get(i);
             if (merchant.getMerchantId().equalsIgnoreCase(removeMerchant.getMerchantId())) {
                 merchantList.remove(i);
+
+                removedMerchant = true;
             }
         }
 

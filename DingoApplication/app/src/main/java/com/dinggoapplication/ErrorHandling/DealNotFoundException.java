@@ -11,14 +11,18 @@ package com.dinggoapplication.ErrorHandling;
 import com.dinggoapplication.Entity.Deal;
 
 /**
+ * Exception class to handle deals objects
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by Leon on 23/2/2015.
  */
 public class DealNotFoundException extends Exception {
+    /** Handle exception for a particular deal */
     Deal deal;
 
     /**
      * Constructor to initialize an Exception
-     * @param detailMessage
+     * @param detailMessage     Message to display as an exception
      */
     public DealNotFoundException(String detailMessage) {
         super(detailMessage);
@@ -27,8 +31,8 @@ public class DealNotFoundException extends Exception {
 
     /**
      * Constructor to initialize an Exception
-     * @param detailMessage
-     * @param deal
+     * @param detailMessage     Message to display as an exception
+     * @param deal              A particular deal to handle for exceptions
      */
     public DealNotFoundException(String detailMessage, Deal deal) {
         super(detailMessage);
@@ -37,9 +41,9 @@ public class DealNotFoundException extends Exception {
 
     /**
      * Constructor to initialize an Exception
-     * @param detailMessage
-     * @param throwable
-     * @param deal
+     * @param detailMessage     Message to display as an exception
+     * @param throwable         Throwable object for stack flow
+     * @param deal              A particular deal to handle for exceptions
      */
     public DealNotFoundException(String detailMessage, Throwable throwable, Deal deal) {
         super(detailMessage, throwable);
@@ -48,8 +52,8 @@ public class DealNotFoundException extends Exception {
 
     /**
      * Constructor to initialize an Exception
-     * @param throwable
-     * @param deal
+     * @param throwable     Throwable object for stack flow
+     * @param deal          A particular deal to handle for exceptions
      */
     public DealNotFoundException(Throwable throwable, Deal deal) {
         super(throwable);
@@ -58,18 +62,29 @@ public class DealNotFoundException extends Exception {
 
     /**
      * Constructor to initialize an Exception
-     * @param deal
+     * @param deal  A particular deal to handle for exceptions
      */
     public DealNotFoundException(Deal deal) {
         super();
         this.deal = deal;
     }
 
+    /**
+     * Returns the detail message which was provided when this
+     * {@code Throwable} was created. Returns {@code null} if no message was
+     * provided at creation time. Subclasses may override this method to return
+     * localized text for the message. Android returns the regular detail message.
+     */
     @Override
     public String getLocalizedMessage() {
         return super.getLocalizedMessage() + ": " + deal.getReferenceCode() + " cannot be found!";
     }
 
+    /**
+     * Returns the detail message which was provided when this
+     * {@code Throwable} was created. Returns {@code null} if no message was
+     * provided at creation time.
+     */
     @Override
     public String getMessage() {
         return super.getMessage() + ": " + deal.getReferenceCode() + " cannot be found!";
