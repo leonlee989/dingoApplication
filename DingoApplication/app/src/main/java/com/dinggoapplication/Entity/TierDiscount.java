@@ -13,27 +13,25 @@ import android.graphics.Bitmap;
 import java.util.Date;
 
 /**
- * Created by Leon on 17/2/2015.
  * Tiered Discount Object - Certain amount off the spent amount for a certain tiered amount
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
+ * Created by Leon on 17/2/2015.
  */
 public class TierDiscount extends Deal {
 
-    /**
-     *`Amount required to spent to be entitled to the discount
-     */
-    double tierAmount;
-    /**
-     * Discount amount if entitlement is valid
-     */
-    double discountAmount;
+    /** Amount required to spent to be entitled to the discount */
+    private double tierAmount;
+    /** Discount amount if entitlement is valid */
+    private double discountAmount;
 
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param tierAmount
-     * @param discountAmount
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
+     * @param tierAmount        The amount customer have to spend
+     * @param discountAmount    The amount discounted according to the tier amount
      */
     public TierDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, double tierAmount, double discountAmount) {
         super(referenceCode, coverImage, merchant);
@@ -43,12 +41,12 @@ public class TierDiscount extends Deal {
 
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param createdAt
-     * @param tierAmount
-     * @param discountAmount
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
+     * @param createdAt         Date and time the deal is created
+     * @param tierAmount        The amount customer have to spend
+     * @param discountAmount    The amount discounted according to the tier amount
      */
     public TierDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt,
                         double tierAmount, double discountAmount) {
@@ -60,12 +58,12 @@ public class TierDiscount extends Deal {
 
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param activated
-     * @param tierAmount
-     * @param discountAmount
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
+     * @param activated         Is the deal activated
+     * @param tierAmount        The amount customer have to spend
+     * @param discountAmount    The amount discounted according to the tier amount
      */
     public TierDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, boolean activated,
                         double tierAmount, double discountAmount) {
@@ -77,13 +75,13 @@ public class TierDiscount extends Deal {
 
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param createdAt
-     * @param activated
-     * @param tierAmount
-     * @param discountAmount
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
+     * @param createdAt         Date and time the deal is created
+     * @param activated         Is the deal activated
+     * @param tierAmount        The amount customer have to spend
+     * @param discountAmount    The amount discounted according to the tier amount
      */
     public TierDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, boolean activated,
                         double tierAmount, double discountAmount) {
@@ -95,13 +93,13 @@ public class TierDiscount extends Deal {
 
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param activatedDate
-     * @param closureDate
-     * @param tierAmount
-     * @param discountAmount
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
+     * @param activatedDate     Date and time the deal is activated
+     * @param closureDate       Date and time the deal is closed
+     * @param tierAmount        The amount customer have to spend
+     * @param discountAmount    The amount discounted according to the tier amount
      */
     public TierDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date activatedDate, Date closureDate,
                         double tierAmount, double discountAmount) {
@@ -113,14 +111,14 @@ public class TierDiscount extends Deal {
 
     /**
      * Constructor to initialize a TierDiscount Object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param createdAt
-     * @param activatedDate
-     * @param closureDate
-     * @param tierAmount
-     * @param discountAmount
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
+     * @param createdAt         Date and time the deal is created
+     * @param activatedDate     Date and time the deal is activated
+     * @param closureDate       Date and time the deal is closed
+     * @param tierAmount        The amount customer have to spend
+     * @param discountAmount    The amount discounted according to the tier amount
      */
     public TierDiscount(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, Date activatedDate, Date closureDate,
                         double tierAmount, double discountAmount) {
@@ -132,7 +130,7 @@ public class TierDiscount extends Deal {
 
     /**
      * Get tiered amount for the deal
-     * @return tierAmount
+     * @return Double value that contains the tier amount
      */
     public double getTierAmount() {
         return this.tierAmount;
@@ -140,7 +138,7 @@ public class TierDiscount extends Deal {
 
     /**
      * Set tiered amount for the deal
-     * @param tierAmount
+     * @param tierAmount    The amount customer have to spend
      */
     public void setTierAmount(double tierAmount) {
         this.tierAmount = tierAmount;
@@ -148,7 +146,7 @@ public class TierDiscount extends Deal {
 
     /**
      *  Get discount price for the deal
-     * @return discountAmount
+     * @return Double value that contains the discount amount
      */
     public double getDiscountAmount() {
         return this.discountAmount;
@@ -156,12 +154,18 @@ public class TierDiscount extends Deal {
 
     /**
      * Set discount price for the deal
-     * @param discountAmount
+     * @param discountAmount    The amount discounted according to the tier amount
      */
     public void setDiscountAmount(double discountAmount) {
         this.discountAmount = discountAmount;
     }
 
+    /**
+     * Calculate the discounted price
+     *
+     * @param amountSpent Amount spent on restaurant
+     * @return Price after discount
+     */
     @Override
     public double afterDiscount(double amountSpent) {
         if (amountSpent >= tierAmount) {
@@ -171,6 +175,11 @@ public class TierDiscount extends Deal {
         }
     }
 
+    /**
+     * Formulate a string pattern for the deal
+     *
+     * @return String value that contain a summary about the deal
+     */
     @Override
     public String toString() {
         return "$" + (long) this.discountAmount + " off $" + (long) this.tierAmount + " spent";

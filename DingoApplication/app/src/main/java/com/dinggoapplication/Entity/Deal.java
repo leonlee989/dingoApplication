@@ -13,24 +13,26 @@ import android.graphics.Bitmap;
 import java.util.Date;
 
 /**
- * Created by Leon on 16/2/2015.
  * Abstract class to hold all the different type of deals
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
+ * Created by Leon on 16/2/2015.
  */
 public abstract class Deal {
     /** Reference code to a particular deal */
-    String referenceCode;
+    private String referenceCode;
     /** Cover image for the merchant products */
-    Bitmap coverImage;
+    private Bitmap coverImage;
     /** Boolean to determine whether the deal is activated or not */
-    boolean activated;
+    private boolean activated;
     /** Date of activation */
-    Date activatedDate;
+    private Date activatedDate;
     /** Date of deactivation */
-    Date closureDate;
+    private Date closureDate;
     /** Deal the deal is created by restaurant*/
-    Date createdAt;
+    private Date createdAt;
     /** Merchant that is involve in the deal */
-    Merchant merchant;
+    private Merchant merchant;
     
     /**
      * Constructor to initialize a Deal Object with the following parameters:

@@ -10,20 +10,26 @@ package com.dinggoapplication.Entity;
 
 /**
  * Address Object that contains the address information for a restaurant
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by Leon on 21/2/2015.
  */
 public class Address {
-    String houseNumber;
-    String streetName;
-    String unitNumber;
-    String postalCode;
+    /** Company's house number */
+    private String houseNumber;
+    /** Street name where the company is located */
+    private String streetName;
+    /** Company's unit address */
+    private String unitNumber;
+    /** Company's postal code */
+    private String postalCode;
 
     /**
      * Constructor that initialize Address Object with the following parameters:
-     * @param houseNumber
-     * @param streetName
-     * @param unitNumber
-     * @param postalCode
+     * @param houseNumber   Company's house number
+     * @param streetName    Street name where the company is located
+     * @param unitNumber    Company's unit address
+     * @param postalCode    Company's postal code
      */
     public Address(String houseNumber, String streetName, String unitNumber, String postalCode) {
         this.houseNumber = houseNumber;
@@ -34,7 +40,7 @@ public class Address {
 
     /**
      * Get house number for the address
-     * @return houseNumber
+     * @return String that contains the house number of the address
      */
     public String getHouseNumber() {
         return this.houseNumber;
@@ -42,7 +48,7 @@ public class Address {
 
     /**
      * Set house number for the address
-     * @param houseNumber
+     * @param houseNumber   String value that contains the new house number of the address
      */
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
@@ -50,7 +56,7 @@ public class Address {
 
     /**
      * Get street number for the address
-     * @return streetName
+     * @return streetName   String value that contains the street name of the address
      */
     public String getStreetName() {
         return streetName;
@@ -58,7 +64,7 @@ public class Address {
 
     /**
      * Set street number for the address
-     * @param streetName
+     * @param streetName    String value that contains the new street name where the company is located
      */
     public void setStreetName(String streetName) {
         this.streetName = streetName;
@@ -66,7 +72,7 @@ public class Address {
 
     /**
      * Get unit number for the address
-     * @return unitNumber
+     * @return unitNumber   String value that contains the unit number of the address
      */
     public String getUnitNumber() {
         return unitNumber;
@@ -74,7 +80,7 @@ public class Address {
 
     /**
      * Set unit number for the address
-     * @param unitNumber
+     * @param unitNumber    String value that contains the new unit number of the address
      */
     public void setUnitNumber(String unitNumber) {
         this.unitNumber = unitNumber;
@@ -82,7 +88,7 @@ public class Address {
 
     /**
      * Get postal code for the address
-     * @return postalCode
+     * @return postalCode   String value that contains the postal code of the address
      */
     public String getPostalCode() {
         return this.postalCode;
@@ -90,15 +96,18 @@ public class Address {
 
     /**
      * Set postal code for the address
-     * @param postalCode
+     * @param postalCode    String value that contains the new postal code of the address
      */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
+    /**
+     * Format Address object into string value to display a summary of the address
+     * @return  String value that contains a summary of the address
+     */
     public String toString() {
         return this.houseNumber + " " + this.streetName + " " + this.unitNumber + " Singapore " +
                 this.postalCode;
     }
-
 }
