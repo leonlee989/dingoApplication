@@ -11,19 +11,31 @@ package com.dinggoapplication;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
+ * Application class that customize android application class to cater for DingGo functionality
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by siungee on 25/02/15.
  */
-
 public class Application extends android.app.Application {
 
+    /**
+     * Called when the application is starting, before any activity, service,
+     * or receiver objects (excluding content providers) have been created.
+     * Implementations should be as quick as possible (for example using
+     * lazy initialization of state) since the time spent in this function
+     * directly impacts the performance of starting the first activity,
+     * service, or receiver in a process.
+     * If you override this method, be sure to call super.onCreate().
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         Bootstrap initialization = new Bootstrap(this);
+        initialization.set();
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-            .setDefaultFontPath("fonts/Nexa Light.otf")
-            .setFontAttrId(com.dinggoapplication.R.attr.fontPath)
-            .build()
+                        .setDefaultFontPath("fonts/Nexa Light.otf")
+                        .setFontAttrId(com.dinggoapplication.R.attr.fontPath)
+                        .build()
         );
     }
 }

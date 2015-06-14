@@ -16,28 +16,42 @@ import com.dinggoapplication.Entity.Address;
 import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.Entity.PercentageDiscount;
 import com.dinggoapplication.Entity.TierDiscount;
+import com.dinggoapplication.Manager.PreferencesManager;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
+ * Bootstrap class to initialize all entity and manager class
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by Leon on 23/2/2015.
  */
 public class Bootstrap {
+    /** Status of bootstrapping */
     static boolean completed = false;
-    Context mContext;
+    /** Application context */
+    private Context mContext;
 
+    /**
+     * Constructor for Bootstrap class with the following parameters
+     * @param context   Application context
+     */
     public Bootstrap(Context context) {
         this.mContext = context;
+    }
 
+    /**
+     * Trigger method for bootstrapping
+     */
+    public void set() {
         if (!completed) {
-            set();
+            initializeEntity();
             completed = true;
         }
     }
 
-    public void set() {
-        initializeEntity();
-    }
-
+    /**
+     * Method initialize all entity and manager classes with dummy data for testing purpose
+     */
     public void initializeEntity() {
 
         // TODO: Merchant details for Oriental Garden
@@ -314,7 +328,6 @@ public class Bootstrap {
                 griddy_souffles, true, 10, 50);
         Constants.dealManager.addDeal(deal1_griddy_souffles);
 
-        Constants.preferencesManager.initializeInstance(mContext);
-
+        PreferencesManager.initializeInstance(mContext);
     }
 }

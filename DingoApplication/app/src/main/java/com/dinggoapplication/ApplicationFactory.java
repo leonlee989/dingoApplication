@@ -11,8 +11,6 @@ package com.dinggoapplication;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -20,14 +18,23 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Factory class that contains global methods that are used across the whole application
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by Leon on 26/2/2015.
  */
 public class ApplicationFactory {
 
+    /**
+     * Method to retrieve the latitude and longitude of a location according to the address provided
+     * @param strAddress    Address of the location
+     * @param context       Application context
+     * @return              LatLng object that contain the latitude and longitude of the location
+     */
     public static LatLng getLocationFromAddress(String strAddress, Context context) {
         Geocoder geocoder = new Geocoder(context);
-        List<Address> address = null;
         LatLng latLng = null;
+        List<Address> address;
 
         try {
             address = geocoder.getFromLocationName(strAddress, 1);
