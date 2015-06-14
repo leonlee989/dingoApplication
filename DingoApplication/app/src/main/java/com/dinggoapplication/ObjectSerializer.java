@@ -16,13 +16,20 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by siungee on 06/03/15.
  */
-
 public class ObjectSerializer {
 
     //private static final Log log = LogManager.getLogger(ObjectSerializer.class);
 
+    /**
+     * Method to encode a serializable object into byte array in string format
+     * @param obj   Serializable object to be encoded into byte array in string format
+     * @return      String value that contains byte array of the serializable object
+     * @throws IOException
+     */
     public static String serialize(Serializable obj) throws IOException {
         if (obj == null) return "";
         try {
@@ -36,6 +43,12 @@ public class ObjectSerializer {
         }
     }
 
+    /**
+     * Method to deserialize a string formatted byte array into an object
+     * @param str   String value that contain byte array of an object
+     * @return      Object that is being deserialize
+     * @throws IOException
+     */
     public static Object deserialize(String str) throws IOException {
         if (str == null || str.length() == 0) return null;
         try {
@@ -47,17 +60,27 @@ public class ObjectSerializer {
         }
     }
 
+    /**
+     * Encoding a byte array into string format
+     * @param bytes An array of bytes
+     * @return      Byte array in string format
+     */
     public static String encodeBytes(byte[] bytes) {
-        StringBuffer strBuf = new StringBuffer();
+        StringBuilder strBuf = new StringBuilder();
 
-        for (int i = 0; i < bytes.length; i++) {
-            strBuf.append((char) (((bytes[i] >> 4) & 0xF) + ((int) 'a')));
-            strBuf.append((char) (((bytes[i]) & 0xF) + ((int) 'a')));
+        for (byte aByte : bytes) {
+            strBuf.append((char) (((aByte >> 4) & 0xF) + ((int) 'a')));
+            strBuf.append((char) (((aByte) & 0xF) + ((int) 'a')));
         }
 
         return strBuf.toString();
     }
 
+    /**
+     * Decoding a string value into its original array of bytes
+     * @param str   String value that contains byte array
+     * @return      An array of bytes
+     */
     public static byte[] decodeBytes(String str) {
         byte[] bytes = new byte[str.length() / 2];
         for (int i = 0; i < str.length(); i+=2) {
@@ -68,15 +91,28 @@ public class ObjectSerializer {
         }
         return bytes;
     }
-
 }
 
+/**
+ * Class that handles exceptions for ObjectSerializer Class
+ */
 class WrappedIOException {
 
+    /**
+     * Wrap an IOException object with the throwable object provided
+     * @param e     Throwable object that contains the stack flow
+     * @return      IOException object to be thrown
+     */
     public static IOException wrap(final Throwable e) {
         return wrap(e.getMessage(), e);
     }
 
+    /**
+     * Wrap an IOException object with the throwable object and error message provided
+     * @param message   Error message to display
+     * @param e         Throwable object that contains the stack flow
+     * @return          IOException object to be thrown
+     */
     public static IOException wrap(final String message, final Throwable e) {
         final IOException wrappedException = new IOException(message + " [" +
                 e.getMessage() + "]");
