@@ -17,140 +17,90 @@ import java.util.Date;
  * Abstract class to hold all the different type of deals
  */
 public abstract class Deal {
-    /**
-     * Reference code to a particular deal
-     */
+    /** Reference code to a particular deal */
     String referenceCode;
-
-    /**
-     * Cover image for the merchant products
-     */
+    /** Cover image for the merchant products */
     Bitmap coverImage;
-    /**
-     *  Boolean to determine whether the deal is activated or not
-     */
+    /** Boolean to determine whether the deal is activated or not */
     boolean activated;
-
-    /**
-     * Date of activation
-     */
+    /** Date of activation */
     Date activatedDate;
-
-    /**
-     * Date of deactivation
-     */
+    /** Date of deactivation */
     Date closureDate;
-
-    /**
-     * Deal the deal is created by restaurant
-     */
+    /** Deal the deal is created by restaurant*/
     Date createdAt;
-
-    /**
-     * Merchant that is involve in the deal
-     */
+    /** Merchant that is involve in the deal */
     Merchant merchant;
-
     
     /**
      * Constructor to initialize a Deal Object with the following parameters:
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
      */
     public Deal(String referenceCode, Bitmap coverImage, Merchant merchant) {
-        this.referenceCode = referenceCode;
-        this.coverImage = coverImage;
-
-        this.merchant = merchant;
+        this(referenceCode, coverImage, merchant, new Date(), null, null);
         activated = false;
-        createdAt = new Date();
-
-        this.activatedDate = null;
-        this.closureDate = null;
     }
 
     /**
      * Constructor to initialize the object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param createdAt
+     * @param referenceCode Reference code to identify deals
+     * @param coverImage    Cover images for display purpose
+     * @param merchant      Merchant that release the deal
+     * @param createdAt     Date and time the deal is created
      */
     public Deal (String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt) {
-        this.referenceCode = referenceCode;
-        this.coverImage = coverImage;
-        this.merchant = merchant;
+        this(referenceCode, coverImage, merchant, createdAt, null, null);
         this.activated = false;
-        this.createdAt = createdAt;
 
-        this.activatedDate = null;
-        this.closureDate = null;
     }
 
     /**
      * Constructor to initialize Deal object with the following parameters:
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param activated
+     * @param referenceCode Reference code to identify deals
+     * @param coverImage    Cover images for display purpose
+     * @param merchant      Merchant that release the deal
+     * @param activated     Is the deal activated
      */
     public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, boolean activated) {
-        this.referenceCode = referenceCode;
-        this.coverImage = coverImage;
-        this.merchant = merchant;
+        this(referenceCode, coverImage, merchant, new Date(), null, null);
         setActivated(activated);
-        this.createdAt = new Date();
-
-        this.activatedDate = null;
-        this.closureDate = null;
     }
 
     /**
      * Constructor to initialize Deal object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param createdAt
-     * @param activated
+     * @param referenceCode Reference code to identify deals
+     * @param coverImage    Cover images for display purpose
+     * @param merchant      Merchant that release the deal
+     * @param createdAt     Date and time the deal is created
+     * @param activated     Is the deal activated
      */
     public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, boolean activated) {
-        this.referenceCode = referenceCode;
-        this.coverImage = coverImage;
-        this.merchant = merchant;
-        this.createdAt = createdAt;
+        this(referenceCode, coverImage, merchant, createdAt, null, null);
         setActivated(activated);
-
-        this.activatedDate = null;
-        this.closureDate = null;
     }
 
     /**
      * Constructor to initialized Deal object with the following parameters:
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param activatedDate
-     * @param closureDate
+     * @param referenceCode Reference code to identify deals
+     * @param coverImage    Cover images for display purpose
+     * @param merchant      Merchant that release the deal
+     * @param activatedDate Date and time the deal is activated
+     * @param closureDate   Date and time the deal is closed
      */
     public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, Date activatedDate, Date closureDate) {
-        this.referenceCode = referenceCode;
-        this.coverImage = coverImage;
-        this.merchant = merchant;
-        this.createdAt = new Date();
-
-        setActivatedDate(activatedDate);
-        setClosureDate(closureDate);
+        this(referenceCode, coverImage, merchant, new Date(), activatedDate, closureDate);
     }
 
     /**
      * Constructor to initialized Deal object with the following parameters
-     * @param referenceCode
-     * @param coverImage
-     * @param merchant
-     * @param createdAt
-     * @param activatedDate
-     * @param closureDate
+     * @param referenceCode     Reference code to identify deals
+     * @param coverImage        Cover images for display purpose
+     * @param merchant          Merchant that release the deal
+     * @param createdAt         Date and time the deal is created
+     * @param activatedDate     Date and time the deal is activated
+     * @param closureDate       Date and time the deal is closed
      */
     public Deal(String referenceCode, Bitmap coverImage, Merchant merchant, Date createdAt, Date activatedDate, Date closureDate) {
         this.referenceCode = referenceCode;
@@ -164,7 +114,7 @@ public abstract class Deal {
 
     /**
      * Get reference code of the deal
-     * @return  referenceCode
+     * @return  A string value that contains the reference code of the deal
      */
     public String getReferenceCode(){
         return this.referenceCode;
@@ -172,7 +122,7 @@ public abstract class Deal {
 
     /**
      * Set reference code for the deal
-     * @param referenceCode
+     * @param referenceCode A string value that contains the new reference code for the deal
      */
     public void setReferenceCode(String referenceCode) {
         this.referenceCode = referenceCode;
@@ -180,7 +130,7 @@ public abstract class Deal {
 
     /**
      * Get the cover image for the merchant
-     * @return coverImage
+     * @return A bitmap object that contains the image uploaded
      */
     public Bitmap getCoverImage() {
         return coverImage;
@@ -188,7 +138,7 @@ public abstract class Deal {
 
     /**
      * Set the cover image for the merchant
-     * @param coverImage
+     * @param coverImage    Bitmap object that contains the newly uploaded image
      */
     public void setCoverImage(Bitmap coverImage) {
         this.coverImage = coverImage;
@@ -196,7 +146,7 @@ public abstract class Deal {
 
     /**
      * Get the merchant who offers this deal
-     * @return merchant
+     * @return merchant that offers the deal
      */
     public Merchant getMerchant() {
         return  this.merchant;
@@ -204,7 +154,7 @@ public abstract class Deal {
 
     /**
      * Set the merchant who offered this deal
-     * @param merchant
+     * @param merchant  New merchant that offers this deal
      */
     public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
@@ -220,7 +170,7 @@ public abstract class Deal {
 
     /**
      * Activate or deactivate deals
-     * @param activated
+     * @param activated Whether deal is activated or not
      */
     public void setActivated(boolean activated) {
         this.activated = activated;
@@ -252,17 +202,17 @@ public abstract class Deal {
 
     /**
      * Set the activation date for the deal
-     * @param activatedDate
+     * @param activatedDate Date and time the deal is activated
      */
     public void setActivatedDate(Date activatedDate) {
         this.activatedDate = activatedDate;
 
-        Date todayTime = new Date();
-        // Different in today time by milliseconds
-        long diff = this.activatedDate.getTime() - todayTime.getTime();
+        if (activatedDate != null) {
+            Date todayTime = new Date();
+            // Different in today time by milliseconds
+            long diff = this.activatedDate.getTime() - todayTime.getTime();
 
-        if  (diff <= 0) {
-            this.activated = true;
+            this.activated = diff <= 0;
         } else {
             this.activated = false;
         }
@@ -278,27 +228,25 @@ public abstract class Deal {
 
     /**
      * Set the closure date for the deal
-     * @param closureDate
+     * @param closureDate Date and time the deal is closed
      */
     public void setClosureDate(Date closureDate) {
         this.closureDate = closureDate;
 
-        if (activated) {
-            Date todayTime = new Date();
-            // Different in today time by milliseconds
-            long diff = this.closureDate.getTime() - todayTime.getTime();
+        if (closureDate != null) {
+            if (activated) {
+                Date todayTime = new Date();
+                // Different in today time by milliseconds
+                long diff = this.closureDate.getTime() - todayTime.getTime();
 
-            if (diff > 0) {
-                this.activated = true;
-            } else {
-                this.activated = false;
+                this.activated = diff > 0;
             }
         }
     }
 
     /**
      * Get the date of creation for the deal
-     * @return createdAt
+     * @return Date and time the deal is created
      */
     public Date getCreatedAt() {
         return this.createdAt;
@@ -306,21 +254,22 @@ public abstract class Deal {
 
     /**
      * Set the date of creation for the deal
-     * @param createdAt
+     * @param createdAt Set a new date and time the deal is created
      */
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
     /**
      * Calculate the discounted price
-     * @param amountSpent
-     * @return After Discount Price
+     * @param amountSpent   Amount spent on restaurant
+     * @return              Price after discount
      */
     public abstract double afterDiscount(double amountSpent);
 
     /**
      * Formulate a string pattern for the deal
-     * @return String
+     * @return String value that contain a summary about the deal
      */
     public abstract String toString();
 
@@ -328,6 +277,9 @@ public abstract class Deal {
      * Enumerator class for deal type
      */
     public enum DealType {
-        PERCENTAGE_DISCOUNT, TIER_DISCOUNT;
+        /** Discount by percentage */
+        PERCENTAGE_DISCOUNT,
+        /** Discount by the amount user spent for a amount of discount */
+        TIER_DISCOUNT
     }
 }
