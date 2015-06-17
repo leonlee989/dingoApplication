@@ -10,9 +10,9 @@ package com.dinggoapplication.Activities;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -31,8 +31,42 @@ import com.dinggoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+/**
+ * Customer activity that deals with the activities executed in the customer landing page
+ * Inflated layout that displays a menu of options for customer to navigate
+ *
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
+ * @deprecated
+ * Created by Leon on 18/2/2015.
+ */
 public class CustomerActivity extends ListActivity {
 
+    /**
+     * Called when the activity is starting.  This is where most initialization
+     * should go: calling {@link #setContentView(int)} to inflate the
+     * activity's UI, using {@link #findViewById} to programmatically interact
+     * with widgets in the UI, calling
+     * {@link #managedQuery(Uri, String[], String, String[], String)} to retrieve
+     * cursors for data being displayed, etc.
+     * <p/>
+     * <p>You can call {@link #finish} from within this function, in
+     * which case onDestroy() will be immediately called without any of the rest
+     * of the activity lifecycle ({@link #onStart}, {@link #onResume},
+     * {@link #onPause}, etc) executing.
+     * <p/>
+     * <p><em>Derived classes must call through to the super class's
+     * implementation of this method.  If they do not, an exception will be
+     * thrown.</em></p>
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                           previously being shut down then this Bundle contains the data it most
+     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     * @see #onStart
+     * @see #onSaveInstanceState
+     * @see #onRestoreInstanceState
+     * @see #onPostCreate
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +74,11 @@ public class CustomerActivity extends ListActivity {
         // Set up the action bar
         final ActionBar actionBar = getActionBar();
 
-        // Customized title as TextView in the ActionBar
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.actionbar_landing_custom);
+        if (actionBar != null) {
+            // Customized title as TextView in the ActionBar
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            actionBar.setCustomView(R.layout.actionbar_landing_custom);
+        }
 
         // Set image for activity action bar
         ImageView image = (ImageView) findViewById(R.id.actionbar_icon);
@@ -76,8 +112,20 @@ public class CustomerActivity extends ListActivity {
         }
     }
 
+    /**
+     * This method will be called when an item in the list is selected.
+     * Subclasses should override. Subclasses can call
+     * getListView().getItemAtPosition(position) if they need to access the
+     * data associated with the selected item.
+     *
+     * @param l        The ListView where the click happened
+     * @param v        The view that was clicked within the ListView
+     * @param position The position of the view in the list
+     * @param id       The row id of the item that was clicked
+     */
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+
         // Actions for individual actions
         switch (position) {
             case 0:
@@ -97,15 +145,29 @@ public class CustomerActivity extends ListActivity {
      * ArrayAdapter class to display rows of option for customer landing page
      */
     private class CustomerArrayAdapter extends ArrayAdapter<String> {
+        /** Application Context */
         private final Context context;
+        /** Values to display as text on each row in the array adaper */
         private final String[] values;
 
+        /**
+         * Constructor to initialize Array Adapter as a sub class
+         * @param context   Application Context
+         * @param values    A list of values to display
+         */
         public CustomerArrayAdapter(Context context, String[] values) {
             super(context, R.layout.landing_row, values);
             this.context = context;
             this.values = values;
         }
 
+        /**
+         * {@inheritDoc}
+         *
+         * @param position      Position of the row
+         * @param convertView   Layout design for each row
+         * @param parent        Parent of the layout
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context
@@ -151,6 +213,11 @@ public class CustomerActivity extends ListActivity {
         }
     }
 
+
+    /**
+     * Customization for the UI settings
+     * @param newBase New context object for the UI
+     */
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));

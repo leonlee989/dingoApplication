@@ -159,7 +159,12 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      */
     public interface OnDealFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onDealFragmentInteraction(String id);
+
+        /**
+         * This method allows interactions with the activity class who implements this listener by its id
+         * @param id    ID of the fragment to be identify in the activity class
+         */
+        void onDealFragmentInteraction(String id);
     }
     /**
      * Custom ArrayAdapter to display deal details in a list view

@@ -13,6 +13,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -37,18 +38,61 @@ import com.google.android.gms.maps.model.LatLng;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+/**
+ * Activity class that executes activities within the single detail page for deals
+ * <p>
+ * Inflated layout that displays full details on a particular deal
+ *
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
+ * Created by siungee on 20/2/2015.
+ */
 public class CustomerDealDetailsActivity extends Activity {
 
+    /** Element that contains the cover image for the deal */
     ImageView imageView;
+    /** Text view that contains the information about the merchant */
     TextView mCompanyName,mDescriptionTextView, mAddressTextView, mWebAddressTextView, mMobileNumber, dDiscount;
+    /** Object that contains the resolution of the mobile's diaplay */
     DisplayMetrics metrics;
+    /** Merchant object that contains information about the merchant offering the respective deal */
     Merchant merchant;
+    /** Deal object that contains information about the deals */
     Deal deal;
+    /** Element that contains a map view to display the location of the merchant */
     MapView mapView;
+    /** Object /  instance that provide geo services */
     GoogleMap map;
+    /** Discount information of the deal */
     String discount;
+    /** Object that contains the latitude and longitude of the merchant's location */
     LatLng mLatLng;
 
+    /**
+     * Called when the activity is starting.  This is where most initialization
+     * should go: calling {@link #setContentView(int)} to inflate the
+     * activity's UI, using {@link #findViewById} to programmatically interact
+     * with widgets in the UI, calling
+     * {@link #managedQuery(Uri, String[], String, String[], String)} to retrieve
+     * cursors for data being displayed, etc.
+     * <p/>
+     * <p>You can call {@link #finish} from within this function, in
+     * which case onDestroy() will be immediately called without any of the rest
+     * of the activity lifecycle ({@link #onStart}, {@link #onResume},
+     * {@link #onPause}, etc) executing.
+     * <p/>
+     * <p><em>Derived classes must call through to the super class's
+     * implementation of this method.  If they do not, an exception will be
+     * thrown.</em></p>
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                           previously being shut down then this Bundle contains the data it most
+     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     * @see #onStart
+     * @see #onSaveInstanceState
+     * @see #onRestoreInstanceState
+     * @see #onPostCreate
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +101,11 @@ public class CustomerDealDetailsActivity extends Activity {
         // Set up the action bar
         final ActionBar actionBar = getActionBar();
 
-        // Customized title as TextView in the ActionBar
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.actionbar_custom);
+        if (actionBar != null) {
+            // Customized title as TextView in the ActionBar
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            actionBar.setCustomView(R.layout.actionbar_custom);
+        }
 
         TextView title = (TextView) findViewById(R.id.actionbar_home_title);
         title.setText(getResources().getString(R.string.app_name));
@@ -140,6 +186,11 @@ public class CustomerDealDetailsActivity extends Activity {
             map.animateCamera(cameraUpdate);
 
             findViewById(R.id.dingItButton).setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Called when a view has been clicked.
+                 *
+                 * @param v The view that was clicked.
+                 */
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(CustomerDealDetailsActivity.this, CustomerDingedDeal.class);
@@ -154,6 +205,10 @@ public class CustomerDealDetailsActivity extends Activity {
         }
     }
 
+    /**
+     * Customization for the UI settings
+     * @param newBase New context object for the UI
+     */
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));

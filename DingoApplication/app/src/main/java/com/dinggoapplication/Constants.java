@@ -28,8 +28,6 @@ public class Constants {
     public static MerchantManager merchantManager = new MerchantManager();
     /** Deal manager class that handles all deal objects */
     public static DealManager dealManager = new DealManager();
-    /** Preference manager class that manage shared preferences */
-    public static PreferencesManager preferencesManager;
 
     // ToDo: To be removed
     public static boolean newItemAdded = false;

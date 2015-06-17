@@ -48,10 +48,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.CollectionActivity"
-            android:label="@string/collection" >
-        </activity>
-        <activity
             android:name=".Activities.CustomerActivity"
             android:label="@string/title_activity_customer"
             android:screenOrientation="portrait">
