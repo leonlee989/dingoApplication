@@ -40,28 +40,21 @@ import java.util.ArrayList;
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnDealFragmentInteractionListener}
  * interface.
+ *
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
+ * Created by leon on 18/02/15.
  */
 public class CustomerViewAll extends Fragment implements AbsListView.OnItemClickListener {
 
-    /**
-     * Fragment listener for the activity that calls this fragment
-     */
+    /** Fragment listener for the activity that calls this fragment */
     private OnDealFragmentInteractionListener mListener;
 
-    /**
-     * The fragment's ListView/GridView.
-     */
+    /** The fragment's ListView/GridView */
     private AbsListView mListView;
-
-    /**
-     * The Adapter which will be used to populate the ListView/GridView with
-     * Views.
-     */
+    /** The Adapter which will be used to populate the ListView/GridView with Views */
     private ListAdapter mAdapter;
-
-    /**
-     * All available deals in the system
-     */
+    /** All available deals in the system */
     private ArrayList<Deal> dealList;
 
     /**
@@ -70,6 +63,20 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      */
     public CustomerViewAll() {}
 
+    /**
+     * Called to do initial creation of a fragment.  This is called after
+     * {@link #onAttach(Activity)} and before
+     * {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * <p/>
+     * <p>Note that this can be called while the fragment's activity is
+     * still in the process of being created.  As such, you can not rely
+     * on things like the activity's content view hierarchy being initialized
+     * at this point.  If you want to do work once the activity itself is
+     * created, see {@link #onActivityCreated(Bundle)}.
+     *
+     * @param savedInstanceState If the fragment is being re-created from
+     *                           a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,14 +84,31 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     * This is optional, and non-graphical fragments can return null (which
+     * is the default implementation).  This will be called between
+     * {@link #onCreate(Bundle)} and {@link #onActivityCreated(Bundle)}.
+     * <p/>
+     * <p>If you return a View from here, you will later be called in
+     * {@link #onDestroyView} when the view is being released.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate
+     *                           any views in the fragment,
+     * @param container          If non-null, this is the parent view that the fragment's
+     *                           UI should be attached to.  The fragment should not add the view itself,
+     *                           but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     *                           from a previous saved state as given here.
+     * @return Return the View for the fragment's UI, or null.
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.customer_all_tab, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.dealList);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -93,8 +117,10 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     }
 
     /**
-     * Attach to the corresponding activity, for this instance the EatDrinkActivity
-     * @param activity
+     * Called when a fragment is first attached to its activity.
+     * {@link #onCreate(Bundle)} will be called after this.
+     *
+     * @param activity  Activity class that the fragment is attached to
      */
     @Override
     public void onAttach(Activity activity) {
@@ -108,7 +134,8 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     }
 
     /**
-     * Detach from the corresponding activity
+     * Called when the fragment is no longer attached to its activity.  This
+     * is called after {@link #onDestroy()}.
      */
     @Override
     public void onDetach() {
@@ -117,11 +144,17 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     }
 
     /**
-     * On item click to pass intent to the Single Deal Details
-     * @param parent
-     * @param view
-     * @param position
-     * @param id
+     * Callback method to be invoked when an item in this AdapterView has
+     * been clicked.
+     * <p/>
+     * Implementers can call getItemAtPosition(position) if they need
+     * to access the data associated with the selected item.
+     *
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that was clicked.
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -142,6 +175,8 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      * The default content for this Fragment has a TextView that is shown when
      * the list is empty. If you would like to change the text, call this method
      * to supply the text it should use.
+     *
+     * @param emptyText     Text to display if the list is empty
      */
     public void setEmptyText(CharSequence emptyText) {
         View emptyView = mListView.getEmptyView();
@@ -166,13 +201,21 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
          */
         void onDealFragmentInteraction(String id);
     }
+
     /**
      * Custom ArrayAdapter to display deal details in a list view
      */
     private class DealArrayAdapter extends ArrayAdapter<Deal> {
+        /** Context object that stores all the resources */
         private final Context context;
+        /** A list of deals to be displayed onto the list view */
         private final ArrayList<Deal> values;
 
+        /**
+         * Constructor that initialize DealArrayAdapter with the following parameters
+         * @param context   Context object that stores all the resources
+         * @param values    A list of deals to be displayed onto the list view
+         */
         public DealArrayAdapter(Context context, ArrayList<Deal> values) {
             super(context, R.layout.deal_view_row, values);
             this.context = context;
@@ -180,11 +223,12 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         }
 
         /**
+         * {@inheritDoc}
          * Customized view for different deals
-         * @param position
-         * @param convertView
-         * @param parent
-         * @return
+         * @param position      Position/index of the row in the list view
+         * @param convertView   Customized row layout on the list view
+         * @param parent        Parent element of this view
+         * @return              View object that represents one of the row in the list view
          */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

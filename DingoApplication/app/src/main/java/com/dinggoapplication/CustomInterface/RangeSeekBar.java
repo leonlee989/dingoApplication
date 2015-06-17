@@ -8,10 +8,6 @@
 
 package com.dinggoapplication.CustomInterface;
 
-/**
- * Created by siungee on 09/03/15.
- */
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -53,80 +49,131 @@ import java.math.BigDecimal;
  * @author Thomas Barrasso (tbarrasso@sevenplusandroid.org)
  * @author Alex Florescu (florescu@yahoo-inc.com)
  * @author Michael Keppler (bananeweizen@gmx.de)
+ *
+ * Created by siungee on 09/03/15.
  */
 public class RangeSeekBar<T extends Number> extends ImageView {
-
+    /** Default minimum value */
     public static final Integer DEFAULT_MINIMUM = 0;
+    /** Default maximum value */
     public static final Integer DEFAULT_MAXIMUM = 150;
+    /** Height of the RangeSeekBar in density-independent pixel */
     public static final int HEIGHT_IN_DP = 30;
+    /** Padding size for the text in density-independent pixel */
     public static final int TEXT_LATERAL_PADDING_IN_DP = 3;
+    /** Initial padding size for text in density-independent pixel */
     private static final int INITIAL_PADDING_IN_DP = 8;
-    private final int LINE_HEIGHT_IN_DP = 1;
+    /** Paint object for the design of the RangeSeekBar */
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    /** Image for the thumb of the RangeSeekBar */
     private final Bitmap thumbImage = BitmapFactory.decodeResource(getResources(), R.drawable.seek_thumb_normal);
+    /** Image for the thumb of the RangeSeekBar when user pressed on it */
     private final Bitmap thumbPressedImage = BitmapFactory.decodeResource(getResources(),
             R.drawable.seek_thumb_pressed);
+    /** Image for the thumb of the RangeSeekBar when RangeSeekBar is disabled */
     private final Bitmap thumbDisabledImage = BitmapFactory.decodeResource(getResources(),
             R.drawable.seek_thumb_disabled);
+    /** The width of the thumb of the RangeSeekBar */
     private final float thumbWidth = thumbImage.getWidth();
+    /** Half of the width for the thumb of the RangeSeekBar */
     private final float thumbHalfWidth = 0.5f * thumbWidth;
+    /** Half of the height for the thumb of the RangeSeekBar */
     private final float thumbHalfHeight = 0.5f * thumbImage.getHeight();
+
+    /** Initial padding for RangeSeekBar */
     private float INITIAL_PADDING;
+    /** Float value that contains padding for RangeSeekBar */
     private float padding;
+    /** T object that contains the minimum value and maximum value */
     private T absoluteMinValue, absoluteMaxValue;
+    /** Number Type object */
     private NumberType numberType;
+    /** Double values that contain minimum value and maximum value for prim */
     private double absoluteMinValuePrim, absoluteMaxValuePrim;
+    /** Normalized value for minimum value */
     private double normalizedMinValue = 0d;
+    /** Normalized value for maximum value */
     private double normalizedMaxValue = 1d;
+    /** Thumb of the RangeSeekBar that is pressed by user */
     private Thumb pressedThumb = null;
+    /** Boolean on whether user is notified while dragging */
     private boolean notifyWhileDragging = false;
+    /** Event listener upon any event change on RangeSeekBar */
     private OnRangeSeekBarChangeListener<T> listener;
-    /**
-     * Default color of a {@link com.dinggoapplication.CustomInterface.RangeSeekBar}, #FF33B5E5. This is also known as "Ice Cream Sandwich" blue.
-     */
+
+    /** Default color of a {@link com.dinggoapplication.CustomInterface.RangeSeekBar}, #FF33B5E5. This is also known as "Ice Cream Sandwich" blue. */
     public static final int DEFAULT_COLOR = Color.argb(0xFF, 0x33, 0xB5, 0xE5);
-    /**
-     * An invalid pointer id.
-     */
+    /** An invalid pointer id.*/
     public static final int INVALID_POINTER_ID = 255;
 
-    // Localized constants from MotionEvent for compatibility
-    // with API < 8 "Froyo".
+    /** Localized constants from MotionEvent for compatibility
+     * with API < 8 "Froyo".
+     */
     public static final int ACTION_POINTER_UP = 0x6, ACTION_POINTER_INDEX_MASK = 0x0000ff00, ACTION_POINTER_INDEX_SHIFT = 8;
-
+    /** X Coordinates for down motion */
     private float mDownMotionX;
-
+    /** ID for active pointer */
     private int mActivePointerId = INVALID_POINTER_ID;
-
+    /** Integer value that contains scaled touch slop */
     private int mScaledTouchSlop;
-
+    /** Boolean on whether device is dragging */
     private boolean mIsDragging;
-
+    /** Offset for the position of the text */
     private int mTextOffset;
+    /** Text size */
     private int mTextSize;
+    /** Distance to the top of the resolution */
     private int mDistanceToTop;
+    /** RectF value */
     private RectF mRect;
 
+    /** Default text size in density independent pixel */
     private static final int DEFAULT_TEXT_SIZE_IN_DP = 14;
+    /** Default text distance to the button in density independent pixel */
     private static final int DEFAULT_TEXT_DISTANCE_TO_BUTTON_IN_DP = 8;
+    /** Default text distance to the top resolution in density independent pixel */
     private static final int DEFAULT_TEXT_DISTANCE_TO_TOP_IN_DP = 8;
+    /** Boolean value for single thumb */
     private boolean mSingleThumb;
 
+    /**
+     * Constructor to initialize RangeSeekBar with the following parameters
+     * @param context   Application context that stores application resources
+     */
     public RangeSeekBar(Context context) {
         super(context);
         init(context, null);
     }
 
+    /**
+     * Constructor to initialize RangeSeekBar with the following parameters
+     * @param context   Application context that stores application resources
+     * @param attrs     Set of attributes associated with the RangeSeekBar
+     */
     public RangeSeekBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
+    /**
+     * Constructor to initialize RangeSeekBar with the following parameters
+     * @param context   Application context that stores application resources
+     * @param attrs     Set of attributes associated with the RangeSeekBar
+     * @param defStyle  Default style for RangeSeekBar
+     */
     public RangeSeekBar(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs);
     }
 
+    /**
+     * Retrieve the numeric value from the set of attributes in this class
+     * @param a                 Type Array Object
+     * @param attribute         Integer value that contains the T attribute
+     * @param defaultValue      Integer value that contains the default value for T
+     * @return                  T object
+     */
+    @SuppressWarnings("unchecked")
     private T extractNumericValueFromAttributes(TypedArray a, int attribute, int defaultValue) {
         TypedValue tv = a.peekValue(attribute);
         if (tv == null) {
@@ -141,6 +188,11 @@ public class RangeSeekBar<T extends Number> extends ImageView {
         }
     }
 
+    /**
+     * Method to initiate RangeSeekBar Object
+     * @param context   Application context that contains application resources
+     * @param attrs     Set of attributes associated with the RangeSeekBar
+     */
     private void init(Context context, AttributeSet attrs) {
         if (attrs == null) {
             setRangeToDefaultValues();
@@ -162,6 +214,8 @@ public class RangeSeekBar<T extends Number> extends ImageView {
         mTextOffset = this.mTextSize + PixelUtil.dpToPx(context,
                 DEFAULT_TEXT_DISTANCE_TO_BUTTON_IN_DP) + this.mDistanceToTop;
 
+        /* Line height (spacing between lines) for the text in density-independent pixel */
+        int LINE_HEIGHT_IN_DP = 1;
         float lineHeight = PixelUtil.dpToPx(context, LINE_HEIGHT_IN_DP);
         mRect = new RectF(padding,
                 mTextOffset + thumbHalfHeight - lineHeight / 2,
@@ -174,31 +228,48 @@ public class RangeSeekBar<T extends Number> extends ImageView {
         mScaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
+    /**
+     * Set the maximum and minimum value for the RangeSeekBar
+     * @param minValue  T object that contains the minimum value
+     * @param maxValue  T object that contains the maximum value
+     */
     public void setRangeValues(T minValue, T maxValue) {
         this.absoluteMinValue = minValue;
         this.absoluteMaxValue = maxValue;
         setValuePrimAndNumberType();
     }
 
+    /**
+     * only used to set default values when initialised from XML without any values specified
+     */
     @SuppressWarnings("unchecked")
-    // only used to set default values when initialised from XML without any values specified
     private void setRangeToDefaultValues() {
         this.absoluteMinValue = (T) DEFAULT_MINIMUM;
         this.absoluteMaxValue = (T) DEFAULT_MAXIMUM;
         setValuePrimAndNumberType();
     }
 
+    /**
+     * Seeting the minimum and maximum value for prim and the number type
+     */
     private void setValuePrimAndNumberType() {
         absoluteMinValuePrim = absoluteMinValue.doubleValue();
         absoluteMaxValuePrim = absoluteMaxValue.doubleValue();
         numberType = NumberType.fromNumber(absoluteMinValue);
     }
 
+    /**
+     * Reset the selected value for the RangeSeekBar
+     */
     public void resetSelectedValues() {
         setSelectedMinValue(absoluteMinValue);
         setSelectedMaxValue(absoluteMaxValue);
     }
 
+    /**
+     * Whether user is notify when the seekbar is bring dragged
+     * @return  True or false whether user is to be notified
+     */
     public boolean isNotifyWhileDragging() {
         return notifyWhileDragging;
     }
@@ -206,7 +277,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
     /**
      * Should the widget notify the listener callback while the user is still dragging a thumb? Default is false.
      *
-     * @param flag
+     * @param flag  True or false whether user is to be notified
      */
     public void setNotifyWhileDragging(boolean flag) {
         this.notifyWhileDragging = flag;
@@ -287,6 +358,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
 
     /**
      * Handles thumb selection and movement. Notifies listener callback on certain events.
+     * @param event     Event on motion
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -386,7 +458,11 @@ public class RangeSeekBar<T extends Number> extends ImageView {
         return true;
     }
 
-    private final void onSecondaryPointerUp(MotionEvent ev) {
+    /**
+     * Secondary pointer interacting with the RangeSeekBar
+     * @param ev    Event on motions
+     */
+    private void onSecondaryPointerUp(MotionEvent ev) {
         final int pointerIndex = (ev.getAction() & ACTION_POINTER_INDEX_MASK) >> ACTION_POINTER_INDEX_SHIFT;
 
         final int pointerId = ev.getPointerId(pointerIndex);
@@ -400,7 +476,11 @@ public class RangeSeekBar<T extends Number> extends ImageView {
         }
     }
 
-    private final void trackTouchEvent(MotionEvent event) {
+    /**
+     * Event handler for touch gesture
+     * @param event Events on motion
+     */
+    private void trackTouchEvent(MotionEvent event) {
         final int pointerIndex = event.findPointerIndex(mActivePointerId);
         final float x = event.getX(pointerIndex);
 
@@ -627,8 +707,8 @@ public class RangeSeekBar<T extends Number> extends ImageView {
     /**
      * Converts a normalized value to a Number object in the value space between absolute minimum and maximum.
      *
-     * @param normalized
-     * @return
+     * @param normalized    Double value that contains normalize value
+     * @return              T Object
      */
     @SuppressWarnings("unchecked")
     private T normalizedToValue(double normalized) {
@@ -686,24 +766,22 @@ public class RangeSeekBar<T extends Number> extends ImageView {
      */
     public interface OnRangeSeekBarChangeListener<T> {
 
-        public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, T minValue, T maxValue);
+        void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, T minValue, T maxValue);
     }
 
     /**
      * Thumb constants (min and max).
      */
-    private static enum Thumb {
+    private enum Thumb {
         MIN, MAX
     }
-
-    ;
 
     /**
      * Utility enumeration used to convert between Numbers and doubles.
      *
      * @author Stephan Tittel (stephan.tittel@kom.tu-darmstadt.de)
      */
-    private static enum NumberType {
+    private enum NumberType {
         LONG, DOUBLE, INTEGER, FLOAT, SHORT, BYTE, BIG_DECIMAL;
 
         public static <E extends Number> NumberType fromNumber(E value) throws IllegalArgumentException {
@@ -734,22 +812,21 @@ public class RangeSeekBar<T extends Number> extends ImageView {
         public Number toNumber(double value) {
             switch (this) {
                 case LONG:
-                    return Long.valueOf((long) value);
+                    return (long) value;
                 case DOUBLE:
                     return value;
                 case INTEGER:
-                    return Integer.valueOf((int) value);
+                    return (int) value;
                 case FLOAT:
-                    return Float.valueOf((float)value);
+                    return (float) value;
                 case SHORT:
-                    return Short.valueOf((short) value);
+                    return (short) value;
                 case BYTE:
-                    return Byte.valueOf((byte) value);
+                    return (byte) value;
                 case BIG_DECIMAL:
                     return BigDecimal.valueOf(value);
             }
             throw new InstantiationError("can't convert " + this + " to a Number object");
         }
     }
-
 }

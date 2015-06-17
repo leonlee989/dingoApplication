@@ -8,33 +8,51 @@
 
 package com.dinggoapplication.CustomInterface;
 
-/**
- * Created by siungee on 09/03/15.
- */
 import android.content.Context;
 import android.util.DisplayMetrics;
 
 /**
- * Util class for converting between dp, px and other magical pixel units
+ * Utility class for converting between density independent pixel (dp), pixel (px) and other
+ * magical pixel units
+ *
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
+ * Created by siungee on 09/03/15.
  */
 public class PixelUtil {
 
-    private PixelUtil() {
-    }
+    /**
+     * Default constructor to initialize PixelUtil Object
+     */
+    private PixelUtil() {}
 
+    /**
+     * Conversion from density-independent pixel (dp) to physical pixel (px)
+     * @param context   Application context that store application resources
+     * @param dp        Integer value that contains the value for density-independent pixel (dp)
+     * @return          Integer value that contains the converted value for physical pixel (px)
+     */
     public static int dpToPx(Context context, int dp) {
-        int px = Math.round(dp * getPixelScaleFactor(context));
-        return px;
+        return Math.round(dp * getPixelScaleFactor(context));
     }
 
+    /**
+     * Conversion from physical pixel (px) to density-independent pixel (dp)
+     * @param context   Application context that store application resources
+     * @param px        Integer value that contain the value for physical pixel (px)
+     * @return          Integer value that contain the converted value for density-independent pixel
+     */
     public static int pxToDp(Context context, int px) {
-        int dp = Math.round(px / getPixelScaleFactor(context));
-        return dp;
+        return Math.round(px / getPixelScaleFactor(context));
     }
 
+    /**
+     * Retrieve the pixel scale factor based on the resolution of the device
+     * @param context   Application context that store application resources
+     * @return          Float value that contains the pixel scale factor based on the resolution of the device
+     */
     private static float getPixelScaleFactor(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT);
     }
-
 }
