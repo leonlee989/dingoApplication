@@ -1,3 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
 <resources>
-    <string name="app_name">Merchant_DingGoApplication</string>
+
+    <string name="company_name">DingGo</string>
+    <string name="app_name">DingGo Merchant</string>
+
+    <!-- Font -->
+    <string name="font_normal">fonts/Nexa Light.otf</string>
+
+    <!-- Login Page -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="registerText"><u>Register for DingGo</u></string>
+    <string name="facebookText">Connect us with Facebook</string>
+
+    <!-- Merchant landing page -->
+    <string name="merchant_optionText_1">Ding a Deal</string>
+    <string name="merchant_optionText_2">Ongoing Deals</string>
+    <string name="merchant_optionText_3">Ding Statistics</string>
+    <string name="merchant_optionText_4">Settings</string>
+
+    <!-- Merchant: Ding A Deal -->
+    <string name="dingadeal_optionText_1">Everyone</string>
+    <string name="dingadeal_optionText_2">50% Off Total Bill</string>
+    <string name="dingadeal_optionText_3">Max 20 Seats Issuable</string>
+    <string name="dingadeal_optionText_4">End 1h 00m</string>
+    <string name="dingadeal_optionText_5">Use by 2h 00m</string>
+    <string name="dingadeal_optionText_6">Mystery Deal</string>
+
+    <!-- Merchant: Ongoing Deal -->
+    <string name="ongoing_title">Ongoing Deals</string>
+
+    <!-- Dialog String Config -->
+    <string name="response_yes">Yes</string>
+    <string name="response_no">No</string>
+
+    <string name="tieredGive1">$</string>
+    <string name="tieredGive2">\u0020Off $</string>
+    <string name="tieredGive3">\u0020Spent</string>
+    <string name="percentageGive1"></string>
+    <string name="percentageGive2">\u0020% Off Total Bill</string>
+    <string name="maxSeatText1">Max\u0020</string>
+    <string name="maxSeatText2">\u0020Seats Issuable</string>
+    <string name="useByText">Use by\u0020</string>
+    <string name="endText">End\u0020</string>
+
+    <!-- Titles -->
+    <string name="title_activity_merchant">Merchant</string>
+    <string name="title_activity_ding_adeal">Ding A Deal</string>
+    <string name="action_settings">Settings</string>
 </resources>

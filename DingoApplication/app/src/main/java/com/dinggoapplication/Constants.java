@@ -10,7 +10,6 @@ package com.dinggoapplication;
 
 import com.dinggoapplication.Manager.DealManager;
 import com.dinggoapplication.Manager.MerchantManager;
-import com.dinggoapplication.Manager.PreferencesManager;
 
 import java.text.SimpleDateFormat;
 

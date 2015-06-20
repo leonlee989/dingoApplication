@@ -1,7 +1,3 @@
 <component name="CopyrightManager">
-  <settings default="Technify">
-    <module2copyright>
-      <element module="All" copyright="Technify" />
-    </module2copyright>
-  </settings>
+  <settings default="" />
 </component>

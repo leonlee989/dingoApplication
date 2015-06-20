@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
+<resources>
+    <color name="red">#aa131a</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#444444</color>
+    <color name="lightgrey">#8c000000</color>
+    <color name="faintgrey">#50000000</color>
+    <color name="black">#000000</color>
+    <color name="facebook_color">#0152a1</color>
+</resources>

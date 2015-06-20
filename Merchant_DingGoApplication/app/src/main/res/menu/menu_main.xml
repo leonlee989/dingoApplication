@@ -1,0 +1,15 @@
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dinggoapplication.Activities.DingADeal">
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>

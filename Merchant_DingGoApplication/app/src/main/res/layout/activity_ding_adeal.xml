@@ -1,0 +1,51 @@
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.dinggoapplication.Activities.DingADeal">
+
+
+    <TextView android:id="@+id/dingadealtitle"
+        android:text="Ding a Deal to:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"/>
+
+    <View android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:background="#90909090"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/dingadealtitle"
+        android:id="@+id/separator1" />
+
+    <ListView android:id="@+id/dingadeal_List"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/separator1"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/dingGoButton"
+        android:background="@color/red"
+        android:text="Ding Go!"
+        android:padding="15dp"
+        android:onClick="dingGo"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>
