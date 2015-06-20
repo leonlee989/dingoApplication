@@ -82,19 +82,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     Intent intent = new Intent(MainActivity.this, CustomerActivity.class);
                     startActivity(intent);
 
-                } else if (username.equalsIgnoreCase("merchant")) {
-
-                    SharedPreferences sharedPreferences = getSharedPreferences("MerchantData", Context.MODE_PRIVATE);
-
-                    // Todo: Predefine MerchantZ
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("merchantId", "merchant04");
-                    editor.apply();
-
-                    // Start activity for merchant view
-                    Intent intent = new Intent(MainActivity.this, MerchantActivity.class);
-                    startActivity(intent);
-
                 } else {
                     // Toast box appear for invalid input
                     Toast.makeText(MainActivity.this, "Invalid username/password.\nPlease try again",

@@ -14,33 +14,32 @@ import android.app.DialogFragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import com.dinggoapplication.Activities.DingADeal;
-import com.dinggoapplication.Activities.OngoingDeal;
-import com.dinggoapplication.Constants;
-import com.dinggoapplication.Entity.Merchant;
-import com.dinggoapplication.Entity.PercentageDiscount;
 import com.dinggoapplication.R;
 
 /**
+ * Fragment Dialog class that executes activities with the dialog that display notifications
+ * <p>
+ * Inflated fragment that show notification in the dialog
+ *
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
  * Created by Leon on 4/3/2015.
  */
 public class NotificationDialog extends DialogFragment {
+    /** Manager class that handles notifications */
     private NotificationManager mNotification;
+    /** Notification ID */
     private int notifyId = 1;
 
+    /**
+     * Activities to execute before the display of notification dialog
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -64,9 +63,29 @@ public class NotificationDialog extends DialogFragment {
         messageText.setGravity(Gravity.CENTER);
     }
 
+    /**
+     * Override to build your own custom Dialog container.  This is typically
+     * used to show an AlertDialog instead of a generic Dialog; when doing so,
+     * {onCreateView(LayoutInflater, ViewGroup, Bundle)} does not need
+     * to be implemented since the AlertDialog takes care of its own content.
+     * <p/>
+     * <p>This method will be called after {@link #onCreate(Bundle)} and
+     * before {onCreateView(LayoutInflater, ViewGroup, Bundle)}.  The
+     * default implementation simply instantiates and returns a {@link Dialog}
+     * class.
+     * <p/>
+     * <p><em>Note: DialogFragment own the {@link Dialog#setOnCancelListener
+     * Dialog.setOnCancelListener} and {@link Dialog#setOnDismissListener
+     * Dialog.setOnDismissListener} callbacks.  You must not set them yourself.</em>
+     * To find out about these events, override {@link #onCancel(DialogInterface)}
+     * and {@link #onDismiss(DialogInterface)}.</p>
+     *
+     * @param savedInstanceState The last saved instance state of the Fragment,
+     *                           or null if this is a freshly created Fragment.
+     * @return Return a new Dialog instance to be displayed by the Fragment.
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         mNotification = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -78,11 +97,20 @@ public class NotificationDialog extends DialogFragment {
         return builder.create();
     }
 
+    /**
+     * Response listener based on user selections
+     */
     DialogInterface.OnClickListener response_yes = new DialogInterface.OnClickListener() {
+        /**
+         * This method will be invoked when a button in the dialog is clicked.
+         *
+         * @param dialog The dialog that received the click.
+         * @param which  The button that was clicked (e.g.
+         *               {@link DialogInterface#BUTTON1}) or the position
+         */
         @Override
         public void onClick(DialogInterface dialog, int which) {
             mNotification.cancel(notifyId);
         }
     };
-
 }

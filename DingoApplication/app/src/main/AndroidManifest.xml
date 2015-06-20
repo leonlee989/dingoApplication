@@ -8,9 +8,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dinggoapplication"
-    android:versionCode="9"
-    android:versionName="1.9" >
+    package="com.dinggoapplication" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -66,31 +64,6 @@
             android:name=".Activities.CustomerDingedDeal"
             android:label="@string/title_activity_customer_dinged_deal"
             android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".Activities.MerchantActivity"
-            android:label="@string/title_activity_merchant"
-            android:parentActivityName=".Activities.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dinggoapplication.Activities.MainActivity" />
-        </activity>
-        <activity
-            android:name=".Activities.DingADeal"
-            android:label="@string/title_activity_ding_adeal"
-            android:parentActivityName=".Activities.MerchantActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dinggoapplication.Activities.MerchantActivity" />
-        </activity>
-        <activity
-            android:name=".Activities.OngoingDeal"
-            android:label="Ongoing Deal"
-            android:parentActivityName=".Activities.MerchantActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dinggoapplication.Activities.MerchantActivity" />
         </activity>
         <activity
             android:name=".Activities.CustomerPreferences"
