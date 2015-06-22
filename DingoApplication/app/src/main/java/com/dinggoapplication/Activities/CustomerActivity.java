@@ -34,7 +34,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Customer activity that deals with the activities executed in the customer landing page
  * Inflated layout that displays a menu of options for customer to navigate
- *
+ * TODO remove for version 2.1
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * @deprecated

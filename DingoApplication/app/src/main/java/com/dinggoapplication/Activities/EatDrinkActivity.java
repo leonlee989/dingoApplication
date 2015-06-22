@@ -11,12 +11,12 @@ package com.dinggoapplication.Activities;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dinggoapplication.Fragments.CustomerViewAll;
-import com.dinggoapplication.Fragments.CustomerViewDings;
 import com.dinggoapplication.Fragments.CustomerViewMap;
 import com.dinggoapplication.R;
 
@@ -44,7 +43,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener,
         CustomerViewAll.OnDealFragmentInteractionListener,
         CustomerViewMap.OnMapFragmentInteractionListener,
-        CustomerViewDings.OnDingsFragmentInteractionListener,
         View.OnClickListener {
 
     /** PagerAdapter that will provide fragments for each of the three primary section of the application */
@@ -190,8 +188,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
                 case 0:
                     return new CustomerViewAll();
                 case 1:
-                    return new CustomerViewDings();
-                case 2:
                     return new CustomerViewMap();
                 default:
                     Fragment fragment = new PlaceholderFragment();
@@ -207,7 +203,7 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
          */
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         /**
@@ -278,18 +274,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
     @Override
     public void onDealFragmentInteraction(String id) {
         // Fragment interaction from all deals fragment
-    }
-
-    /**
-     * This method allows interactions with the activity class who implements this listener by its id
-     * <p>
-     * Fragment interaction from Dings Fragment
-     *
-     * @param id ID of the fragment to be identify in the activity class
-     */
-    @Override
-    public void onDingsFragmentInteraction(String id) {
-        // Fragment interaction from Dings Fragment
     }
 
     /**

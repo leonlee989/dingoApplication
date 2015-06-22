@@ -13,7 +13,7 @@
     tools:context="com.dinggoapplication.Activities.EatDrinkActivity"
     android:background="@color/white">
 
-    <RelativeLayout android:id="@+id/dealHeader"
+    <!--<RelativeLayout android:id="@+id/dealHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/red">
@@ -38,17 +38,18 @@
             android:layout_marginRight="10dp"
             android:text="Rank By"
             android:textColor="@color/white" />
-        </RelativeLayout>
+    </RelativeLayout>-->
 
     <ListView android:id="@+id/dealList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/dealHeader"/>
+        android:layout_height="match_parent"/>
+        <!--android:layout_below="@+id/dealHeader"-->
 
     <TextView android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/dealHeader"
         android:gravity="center" />
+        <!--android:layout_below="@+id/dealHeader"-->
+
 
 </RelativeLayout>

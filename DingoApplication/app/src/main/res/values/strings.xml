@@ -27,7 +27,7 @@
     <string name="hint_password">Password</string>
     <string name="login_button">Login</string>
     <string name="registerText"><u>Register for DingGo</u></string>
-    <string name="facebookText">Connect us with Facebook</string>
+    <string name="facebookText">Connect with us on Facebook</string>
 
     <!-- Customer landing page -->
     <string name="customer_optionText_1">Eat &amp; Drink</string>
@@ -42,8 +42,7 @@
 
     <!-- ActionBar Titles -->
     <string name="eatDrink_tabText_1">All</string>
-    <string name="eatDrink_tabText_2">Dings</string>
-    <string name="eatDrink_tabText_3">Map</string>
+    <string name="eatDrink_tabText_2">Map</string>
     <string name="title_activity_customer">CustomerActivity</string>
     <string name="title_activity_eat_drink">EatDrinkActivity</string>
     <string name="title_activity_customer_deal_details">CustomerDealDetailsActivity</string>

@@ -11,7 +11,6 @@ package com.dinggoapplication.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -79,7 +78,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if (username.equalsIgnoreCase("customer")) {
 
                     // Start activity for customer view
-                    Intent intent = new Intent(MainActivity.this, CustomerActivity.class);
+                    Intent intent = new Intent(MainActivity.this, EatDrinkActivity.class);
                     startActivity(intent);
 
                 } else {
@@ -130,10 +129,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     /**
-     * Register a new account with a new layout
+     * Register a new account
      */
     public void register() {
         Toast.makeText(this, "Register an account", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Skip registration, allow user to trial use app with dinging related features blocked
+     */
+    public void skipRegistration() {
+        Toast.makeText(this, "Skip Registration & use App", Toast.LENGTH_LONG).show();
     }
 
     /**
