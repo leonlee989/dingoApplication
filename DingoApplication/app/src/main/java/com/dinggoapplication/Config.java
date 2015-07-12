@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
  * @version 2.1
  * Created by Leon on 16/2/2015.
  */
-public class Constants {
+public class Config {
     // Context set in Main Activity Class
     /** Standard date formatter */
     public static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");

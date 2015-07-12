@@ -25,6 +25,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -33,5 +39,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'uk.co.chrisjenx:calligraphy:2.0.1'
-    compile 'net.glxn.qrgen:android:2.0'
 }

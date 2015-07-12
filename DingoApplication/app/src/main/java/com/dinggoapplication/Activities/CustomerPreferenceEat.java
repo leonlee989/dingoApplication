@@ -36,7 +36,7 @@ import java.util.LinkedHashMap;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
- * Activity class that executes activities within eat preferences page
+ * Activity class that executes activities within eat settings page
  * <p>
  * Inflated layout that displays the configuration for prioritizing a certain category of deals for eat and drink
  *
@@ -45,13 +45,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by siungee on 20/2/2015.
  */
 public class CustomerPreferenceEat extends Activity {
-    /** Manager class that handles shared preferences */
+    /** Manager class that handles shared settings */
     PreferencesManager preferenceManager;
     /** Object that deals with caching data in the device per instance */
     SharedPreferences sp;
     /** Adapter that allows customization of rows in the list view */
     CustomAdapter adapter;
-    /** Hash of boolean values to track the toggle values in eat preferences */
+    /** Hash of boolean values to track the toggle values in eat settings */
     LinkedHashMap<String,Boolean> eatToggleStateList;
     /** Silder element to allow user to select a range of values */
     RangeSeekBar<Integer> rangeSeekBar;
@@ -101,7 +101,7 @@ public class CustomerPreferenceEat extends Activity {
         TextView title = (TextView) findViewById(R.id.actionbar_home_title);
         title.setText("Buy");
 
-        //Instantiate preference manager and shared preferences
+        //Instantiate preference manager and shared settings
         preferenceManager = PreferencesManager.getInstance();
         sp = preferenceManager.getSPInstance();
 
@@ -406,7 +406,7 @@ public class CustomerPreferenceEat extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        //save toggle state to shared preferences
+        //save toggle state to shared settings
         preferenceManager.setValue("eatToggleState", eatToggleStateList);
         preferenceManager.setValue("eatBudget", eatBudgetRange);
     }
@@ -442,7 +442,7 @@ public class CustomerPreferenceEat extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //save toggle state to shared preferences
+        //save toggle state to shared settings
         preferenceManager.setValue("eatToggleState", eatToggleStateList);
         preferenceManager.setValue("eatBudget", eatBudgetRange);
     }

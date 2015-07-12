@@ -6,77 +6,76 @@
   ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.dinggoapplication.Activities.CustomerDingedDeal">
+    android:orientation="vertical"
+    tools:context="com.dinggoapplication.Activities.DingedDealDetailsActivity">
+
+    <include layout="@layout/toolbar"/>
 
     <LinearLayout
+        android:layout_marginTop="@+id/toolbar"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:layout_gravity="bottom">
 
         <TextView
-            android:text="You Dinged a Deal!!"
+            android:text="You dinged a deal for"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="15"
-            android:textSize="30dp"
+            android:textSize="@dimen/text_size_xlarge"
             android:gravity="center"
             tools:ignore="Suspicious0dp" />
-        <TextView
-            android:text="Go to"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:textSize="16dp"
-            android:gravity="center"
-            tools:ignore="Suspicious0dp" />
-        <TextView
-            android:id="@+id/mCNameTextView"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            tools:ignore="Suspicious0dp" />
-        <TextView
-            android:text="for"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:textSize="16dp"
-            android:gravity="center"
-            tools:ignore="Suspicious0dp" />
+
         <TextView
             android:id="@+id/dDiscountTextView"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_xlarge"
             android:textStyle="bold"
             android:gravity="center"
             tools:ignore="Suspicious0dp" />
-        <ImageView
-            android:id="@+id/qrCodeImageView"
+        <TextView
+            android:id="@+id/redeemBy"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"
-            android:layout_margin="10dp"
-            tools:ignore="Suspicious0dp"
-            android:gravity="center"/>
+            android:layout_weight="10"
+            android:textSize="@dimen/text_size_large"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+        <TextView
+            android:text="Reference ID"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:textSize="@dimen/text_size_large"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
+        <TextView
+            android:id="@+id/referenceID"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            android:textColor="@color/theme_primary_dark"
+            android:gravity="center"
+            tools:ignore="Suspicious0dp" />
         <TextView
             android:text="Show this screen to your waiter/ waitress"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_xlarge"
             android:gravity="center"
             tools:ignore="Suspicious0dp" />
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

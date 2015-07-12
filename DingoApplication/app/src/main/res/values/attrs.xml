@@ -8,10 +8,22 @@
   -->
 
 <resources>
+
+    <declare-styleable name="BaseTheme">
+        <attr name="actionBarIconColor" format="color" />
+        <attr name="actionBarInsetStart" format="dimension" />
+        <attr name="spinnerBarInsetStart" format="dimension" />
+        <attr name="popupItemBackground" format="reference" />
+        <attr name="photoItemForeground" format="reference" />
+        <attr name="photoItemForegroundBorderless" format="reference" />
+    </declare-styleable>
+
     <declare-styleable name="RangeSeekBar">
         <attr name="absoluteMinValue" format="integer|float"/>
         <attr name="absoluteMaxValue" format="integer|float"/>
         <attr name="singleThumb" format="boolean"/>
     </declare-styleable>
+
+
 
 </resources>

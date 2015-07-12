@@ -23,10 +23,11 @@
     <string name="hello_world">Hello world!</string>
 
     <!-- Login Page -->
-    <string name="hint_username">Username</string>
-    <string name="hint_password">Password</string>
+    <string name="hint_username"><i>Username/ Email</i></string>
+    <string name="hint_password"><i>Password</i></string>
     <string name="login_button">Login</string>
-    <string name="registerText"><u>Register for DingGo</u></string>
+    <string name="register_button">Register</string>
+    <string name="skip_button">Skip this to trial</string>
     <string name="facebookText">Connect with us on Facebook</string>
 
     <!-- Customer landing page -->
@@ -44,8 +45,16 @@
     <string name="eatDrink_tabText_1">All</string>
     <string name="eatDrink_tabText_2">Map</string>
     <string name="title_activity_customer">CustomerActivity</string>
-    <string name="title_activity_eat_drink">EatDrinkActivity</string>
-    <string name="title_activity_customer_deal_details">CustomerDealDetailsActivity</string>
+    <string name="title_activity_eat_drink">Eat &amp; Drink</string>
+    <string name="title_activity_customer_deal_details">Deal Details</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string name="navdrawer_item_eat_and_drink">Eat &amp; Drink</string>
+    <string name="navdrawer_item_dinged_deals">Dinged Deals</string>
+    <string name="navdrawer_item_preferences">Preferences</string>
+    <string name="navdrawer_item_settings">Settings</string>
+    <string name="navdrawer_item_image">icon</string>
+    <string name="navdrawer_item_menu">Menu</string>
 
     <!--DealDetails-->
     <string name="dealImage">dealImage</string>
@@ -61,15 +70,19 @@
     <string name="AlertRadio_3">No to be missed Deals</string>
     <string name="AlertRadio_4">No Deals</string>
     <string name="ProximityTitle">Deal Proximity</string>
+    <string name="placeholder_lorem_ipsum">lorem</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_customer_dinged_deal">CustomerDingedDeal</string>
-    <string name="title_activity_customer_preferences">CustomerPreferences</string>
+    <string name="title_activity_customer_dinged_deal">Dinged Deal Detail</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_customer_preferences">Preferences</string>
     <string name="title_activity_customer_preference_manage_deals">CustomerPreferenceManageDeals
     </string>
     <string name="title_activity_customer_preference_eat">CustomerPreferenceEat</string>
     <string name="demo_min_label">Min</string>
     <string name="demo_max_label">Max</string>
+    <string name="title_activity_landing">LandingActivity</string>
+    <string name="title_activity_dinged_deals">Dinged Deals</string>
+    <string name="title_activity_customer_preference">CustomerPreference</string>
 </resources>
