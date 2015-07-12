@@ -77,18 +77,18 @@ public class CustomerActivity extends ListActivity {
         if (actionBar != null) {
             // Customized title as TextView in the ActionBar
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.actionbar_landing_custom);
+            actionBar.setCustomView(R.layout.actionbar_custom);
         }
 
         // Set image for activity action bar
-        ImageView image = (ImageView) findViewById(R.id.actionbar_icon);
-        image.setImageResource(R.drawable.bell);
+        //ImageView image = (ImageView) findViewById(R.id.actionbar_icon);
+        //image.setImageResource(R.drawable.bell);
 
         // Set Font for title text
-        TextView title = (TextView) findViewById(R.id.actionbar_title);
+        //TextView title = (TextView) findViewById(R.id.actionbar_title);
 
         // Set title text for activity action bar
-        title.setText(getResources().getString(R.string.app_name));
+        //title.setText(getResources().getString(R.string.app_name));
 
         // Menu context to be display on customer landing page
         final int noOfOptions = 6;
@@ -125,8 +125,8 @@ public class CustomerActivity extends ListActivity {
                 startActivity(intent);
                 break;
             case 5:
-                Intent iPreferences = new Intent(CustomerActivity.this, CustomerPreferences.class);
-                startActivity(iPreferences);
+                //Intent iPreferences = new Intent(CustomerActivity.this, CustomerPreferences.class);
+                //startActivity(iPreferences);
                 break;
             default:
                 String item = (String) getListAdapter().getItem(position);
@@ -182,7 +182,7 @@ public class CustomerActivity extends ListActivity {
             ImageView imageIcon = (ImageView) rowView.findViewById(R.id.landing_icon);
             switch (position) {
                 case 0:
-                    imageIcon.setImageResource(R.drawable.meal);
+                    //imageIcon.setImageResource(R.drawable.meal);
                     break;
                 case 1:
                     imageIcon.setImageResource(R.drawable.watch);
@@ -194,10 +194,10 @@ public class CustomerActivity extends ListActivity {
                     imageIcon.setImageResource(R.drawable.buy);
                     break;
                 case 4:
-                    imageIcon.setImageResource(R.drawable.ding);
+                    //imageIcon.setImageResource(R.drawable.ding);
                     break;
                 case 5:
-                    imageIcon.setImageResource(R.drawable.preferences);
+                    //imageIcon.setImageResource(R.drawable.preferences);
                     break;
             }
 

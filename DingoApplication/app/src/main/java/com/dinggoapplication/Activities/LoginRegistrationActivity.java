@@ -37,7 +37,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class LoginRegistrationActivity extends Activity implements View.OnClickListener {
 
     /**
-     * Called when the activity is starting.  This is where most initialization
+     * Called when the activity is starting.  This is where most initializationboss
      * should go: calling {@link #setContentView(int)} to inflate the
      * activity's UI, using {@link #findViewById} to programmatically interact
      * with widgets in the UI, calling
