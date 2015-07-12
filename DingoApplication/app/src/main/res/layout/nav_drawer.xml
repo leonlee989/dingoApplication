@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/navdrawer_width"
+    android:id="@+id/navdrawer"
+    android:orientation="vertical"
+    android:background="@color/navdrawer_background"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    android:layout_gravity="start">
+
+    <TextView
+        android:id="@+id/navdrawer_menutext"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/navdrawer_item_menu"
+        android:textSize="@dimen/text_size_xlarge"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <!-- Drawer Items -->
+    <LinearLayout
+        android:id="@+id/navdrawer_item_list"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="7"
+        android:gravity="center">
+    </LinearLayout>
+</LinearLayout>
