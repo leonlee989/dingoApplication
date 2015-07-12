@@ -26,13 +26,13 @@ import java.util.LinkedHashMap;
  * Created by siungee on 06/03/15.
  */
 public class PreferencesManager {
-    /** Name of the preferences */
+    /** Name of the settings */
     private static final String PREF_NAME = "com.example.app.PREF_NAME";
     /** Instance of Preference Manager Class */
     private static PreferencesManager sInstance;
     /** SharedPreferences object for the application */
     private final SharedPreferences mPref;
-    /** Editor object that handle amendments of data in the shared preferences */
+    /** Editor object that handle amendments of data in the shared settings */
     private final Editor editor;
 
     /**
@@ -68,7 +68,7 @@ public class PreferencesManager {
     }
 
     /**
-     * Retrieve shared preferences object
+     * Retrieve shared settings object
      * @return  SharedPreferences object
      */
     public synchronized SharedPreferences getSPInstance() {
@@ -76,9 +76,9 @@ public class PreferencesManager {
     }
 
     /**
-     * Set value in the shared preferences object
+     * Set value in the shared settings object
      * @param key           String value that contains the identifier for the stored data
-     * @param arrayList     List of objects to be stored in shared preferences
+     * @param arrayList     List of objects to be stored in shared settings
      */
     public void setValue(String key, ArrayList arrayList) {
         try {
@@ -91,9 +91,9 @@ public class PreferencesManager {
     }
 
     /**
-     * Set value in the shared preferences object
+     * Set value in the shared settings object
      * @param key           String value that contains the identifier for the stored data
-     * @param arrayList     A hash of object to be stored in the shared preferences
+     * @param arrayList     A hash of object to be stored in the shared settings
      */
     public void setValue(String key, LinkedHashMap arrayList) {
         try {
@@ -141,7 +141,7 @@ public class PreferencesManager {
     }
 
     /**
-     * Clear all data in the shared preferences
+     * Clear all data in the shared settings
      * @return  Status on the clearing of data
      */
     public boolean clear() {

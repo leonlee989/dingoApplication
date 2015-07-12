@@ -5,8 +5,7 @@
   ~ Proprietary and confidential
   ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
   ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dinggoapplication" >
 
@@ -26,7 +25,7 @@
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:theme="@style/dingoTheme" >
+        android:theme="@style/DinggoTheme" >
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -35,7 +34,7 @@
             android:value="@string/google_maps_key" />
         <!-- Release API -->
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.LoginRegistrationActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/dingoThemeLogin" >
@@ -46,39 +45,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.CustomerActivity"
-            android:label="@string/title_activity_customer"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".Activities.EatDrinkActivity"
             android:label="@string/title_activity_eat_drink"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.CustomerDealDetailsActivity"
+            android:name=".Activities.DealDetailsActivity"
             android:label="@string/title_activity_customer_deal_details"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.CustomerDingedDeal"
+            android:name=".Activities.DingedDealDetailsActivity"
             android:label="@string/title_activity_customer_dinged_deal"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.CustomerPreferences"
+            android:name=".Activities.CustomerPreferenceActivity"
             android:label="@string/title_activity_customer_preferences"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Activities.CustomerPreferenceManageNotifications"
             android:label="@string/title_activity_customer_preference_manage_deals"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Activities.CustomerPreferenceEat"
             android:label="@string/title_activity_customer_preference_eat"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".Activities.DingedDealsActivity"
+            android:label="@string/title_activity_dinged_deals" >
+        </activity>
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

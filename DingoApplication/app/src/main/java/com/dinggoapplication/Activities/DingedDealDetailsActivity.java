@@ -8,18 +8,14 @@
 
 package com.dinggoapplication.Activities;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.dinggoapplication.R;
-
-import net.glxn.qrgen.android.QRCode;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -32,10 +28,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * @version 2.1
  * Created by siungee on 20/2/2015.
  */
-public class CustomerDingedDeal extends Activity {
+public class DingedDealDetailsActivity extends BaseActivity {
 
     /** TextView object that displays the company name and discount offered */
-    TextView mCompanyNameTV, dDiscountTV;
+    TextView redeemByTV, dDiscountTV, referenceID;
 
     /**
      * Called when the activity is starting.  This is where most initialization
@@ -65,34 +61,29 @@ public class CustomerDingedDeal extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_dinged_deal);
+        setContentView(R.layout.activity_dinged_deal_details);
 
-        // Set up the action bar
-        final ActionBar actionBar = getActionBar();
+        final Toolbar toolbar = getActionBarToolbar();
+        toolbar.setNavigationIcon(R.drawable.ic_up);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
-        if (actionBar != null) {
-            // Customized title as TextView in the ActionBar
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.actionbar_custom);
-        }
-
-        TextView title = (TextView) findViewById(R.id.actionbar_home_title);
-        title.setText(getResources().getString(R.string.app_name));
-        mCompanyNameTV = (TextView) findViewById(R.id.mCNameTextView);
+        redeemByTV = (TextView) findViewById(R.id.redeemBy);
+        referenceID = (TextView) findViewById(R.id.referenceID);
         dDiscountTV = (TextView) findViewById(R.id.dDiscountTextView);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            //set TextView for QR code from deal details
-            mCompanyNameTV.setText(extras.getString("mCompanyName"));
+            //TODO retrieve and set TV to display dynamic values
             dDiscountTV.setText(extras.getString("discountString") + " Your Bill");
-
-            //set QR code to image view
-            Bitmap bmp = QRCode.from(extras.getString("deal_referenceCode")).bitmap();
-            ImageView myImage = (ImageView) findViewById(R.id.qrCodeImageView);
-            myImage.setImageBitmap(bmp);
-
+            redeemByTV.setText("Redeem by 2.00pm");
+            referenceID.setText("D1234567");
+            //referenceID.setText(extras.getString("referenceID"));
         }
     }
 

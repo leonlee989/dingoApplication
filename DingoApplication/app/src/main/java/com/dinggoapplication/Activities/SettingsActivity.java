@@ -8,8 +8,6 @@
 
 package com.dinggoapplication.Activities;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,8 +34,10 @@ import java.util.LinkedHashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+
 /**
- * Activity class that executes activities within customer preferences page
+ * Activity class that executes activities within customer settings page
  * <p>
  * Inflated layout that display a list of settings for user to customized the configuration of the application
  *
@@ -45,16 +45,23 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * @version 2.1
  * Created by siungee on 20/2/2015.
  */
-public class CustomerPreferences extends Activity {
+public class SettingsActivity extends BaseActivity {
 
-    /** Manager class that handles shared preferences */
+    private static final String TAG = makeLogTag(SettingsActivity.class);
+
+    /** Manager class that handles shared settings */
     PreferencesManager preferenceManager;
     /** Object that deals with caching data in the device per instance */
     SharedPreferences sp;
     /** Adapter that allows customization of rows in the list view */
     CustomAdapter adapter;
-    /** Hash of boolean values to track the toggle values in customer preferences */
+    /** Hash of boolean values to track the toggle values in customer settings */
     LinkedHashMap<String,Boolean> toggleStateList;
+
+    @Override
+    protected int getSelfNavDrawerItem() {
+        return NAVDRAWER_SETTINGS;
+    }
 
     /**
      * Called when the activity is starting.  This is where most initialization
@@ -85,21 +92,11 @@ public class CustomerPreferences extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_preferences);
+        setContentView(R.layout.activity_settings);
 
-        // Set up the action bar
-        final ActionBar actionBar = getActionBar();
+        getActionBarToolbar();
 
-        if (actionBar != null) {
-            // Customized title as TextView in the ActionBar
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.actionbar_custom);
-        }
-
-        TextView title = (TextView) findViewById(R.id.actionbar_home_title);
-        title.setText("Preferences");
-
-        //Instantiate preference manager and shared preferences
+        //Instantiate preference manager and shared settings
         preferenceManager = PreferencesManager.getInstance();
         sp = preferenceManager.getSPInstance();
 
@@ -122,7 +119,7 @@ public class CustomerPreferences extends Activity {
         }
 
         // Instantiate list view and bind the adapter
-        ListView listView = (ListView) findViewById(R.id.preferencesListView);
+        ListView listView = (ListView) findViewById(R.id.settingsListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(itemActions);
     }
@@ -149,16 +146,16 @@ public class CustomerPreferences extends Activity {
 
             switch(position) {
                 case 5: // Manage Notification Settings
-                    Intent intent = new Intent(CustomerPreferences.this, CustomerPreferenceManageNotifications.class);
+                    Intent intent = new Intent(SettingsActivity.this, CustomerPreferenceManageNotifications.class);
                     startActivity(intent);
                     break;
                 case 7: // Eat Preferences Settings
-                    Intent eat = new Intent(CustomerPreferences.this, CustomerPreferenceEat.class);
+                    Intent eat = new Intent(SettingsActivity.this, CustomerPreferenceEat.class);
                     startActivity(eat);
                     break;
                 default: // Default Interface: Toast box
                     TextView text = (TextView) view.findViewById(R.id.pOptionLabel);
-                    Toast.makeText(CustomerPreferences.this, text.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingsActivity.this, text.getText(), Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -174,23 +171,22 @@ public class CustomerPreferences extends Activity {
 
         adapter.addOption(new PreferenceItem("Profile", RowType.HEADER));
         adapter.addOption(new PreferenceItem("Edit Profile", RowType.SELECTOR));
-        adapter.addOption(new PreferenceItem("Change Password", RowType.SELECTOR));
-        adapter.addOption(new PreferenceItem("Clear Search History", RowType.SELECTOR));
 
-        adapter.addOption(new PreferenceItem("Deals", RowType.HEADER));
+        /*adapter.addOption(new PreferenceItem("Deals", RowType.HEADER));
         adapter.addOption(new PreferenceItem("Manage Notifications", RowType.SELECTOR));
         adapter.addOption(new PreferenceItem("Type of Deals", RowType.SUBHEADER));
         adapter.addOption(new PreferenceItem("Eat", false));
         adapter.addOption(new PreferenceItem("Drink", false));
         adapter.addOption(new PreferenceItem("Watch", false));
         adapter.addOption(new PreferenceItem("Play", false));
-        adapter.addOption(new PreferenceItem("Buy", false));
+        adapter.addOption(new PreferenceItem("Buy", false));*/
 
         adapter.addOption(new PreferenceItem("Support", RowType.HEADER));
         adapter.addOption(new PreferenceItem("Feedback", RowType.SELECTOR));
         adapter.addOption(new PreferenceItem("Report a Problem", RowType.SELECTOR));
+        adapter.addOption(new PreferenceItem("FAQs", RowType.SELECTOR));
 
-        adapter.addOption(new PreferenceItem("About", RowType.HEADER));
+        adapter.addOption(new PreferenceItem("About Us", RowType.HEADER));
         adapter.addOption(new PreferenceItem("Privacy Policy", RowType.SELECTOR));
         adapter.addOption(new PreferenceItem("Terms of Service", RowType.SELECTOR));
         adapter.addOption(new PreferenceItem("Open Source Libraries", RowType.SELECTOR));
@@ -528,7 +524,7 @@ public class CustomerPreferences extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        //save toggle state to shared preferences
+        //save toggle state to shared settings
         preferenceManager.setValue("dealTypeToggleState", toggleStateList);
     }
 
@@ -563,7 +559,7 @@ public class CustomerPreferences extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //save toggle state to shared preferences
+        //save toggle state to shared settings
         preferenceManager.setValue("dealTypeToggleState", toggleStateList);
     }
 }

@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.dinggoapplication.Activities.CustomerDealDetailsActivity;
+import com.dinggoapplication.Activities.DealDetailsActivity;
 import com.dinggoapplication.Config;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
@@ -82,6 +82,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         super.onCreate(savedInstanceState);
         this.dealList = Config.dealManager.getDealList();
         mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
+
     }
 
     /**
@@ -165,7 +166,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             mListener.onDealFragmentInteraction(deal.getReferenceCode());
             //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(getActivity().getBaseContext(), CustomerDealDetailsActivity.class);
+            Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
             intent.putExtra("deal_referenceCode", deal.getReferenceCode());
             startActivity(intent);
         }

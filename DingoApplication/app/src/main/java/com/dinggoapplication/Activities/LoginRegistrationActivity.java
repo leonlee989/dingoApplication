@@ -11,7 +11,6 @@ package com.dinggoapplication.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +34,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * @version 2.1
  * Created by leon on 10/2/2015.
  */
-public class MainActivity extends Activity implements View.OnClickListener {
+public class LoginRegistrationActivity extends Activity implements View.OnClickListener {
 
     /**
      * Called when the activity is starting.  This is where most initialization
@@ -65,7 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_registration);
 
         // When login button is clicked
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
@@ -80,17 +79,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 String username = usernameControl.getText().toString();
 
                 // Determine customer or merchant activity to access
-                if (username.equalsIgnoreCase("customer")) {
+                //if (username.equalsIgnoreCase("customer")) {
 
                     // Start activity for customer view
-                    Intent intent = new Intent(MainActivity.this, CustomerActivity.class);
+                    Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);
                     startActivity(intent);
 
-                } else {
+                /*} else {
                     // Toast box appear for invalid input
-                    Toast.makeText(MainActivity.this, "Invalid username/password.\nPlease try again",
+                    Toast.makeText(LoginRegistrationActivity.this, "Invalid username/password.\nPlease try again",
                             Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
 
@@ -134,7 +133,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     /**
-     * Register a new account with a new layout
+     * Register a new account
      */
     public void register() {
         try {
@@ -143,6 +142,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Skip registration, allow user to trial use app with dinging related features blocked
+     */
+    public void skipRegistration() {
+        Toast.makeText(this, "Skip Registration & use App", Toast.LENGTH_LONG).show();
     }
 
     /**

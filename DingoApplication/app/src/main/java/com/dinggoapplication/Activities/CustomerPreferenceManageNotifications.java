@@ -80,7 +80,7 @@ public class CustomerPreferenceManageNotifications extends Activity implements S
         seekBar.setMax(150);
         seekBar.setOnSeekBarChangeListener(this);
 
-        // ToDo: Set progress according to shared preferences
+        // ToDo: Set progress according to shared settings
         seekBar.setProgress(50);
 
         // After activity is created

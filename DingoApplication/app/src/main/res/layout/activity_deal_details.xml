@@ -6,37 +6,37 @@
   ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignParentBottom="true"
-    tools:context="com.dinggoapplication.Activities.CustomerDealDetailsActivity">
+    android:orientation="vertical"
+    tools:context="com.dinggoapplication.Activities.DealDetailsActivity">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dealImage"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/dealImage" />
-    <TextView
-        android:id="@+id/companyName"
-        android:layout_width="fill_parent"
-        android:layout_height="80px"
-        android:layout_alignLeft="@+id/dealImage"
-        android:layout_alignRight="@+id/dealImage"
-        android:layout_alignBottom="@+id/dealImage"
-        android:gravity="bottom|center_horizontal"
-        android:textSize="38px"
-        android:textColor="@color/white"
-        android:background="@drawable/gradientbackground"/>
+    <include layout="@layout/toolbar"/>
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dealImage"
+            android:contentDescription="@string/dealImage" />
+        <TextView
+            android:id="@+id/companyName"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:gravity="bottom|center_horizontal"
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/white"
+            android:background="@drawable/gradientbackground"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/dealImage"
-        android:layout_above="@+id/dingItButton"
         android:id="@+id/details"
         android:orientation="vertical">
 
@@ -50,9 +50,6 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:gravity="center_horizontal"/>
-            <!--android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            -->
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -66,7 +63,7 @@
                 tools:ignore="Suspicious0dp"
                 android:layout_height="fill_parent"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
                 android:layout_weight="55">
                 <!--android:layout_weight="3"-->
                 <TextView
@@ -95,7 +92,6 @@
                 android:layout_width="0dp"
                 tools:ignore="Suspicious0dp"
                 android:layout_height="fill_parent"
-                android:layout_alignParentRight="true"
                 android:layout_weight="45"/>
         </LinearLayout>
         <View style="@style/hDivider"/>
@@ -228,10 +224,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:id="@+id/dingItButton"
         android:background="@color/red"
         android:text="Ding It!"
         android:padding="15dp"
         android:textColor="@color/white"/>
-</RelativeLayout>
+</LinearLayout>

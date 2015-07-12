@@ -8,44 +8,43 @@
 
 package com.dinggoapplication.Activities;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.dinggoapplication.Fragments.CustomerViewAll;
-import com.dinggoapplication.Fragments.CustomerViewDings;
 import com.dinggoapplication.Fragments.CustomerViewMap;
 import com.dinggoapplication.R;
+import com.dinggoapplication.widget.SlidingTabLayout;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static com.dinggoapplication.Utils.LogUtils.LOGD;
+import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within Eat and Drink page
  * <p>
  * Inflated layout that display two fragments, one of the fragment is to display a list of deals
- * according to user preferences and the other fragment is to display a map view with the available
+ * according to user settings and the other fragment is to display a map view with the available
  * deals around user's proximity
  *
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by leon on 10/2/2015.
  */
-public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabListener,
+public class EatDrinkActivity extends BaseActivity implements
         CustomerViewAll.OnDealFragmentInteractionListener,
-        CustomerViewMap.OnMapFragmentInteractionListener,
-        CustomerViewDings.OnDingsFragmentInteractionListener,
-        View.OnClickListener {
+        CustomerViewMap.OnMapFragmentInteractionListener {
+
+    private static final String TAG = makeLogTag(EatDrinkActivity.class);
 
     /** PagerAdapter that will provide fragments for each of the three primary section of the application */
     AppSectionPagerAdapter mAppSectionPagerAdapter;
@@ -56,6 +55,13 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
     /** Context variable to store resources */
     Context mContext;
 
+    SlidingTabLayout mSlidingTabLayout = null;
+
+    @Override
+    protected int getSelfNavDrawerItem() {
+        return NAVDRAWER_EAT_AND_DRINK;
+    }
+
     /**
      * Perform initialization of all fragments and loaders.
      *
@@ -65,100 +71,50 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eat_drink);
+        getActionBarToolbar();
 
         // Create the adapter that will return a fragment for each of the three primary sections
         mAppSectionPagerAdapter = new AppSectionPagerAdapter(getSupportFragmentManager(), getApplicationContext());
 
-        // Set up the action bar
-        final ActionBar actionBar = getActionBar();
-
-        if (actionBar != null) {
-            // Customized title as TextView in the ActionBar
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.actionbar_custom);
-
-            // Specify that the home/up button should not be enables since there is no hierarchical parent
-            actionBar.setHomeButtonEnabled(false);
-
-            // Specify to display tabs in the action bar
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        }
-
-        // Set title text for activity action bar
-        TextView title = (TextView) findViewById(R.id.actionbar_home_title);
-        title.setText(getResources().getString(R.string.customer_optionText_1));
-
         //Set up the viewpager, attaching the adapter and setting up a listener for when the user
         // swipe between the sections
-        mViewPager = (ViewPager) findViewById(R.id.customer_home_pager);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mAppSectionPagerAdapter);
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            /**
-             * Upon selection of a tab by the user
-             * @param position  The position of the tab user selected
-             */
-            @Override
-            public void onPageSelected(int position) {
-                if (actionBar != null) {
-                    // When swiping between different sections, select the corresponding tabs.
-                    // We can also use ActionBar.Tab#Select() to do this if we have a reference to the tab
-                    actionBar.setSelectedNavigationItem(position);
+
+        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+
+        Resources res = getResources();
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.red));
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setViewPager(mViewPager);
+
+        if (mSlidingTabLayout != null) {
+            mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset,
+                                           int positionOffsetPixels) {
+
                 }
-            }
-        });
 
-        if (actionBar != null) {
-            // For each of the section, add a tab to the action bar
-            for (int i = 0; i < mAppSectionPagerAdapter.getCount(); i++) {
+                @Override
+                public void onPageSelected(int position) {
 
-                actionBar.addTab(
-                        actionBar.newTab()
-                                .setText(mAppSectionPagerAdapter.getPageTitle(i))
-                                .setTabListener(this));
+                }
 
-            }
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                    enableDisableSwipeRefresh(state == ViewPager.SCROLL_STATE_IDLE);
+                }
+            });
         }
-        mViewPager.setCurrentItem(1);
     }
 
-    /**
-     * Called when a tab exits the selected state.
-     *
-     * @param tab The tab that was unselected
-     * @param ft  A {@link FragmentTransaction} for queuing fragment operations to execute
-     *            during a tab switch. This tab's unselect and the newly selected tab's select
-     *            will be executed in a single transaction. This FragmentTransaction does not
-     */
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // Actions when tab is being unselected
-    }
 
-    /**
-     * Called when a tab enters the selected state.
-     *
-     * @param tab The tab that was selected
-     * @param ft  A {@link FragmentTransaction} for queuing fragment operations to execute
-     *            during a tab switch. The previous tab's unselect and this tab's select will be
-     *            executed in a single transaction. This FragmentTransaction does not support
-     */
     @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // When the given tab is selected, switch to the corresponding page in the view pager
-        mViewPager.setCurrentItem(tab.getPosition());
-    }
-
-    /**
-     * Called when a tab that is already selected is chosen again by the user.
-     * Some applications may use this action to return to the top level of a category.
-     *
-     * @param tab The tab that was reselected.
-     * @param ft  A {@link FragmentTransaction} for queuing fragment operations to execute
-     *            once this method returns. This FragmentTransaction does not support
-     */
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // Actions when the tab is reselected
+    public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
+        LOGD(TAG, "sharedpreferences key " + key + " changed, maybe reloading data.");
+        //TODO repopulate deals according to changed user prefs
     }
 
     /**
@@ -186,20 +142,16 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
          */
         @Override
         public Fragment getItem(int position) {
+            Fragment fragment = new Fragment();
             switch(position) {
                 case 0:
-                    return new CustomerViewAll();
+                    fragment = new CustomerViewAll();
+                    break;
                 case 1:
-                    return new CustomerViewDings();
-                case 2:
-                    return new CustomerViewMap();
-                default:
-                    Fragment fragment = new PlaceholderFragment();
-                    Bundle args = new Bundle();
-                    args.putInt(PlaceholderFragment.ARG_SECTION_NUMBER, position + 1);
-                    fragment.setArguments(args);
-                    return fragment;
+                    fragment = new CustomerViewMap();
+                    break;
             }
+            return fragment;
         }
 
         /**
@@ -207,7 +159,7 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
          */
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         /**
@@ -230,45 +182,6 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
     }
 
     /**
-     * A placeholder fragment containing default view in a section.
-     * To be removed
-     * @deprecated
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /** Text display on the tab */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Called to have the fragment instantiate its user interface view.
-         * This is optional, and non-graphical fragments can return null (which
-         * is the default implementation).  This will be called between
-         * {@link #onCreate(Bundle)} and {@link #onActivityCreated(Bundle)}.
-         * <p/>
-         * <p>If you return a View from here, you will later be called in
-         * {@link #onDestroyView} when the view is being released.
-         *
-         * @param inflater           The LayoutInflater object that can be used to inflate
-         *                           any views in the fragment,
-         * @param container          If non-null, this is the parent view that the fragment's
-         *                           UI should be attached to.  The fragment should not add the view itself,
-         *                           but this can be used to generate the LayoutParams of the view.
-         * @param savedInstanceState If non-null, this fragment is being re-constructed
-         *                           from a previous saved state as given here.
-         * @return Return the View for the fragment's UI, or null.
-         */
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            Bundle args = getArguments();
-
-            ((TextView) rootView.findViewById(android.R.id.text1)).setText(
-                    getString(R.string.display_fragment, args.getInt(ARG_SECTION_NUMBER)));
-
-            return rootView;
-        }
-    }
-
-    /**
      * This method allows interactions with the activity class who implements this listener by its id
      * <p>
      * Fragment interaction from all deals fragment
@@ -283,34 +196,11 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
     /**
      * This method allows interactions with the activity class who implements this listener by its id
      * <p>
-     * Fragment interaction from Dings Fragment
-     *
-     * @param id ID of the fragment to be identify in the activity class
-     */
-    @Override
-    public void onDingsFragmentInteraction(String id) {
-        // Fragment interaction from Dings Fragment
-    }
-
-    /**
-     * This method allows interactions with the activity class who implements this listener by its id
-     * <p>
      * Fragment interaction from Map Fragment
      */
     @Override
     public void onMapFragmentInteraction() {
         // Fragment interaction from Map Fragment
-    }
-
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-        // For advanced filtering feature in Map Fragment
-        Toast.makeText(this, "Advanced Filtering", Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -320,5 +210,12 @@ public class EatDrinkActivity extends FragmentActivity implements ActionBar.TabL
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.eat_and_drink, menu);
+        return true;
     }
 }
