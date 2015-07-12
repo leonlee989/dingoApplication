@@ -25,7 +25,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.dinggoapplication.Activities.CustomerDealDetailsActivity;
-import com.dinggoapplication.Constants;
+import com.dinggoapplication.Config;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
@@ -82,7 +82,7 @@ public class CustomerViewDings extends Fragment implements AbsListView.OnItemCli
         super.onCreate(savedInstanceState);
 
         // ToDo: Retrieve category and value from the settings in Preference Activity set by the customers
-        this.dealList = Constants.dealManager
+        this.dealList = Config.dealManager
                 .retrieveDealByCategory("Merchant Type", "Thai Food");
 
         mAdapter = new DingArrayAdapter(getActivity(), dealList);

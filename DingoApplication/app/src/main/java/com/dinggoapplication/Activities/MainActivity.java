@@ -19,6 +19,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dinggoapplication.R;
+import com.dinggoapplication.Utility.DAOUtil;
+import com.parse.ParseObject;
+
+import java.util.HashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -133,7 +137,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * Register a new account with a new layout
      */
     public void register() {
-        Toast.makeText(this, "Register an account", Toast.LENGTH_LONG).show();
+        try {
+            ParseObject parseObject = DAOUtil.getObject("user", "PxTkuFmMAT");
+            Toast.makeText(this, "Register an account " + parseObject.getString("username"), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

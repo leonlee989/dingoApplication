@@ -34,4 +34,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'uk.co.chrisjenx:calligraphy:2.0.1'
     compile 'net.glxn.qrgen:android:2.0'
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
 }

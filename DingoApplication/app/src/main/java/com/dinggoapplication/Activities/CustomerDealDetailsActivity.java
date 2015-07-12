@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dinggoapplication.Constants;
+import com.dinggoapplication.Config;
 import com.dinggoapplication.Entity.Address;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
@@ -114,7 +114,7 @@ public class CustomerDealDetailsActivity extends Activity {
         if (extras != null) {
 
             //get deal
-            deal = Constants.dealManager.getDeal(extras.getString("deal_referenceCode"));
+            deal = Config.dealManager.getDeal(extras.getString("deal_referenceCode"));
             merchant = deal.getMerchant();
             imageView = (ImageView) findViewById(R.id.dealImage);
 

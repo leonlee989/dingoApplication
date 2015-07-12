@@ -8,6 +8,9 @@
 
 package com.dinggoapplication;
 
+import com.dinggoapplication.Utility.DAOUtil;
+import com.parse.Parse;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -30,10 +33,16 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Bootstrapping
         Bootstrap initialization = new Bootstrap(this);
         initialization.set();
+
+        // Instantiation of Parse Database
+        DAOUtil.initialize(this);
+
+        // Initializing custom font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/Nexa Light.otf")
+                        .setDefaultFontPath(Config.FONT_PATH)
                         .setFontAttrId(com.dinggoapplication.R.attr.fontPath)
                         .build()
         );

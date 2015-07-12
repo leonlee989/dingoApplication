@@ -88,7 +88,7 @@ public class Bootstrap {
                 merchantDescription_oriental_garden, merchantType_oriental_garden, address_oriental_garden,
                 contactNumber_oriental_garden, website_oriental_garden, latLng_orientalgarden);
 
-        Constants.merchantManager.addMerchant(oriental_garden);
+        Config.merchantManager.addMerchant(oriental_garden);
 
         // Deals available for Oriental Garden
         Bitmap coverImage_oriental_garden = BitmapFactory.decodeResource(mContext.getResources(),
@@ -96,7 +96,7 @@ public class Bootstrap {
 
         PercentageDiscount deal1_peach_garden = new PercentageDiscount("OG1", coverImage_oriental_garden,
                 oriental_garden, true, 50);
-        Constants.dealManager.addDeal(deal1_peach_garden);
+        Config.dealManager.addDeal(deal1_peach_garden);
 
         // TODO: Merchant details for Pho Pho
         String merchantId_pho_pho = "merchant02";
@@ -132,7 +132,7 @@ public class Bootstrap {
                 merchantDescription_pho_pho, merchantType_pho_pho, address_pho_pho,
                 contactNumber_pho_pho, website_pho_pho, latLng_pho_pho);
 
-        Constants.merchantManager.addMerchant(pho_pho);
+        Config.merchantManager.addMerchant(pho_pho);
 
         // Deals available for Pho Pro Restaurant
         Bitmap coverImage_pho_pho = BitmapFactory.decodeResource(mContext.getResources(),
@@ -140,7 +140,7 @@ public class Bootstrap {
 
         PercentageDiscount deal1_pho_pho = new PercentageDiscount("PP1", coverImage_pho_pho,
                 pho_pho, true, 50);
-        Constants.dealManager.addDeal(deal1_pho_pho);
+        Config.dealManager.addDeal(deal1_pho_pho);
 
 
         // TODO: Merchant details for Four Seasons Chicken
@@ -179,17 +179,17 @@ public class Bootstrap {
                 merchantType_fourseason_chicken, address_fourseason_chicken, contactNumber_fourseason_chicken,
                 website_fourseason_chicken, latLng_fourseason_chicken);
 
-        Constants.merchantManager.addMerchant(merchant_fourseason_chicken);
+        Config.merchantManager.addMerchant(merchant_fourseason_chicken);
 
         // Deals available for Texas Chicken
         Bitmap coverImage_four_chicken = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.coverfourseasonschicken);
         PercentageDiscount deal1_fourseason_chicken = new PercentageDiscount("tc1", coverImage_four_chicken,
                 merchant_fourseason_chicken, true, 20);
-        Constants.dealManager.addDeal(deal1_fourseason_chicken);
+        Config.dealManager.addDeal(deal1_fourseason_chicken);
         TierDiscount deal2_fourseason_chicken = new TierDiscount("tc2", coverImage_four_chicken,
                 merchant_fourseason_chicken, true, 10, 30);
-        Constants.dealManager.addDeal(deal2_fourseason_chicken);
+        Config.dealManager.addDeal(deal2_fourseason_chicken);
 
         // TODO: Merchant details for Gold Thai
         String merchantId_gold_thai = "merchant04";
@@ -225,18 +225,18 @@ public class Bootstrap {
                 merchantType_gold_thai, address_gold_thai, contactNumber_gold_thai,
                 website_gold_thai, latLng_gold_thai);
 
-        Constants.merchantManager.addMerchant(gold_thai);
+        Config.merchantManager.addMerchant(gold_thai);
 
         // Deals available for Gold Thai Restaurant
         Bitmap coverImage_gold_thai = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.covergoldthai);
         TierDiscount deal1_gold_thai = new TierDiscount("GT1", coverImage_gold_thai,
                 gold_thai, true, 20, 10);
-        Constants.dealManager.addDeal(deal1_gold_thai);
+        Config.dealManager.addDeal(deal1_gold_thai);
 
         PercentageDiscount deal2_gold_thai = new PercentageDiscount("GT2", coverImage_gold_thai,
                 gold_thai, true, 40);
-        Constants.dealManager.addDeal(deal2_gold_thai);
+        Config.dealManager.addDeal(deal2_gold_thai);
 
         // TODO: Merchant details for Lerk Thai
         String merchantId_lerk_thai = "merchant05";
@@ -272,18 +272,18 @@ public class Bootstrap {
                 merchantType_lerk_thai, address_lerk_thai, contactNumber_lerk_thai,
                 website_lerk_thai, latLng_lerk_thai);
 
-        Constants.merchantManager.addMerchant(lerk_thai);
+        Config.merchantManager.addMerchant(lerk_thai);
 
         // Deals available for Gold Thai Restaurant
         Bitmap coverImage_lerk_thai = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.covergoldthai);
         TierDiscount deal1_lerk_thai = new TierDiscount("LT1", coverImage_lerk_thai,
                 lerk_thai, true, 100, 50);
-        Constants.dealManager.addDeal(deal1_lerk_thai);
+        Config.dealManager.addDeal(deal1_lerk_thai);
 
         PercentageDiscount deal2_lerk_thai = new PercentageDiscount("LT2", coverImage_lerk_thai,
                 lerk_thai, true, 20);
-        Constants.dealManager.addDeal(deal2_lerk_thai);
+        Config.dealManager.addDeal(deal2_lerk_thai);
 
         // TODO: Merchant details for Griddy & Souffles
         String merchantId_griddy_souffles = "merchant06";
@@ -319,14 +319,14 @@ public class Bootstrap {
                 merchantDescription_griddy_souffles, merchantType_griddy_souffles,
                 address_griddy_souffles, contactNumber_griddy_souffles, website_griddy_souffles, latLng_griddy_souffles);
 
-        Constants.merchantManager.addMerchant(griddy_souffles);
+        Config.merchantManager.addMerchant(griddy_souffles);
 
         // Deals available for Griddy & Souffles
         Bitmap coverImage_waffles_souffles = BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.coverwafflessouffles);
         TierDiscount deal1_griddy_souffles = new TierDiscount("GW1", coverImage_waffles_souffles,
                 griddy_souffles, true, 10, 50);
-        Constants.dealManager.addDeal(deal1_griddy_souffles);
+        Config.dealManager.addDeal(deal1_griddy_souffles);
 
         PreferencesManager.initializeInstance(mContext);
     }

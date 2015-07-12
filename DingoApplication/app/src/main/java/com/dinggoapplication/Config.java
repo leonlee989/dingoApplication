@@ -8,6 +8,8 @@
 
 package com.dinggoapplication;
 
+import android.annotation.SuppressLint;
+
 import com.dinggoapplication.Manager.DealManager;
 import com.dinggoapplication.Manager.MerchantManager;
 
@@ -19,15 +21,21 @@ import java.text.SimpleDateFormat;
  * @version 2.1
  * Created by Leon on 16/2/2015.
  */
-public class Constants {
+public class Config {
     // Context set in Main Activity Class
     /** Standard date formatter */
+    @SuppressLint("SimpleDateFormat")
     public static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     /** Merchant manager class that handles all merchant objects */
     public static MerchantManager merchantManager = new MerchantManager();
     /** Deal manager class that handles all deal objects */
     public static DealManager dealManager = new DealManager();
 
-    // ToDo: To be removed
-    public static boolean newItemAdded = false;
+    /** Application Key for Parse Database */
+    public static final String APPLICATION_ID = "knp8Hwmkxu7JoYA7fcZt6ABGT1Gw07W6Oyaxy4gn";
+    /** Client Key */
+    public static final String CLIENT_ID = "MJUWjMhwj5pUKaOCWXoyQOyhHphPYRe8PowhFjXU";
+
+    /** Custom font path for the application */
+    public static final String FONT_PATH = "fonts/Nexa Light.otf";
 }

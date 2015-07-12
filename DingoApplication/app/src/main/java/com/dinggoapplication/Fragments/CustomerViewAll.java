@@ -25,7 +25,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.dinggoapplication.Activities.CustomerDealDetailsActivity;
-import com.dinggoapplication.Constants;
+import com.dinggoapplication.Config;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
@@ -80,7 +80,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.dealList = Constants.dealManager.getDealList();
+        this.dealList = Config.dealManager.getDealList();
         mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
     }
 
