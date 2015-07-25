@@ -21,6 +21,8 @@
     <string name="collection">Collection</string>
     <string name="external_activity">External Activity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="long_text">To celebrate SG50, Spizza is offering a fantastic 50 cents pizza promotion from the 3rd to the 7th of August 2015.
+        With every 10 or 12-inch pizza ordered at full price, diners can enjoy a second 10-inch pizza at 50 cents!</string>
 
     <!-- Login Page -->
     <string name="hint_username"><i>Username/ Email</i></string>

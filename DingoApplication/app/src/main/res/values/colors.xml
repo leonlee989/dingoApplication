@@ -16,6 +16,7 @@
     <color name="faintgrey">#50000000</color>
     <color name="black">#000000</color>
     <color name="facebook_color">#0152a1</color>
+    <color name="rating_yellow">#ffded42d</color>
 
     <color name="body_text_1">#de000000</color>
     <color name="body_text_2">#8a000000</color>

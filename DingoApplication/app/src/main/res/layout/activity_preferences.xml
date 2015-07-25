@@ -21,12 +21,72 @@
 
         <include layout="@layout/toolbar"/>
 
-        <ListView
+        <!--<ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/preferencesListView"
             android:divider="@null"
-            android:dividerHeight="0dp"/>
+            android:dividerHeight="0dp"/>-->
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/eatLinearlayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price Range"
+                    android:textSize="20dp"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/priceRangeTextView" />
+
+                <com.dinggoapplication.CustomInterface.RangeSeekBar
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eatRangeSeekBar"
+                    android:layout_marginBottom="20dp"/>
+                <View style="@style/hDivider"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location"
+                    android:textSize="20dp"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/locationTextView" />
+
+                <SeekBar
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/locationSeekBar" />
+
+                <View style="@style/hDivider"/>
+
+                <ListView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/eatListView" />
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
 
     <!-- Nav drawer -->

@@ -26,4 +26,6 @@
     -->
     <item name="customer_dings_tab" type="layout">@layout/customer_view_all</item>
 
+    <item name="header_shadow" type="drawable">@null</item>
+
 </resources>
