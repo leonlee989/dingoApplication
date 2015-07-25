@@ -30,4 +30,8 @@ public class DingedDealsActivity extends BaseActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    @Override
+    public boolean canSwipeRefreshChildScrollUp() {
+        return false;
+    }
 }

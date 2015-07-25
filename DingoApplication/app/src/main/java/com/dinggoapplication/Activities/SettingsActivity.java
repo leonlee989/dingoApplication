@@ -194,6 +194,11 @@ public class SettingsActivity extends BaseActivity {
         return adapter;
     }
 
+    @Override
+    public boolean canSwipeRefreshChildScrollUp() {
+        return false;
+    }
+
     /**
      * Adapter class that allows customization of row in the list view
      * <p>

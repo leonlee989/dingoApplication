@@ -95,4 +95,9 @@ public class DingedDealDetailsActivity extends BaseActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
+    @Override
+    public boolean canSwipeRefreshChildScrollUp() {
+        return false;
+    }
 }

@@ -16,23 +16,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dinggoapplication.Config;
-import com.dinggoapplication.Entity.Address;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.Entity.PercentageDiscount;
 import com.dinggoapplication.Entity.TierDiscount;
 import com.dinggoapplication.R;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -66,6 +62,8 @@ public class DealDetailsActivity extends BaseActivity {
     String discount;
     /** Object that contains the latitude and longitude of the merchant's location */
     LatLng mLatLng;
+
+    RatingBar merchantRatingBar;
 
     /**
      * Called when the activity is starting.  This is where most initialization
@@ -118,26 +116,28 @@ public class DealDetailsActivity extends BaseActivity {
             metrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
             int width = metrics.widthPixels;
-            int height = width*200/480;
+            int height = width*300/480;
 
             //resize image resolution to device resolution
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(metrics.widthPixels,height);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(metrics.widthPixels,height);
             imageView.setLayoutParams(layoutParams);
-            System.out.println("LayoutParams: "+layoutParams);
             imageView.setImageBitmap(deal.getCoverImage());
 
+            //get rating
+            merchantRatingBar = (RatingBar) findViewById(R.id.merchantRating);
+
             //get xml elements
-            mCompanyName = (TextView) findViewById(R.id.companyName);
+            mCompanyName = (TextView) findViewById(R.id.companyName);/*
             mDescriptionTextView = (TextView) findViewById(R.id.merchantDescription);
             mAddressTextView = (TextView) findViewById(R.id.merchantAddress);
             mWebAddressTextView = (TextView) findViewById(R.id.merchantWebAddress);
-            mMobileNumber = (TextView) findViewById(R.id.merchantMobileNumber);
+            mMobileNumber = (TextView) findViewById(R.id.merchantMobileNumber);*/
             dDiscount = (TextView) findViewById(R.id.discount);
 
             //get & set merchant companyname, description, address, web address, mobile no.
             mCompanyName.setText(merchant.getCompanyName());
 
-            mDescriptionTextView.setText(merchant.getMerchantDescription());
+            /*mDescriptionTextView.setText(merchant.getMerchantDescription());
 
             Address mAddress = merchant.getAddress();
             mAddressTextView.setText(mAddress.getUnitNumber() + "\n" + mAddress.getHouseNumber() + " " +
@@ -145,7 +145,7 @@ public class DealDetailsActivity extends BaseActivity {
 
             mWebAddressTextView.setText(merchant.getWebsite());
 
-            mMobileNumber.setText(String.valueOf(merchant.getContactNumber()));
+            mMobileNumber.setText(String.valueOf(merchant.getContactNumber()));*/
 
             if(deal instanceof PercentageDiscount){
                 double pDiscount = ((PercentageDiscount) deal).getPercentage();
@@ -159,7 +159,7 @@ public class DealDetailsActivity extends BaseActivity {
             }
 
             // Gets the MapView from the XML layout and creates it
-            mapView = (MapView) findViewById(R.id.mapview);
+            /*mapView = (MapView) findViewById(R.id.mapview);
             mapView.onCreate(savedInstanceState);
 
             // Gets to GoogleMap from the MapView and does initialization stuff
@@ -179,7 +179,7 @@ public class DealDetailsActivity extends BaseActivity {
             mLatLng = merchant.getLatLng();
             // Updates the location and zoom of the MapView
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 10);
-            map.animateCamera(cameraUpdate);
+            map.animateCamera(cameraUpdate);*/
 
             findViewById(R.id.dingItButton).setOnClickListener(new View.OnClickListener() {
                 /**
@@ -209,4 +209,5 @@ public class DealDetailsActivity extends BaseActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
 }

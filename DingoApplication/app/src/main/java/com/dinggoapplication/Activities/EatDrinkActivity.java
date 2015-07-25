@@ -117,6 +117,11 @@ public class EatDrinkActivity extends BaseActivity implements
         //TODO repopulate deals according to changed user prefs
     }
 
+    @Override
+    public boolean canSwipeRefreshChildScrollUp() {
+        return false;
+    }
+
     /**
      * A @link FragmentPagerAdapter that returns a fragment corresponding to one of the primary
      * sections of the app.

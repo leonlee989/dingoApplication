@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.Utils.LUtils;
+import com.dinggoapplication.widget.MultiSwipeRefreshLayout;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,9 @@ import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
 /**
  * Created by siungee on 25/06/15.
  */
-public abstract class BaseActivity extends ActionBarActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
+public abstract class BaseActivity extends ActionBarActivity implements
+        MultiSwipeRefreshLayout.CanChildScrollUpCallback,
+        SharedPreferences.OnSharedPreferenceChangeListener{
 
     private static final String TAG = makeLogTag(BaseActivity.class);
 
@@ -131,6 +134,27 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
+    }
+
+    private void trySetupSwipeRefresh() {
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setColorSchemeResources(
+                    R.color.refresh_progress_1,
+                    R.color.refresh_progress_2,
+                    R.color.refresh_progress_3);
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    requestDataRefresh();
+                }
+            });
+
+            if (mSwipeRefreshLayout instanceof MultiSwipeRefreshLayout) {
+                MultiSwipeRefreshLayout mswrl = (MultiSwipeRefreshLayout) mSwipeRefreshLayout;
+                mswrl.setCanChildScrollUpCallback(this);
+            }
+        }
     }
 
     /** Returns the navigation drawer item that corresponds to this Activity.*/
@@ -238,6 +262,18 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
             mDrawerItemsListContainer.addView(mNavDrawerItemViews[i]);
             ++i;
         }
+    }
+
+    protected void requestDataRefresh() {
+        /*Account activeAccount = AccountUtils.getActiveAccount(this);
+        ContentResolver contentResolver = getContentResolver();
+        if (contentResolver.isSyncActive(activeAccount, ScheduleContract.CONTENT_AUTHORITY)) {
+            LOGD(TAG, "Ignoring manual sync request because a sync is already in progress.");
+            return;
+        }
+        mManualSyncRequest = true;
+        LOGD(TAG, "Requesting manual data refresh.");
+        SyncHelper.requestManualSync(activeAccount);*/
     }
 
     private void goToNavDrawerItem(int item) {
@@ -455,6 +491,11 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         }
     }
 
+    protected void onRefreshingStateChanged(boolean refreshing) {
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(refreshing);
+        }
+    }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -466,7 +507,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         super.onPostCreate(savedInstanceState);
         setupNavDrawer();
 
-        //trySetupSwipeRefresh();
+        trySetupSwipeRefresh();
         updateSwipeRefreshProgressBarTop();
 
         View mainContent = findViewById(R.id.main_content);
@@ -477,6 +518,5 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
             LOGW(TAG, "No view with ID main_content to fade in.");
         }
     }
-
 
 }
