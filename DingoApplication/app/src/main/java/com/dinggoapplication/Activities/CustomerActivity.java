@@ -25,8 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dinggoapplication.Config;
-import com.dinggoapplication.Fragments.Dialogs.NotificationDialog;
 import com.dinggoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;

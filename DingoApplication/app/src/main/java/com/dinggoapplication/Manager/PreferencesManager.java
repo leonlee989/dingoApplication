@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 
 /**
  * Manager class that handles shared preference for the application
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by siungee on 06/03/15.

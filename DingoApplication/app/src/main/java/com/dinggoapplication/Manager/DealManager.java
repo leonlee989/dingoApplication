@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 /**
  * Deal Manager class that handles all deals in the application
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 25/2/2015.

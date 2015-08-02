@@ -14,6 +14,7 @@ import java.util.Date;
 
 /**
  * PercentageDiscount Class - A certain percentage off the amount spent
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 16/2/2015.

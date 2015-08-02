@@ -9,11 +9,11 @@
 package com.dinggoapplication.Entity;
 
 import android.graphics.Bitmap;
-
 import java.util.Date;
 
 /**
  * Abstract class to hold all the different type of deals
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 16/2/2015.
@@ -33,7 +33,7 @@ public abstract class Deal {
     private Date createdAt;
     /** Merchant that is involve in the deal */
     private Merchant merchant;
-    
+
     /**
      * Constructor to initialize a Deal Object with the following parameters:
      * @param referenceCode     Reference code to identify deals

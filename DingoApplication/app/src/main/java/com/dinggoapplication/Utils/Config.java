@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication;
+package com.dinggoapplication.Utils;
 
 import android.annotation.SuppressLint;
 

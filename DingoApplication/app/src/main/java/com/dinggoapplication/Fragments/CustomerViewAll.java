@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,18 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.dinggoapplication.Activities.DealDetailsActivity;
-import com.dinggoapplication.Config;
+import com.dinggoapplication.Utils.Config;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
+import com.dinggoapplication.managers.DealManager;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -80,6 +87,21 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("deal");
+        query.fromLocalDatastore();
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                for (ParseObject parseObject : list) {
+                    com.dinggoapplication.entities.Deal deal = (com.dinggoapplication.entities.Deal) parseObject;
+                    Log.d("Deal", deal.getDealName());
+                }
+            }
+        });
+
+        // TODO: to be Removed
         this.dealList = Config.dealManager.getDealList();
         mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
 

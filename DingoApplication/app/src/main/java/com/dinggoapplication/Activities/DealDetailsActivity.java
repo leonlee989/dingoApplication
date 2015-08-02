@@ -21,7 +21,7 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dinggoapplication.Config;
+import com.dinggoapplication.Utils.Config;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.Entity.PercentageDiscount;
@@ -210,4 +210,8 @@ public class DealDetailsActivity extends BaseActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    @Override
+    public boolean canSwipeRefreshChildScrollUp() {
+        return false;
+    }
 }
