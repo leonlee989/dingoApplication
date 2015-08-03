@@ -10,13 +10,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -35,7 +35,7 @@ import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
 /**
  * Created by siungee on 25/06/15.
  */
-public abstract class BaseActivity extends ActionBarActivity implements
+public abstract class BaseActivity extends AppCompatActivity implements
         MultiSwipeRefreshLayout.CanChildScrollUpCallback,
         SharedPreferences.OnSharedPreferenceChangeListener{
 
@@ -175,7 +175,7 @@ public abstract class BaseActivity extends ActionBarActivity implements
             mActionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mDrawerLayout.openDrawer(Gravity.START);
+                    mDrawerLayout.openDrawer(GravityCompat.START);
                 }
             });
         }
@@ -207,7 +207,7 @@ public abstract class BaseActivity extends ActionBarActivity implements
             }
         });
 
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         // populate the nav drawer with the correct items
         populateNavDrawer();
@@ -230,12 +230,12 @@ public abstract class BaseActivity extends ActionBarActivity implements
     protected void onNavDrawerSlide(float offset) {}
 
     protected boolean isNavDrawerOpen() {
-        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(Gravity.START);
+        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START);
     }
 
     protected void closeNavDrawer() {
         if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(Gravity.START);
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         }
     }
 
@@ -372,7 +372,7 @@ public abstract class BaseActivity extends ActionBarActivity implements
 
     private void onNavDrawerItemClicked(final int itemId) {
         if (itemId == getSelfNavDrawerItem()) {
-            mDrawerLayout.closeDrawer(Gravity.START);
+            mDrawerLayout.closeDrawer(GravityCompat.START);
             return;
         }
 
@@ -393,7 +393,7 @@ public abstract class BaseActivity extends ActionBarActivity implements
         }
 
 
-        mDrawerLayout.closeDrawer(Gravity.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     private void setSelectedNavDrawerItem(int itemId) {

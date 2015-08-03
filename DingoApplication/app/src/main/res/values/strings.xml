@@ -20,9 +20,19 @@
     <string name="display_fragment">Hello fragment</string>
     <string name="collection">Collection</string>
     <string name="external_activity">External Activity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="url">www.google.com</string>
+    <string name="tel">60001234</string>
+    <string name="address">"Peach Garden @ Thomson Plaza\n301 Upper Thomson Road\n#01-88, Thomson Plaza\nSingapore 574408"</string>
+    <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="long_text">To celebrate SG50, Spizza is offering a fantastic 50 cents pizza promotion from the 3rd to the 7th of August 2015.
         With every 10 or 12-inch pizza ordered at full price, diners can enjoy a second 10-inch pizza at 50 cents!</string>
+    <string name="very_long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+        qui officia deserunt mollit anim id est laborum.</string>
 
     <!-- Login Page -->
     <string name="hint_username"><i>Username/ Email</i></string>
@@ -60,6 +70,14 @@
 
     <!--DealDetails-->
     <string name="dealImage">dealImage</string>
+    <string name="seatsOffered">"Seats \nOffered"</string>
+    <string name="timeLeft">"To Claim"</string>
+    <string name="redeemBy">"Redeem \nBy"</string>
+    <string name="dingThisDeal">Ding This Deal</string>
+    <string name="dealDescriptionDivider">Deal Description</string>
+    <string name="readMore">Read More</string>
+    <string name="aboutMerchantDivider">About Merchant</string>
+    <string name="overall">Overall</string>
 
     <!-- Dialog String Config -->
     <string name="response_yes">Yes</string>

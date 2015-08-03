@@ -10,22 +10,19 @@ package com.dinggoapplication.Activities;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dinggoapplication.Config;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
-import com.dinggoapplication.Entity.PercentageDiscount;
-import com.dinggoapplication.Entity.TierDiscount;
 import com.dinggoapplication.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -42,12 +39,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * @version 2.1
  * Created by siungee on 20/2/2015.
  */
-public class DealDetailsActivity extends BaseActivity {
+public class DealDetailsActivity extends BaseActivity{
 
     /** Element that contains the cover image for the deal */
     ImageView imageView;
     /** Text view that contains the information about the merchant */
-    TextView mCompanyName,mDescriptionTextView, mAddressTextView, mWebAddressTextView, mMobileNumber, dDiscount;
+    TextView mCompanyName,mDescriptionTextView, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
+    dSeatOffered, dTimeLeft, dRedeemBy;
     /** Object that contains the resolution of the mobile's diaplay */
     DisplayMetrics metrics;
     /** Merchant object that contains information about the merchant offering the respective deal */
@@ -95,6 +93,8 @@ public class DealDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal_details);
 
+        final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+
         final Toolbar toolbar = getActionBarToolbar();
         toolbar.setNavigationIcon(R.drawable.ic_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -103,7 +103,6 @@ public class DealDetailsActivity extends BaseActivity {
                 finish();
             }
         });
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
@@ -111,13 +110,38 @@ public class DealDetailsActivity extends BaseActivity {
             deal = Config.dealManager.getDeal(extras.getString("deal_referenceCode"));
             merchant = deal.getMerchant();
             imageView = (ImageView) findViewById(R.id.dealImage);
-
+            toolbarLayout.setTitle(merchant.getCompanyName());
+            toolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
+            toolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
+            toolbarLayout.setCollapsedTitleTextAppearance(R.attr.fontPath);
+            toolbarLayout.setExpandedTitleTextAppearance(R.attr.fontPath);
             //get device application screen resolution
             metrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
             int width = metrics.widthPixels;
             int height = width*300/480;
+            imageView.setImageBitmap(deal.getCoverImage());
+            dDealName = (TextView) findViewById(R.id.dealName);
+            dDealName.setText("Get 50% off Total Bill");
 
+            dSeatOffered = (TextView) findViewById(R.id.seatsOffered);
+            dSeatOffered.setText("8");
+            dTimeLeft = (TextView) findViewById(R.id.timeLeft);
+            dTimeLeft.setText("1 H 25 M");
+            dRedeemBy = (TextView) findViewById(R.id.redeemBy);
+            dRedeemBy.setText("2.10 PM");
+
+            /*if(deal instanceof PercentageDiscount){
+                double pDiscount = ((PercentageDiscount) deal).getPercentage();
+                discount = String.valueOf(pDiscount) + "% Off";
+                dDiscount.setText(discount);
+            } else if(deal instanceof TierDiscount){
+                double tierAmount = ((TierDiscount) deal).getTierAmount();
+                double tDiscount =  ((TierDiscount) deal).getDiscountAmount();
+                discount = "Spend $" + String.valueOf(tierAmount) + " get $" + String.valueOf(tDiscount) + " Off";
+                dDiscount.setText(discount);
+            }
+/*
             //resize image resolution to device resolution
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(metrics.widthPixels,height);
             imageView.setLayoutParams(layoutParams);
@@ -127,17 +151,17 @@ public class DealDetailsActivity extends BaseActivity {
             merchantRatingBar = (RatingBar) findViewById(R.id.merchantRating);
 
             //get xml elements
-            mCompanyName = (TextView) findViewById(R.id.companyName);/*
+            mCompanyName = (TextView) findViewById(R.id.companyName);*//*
             mDescriptionTextView = (TextView) findViewById(R.id.merchantDescription);
             mAddressTextView = (TextView) findViewById(R.id.merchantAddress);
             mWebAddressTextView = (TextView) findViewById(R.id.merchantWebAddress);
-            mMobileNumber = (TextView) findViewById(R.id.merchantMobileNumber);*/
+            mMobileNumber = (TextView) findViewById(R.id.merchantMobileNumber);*//*
             dDiscount = (TextView) findViewById(R.id.discount);
 
             //get & set merchant companyname, description, address, web address, mobile no.
             mCompanyName.setText(merchant.getCompanyName());
 
-            /*mDescriptionTextView.setText(merchant.getMerchantDescription());
+            *//*mDescriptionTextView.setText(merchant.getMerchantDescription());
 
             Address mAddress = merchant.getAddress();
             mAddressTextView.setText(mAddress.getUnitNumber() + "\n" + mAddress.getHouseNumber() + " " +
@@ -145,7 +169,7 @@ public class DealDetailsActivity extends BaseActivity {
 
             mWebAddressTextView.setText(merchant.getWebsite());
 
-            mMobileNumber.setText(String.valueOf(merchant.getContactNumber()));*/
+            mMobileNumber.setText(String.valueOf(merchant.getContactNumber()));*//*
 
             if(deal instanceof PercentageDiscount){
                 double pDiscount = ((PercentageDiscount) deal).getPercentage();
@@ -159,7 +183,7 @@ public class DealDetailsActivity extends BaseActivity {
             }
 
             // Gets the MapView from the XML layout and creates it
-            /*mapView = (MapView) findViewById(R.id.mapview);
+            *//*mapView = (MapView) findViewById(R.id.mapview);
             mapView.onCreate(savedInstanceState);
 
             // Gets to GoogleMap from the MapView and does initialization stuff
@@ -179,14 +203,14 @@ public class DealDetailsActivity extends BaseActivity {
             mLatLng = merchant.getLatLng();
             // Updates the location and zoom of the MapView
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 10);
-            map.animateCamera(cameraUpdate);*/
+            map.animateCamera(cameraUpdate);*//*
 
             findViewById(R.id.dingItButton).setOnClickListener(new View.OnClickListener() {
-                /**
+                *//**
                  * Called when a view has been clicked.
                  *
                  * @param v The view that was clicked.
-                 */
+                 *//*
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(DealDetailsActivity.this, DingedDealDetailsActivity.class);
@@ -197,8 +221,10 @@ public class DealDetailsActivity extends BaseActivity {
                     }
                     startActivity(intent);
                 }
-            });
+            });*/
+
         }
+
     }
 
     /**
@@ -208,6 +234,11 @@ public class DealDetailsActivity extends BaseActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public boolean canSwipeRefreshChildScrollUp() {
+        return false;
     }
 
 }
