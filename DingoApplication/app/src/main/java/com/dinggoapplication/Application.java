@@ -8,8 +8,9 @@
 
 package com.dinggoapplication;
 
-import com.dinggoapplication.Utility.DAOUtil;
-import com.parse.Parse;
+import com.dinggoapplication.Utils.Config;
+import com.dinggoapplication.Utils.DAOUtil;
+import com.dinggoapplication.managers.DealManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -33,12 +34,16 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // Bootstrapping
-        Bootstrap initialization = new Bootstrap(this);
-        initialization.set();
-
         // Instantiation of Parse Database
         DAOUtil.initialize(this);
+
+        // Bootstrapping
+        Bootstrap bootstrapping = new Bootstrap(this);
+        bootstrapping.execute(false);
+
+        // Cache deal information according to user preferences
+        DealManager dealManager = DealManager.getInstance();
+        dealManager.updateCacheList();
 
         // Initializing custom font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()

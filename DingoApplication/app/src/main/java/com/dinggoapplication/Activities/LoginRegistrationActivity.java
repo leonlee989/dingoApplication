@@ -18,10 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dinggoapplication.R;
-import com.dinggoapplication.Utility.DAOUtil;
-import com.parse.ParseObject;
-
-import java.util.HashMap;
+import com.dinggoapplication.Utils.LoginRegisterUtils;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -67,33 +64,71 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         setContentView(R.layout.activity_login_registration);
 
         // When login button is clicked
-        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
-            /**
-             * Called when a view has been clicked.
-             *
-             * @param v The view that was clicked.
-             */
-            @Override
-            public void onClick(View v) {
-                EditText usernameControl = (EditText) findViewById(R.id.username);
-                String username = usernameControl.getText().toString();
+        findViewById(R.id.login).setOnClickListener(loginListener);
+        findViewById(R.id.register).setOnClickListener(registerListener);
+        findViewById(R.id.skip).setOnClickListener(skipListener);
+    }
 
-                // Determine customer or merchant activity to access
-                //if (username.equalsIgnoreCase("customer")) {
+    private View.OnClickListener loginListener = new View.OnClickListener() {
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        @Override
+        public void onClick(View v) {
+            EditText usernameControl = (EditText) findViewById(R.id.username);
+            String username = usernameControl.getText().toString();
 
-                    // Start activity for customer view
-                    Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);
-                    startActivity(intent);
+            // Determine customer or merchant activity to access
+            //if (username.equalsIgnoreCase("customer")) {
+
+            // Start activity for customer view
+            Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);
+            startActivity(intent);
 
                 /*} else {
                     // Toast box appear for invalid input
                     Toast.makeText(LoginRegistrationActivity.this, "Invalid username/password.\nPlease try again",
                             Toast.LENGTH_LONG).show();
                 }*/
-            }
-        });
+        }
+    };
 
-    }
+    private View.OnClickListener registerListener = new View.OnClickListener() {
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        @Override
+        public void onClick(View v) {
+            try {
+                EditText usernameText = (EditText) findViewById(R.id.username);
+                if (LoginRegisterUtils.usernameIsExist(usernameText.getText().toString())) {
+
+                    Toast.makeText(v.getContext(), "Registration", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    /**
+     * Skip registration, allow user to trial use app with dinging related features blocked
+     */
+    private View.OnClickListener skipListener = new View.OnClickListener() {
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(v.getContext(), "Skip Registration & use App", Toast.LENGTH_LONG).show();
+        }
+    };
 
     /**
      * Called when a view has been clicked.
@@ -102,24 +137,8 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.register) {
-        /*
-            Create an intent that ask user to pick a photo, but using
-            FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, ensures that relaunching
-            the application from the device home screen does not return
-            to the external activity
-        */
-            /*
-            Intent externalActivityIntent = new Intent(Intent.ACTION_PICK);
-            externalActivityIntent.setType("image/*");
-            externalActivityIntent.addFlags(
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(externalActivityIntent);
-            */
-            register();
-
-        } else if (v.getId() == R.id.facebookText) {
-            facebookLogin();
+        if (v.getId() == R.id.facebookText) {
+            Toast.makeText(this, "Facebook Login", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -130,31 +149,5 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
-    /**
-     * Register a new account
-     */
-    public void register() {
-        try {
-            ParseObject parseObject = DAOUtil.getObject("user", "PxTkuFmMAT");
-            Toast.makeText(this, "Register an account " + parseObject.getString("username"), Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Skip registration, allow user to trial use app with dinging related features blocked
-     */
-    public void skipRegistration() {
-        Toast.makeText(this, "Skip Registration & use App", Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Facebook integration to cater for facebook login
-     */
-    public void facebookLogin() {
-        Toast.makeText(this, "Facebook Login", Toast.LENGTH_LONG).show();
     }
 }

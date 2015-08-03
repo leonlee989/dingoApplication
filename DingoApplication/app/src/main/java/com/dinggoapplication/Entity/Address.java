@@ -10,6 +10,7 @@ package com.dinggoapplication.Entity;
 
 /**
  * Address Object that contains the address information for a restaurant
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 21/2/2015.

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 /**
  * Manager object to handle all merchant in the system
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 23/2/2015.

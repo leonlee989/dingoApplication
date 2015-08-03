@@ -14,6 +14,7 @@ import java.util.Date;
 
 /**
  * Tiered Discount Object - Certain amount off the spent amount for a certain tiered amount
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 17/2/2015.

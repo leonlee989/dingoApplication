@@ -3,6 +3,8 @@ package com.dinggoapplication.Utils;
 import android.util.Log;
 
 import com.dinggoapplication.BuildConfig;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 /**
  * Created by siungee on 25/06/15.
@@ -71,5 +73,18 @@ public class LogUtils {
 
     public static void LOGE(final String tag, String message, Throwable cause) {
         Log.e(tag, message, cause);
+    }
+
+    public static SaveCallback saveCallback(final String className) {
+        return new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("Data", className + " table is updated");
+                } else {
+                    Log.d("Data", className + " table update error: " + e.getMessage());
+                }
+            }
+        };
     }
 }

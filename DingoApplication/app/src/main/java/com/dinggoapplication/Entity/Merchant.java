@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Class that contains all details about the merchants
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 23/2/2015.
