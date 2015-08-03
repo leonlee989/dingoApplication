@@ -2,12 +2,18 @@ package com.dinggoapplication.managers;
 
 import android.util.Log;
 
+import com.dinggoapplication.entities.Branch;
+import com.dinggoapplication.entities.Company;
+import com.dinggoapplication.entities.CuisineType;
+import com.dinggoapplication.entities.Deal;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +27,11 @@ public class DealManager {
     private static int checkOut = 0;
     private final static String parseClassName = "deal";
 
-    private DealManager() {}
+    private ArrayList<Deal> dealList;
+
+    private DealManager() {
+        dealList = new ArrayList<>();
+    }
 
     public static DealManager getInstance() {
         synchronized (DealManager.class) {
@@ -46,7 +56,7 @@ public class DealManager {
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(final List<ParseObject> dealList, ParseException e) {
+            public void done(final List<ParseObject> parseObjects, ParseException e) {
                 if (e != null) {
                     Log.e("Deal", "Unable to find deals from Parse Database");
                     return;
@@ -54,13 +64,57 @@ public class DealManager {
 
                 // Remove previously cache data
                 ParseObject.unpinAllInBackground("dealList", new DeleteCallback() {
+
                     @Override
                     public void done(ParseException e) {
                         // Cache new results
-                        ParseObject.pinAllInBackground("dealList", dealList);
+                        ParseObject.pinAllInBackground("dealList", parseObjects);
+                        afterQueryProcessing(parseObjects);
                     }
                 });
             }
         });
+    }
+
+    public void afterQueryProcessing(List<ParseObject> parseObjects) {
+        for (ParseObject parseObject : parseObjects) {
+            Deal deal = (Deal) parseObject;
+            fetchRegionalDataIfNeeded(deal);
+            this.dealList.add(deal);
+        }
+
+        Log.d("Deal", "Caching of data is completed!");
+    }
+
+    public void fetchRegionalDataIfNeeded(Deal deal) {
+        try {
+            Branch branch;
+            if (!deal.getBranch().isDataAvailable()) {
+                branch = deal.getBranch().fetchIfNeeded();
+            } else {
+                branch = deal.getBranch();
+            }
+
+            if (branch != null) {
+                Company company;
+                if (!branch.getCompany().isDataAvailable()) {
+                    company = branch.getCompany().fetchIfNeeded();
+                } else {
+                    company = branch.getCompany();
+                }
+
+                if (company != null) {
+                    if (!company.getCuisineType().isDataAvailable()) {
+                        company.getCuisineType().fetchIfNeeded();
+                    }
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Deal> getDealList() {
+        return this.dealList;
     }
 }

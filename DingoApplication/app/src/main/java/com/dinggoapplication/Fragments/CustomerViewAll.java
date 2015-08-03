@@ -26,10 +26,11 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.dinggoapplication.Activities.DealDetailsActivity;
-import com.dinggoapplication.Utils.Config;
-import com.dinggoapplication.Entity.Deal;
-import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
+import com.dinggoapplication.entities.Branch;
+import com.dinggoapplication.entities.Company;
+import com.dinggoapplication.entities.CuisineType;
+import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -68,7 +69,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CustomerViewAll() {}
+    public CustomerViewAll() {
+        dealList = new ArrayList<>();
+    }
 
     /**
      * Called to do initial creation of a fragment.  This is called after
@@ -88,24 +91,12 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("deal");
-        query.fromLocalDatastore();
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                for (ParseObject parseObject : list) {
-                    com.dinggoapplication.entities.Deal deal = (com.dinggoapplication.entities.Deal) parseObject;
-                    Log.d("Deal", deal.getDealName());
-                }
-            }
-        });
-
-        // TODO: to be Removed
-        this.dealList = Config.dealManager.getDealList();
+        DealManager dealManager = DealManager.getInstance();
+        this.dealList = dealManager.getDealList();
         mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
 
     }
+
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -185,11 +176,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             Deal deal = this.dealList.get((this.dealList.size()-1) - position);
-            mListener.onDealFragmentInteraction(deal.getReferenceCode());
+            mListener.onDealFragmentInteraction(deal.getReferenceId());
             //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
-            intent.putExtra("deal_referenceCode", deal.getReferenceCode());
+            intent.putExtra("deal_referenceCode", deal.getReferenceId());
             startActivity(intent);
         }
     }
@@ -232,17 +223,18 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         /** Context object that stores all the resources */
         private final Context context;
         /** A list of deals to be displayed onto the list view */
-        private final ArrayList<Deal> values;
+        private final ArrayList<Deal> dealList;
 
         /**
          * Constructor that initialize DealArrayAdapter with the following parameters
          * @param context   Context object that stores all the resources
-         * @param values    A list of deals to be displayed onto the list view
+         * @param dealList    A list of deals to be displayed onto the list view
          */
-        public DealArrayAdapter(Context context, ArrayList<Deal> values) {
-            super(context, R.layout.deal_view_row, values);
+        public DealArrayAdapter(Context context, ArrayList<Deal> dealList) {
+            super(context, R.layout.deal_view_row, dealList);
             this.context = context;
-            this.values = values;
+            Log.d("Deal","" + dealList.size());
+            this.dealList = dealList;
         }
 
         /**
@@ -259,24 +251,30 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
 
             View rowView = inflater.inflate(R.layout.deal_view_row, parent, false);
 
-            Deal deal = values.get((values.size()-1) - position);
-            Merchant merchant = deal.getMerchant();
+            try {
+                Deal deal = dealList.get((dealList.size() - 1) - position);
 
-            ImageView image = (ImageView) rowView.findViewById(R.id.merchantLogo);
-            image.setImageBitmap(merchant.getImage());
+                Company company = deal.getBranch().getCompany();
 
-            TextView companyName = (TextView) rowView.findViewById(R.id.companyName);
-            companyName.setText(merchant.getCompanyName());
+                ImageView image = (ImageView) rowView.findViewById(R.id.merchantLogo);
+                image.setImageBitmap(company.getLogoImage());
 
-            TextView merchantType = (TextView) rowView.findViewById(R.id.merchantType);
-            merchantType.setText(merchant.getMerchantType());
+                TextView companyName = (TextView) rowView.findViewById(R.id.companyName);
+                companyName.setText(company.getCompanyName());
 
-            TextView dealTextView = (TextView) rowView.findViewById(R.id.dealDetail);
-            dealTextView.setText(deal.toString());
-            dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
+                TextView merchantType = (TextView) rowView.findViewById(R.id.merchantType);
+                merchantType.setText(company.getCuisineType().getCuisineName());
 
-            TextView additionInfo = (TextView) rowView.findViewById(R.id.addtionalInfo);
-            additionInfo.setText("500 m");
+                TextView dealTextView = (TextView) rowView.findViewById(R.id.dealDetail);
+                dealTextView.setText(deal.getDealName());
+                dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
+
+                TextView additionInfo = (TextView) rowView.findViewById(R.id.addtionalInfo);
+                additionInfo.setText("500 m");
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             return rowView;
         }
