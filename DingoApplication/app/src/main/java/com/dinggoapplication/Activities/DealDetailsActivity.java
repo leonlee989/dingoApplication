@@ -15,18 +15,21 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.dinggoapplication.Config;
-import com.dinggoapplication.Entity.Deal;
-import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
+import com.dinggoapplication.entities.Branch;
+import com.dinggoapplication.entities.Company;
+import com.dinggoapplication.entities.Deal;
+import com.dinggoapplication.managers.DealManager;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.ParseException;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -48,8 +51,10 @@ public class DealDetailsActivity extends BaseActivity{
     dSeatOffered, dTimeLeft, dRedeemBy;
     /** Object that contains the resolution of the mobile's diaplay */
     DisplayMetrics metrics;
-    /** Merchant object that contains information about the merchant offering the respective deal */
-    Merchant merchant;
+    /** Company object that contains information about the company whose branch is offering the respective deal */
+    Company merchant;
+    /** Branch object that contains information about the branch that offers the respective deal */
+    Branch branch;
     /** Deal object that contains information about the deals */
     Deal deal;
     /** Element that contains a map view to display the location of the merchant */
@@ -103,33 +108,44 @@ public class DealDetailsActivity extends BaseActivity{
                 finish();
             }
         });
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
             //get deal
-            deal = Config.dealManager.getDeal(extras.getString("deal_referenceCode"));
-            merchant = deal.getMerchant();
-            imageView = (ImageView) findViewById(R.id.dealImage);
-            toolbarLayout.setTitle(merchant.getCompanyName());
-            toolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
-            toolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
-            toolbarLayout.setCollapsedTitleTextAppearance(R.attr.fontPath);
-            toolbarLayout.setExpandedTitleTextAppearance(R.attr.fontPath);
-            //get device application screen resolution
-            metrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            int width = metrics.widthPixels;
-            int height = width*300/480;
-            imageView.setImageBitmap(deal.getCoverImage());
-            dDealName = (TextView) findViewById(R.id.dealName);
-            dDealName.setText("Get 50% off Total Bill");
+            //deal = Config.dealManager.getDeal(extras.getString("deal_referenceCode"));
+            DealManager dealManager = DealManager.getInstance();
+            deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
+            branch = deal.getBranch();
+            merchant = branch.getCompany();
 
-            dSeatOffered = (TextView) findViewById(R.id.seatsOffered);
-            dSeatOffered.setText("8");
-            dTimeLeft = (TextView) findViewById(R.id.timeLeft);
-            dTimeLeft.setText("1 H 25 M");
-            dRedeemBy = (TextView) findViewById(R.id.redeemBy);
-            dRedeemBy.setText("2.10 PM");
+            try {
+                imageView = (ImageView) findViewById(R.id.dealImage);
+                toolbarLayout.setTitle(merchant.getCompanyName());
+                toolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
+                toolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
+                toolbarLayout.setCollapsedTitleTextAppearance(R.attr.fontPath);
+                toolbarLayout.setExpandedTitleTextAppearance(R.attr.fontPath);
+                //get device application screen resolution
+                metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int width = metrics.widthPixels;
+                int height = width * 300 / 480;
+                imageView.setImageBitmap(merchant.getCoverImage());
+
+                dDealName = (TextView) findViewById(R.id.dealName);
+                dDealName.setText(deal.getDealName());
+
+                dSeatOffered = (TextView) findViewById(R.id.seatsOffered);
+                dSeatOffered.setText("" + deal.getSeatToOffer());
+                dTimeLeft = (TextView) findViewById(R.id.timeLeft);
+                dTimeLeft.setText("1 H 25 M");
+                dRedeemBy = (TextView) findViewById(R.id.redeemBy);
+                dRedeemBy.setText("2.10 PM");
+
+            } catch (ParseException e) {
+                Log.e("Deal", "Unable to parse cover image into Bitmap Object");
+            }
 
             /*if(deal instanceof PercentageDiscount){
                 double pDiscount = ((PercentageDiscount) deal).getPercentage();

@@ -27,18 +27,12 @@ import android.widget.TextView;
 
 import com.dinggoapplication.Activities.DealDetailsActivity;
 import com.dinggoapplication.R;
-import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
-import com.dinggoapplication.entities.CuisineType;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -94,7 +88,6 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         DealManager dealManager = DealManager.getInstance();
         this.dealList = dealManager.getDealList();
         mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
-
     }
 
 
@@ -233,7 +226,6 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         public DealArrayAdapter(Context context, ArrayList<Deal> dealList) {
             super(context, R.layout.deal_view_row, dealList);
             this.context = context;
-            Log.d("Deal","" + dealList.size());
             this.dealList = dealList;
         }
 

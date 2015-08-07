@@ -4,16 +4,15 @@ import android.util.Log;
 
 import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
-import com.dinggoapplication.entities.CuisineType;
 import com.dinggoapplication.entities.Deal;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,10 +26,10 @@ public class DealManager {
     private static int checkOut = 0;
     private final static String parseClassName = "deal";
 
-    private ArrayList<Deal> dealList;
+    private HashMap<String, Deal> dealList;
 
     private DealManager() {
-        dealList = new ArrayList<>();
+        dealList = new HashMap<>();
     }
 
     public static DealManager getInstance() {
@@ -76,11 +75,29 @@ public class DealManager {
         });
     }
 
+    public void getFromCache() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(parseClassName);
+
+        query.fromLocalDatastore();
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if (e != null) {
+                    Log.e("Deal", "Unable to find deals from Local Database");
+                    return;
+                }
+
+                afterQueryProcessing(list);
+            }
+        });
+    }
+
+
     public void afterQueryProcessing(List<ParseObject> parseObjects) {
         for (ParseObject parseObject : parseObjects) {
             Deal deal = (Deal) parseObject;
             fetchRegionalDataIfNeeded(deal);
-            this.dealList.add(deal);
+            this.dealList.put(deal.getReferenceId(), deal);
         }
 
         Log.d("Deal", "Caching of data is completed!");
@@ -115,6 +132,10 @@ public class DealManager {
     }
 
     public ArrayList<Deal> getDealList() {
-        return this.dealList;
+        return new ArrayList<>(dealList.values());
+    }
+
+    public Deal getDeal(String referenceId) {
+        return dealList.get(referenceId);
     }
 }

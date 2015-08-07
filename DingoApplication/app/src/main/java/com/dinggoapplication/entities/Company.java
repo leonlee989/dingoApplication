@@ -169,7 +169,7 @@ public class Company extends ParseObject {
      */
     public Bitmap getLogoImage() throws ParseException {
         ParseFile logoImage = getParseFile(COLUMN_LOGO);
-        return ImageUtils.convertBtyesToImage(logoImage.getData());
+        return ImageUtils.convertBytesToImage(logoImage.getData());
     }
 
     /**
@@ -189,7 +189,7 @@ public class Company extends ParseObject {
      */
     public Bitmap getCoverImage() throws ParseException {
         ParseFile coverImage = getParseFile(COLUMN_COVER_IMAGE);
-        return ImageUtils.convertBtyesToImage(coverImage.getData());
+        return ImageUtils.convertBytesToImage(coverImage.getData());
     }
 
     /**
