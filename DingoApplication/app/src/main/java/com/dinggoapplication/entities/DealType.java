@@ -71,7 +71,7 @@ public class DealType extends ParseObject {
      */
     public Bitmap getTypeImage() throws ParseException {
         ParseFile dealImage = getParseFile(COLUMN_IMAGE);
-        return ImageUtils.convertBtyesToImage(dealImage.getData());
+        return ImageUtils.convertBytesToImage(dealImage.getData());
     }
 
     /**

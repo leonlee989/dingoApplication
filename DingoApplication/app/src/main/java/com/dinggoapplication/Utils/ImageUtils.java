@@ -48,7 +48,7 @@ public class ImageUtils {
      * @param bytes Byte array that defines the image
      * @return      Bitmap object that defines the image
      */
-    public static Bitmap convertBtyesToImage(byte[] bytes) {
+    public static Bitmap convertBytesToImage(byte[] bytes) {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }
