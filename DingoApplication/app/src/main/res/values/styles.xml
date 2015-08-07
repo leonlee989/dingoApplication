@@ -169,13 +169,13 @@
     <style name="RatingBar.Small">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:progressDrawable">@drawable/ratingbar</item>
-        <item name="android:indeterminateDrawable">@drawable/ratingbar</item>
+        <item name="android:progressDrawable">@drawable/ratingbar_small</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_small</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:maxHeight">48dp</item>
         <item name="android:numStars">5</item>
-        <item name="android:scaleX">0.5</item>
-        <item name="android:scaleY">0.5</item>
+        <item name="android:scaleX">1</item>
+        <item name="android:scaleY">1</item>
         <item name="android:rating">0</item>
         <item name="android:stepSize">1</item>
     </style>

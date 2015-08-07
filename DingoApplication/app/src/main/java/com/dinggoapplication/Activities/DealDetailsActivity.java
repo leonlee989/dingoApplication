@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.dinggoapplication.Config;
 import com.dinggoapplication.Entity.Deal;
 import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
@@ -107,7 +106,7 @@ public class DealDetailsActivity extends BaseActivity{
         if (extras != null) {
 
             //get deal
-            deal = Config.dealManager.getDeal(extras.getString("deal_referenceCode"));
+            /*deal = Config.dealManager.getDeal(extras.getString("deal_referenceCode"));
             merchant = deal.getMerchant();
             imageView = (ImageView) findViewById(R.id.dealImage);
             toolbarLayout.setTitle(merchant.getCompanyName());
@@ -120,7 +119,7 @@ public class DealDetailsActivity extends BaseActivity{
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
             int width = metrics.widthPixels;
             int height = width*300/480;
-            imageView.setImageBitmap(deal.getCoverImage());
+            imageView.setImageBitmap(deal.getCoverImage());*/
             dDealName = (TextView) findViewById(R.id.dealName);
             dDealName.setText("Get 50% off Total Bill");
 
