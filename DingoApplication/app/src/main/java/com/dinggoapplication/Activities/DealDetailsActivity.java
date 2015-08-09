@@ -10,6 +10,7 @@ package com.dinggoapplication.Activities;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -60,7 +61,7 @@ public class DealDetailsActivity extends BaseActivity{
     ImageView imageView;
     /** Text view that contains the information about the merchant */
     TextView mCompanyName,mDescriptionTextView, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
-    dSeatOffered, dTimeLeft, dRedeemBy, dDealDescriptionReadMore;
+    dSeatOffered, dTimeLeft, dRedeemBy, dDealDescriptionReadMore, dMerchantAllReviews;
     /** Object that contains the resolution of the mobile's diaplay */
     DisplayMetrics metrics;
     /** Company object that contains information about the company whose branch is offering the respective deal */
@@ -172,9 +173,23 @@ public class DealDetailsActivity extends BaseActivity{
                     }
                 });
 
+                dMerchantAllReviews = (TextView) findViewById(R.id.allReviews);
+                dMerchantAllReviews.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
+                        Log.d(TAG, "onclick for all reviews");
+
+                        Intent intent = new Intent(DealDetailsActivity.this, MerchantReviews.class);
+                        /*intent.putExtra("deal_referenceCode", deal.getReferenceCode());
+                        intent.putExtra("mCompanyName", merchant.getCompanyName());*/
+                        startActivity(intent);
+
+
+                    }
+                });
             } catch (ParseException e) {
-                Log.e("Deal", "Unable to parse cover image into Bitmap Object");
+                Log.e(TAG, "Unable to parse cover image into Bitmap Object");
             }
 
             /*if(deal instanceof PercentageDiscount){

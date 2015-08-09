@@ -107,16 +107,6 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/gradientbackground"
                 app:layout_collapseMode="parallax"/>
-            <!--
-                         <RatingBar
-                            android:id="@+id/merchantRating"
-                             android:gravity="bottom|center_horizontal"
-                             style="@style/RatingBar"
-                             android:isIndicator="true"
-                             android:layout_alignParentBottom="true"
-                             android:layout_centerHorizontal="true"
-                             android:rating="4"/>
-            -->
             <include layout="@layout/toolbar_actionbar" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
