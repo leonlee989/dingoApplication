@@ -16,7 +16,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -26,12 +28,22 @@ import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within the single detail page for deals
@@ -48,7 +60,7 @@ public class DealDetailsActivity extends BaseActivity{
     ImageView imageView;
     /** Text view that contains the information about the merchant */
     TextView mCompanyName,mDescriptionTextView, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
-    dSeatOffered, dTimeLeft, dRedeemBy;
+    dSeatOffered, dTimeLeft, dRedeemBy, dDealDescriptionReadMore;
     /** Object that contains the resolution of the mobile's diaplay */
     DisplayMetrics metrics;
     /** Company object that contains information about the company whose branch is offering the respective deal */
@@ -68,6 +80,9 @@ public class DealDetailsActivity extends BaseActivity{
 
     RatingBar merchantRatingBar;
 
+    DateFormat dateFormat;
+
+    private static final String TAG = makeLogTag(DealDetailsActivity.class);
     /**
      * Called when the activity is starting.  This is where most initialization
      * should go: calling {@link #setContentView(int)} to inflate the
@@ -109,6 +124,8 @@ public class DealDetailsActivity extends BaseActivity{
             }
         });
 
+        dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
@@ -141,7 +158,20 @@ public class DealDetailsActivity extends BaseActivity{
                 dTimeLeft = (TextView) findViewById(R.id.timeLeft);
                 dTimeLeft.setText("1 H 25 M");
                 dRedeemBy = (TextView) findViewById(R.id.redeemBy);
-                dRedeemBy.setText("2.10 PM");
+                dRedeemBy.setText(dateFormat.format(deal.getRedeemBy()));
+
+                dDealDescriptionReadMore = (TextView) findViewById(R.id.readMore);
+                dDealDescriptionReadMore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        LayoutInflater inflater = LayoutInflater.from((DealDetailsActivity.this));
+                        inflater.inflate(R.layout.merchant_reviews_single_row, (ViewGroup)v.getRootView(), false);
+                        Log.d(TAG, "onclick for read more");
+
+                    }
+                });
+
 
             } catch (ParseException e) {
                 Log.e("Deal", "Unable to parse cover image into Bitmap Object");
@@ -157,7 +187,7 @@ public class DealDetailsActivity extends BaseActivity{
                 discount = "Spend $" + String.valueOf(tierAmount) + " get $" + String.valueOf(tDiscount) + " Off";
                 dDiscount.setText(discount);
             }
-/*
+
             //resize image resolution to device resolution
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(metrics.widthPixels,height);
             imageView.setLayoutParams(layoutParams);
@@ -177,7 +207,7 @@ public class DealDetailsActivity extends BaseActivity{
             //get & set merchant companyname, description, address, web address, mobile no.
             mCompanyName.setText(merchant.getCompanyName());
 
-            *//*mDescriptionTextView.setText(merchant.getMerchantDescription());
+            mDescriptionTextView.setText(merchant.getMerchantDescription());
 
             Address mAddress = merchant.getAddress();
             mAddressTextView.setText(mAddress.getUnitNumber() + "\n" + mAddress.getHouseNumber() + " " +
@@ -196,10 +226,10 @@ public class DealDetailsActivity extends BaseActivity{
                 double tDiscount =  ((TierDiscount) deal).getDiscountAmount();
                 discount = "Spend $" + String.valueOf(tierAmount) + " get $" + String.valueOf(tDiscount) + " Off";
                 dDiscount.setText(discount);
-            }
+            }*/
 
             // Gets the MapView from the XML layout and creates it
-            *//*mapView = (MapView) findViewById(R.id.mapview);
+            mapView = (MapView) findViewById(R.id.mapview);
             mapView.onCreate(savedInstanceState);
 
             // Gets to GoogleMap from the MapView and does initialization stuff
@@ -216,10 +246,11 @@ public class DealDetailsActivity extends BaseActivity{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mLatLng = merchant.getLatLng();
+            mLatLng = branch.getLatLng();
             // Updates the location and zoom of the MapView
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 10);
-            map.animateCamera(cameraUpdate);*//*
+            map.animateCamera(cameraUpdate);
+            /*
 
             findViewById(R.id.dingItButton).setOnClickListener(new View.OnClickListener() {
                 *//**

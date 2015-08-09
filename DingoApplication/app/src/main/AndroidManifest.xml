@@ -82,6 +82,10 @@
             android:name=".Activities.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name=".Activities.MerchantReviews"
+            android:label="@string/title_activity_merchant_reviews" >
+        </activity>
     </application>
 
 </manifest>

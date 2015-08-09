@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="username" />
+            <TextView
+                android:id="@+id/reviewedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="14 Jul 2015" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/overall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/overall"
+                android:layout_gravity="center_vertical|right" />
+            <RatingBar
+                android:id="@+id/userOverallRating"
+                style="@style/RatingBar.Small"
+                android:isIndicator="true"
+                android:rating="4"
+                android:layout_gravity="center_vertical|right" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/foodAndDrinkTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="Food/ Drink" />
+            <RatingBar
+                android:id="@+id/foodAndDrinkRB"
+                style="@style/RatingBar.Small"
+                android:isIndicator="true"
+                android:rating="4" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/valueTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="Value" />
+            <RatingBar
+                android:id="@+id/valueRB"
+                style="@style/RatingBar.Small"
+                android:isIndicator="true"
+                android:rating="4" />
+        </TableRow>
+        </TableLayout>
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/ambienceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="15dp"
+                    android:text="Ambience" />
+                <RatingBar
+                    android:id="@+id/ambienceRB"
+                    style="@style/RatingBar.Small"
+                    android:isIndicator="true"
+                    android:rating="4"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/serviceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="15dp"
+                    android:text="Food/ Drink" />
+                <RatingBar
+                    android:id="@+id/serviceRB"
+                    style="@style/RatingBar.Small"
+                    android:isIndicator="true"
+                    android:rating="4" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/userReviewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/long_text"
+        android:maxLines="5"
+        android:textSize="16sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="5dp"
+        android:gravity="center"/>
+</LinearLayout>

@@ -51,5 +51,7 @@ public class Application extends android.app.Application {
                         .setFontAttrId(com.dinggoapplication.R.attr.fontPath)
                         .build()
         );
+
     }
+
 }
