@@ -156,28 +156,32 @@
     <style name="RatingBar">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:progressDrawable">@drawable/ratingbar</item>
-        <item name="android:indeterminateDrawable">@drawable/ratingbar</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:maxHeight">48dp</item>
         <item name="android:numStars">5</item>
-        <item name="android:scaleX">0.6</item>
-        <item name="android:scaleY">0.6</item>
+        <item name="android:scaleX">1</item>
+        <item name="android:scaleY">1</item>
         <item name="android:rating">0</item>
         <item name="android:stepSize">1</item>
     </style>
     <style name="RatingBar.Small">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:progressDrawable">@drawable/ratingbar</item>
-        <item name="android:indeterminateDrawable">@drawable/ratingbar</item>
+        <item name="android:progressDrawable">@drawable/ratingbar_small</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_small</item>
+        <item name="android:minHeight">24dp</item>
+        <item name="android:maxHeight">24dp</item>
+    </style>
+    <style name="RatingBar.Medium">
+        <item name="android:progressDrawable">@drawable/ratingbar_medium</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_medium</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:maxHeight">36dp</item>
+
+    </style>
+    <style name="RatingBar.Large">
+        <item name="android:progressDrawable">@drawable/ratingbar_large</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_large</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:maxHeight">48dp</item>
-        <item name="android:numStars">5</item>
-        <item name="android:scaleX">0.5</item>
-        <item name="android:scaleY">0.5</item>
-        <item name="android:rating">0</item>
-        <item name="android:stepSize">1</item>
     </style>
 
     <!--UI Dividers-->

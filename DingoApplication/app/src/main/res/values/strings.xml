@@ -78,6 +78,7 @@
     <string name="readMore">Read More</string>
     <string name="aboutMerchantDivider">About Merchant</string>
     <string name="overall">Overall</string>
+    <string name="allReviews">All Reviews</string>
 
     <!-- Dialog String Config -->
     <string name="response_yes">Yes</string>
@@ -105,4 +106,8 @@
     <string name="title_activity_landing">LandingActivity</string>
     <string name="title_activity_dinged_deals">Dinged Deals</string>
     <string name="title_activity_customer_preference">CustomerPreference</string>
+    <string name="title_activity_merchant_reviews">MerchantReviews</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -8,30 +8,16 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+   <include layout="@layout/merchant_reviews_overall"/>
 
-
-
-        <TextView
-            android:id="@+id/overall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="@string/overall"
-            android:layout_centerVertical="true"
-            android:gravity="center_horizontal" />
-
-        <RatingBar
-            android:id="@+id/merchantRating"
-            android:layout_toRightOf="@+id/overall"
-            style="@style/RatingBar"
-            android:isIndicator="true"
-            android:rating="4"
-            android:layout_centerVertical="true"
-            android:background="@color/theme_primary" />
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/allReviews"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/theme_primary"
+        android:id="@+id/allReviews" />
 
 </LinearLayout>
