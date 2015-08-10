@@ -210,6 +210,14 @@
         <item name="android:background">@color/faintgrey</item>
     </style>
 
+    <!-- Full Screen Dialog -->
+    <style name="FullScreenDialog" parent="DinggoTheme" >
+        <item name="windowActionBar">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowActionModeOverlay">true</item>s
+    </style>
+
     <!--Text Appearance-->
     <style name="TextAppearance.FontPath_Light" parent="android:TextAppearance">
         <!-- Custom Attr-->
