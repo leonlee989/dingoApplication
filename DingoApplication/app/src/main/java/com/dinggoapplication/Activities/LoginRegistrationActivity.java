@@ -13,12 +13,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.Utils.LoginRegisterUtils;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -87,11 +97,11 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
             Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);
             startActivity(intent);
 
-                /*} else {
-                    // Toast box appear for invalid input
-                    Toast.makeText(LoginRegistrationActivity.this, "Invalid username/password.\nPlease try again",
-                            Toast.LENGTH_LONG).show();
-                }*/
+            /*} else {
+                // Toast box appear for invalid input
+                Toast.makeText(LoginRegistrationActivity.this, "Invalid username/password.\nPlease try again",
+                        Toast.LENGTH_LONG).show();
+            }*/
         }
     };
 
@@ -139,7 +149,58 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
     public void onClick(View v) {
         if (v.getId() == R.id.facebookText) {
             Toast.makeText(this, "Facebook Login", Toast.LENGTH_LONG).show();
+
+            List<String> permissions = Arrays.asList(
+                    "email",
+                    "public_profile",
+                    "user_friends"
+            );
+
+            ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, facebookLoginCallBack);
         }
+    }
+
+    private LogInCallback facebookLoginCallBack = new LogInCallback() {
+        @Override
+        public void done(ParseUser parseUser, ParseException e) {
+            if (e != null) {
+                Log.e("Login", e.getMessage());
+                return;
+            }
+            if (parseUser == null) {
+                Log.d("DingGo", "The user have cancelled the Facebook login!");
+            } else if (parseUser.isNew()) {
+                Log.d("DingGo", "The user signed up and logged into DingGo through facebook");
+            } else {
+                Log.d("DingGo", "User logged into DingGo through facebook");
+            }
+        }
+    };
+    /**
+     * Called when an activity you launched exits, giving you the requestCode
+     * you started it with, the resultCode it returned, and any additional
+     * data from it.  The <var>resultCode</var> will be
+     * {@link #RESULT_CANCELED} if the activity explicitly returned that,
+     * didn't return any result, or crashed during its operation.
+     * <p/>
+     * <p>You will receive this call immediately before onResume() when your
+     * activity is re-starting.
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode  The integer result code returned by the child activity
+     *                    through its setResult().
+     * @param data        An Intent, which can return result data to the caller
+     *                    (various data can be attached to Intent "extras").
+     * @see #startActivityForResult
+     * @see #createPendingResult
+     * @see #setResult(int)
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

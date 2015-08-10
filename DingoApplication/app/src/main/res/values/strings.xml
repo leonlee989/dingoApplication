@@ -10,7 +10,7 @@
 <resources>
 
     <string name="app_name">DingGo</string>
-
+    <string name="facebook_app_id">1613874552196379</string>
     <!-- Font -->
     <string name="font_normal">fonts/Nexa Light.otf</string>
 
