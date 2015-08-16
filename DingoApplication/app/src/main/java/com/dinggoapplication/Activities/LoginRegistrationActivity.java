@@ -11,6 +11,7 @@ package com.dinggoapplication.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,15 +21,14 @@ import android.widget.Toast;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.Utils.LoginRegisterUtils;
+import com.dinggoapplication.entities.Company;
+import com.dinggoapplication.entities.Deal;
+import com.dinggoapplication.managers.DealManager;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import com.parse.SignUpCallback;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -42,6 +42,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by leon on 10/2/2015.
  */
 public class LoginRegistrationActivity extends Activity implements View.OnClickListener {
+
+    private EditText txtUsername;
+    private EditText txtPassword;
 
     /**
      * Called when the activity is starting.  This is where most initializationboss
@@ -73,6 +76,10 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_registration);
 
+        // Entered username and password by users
+        txtUsername = (EditText) findViewById(R.id.username);
+        txtPassword = (EditText) findViewById(R.id.password);
+
         // When login button is clicked
         findViewById(R.id.login).setOnClickListener(loginListener);
         findViewById(R.id.register).setOnClickListener(registerListener);
@@ -87,21 +94,40 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
          */
         @Override
         public void onClick(View v) {
-            EditText usernameControl = (EditText) findViewById(R.id.username);
-            String username = usernameControl.getText().toString();
+            String username = txtUsername.getText().toString();
+            String password = txtPassword.getText().toString();
 
-            // Determine customer or merchant activity to access
-            //if (username.equalsIgnoreCase("customer")) {
+            LoginRegisterUtils.loadingStart(true);
+            if (editTextExceptionHandler(username, password)) {
+                // TODO: Login in by email address
+                if (username.contains("@")) {
 
-            // Start activity for customer view
-            Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);
-            startActivity(intent);
+                } else {
+                    // Login by user name
+                    ParseUser.logInInBackground(username, password, manualLoginCallBack);
+                }
+            }
+        }
+    };
 
-            /*} else {
-                // Toast box appear for invalid input
-                Toast.makeText(LoginRegistrationActivity.this, "Invalid username/password.\nPlease try again",
-                        Toast.LENGTH_LONG).show();
-            }*/
+    public LogInCallback manualLoginCallBack = new LogInCallback() {
+        @Override
+        public void done(ParseUser parseUser, ParseException e) {
+            LoginRegisterUtils.loadingFinish();
+
+            if (parseUser != null) {
+                bootstrapReviewObjects();
+                loginSuccess();
+            } else {
+                if (e != null) {
+                    Log.e(LoginRegisterUtils.getLogTag(), e.toString());
+                    parseExceptionHandler(e.getCode());
+                    txtPassword.selectAll();
+                    txtPassword.requestFocus();
+                } else {
+                    showToast(R.string.login_failed_unknown_toast);
+                }
+            }
         }
     };
 
@@ -113,14 +139,76 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
          */
         @Override
         public void onClick(View v) {
-            try {
-                EditText usernameText = (EditText) findViewById(R.id.username);
-                if (LoginRegisterUtils.usernameIsExist(usernameText.getText().toString())) {
+            String email = txtUsername.getText().toString();
+            String password = txtPassword.getText().toString();
 
-                    Toast.makeText(v.getContext(), "Registration", Toast.LENGTH_LONG).show();
+            if (editTextExceptionHandler(email, password)) {
+                ParseUser parseUser = new ParseUser();
+
+                // Set values for user's account
+                if (email.contains("@")) {
+                    parseUser.setEmail(email);
+                    parseUser.setUsername(email.substring(0, email.indexOf("@")));
+                    parseUser.put("name", email.substring(0, email.indexOf("@")));
+                    parseUser.setPassword(password);
+                    LoginRegisterUtils.setOtherInfo(parseUser);
+
+                    LoginRegisterUtils.loadingStart(true);
+                    parseUser.signUpInBackground(manualSignUpCallBack);
+                } else {
+                    showToast(R.string.sign_up_failed_invalid_email);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            }
+        }
+    };
+
+    private SignUpCallback manualSignUpCallBack = new SignUpCallback() {
+        @Override
+        public void done(ParseException e) {
+            LoginRegisterUtils.loadingFinish();
+
+            if (e == null) {
+                // TODO: Send email for verifications
+                loginSuccess();
+            } else parseExceptionHandler(e.getCode());
+
+        }
+    };
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.facebookText)
+            ParseFacebookUtils.logInWithReadPermissionsInBackground(this, LoginRegisterUtils.getFacebookPermissions(), facebookLoginCallBack);
+    }
+
+    private LogInCallback facebookLoginCallBack = new LogInCallback() {
+        @Override
+        public void done(ParseUser parseUser, ParseException e) {
+            if (e != null) {
+                Log.e(LoginRegisterUtils.getLogTag(), e.getMessage());
+                return;
+            }
+
+            if (parseUser == null) {
+                Log.d("Login", "The user have cancelled the Facebook login!");
+            } else if (parseUser.isNew()) {
+                Log.d("Login", "The user signed up and logged into DingGo through facebook");
+
+                LoginRegisterUtils.fbSaveUserProfile(parseUser,
+                        LoginRegisterUtils.ProfileAccess.NAME,
+                        LoginRegisterUtils.ProfileAccess.EMAIL
+                );
+
+                loginSuccess();
+            } else {
+                Log.d("DingGo", "User logged into DingGo through facebook");
+                bootstrapReviewObjects();
+                loginSuccess();
             }
         }
     };
@@ -140,42 +228,14 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         }
     };
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.facebookText) {
-            Toast.makeText(this, "Facebook Login", Toast.LENGTH_LONG).show();
+    protected void loginSuccess() {
+        showToast(R.string.login_success_toast);
 
-            List<String> permissions = Arrays.asList(
-                    "email",
-                    "public_profile",
-                    "user_friends"
-            );
-
-            ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, facebookLoginCallBack);
-        }
+        // Start activity for customer view
+        Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);
+        startActivity(intent);
     }
 
-    private LogInCallback facebookLoginCallBack = new LogInCallback() {
-        @Override
-        public void done(ParseUser parseUser, ParseException e) {
-            if (e != null) {
-                Log.e("Login", e.getMessage());
-                return;
-            }
-            if (parseUser == null) {
-                Log.d("DingGo", "The user have cancelled the Facebook login!");
-            } else if (parseUser.isNew()) {
-                Log.d("DingGo", "The user signed up and logged into DingGo through facebook");
-            } else {
-                Log.d("DingGo", "User logged into DingGo through facebook");
-            }
-        }
-    };
     /**
      * Called when an activity you launched exits, giving you the requestCode
      * you started it with, the resultCode it returned, and any additional
@@ -210,5 +270,61 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    protected void bootstrapReviewObjects() {
+        DealManager dealManager = DealManager.getInstance();
+
+        for (Deal deal : dealManager.getDealList()) {
+            Company company = deal.getBranch().getCompany();
+        }
+    }
+
+    protected boolean editTextExceptionHandler(String username, String password) {
+        boolean isValid = true;
+        Resources resources = getResources();
+
+        // Field validations
+        if (username.length() == 0) {
+            isValid = false;
+            showToast(R.string.no_username_toast);
+        } else if (password.length() == 0) {
+            isValid = false;
+            showToast(R.string.no_password_toast);
+        } else if (password.length() < resources.getInteger(R.integer.password_min_char)){
+            isValid = false;
+            showToast(R.string.length_of_password_toast);
+        }
+
+        return isValid;
+    }
+
+    protected void parseExceptionHandler(int errorCode) {
+        switch (errorCode) {
+            case ParseException.OBJECT_NOT_FOUND:
+                showToast(R.string.login_failed_invalid_credential_toast);
+                break;
+            case ParseException.INVALID_EMAIL_ADDRESS:
+                showToast(R.string.sign_up_failed_invalid_email);
+                break;
+            case ParseException.USERNAME_TAKEN:
+                showToast(R.string.sign_up_failed_username_taken);
+                break;
+            case ParseException.EMAIL_TAKEN:
+                showToast(R.string.sign_up_failed_email_taken);
+                break;
+            case ParseException.CONNECTION_FAILED:
+                showToast(R.string.login_failed_server_error_toast);
+                break;
+            default:
+                showToast(R.string.login_failed_unknown_toast);
+        }
+    }
+    protected void showToast(int id) {
+        showToast(getString(id));
+    }
+
+    protected void showToast(CharSequence text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 }

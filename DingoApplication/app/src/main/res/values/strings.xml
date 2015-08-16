@@ -9,11 +9,6 @@
 
 <resources>
 
-    <string name="app_name">DingGo</string>
-    <string name="facebook_app_id">1613874552196379</string>
-    <!-- Font -->
-    <string name="font_normal">fonts/Nexa Light.otf</string>
-
     <!-- Demo Text -->
     <string name="title_activity_activity">activity</string>
     <string name="title_activity_collection">collection</string>
@@ -34,6 +29,11 @@
         esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
         qui officia deserunt mollit anim id est laborum.</string>
 
+    <string name="app_name">DingGo</string>
+    <string name="facebook_app_id">1613874552196379</string>
+    <!-- Font -->
+    <string name="font_normal">fonts/Nexa Light.otf</string>
+
     <!-- Login Page -->
     <string name="hint_username"><i>Username/ Email</i></string>
     <string name="hint_password"><i>Password</i></string>
@@ -41,6 +41,18 @@
     <string name="register_button">Register</string>
     <string name="skip_button">Skip this to trial</string>
     <string name="facebookText">Connect with us on Facebook</string>
+
+    <string name="no_username_toast">Please enter a username to login or register</string>
+    <string name="no_password_toast">Please enter a password to login or register</string>
+    <string name="length_of_password_toast">Password need to be more than 8 characters in length, please reenter your password</string>
+    <string name="login_success_toast">You have successfully logged into DingGo</string>
+    <string name="login_failed_invalid_credential_toast">Invalid username/password.\nPlease try again</string>
+    <string name="login_failed_server_error_toast">Unable to connect to server due to network issues</string>
+    <string name="login_failed_unknown_toast">Could not log in, please try again later</string>
+
+    <string name="sign_up_failed_invalid_email">Email address is invalid, please correct it and try again</string>
+    <string name="sign_up_failed_username_taken">Username is already been taken, please enter a different one</string>
+    <string name="sign_up_failed_email_taken">Email is already been taken, please enter a different email</string>
 
     <!-- Customer landing page -->
     <string name="customer_optionText_1">Eat &amp; Drink</string>

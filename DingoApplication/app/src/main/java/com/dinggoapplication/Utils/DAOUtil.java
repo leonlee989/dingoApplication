@@ -37,7 +37,7 @@ public class DAOUtil {
 
         // Initialize Facebook Utilities
         ParseFacebookUtils.initialize(context);
-        ParseUser.enableAutomaticUser();
+        //ParseUser.enableAutomaticUser();
     }
 
     /**

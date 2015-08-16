@@ -77,7 +77,7 @@ public class DealManager {
             @Override
             public void done(final List<ParseObject> parseObjects, ParseException e) {
                 if (e != null) {
-                    Log.e("Deal", "Unable to find deals from Parse Database");
+                    Log.e("Deal", "Unable to find deals from Parse Database:\n" + e.getMessage());
                     return;
                 }
 

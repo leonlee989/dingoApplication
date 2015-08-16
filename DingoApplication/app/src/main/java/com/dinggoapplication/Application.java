@@ -11,6 +11,7 @@ package com.dinggoapplication;
 import com.dinggoapplication.Utils.Config;
 import com.dinggoapplication.Utils.DAOUtil;
 import com.dinggoapplication.managers.DealManager;
+import com.parse.ParseUser;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -34,8 +35,15 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         // Instantiation of Parse Database
         DAOUtil.initialize(this);
+
+        // TODO: To be remove (Remove any session available in order to deal with login and register testing)
+        ParseUser parseUser = ParseUser.getCurrentUser();
+        if (parseUser != null) {
+            parseUser.logOut();
+        }
 
         // Bootstrapping
         Bootstrap bootstrapping = new Bootstrap(this);
