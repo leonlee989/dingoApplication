@@ -91,6 +91,9 @@
     <string name="aboutMerchantDivider">About Merchant</string>
     <string name="overall">Overall</string>
     <string name="allReviews">All Reviews</string>
+    <string name="dealDetailsTitle">Deal Details</string>
+    <string name="dealTCDivider">Terms &amp; Conditions</string>
+
 
     <!-- Dialog String Config -->
     <string name="response_yes">Yes</string>

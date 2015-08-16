@@ -9,17 +9,20 @@
 package com.dinggoapplication.Activities;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -60,8 +63,8 @@ public class DealDetailsActivity extends BaseActivity{
     /** Element that contains the cover image for the deal */
     ImageView imageView;
     /** Text view that contains the information about the merchant */
-    TextView mCompanyName,mDescriptionTextView, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
-    dSeatOffered, dTimeLeft, dRedeemBy, dDealDescriptionReadMore, dMerchantAllReviews;
+    TextView mCompanyName ,mMerchantDescription, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
+    dSeatOffered, dTimeLeft, dRedeemBy, dDealDescription, dDealDescriptionReadMore, dMerchantAllReviews;
     /** Object that contains the resolution of the mobile's diaplay */
     DisplayMetrics metrics;
     /** Company object that contains information about the company whose branch is offering the respective deal */
@@ -144,11 +147,12 @@ public class DealDetailsActivity extends BaseActivity{
                 toolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
                 toolbarLayout.setCollapsedTitleTextAppearance(R.attr.fontPath);
                 toolbarLayout.setExpandedTitleTextAppearance(R.attr.fontPath);
+
                 //get device application screen resolution
-                metrics = new DisplayMetrics();
+                /*metrics = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(metrics);
                 int width = metrics.widthPixels;
-                int height = width * 300 / 480;
+                int height = width * 300 / 480;*/
                 imageView.setImageBitmap(merchant.getCoverImage());
 
                 dDealName = (TextView) findViewById(R.id.dealName);
@@ -161,17 +165,39 @@ public class DealDetailsActivity extends BaseActivity{
                 dRedeemBy = (TextView) findViewById(R.id.redeemBy);
                 dRedeemBy.setText(dateFormat.format(deal.getRedeemBy()));
 
+                dDealDescription = (TextView) findViewById(R.id.dealDescription);
+                dDealDescription.setText(deal.getDesciption());
+
                 dDealDescriptionReadMore = (TextView) findViewById(R.id.readMore);
                 dDealDescriptionReadMore.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        LayoutInflater inflater = LayoutInflater.from((DealDetailsActivity.this));
-                        inflater.inflate(R.layout.merchant_reviews_single_row, (ViewGroup)v.getRootView(), false);
                         Log.d(TAG, "onclick for read more");
+
+                        DealDescriptionDialogFragment frag = DealDescriptionDialogFragment
+                                .newInstance(deal.getDesciption(), deal.getTermConditions());
+
+                        frag.show(getSupportFragmentManager(), "dialog");
 
                     }
                 });
+
+                //get xml elements
+                mMerchantDescription = (TextView) findViewById(R.id.companyDescription);
+                mAddressTextView = (TextView) findViewById(R.id.branchAddress);
+                mWebAddressTextView = (TextView) findViewById(R.id.companyWebsite);
+                mMobileNumber = (TextView) findViewById(R.id.branchPhoneNo);
+
+                //get & set merchant description, address, web address, mobile no.
+
+                mMerchantDescription.setText(merchant.getDescription());
+
+                String mAddress = branch.getAddress1();
+                mAddressTextView.setText(mAddress + "\n" + "Singapore " + branch.getPostCode());
+
+                mWebAddressTextView.setText(merchant.getWebsiteUrl());
+
+                mMobileNumber.setText(String.valueOf(branch.getPhoneNo()));
 
                 dMerchantAllReviews = (TextView) findViewById(R.id.allReviews);
                 dMerchantAllReviews.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +210,6 @@ public class DealDetailsActivity extends BaseActivity{
                         /*intent.putExtra("deal_referenceCode", deal.getReferenceCode());
                         intent.putExtra("mCompanyName", merchant.getCompanyName());*/
                         startActivity(intent);
-
 
                     }
                 });
@@ -211,26 +236,8 @@ public class DealDetailsActivity extends BaseActivity{
             //get rating
             merchantRatingBar = (RatingBar) findViewById(R.id.merchantRating);
 
-            //get xml elements
-            mCompanyName = (TextView) findViewById(R.id.companyName);*//*
-            mDescriptionTextView = (TextView) findViewById(R.id.merchantDescription);
-            mAddressTextView = (TextView) findViewById(R.id.merchantAddress);
-            mWebAddressTextView = (TextView) findViewById(R.id.merchantWebAddress);
-            mMobileNumber = (TextView) findViewById(R.id.merchantMobileNumber);*//*
-            dDiscount = (TextView) findViewById(R.id.discount);
-
-            //get & set merchant companyname, description, address, web address, mobile no.
-            mCompanyName.setText(merchant.getCompanyName());
-
-            mDescriptionTextView.setText(merchant.getMerchantDescription());
-
-            Address mAddress = merchant.getAddress();
-            mAddressTextView.setText(mAddress.getUnitNumber() + "\n" + mAddress.getHouseNumber() + " " +
-                    mAddress.getStreetName()+ "\n" + "Singapore " + mAddress.getPostalCode());
-
-            mWebAddressTextView.setText(merchant.getWebsite());
-
-            mMobileNumber.setText(String.valueOf(merchant.getContactNumber()));*//*
+            */
+            /*
 
             if(deal instanceof PercentageDiscount){
                 double pDiscount = ((PercentageDiscount) deal).getPercentage();
@@ -265,25 +272,25 @@ public class DealDetailsActivity extends BaseActivity{
             // Updates the location and zoom of the MapView
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 10);
             map.animateCamera(cameraUpdate);
-            /*
+
 
             findViewById(R.id.dingItButton).setOnClickListener(new View.OnClickListener() {
-                *//**
+                /**
                  * Called when a view has been clicked.
                  *
                  * @param v The view that was clicked.
-                 *//*
+                 */
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(DealDetailsActivity.this, DingedDealDetailsActivity.class);
+                    /*Intent intent = new Intent(DealDetailsActivity.this, DingedDealDetailsActivity.class);
                     intent.putExtra("deal_referenceCode", deal.getReferenceCode());
                     intent.putExtra("mCompanyName", merchant.getCompanyName());
                     if(!discount.isEmpty()) {
                         intent.putExtra("discountString", discount);
                     }
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }
-            });*/
+            });
 
         }
 
@@ -301,6 +308,79 @@ public class DealDetailsActivity extends BaseActivity{
     @Override
     public boolean canSwipeRefreshChildScrollUp() {
         return false;
+    }
+
+    static public class DealDescriptionDialogFragment extends DialogFragment {
+
+        public static DealDescriptionDialogFragment newInstance(String dealDescription, String dealTC) {
+            DealDescriptionDialogFragment frag = new DealDescriptionDialogFragment();
+            Bundle args = new Bundle();
+            args.putString("dealDescription", dealDescription);
+            args.putString("dealTC", dealTC);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialog);
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            Dialog d = getDialog();
+            if (d!=null){
+                int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                int height = ViewGroup.LayoutParams.MATCH_PARENT;
+                d.getWindow().setLayout(width, height);
+            }
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout to use as dialog or embedded fragment
+            final View view = inflater.inflate(R.layout.deal_description_dialog, container, false);
+
+            //Set values for dialog components
+            TextView dialogDealDescription = (TextView) view.findViewById(R.id.dealDescription);
+            String dealDescription = getArguments().getString("dealDescription");
+            dialogDealDescription.setText(dealDescription);
+
+            TextView dialogTC = (TextView) view.findViewById(R.id.dealTC);
+            String dealTC = getArguments().getString("dealTC");
+            dialogDealDescription.setText(dealDescription);
+            dialogTC.setText(dealTC);
+
+            //close dialog button
+            ImageView closeDialog = (ImageView) view.findViewById(R.id.closeDealDetailsDialog);
+            closeDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //Close dialog
+                    getDialog().dismiss();
+
+                }
+            });
+
+            return view;
+        }
+
+        /** The system calls this only when creating the layout in a dialog. */
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // The only reason you might override this method when using onCreateView() is
+            // to modify any dialog characteristics. For example, the dialog includes a
+            // title by default, but your custom layout might not need it. So here you can
+            // remove the dialog title, but you must call the superclass to get the Dialog.
+            Dialog dialog = super.onCreateDialog(savedInstanceState);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            return dialog;
+        }
+
     }
 
 }
