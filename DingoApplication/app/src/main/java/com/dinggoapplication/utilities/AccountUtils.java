@@ -1,4 +1,4 @@
-package com.dinggoapplication.utils;
+package com.dinggoapplication.utilities;
 
 /**
  * @author Lee Quee Leong & Seah Siu Ngee

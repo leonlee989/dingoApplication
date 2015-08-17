@@ -11,7 +11,7 @@ package com.dinggoapplication;
 import android.content.Context;
 
 import com.dinggoapplication.managers.PreferencesManager;
-import com.dinggoapplication.utils.ImageUtils;
+import com.dinggoapplication.utilities.ImageUtils;
 import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.CuisineType;

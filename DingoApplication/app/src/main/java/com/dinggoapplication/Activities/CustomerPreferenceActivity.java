@@ -24,7 +24,7 @@ import java.util.LinkedHashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 public class CustomerPreferenceActivity extends BaseActivity {
 

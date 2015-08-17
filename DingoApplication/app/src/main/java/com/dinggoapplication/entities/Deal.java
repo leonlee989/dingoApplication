@@ -1,6 +1,6 @@
 package com.dinggoapplication.entities;
 
-import com.dinggoapplication.utils.LogUtils;
+import com.dinggoapplication.utilities.LogUtils;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 

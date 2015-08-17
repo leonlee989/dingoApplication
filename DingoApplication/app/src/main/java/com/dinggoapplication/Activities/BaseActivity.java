@@ -24,13 +24,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dinggoapplication.R;
-import com.dinggoapplication.utils.LUtils;
+import com.dinggoapplication.utilities.LUtils;
 import com.dinggoapplication.widget.MultiSwipeRefreshLayout;
 
 import java.util.ArrayList;
 
-import static com.dinggoapplication.utils.LogUtils.LOGW;
-import static com.dinggoapplication.utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utilities.LogUtils.LOGW;
+import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * Created by siungee on 25/06/15.

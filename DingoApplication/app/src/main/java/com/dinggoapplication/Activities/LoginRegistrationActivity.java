@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dinggoapplication.R;
-import com.dinggoapplication.utils.LoginRegisterUtils;
+import com.dinggoapplication.utilities.LoginRegisterUtils;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;

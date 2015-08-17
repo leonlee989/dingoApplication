@@ -26,8 +26,8 @@ import com.dinggoapplication.widget.SlidingTabLayout;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.utils.LogUtils.LOGD;
-import static com.dinggoapplication.utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utilities.LogUtils.LOGD;
+import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within Eat and Drink page

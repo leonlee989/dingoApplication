@@ -47,7 +47,7 @@ import java.util.Locale;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within the single detail page for deals
