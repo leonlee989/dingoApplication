@@ -10,7 +10,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dinggoapplication.Activities.EatDrinkActivity"
+    tools:context="com.dinggoapplication.activities.EatDrinkActivity"
     android:background="@color/white">
 
     <ListView android:id="@+id/dealList"

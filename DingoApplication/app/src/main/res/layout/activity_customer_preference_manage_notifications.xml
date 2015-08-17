@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.dinggoapplication.Activities.CustomerPreferenceManageNotifications">
+    tools:context="com.dinggoapplication.activities.CustomerPreferenceManageNotifications">
 
     <TextView android:id="@+id/alertitle"
         android:text="@string/AlertTitle"

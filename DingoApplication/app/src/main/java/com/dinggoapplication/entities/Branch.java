@@ -1,6 +1,6 @@
 package com.dinggoapplication.entities;
 
-import com.dinggoapplication.Utils.LogUtils;
+import com.dinggoapplication.utils.LogUtils;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;

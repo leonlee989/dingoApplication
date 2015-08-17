@@ -1,4 +1,4 @@
-package com.dinggoapplication.Utils;
+package com.dinggoapplication.utils;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;

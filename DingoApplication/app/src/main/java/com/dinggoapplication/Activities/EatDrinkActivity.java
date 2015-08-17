@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,15 +19,15 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-import com.dinggoapplication.Fragments.CustomerViewAll;
-import com.dinggoapplication.Fragments.CustomerViewMap;
+import com.dinggoapplication.fragments.CustomerViewAll;
+import com.dinggoapplication.fragments.CustomerViewMap;
 import com.dinggoapplication.R;
 import com.dinggoapplication.widget.SlidingTabLayout;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.Utils.LogUtils.LOGD;
-import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utils.LogUtils.LOGD;
+import static com.dinggoapplication.utils.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within Eat and Drink page

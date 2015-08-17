@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Manager;
+package com.dinggoapplication.managers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,7 +21,6 @@ import java.util.LinkedHashMap;
 
 /**
  * Manager class that handles shared preference for the application
- * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by siungee on 06/03/15.

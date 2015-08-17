@@ -1,4 +1,4 @@
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.dinggoapplication.CustomInterface.DividerItemDecoration;
+import com.dinggoapplication.custom_ui.DividerItemDecoration;
 import com.dinggoapplication.R;
 
 import java.util.ArrayList;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utils.LogUtils.makeLogTag;
 
 public class MerchantReviews extends BaseActivity {
 

@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -23,8 +23,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.dinggoapplication.CustomInterface.RangeSeekBar;
-import com.dinggoapplication.Manager.PreferencesManager;
+import com.dinggoapplication.custom_ui.RangeSeekBar;
+import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
 

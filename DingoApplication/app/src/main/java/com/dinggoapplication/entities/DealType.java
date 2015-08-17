@@ -2,8 +2,8 @@ package com.dinggoapplication.entities;
 
 import android.graphics.Bitmap;
 
-import com.dinggoapplication.Utils.ImageUtils;
-import com.dinggoapplication.Utils.LogUtils;
+import com.dinggoapplication.utils.ImageUtils;
+import com.dinggoapplication.utils.LogUtils;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseFile;

@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Fragments;
+package com.dinggoapplication.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.dinggoapplication.Activities.DealDetailsActivity;
+import com.dinggoapplication.activities.DealDetailsActivity;
 import com.dinggoapplication.R;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;

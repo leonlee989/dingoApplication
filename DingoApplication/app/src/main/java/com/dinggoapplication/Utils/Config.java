@@ -6,12 +6,9 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Utils;
+package com.dinggoapplication.utils;
 
 import android.annotation.SuppressLint;
-
-import com.dinggoapplication.Manager.DealManager;
-import com.dinggoapplication.Manager.MerchantManager;
 
 import java.text.SimpleDateFormat;
 
@@ -26,10 +23,6 @@ public class Config {
     /** Standard date formatter */
     @SuppressLint("SimpleDateFormat")
     public static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-    /** Merchant manager class that handles all merchant objects */
-    public static MerchantManager merchantManager = new MerchantManager();
-    /** Deal manager class that handles all deal objects */
-    public static DealManager dealManager = new DealManager();
 
     /** Application Key for Parse Database */
     public static final String APPLICATION_ID = "knp8Hwmkxu7JoYA7fcZt6ABGT1Gw07W6Oyaxy4gn";

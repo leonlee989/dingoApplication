@@ -1,4 +1,4 @@
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -24,13 +24,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dinggoapplication.R;
-import com.dinggoapplication.Utils.LUtils;
+import com.dinggoapplication.utils.LUtils;
 import com.dinggoapplication.widget.MultiSwipeRefreshLayout;
 
 import java.util.ArrayList;
 
-import static com.dinggoapplication.Utils.LogUtils.LOGW;
-import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utils.LogUtils.LOGW;
+import static com.dinggoapplication.utils.LogUtils.makeLogTag;
 
 /**
  * Created by siungee on 25/06/15.

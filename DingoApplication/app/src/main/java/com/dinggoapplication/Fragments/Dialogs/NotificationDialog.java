@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Fragments.Dialogs;
+package com.dinggoapplication.fragments.Dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

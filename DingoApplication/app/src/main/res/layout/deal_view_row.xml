@@ -11,7 +11,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    tools:context="com.dinggoapplication.Activities.EatDrinkActivity">
+    tools:context="com.dinggoapplication.activities.EatDrinkActivity">
 
     <ImageView
         android:layout_width="80dp"

@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 
 import android.app.Dialog;
@@ -47,7 +47,7 @@ import java.util.Locale;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utils.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within the single detail page for deals
@@ -77,8 +77,6 @@ public class DealDetailsActivity extends BaseActivity{
     MapView mapView;
     /** Object /  instance that provide geo services */
     GoogleMap map;
-    /** Discount information of the deal */
-    String discount;
     /** Object that contains the latitude and longitude of the merchant's location */
     LatLng mLatLng;
 
@@ -133,8 +131,7 @@ public class DealDetailsActivity extends BaseActivity{
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            //get deal
-            //deal = Config.dealManager.getDeal(extras.getString("deal_referenceCode"));
+            // Retrieve deal from the deal manager class
             DealManager dealManager = DealManager.getInstance();
             deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
             branch = deal.getBranch();
@@ -216,39 +213,6 @@ public class DealDetailsActivity extends BaseActivity{
             } catch (ParseException e) {
                 Log.e(TAG, "Unable to parse cover image into Bitmap Object");
             }
-
-            /*if(deal instanceof PercentageDiscount){
-                double pDiscount = ((PercentageDiscount) deal).getPercentage();
-                discount = String.valueOf(pDiscount) + "% Off";
-                dDiscount.setText(discount);
-            } else if(deal instanceof TierDiscount){
-                double tierAmount = ((TierDiscount) deal).getTierAmount();
-                double tDiscount =  ((TierDiscount) deal).getDiscountAmount();
-                discount = "Spend $" + String.valueOf(tierAmount) + " get $" + String.valueOf(tDiscount) + " Off";
-                dDiscount.setText(discount);
-            }
-
-            //resize image resolution to device resolution
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(metrics.widthPixels,height);
-            imageView.setLayoutParams(layoutParams);
-            imageView.setImageBitmap(deal.getCoverImage());
-
-            //get rating
-            merchantRatingBar = (RatingBar) findViewById(R.id.merchantRating);
-
-            */
-            /*
-
-            if(deal instanceof PercentageDiscount){
-                double pDiscount = ((PercentageDiscount) deal).getPercentage();
-                discount = String.valueOf(pDiscount) + "% Off";
-                dDiscount.setText(discount);
-            } else if(deal instanceof TierDiscount){
-                double tierAmount = ((TierDiscount) deal).getTierAmount();
-                double tDiscount =  ((TierDiscount) deal).getDiscountAmount();
-                discount = "Spend $" + String.valueOf(tierAmount) + " get $" + String.valueOf(tDiscount) + " Off";
-                dDiscount.setText(discount);
-            }*/
 
             // Gets the MapView from the XML layout and creates it
             mapView = (MapView) findViewById(R.id.mapview);
@@ -359,7 +323,6 @@ public class DealDetailsActivity extends BaseActivity{
             closeDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     //Close dialog
                     getDialog().dismiss();
 
@@ -380,7 +343,5 @@ public class DealDetailsActivity extends BaseActivity{
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             return dialog;
         }
-
     }
-
 }

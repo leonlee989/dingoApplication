@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dinggoapplication.CustomInterface;
+package com.dinggoapplication.custom_ui;
 
         import android.content.Context;
         import android.content.res.TypedArray;

@@ -1,4 +1,4 @@
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import com.dinggoapplication.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utils.LogUtils.makeLogTag;
 
 public class DingedDealsActivity extends BaseActivity {
 

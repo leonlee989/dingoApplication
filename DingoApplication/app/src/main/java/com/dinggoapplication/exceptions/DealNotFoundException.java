@@ -6,12 +6,13 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.ErrorHandling;
+package com.dinggoapplication.exceptions;
 
-import com.dinggoapplication.Entity.Deal;
+import com.dinggoapplication.entities.Deal;
 
 /**
  * Exception class to handle deals objects
+ * @deprecated
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
  * Created by Leon on 23/2/2015.
@@ -77,7 +78,7 @@ public class DealNotFoundException extends Exception {
      */
     @Override
     public String getLocalizedMessage() {
-        return super.getLocalizedMessage() + ": " + deal.getReferenceCode() + " cannot be found!";
+        return super.getLocalizedMessage() + ": " + deal.getReferenceId() + " cannot be found!";
     }
 
     /**
@@ -87,6 +88,6 @@ public class DealNotFoundException extends Exception {
      */
     @Override
     public String getMessage() {
-        return super.getMessage() + ": " + deal.getReferenceCode() + " cannot be found!";
+        return super.getMessage() + ": " + deal.getReferenceId() + " cannot be found!";
     }
 }

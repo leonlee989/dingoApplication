@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.CustomInterface;
+package com.dinggoapplication.custom_ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -101,7 +101,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
     /** Event listener upon any event change on RangeSeekBar */
     private OnRangeSeekBarChangeListener<T> listener;
 
-    /** Default color of a {@link com.dinggoapplication.CustomInterface.RangeSeekBar}, #FF33B5E5. This is also known as "Ice Cream Sandwich" blue. */
+    /** Default color of a {@link com.dinggoapplication.custom_ui.RangeSeekBar}, #FF33B5E5. This is also known as "Ice Cream Sandwich" blue. */
     public static final int DEFAULT_COLOR = Color.argb(0xFF, 0x33, 0xB5, 0xE5);
     /** An invalid pointer id.*/
     public static final int INVALID_POINTER_ID = 255;

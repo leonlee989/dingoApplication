@@ -41,7 +41,7 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
-            android:name=".Activities.LoginRegistrationActivity"
+            android:name=".activities.LoginRegistrationActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/dingoThemeLogin" >
@@ -52,45 +52,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.EatDrinkActivity"
+            android:name=".activities.EatDrinkActivity"
             android:label="@string/title_activity_eat_drink"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.DealDetailsActivity"
+            android:name=".activities.DealDetailsActivity"
             android:label="@string/title_activity_customer_deal_details"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.DingedDealDetailsActivity"
+            android:name=".activities.DingedDealDetailsActivity"
             android:label="@string/title_activity_customer_dinged_deal"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.CustomerPreferenceActivity"
+            android:name=".activities.CustomerPreferenceActivity"
             android:label="@string/title_activity_customer_preferences"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.CustomerPreferenceManageNotifications"
+            android:name=".activities.CustomerPreferenceManageNotifications"
             android:label="@string/title_activity_customer_preference_manage_deals"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.CustomerPreferenceEat"
+            android:name=".activities.CustomerPreferenceEat"
             android:label="@string/title_activity_customer_preference_eat"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Activities.DingedDealsActivity"
+            android:name=".activities.DingedDealsActivity"
             android:label="@string/title_activity_dinged_deals" >
         </activity>
         <activity
-            android:name=".Activities.SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name=".Activities.MerchantReviews"
+            android:name=".activities.MerchantReviews"
             android:label="@string/title_activity_merchant_reviews" >
         </activity>
     </application>

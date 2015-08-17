@@ -1,4 +1,4 @@
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,8 +12,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.dinggoapplication.CustomInterface.RangeSeekBar;
-import com.dinggoapplication.Manager.PreferencesManager;
+import com.dinggoapplication.custom_ui.RangeSeekBar;
+import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
 
@@ -24,7 +24,7 @@ import java.util.LinkedHashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utils.LogUtils.makeLogTag;
 
 public class CustomerPreferenceActivity extends BaseActivity {
 

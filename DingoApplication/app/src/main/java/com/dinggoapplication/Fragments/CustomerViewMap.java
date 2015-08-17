@@ -6,26 +6,28 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Fragments;
+package com.dinggoapplication.fragments;
 
 import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dinggoapplication.Utils.Config;
-import com.dinggoapplication.Entity.Deal;
-import com.dinggoapplication.Entity.Merchant;
 import com.dinggoapplication.R;
+import com.dinggoapplication.entities.Branch;
+import com.dinggoapplication.entities.Deal;
+import com.dinggoapplication.managers.DealManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
 
@@ -194,17 +196,22 @@ public class CustomerViewMap extends Fragment {
      * Adding image and information with regards to every single deals onto the map
      */
     public void setAllDeals() {
-        // Sample displaying
-        ArrayList<Deal> dealList = Config.dealManager.getDealList();
+        try {
+            // Sample displaying
+            DealManager dealManager = DealManager.getInstance();
+            ArrayList<Deal> dealList = dealManager.getDealList();
 
-        for (Deal deal: dealList) {
-            Merchant merchant = deal.getMerchant();
+            for (Deal deal : dealList) {
+                Branch merchant = deal.getBranch();
 
-            mMap.addMarker(new MarkerOptions()
-                    .position(merchant.getLatLng())
-                    .title(merchant.getCompanyName())
-                    .snippet(deal.toString())
-                    .icon(BitmapDescriptorFactory.fromBitmap(merchant.getImage())));
+                mMap.addMarker(new MarkerOptions()
+                        .position(merchant.getLatLng())
+                        .title(merchant.getCompany().getCompanyName())
+                        .snippet(deal.toString())
+                        .icon(BitmapDescriptorFactory.fromBitmap(merchant.getCompany().getLogoImage())));
+            }
+        } catch (ParseException e) {
+            Log.e("Map", e.getMessage());
         }
     }
 }

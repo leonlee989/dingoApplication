@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.CustomInterface;
+package com.dinggoapplication.custom_ui;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

@@ -6,7 +6,7 @@
  * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
  */
 
-package com.dinggoapplication.Activities;
+package com.dinggoapplication.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dinggoapplication.Manager.PreferencesManager;
+import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
 
@@ -34,7 +34,7 @@ import java.util.LinkedHashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static com.dinggoapplication.Utils.LogUtils.makeLogTag;
+import static com.dinggoapplication.utils.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within customer settings page

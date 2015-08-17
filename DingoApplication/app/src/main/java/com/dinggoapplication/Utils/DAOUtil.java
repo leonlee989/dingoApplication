@@ -1,4 +1,4 @@
-package com.dinggoapplication.Utils;
+package com.dinggoapplication.utils;
 
 import android.content.Context;
 
@@ -11,7 +11,6 @@ import com.parse.Parse;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
-import com.parse.ParseUser;
 
 /**
  * @author Lee Quee Leong & Seah Siu Ngee

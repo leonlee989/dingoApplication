@@ -1,11 +1,10 @@
-package com.dinggoapplication.Utils;
+package com.dinggoapplication.utils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 /**
  * Utility class that deal with images handling and other required operations related to images

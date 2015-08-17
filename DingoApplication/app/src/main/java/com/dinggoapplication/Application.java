@@ -8,8 +8,8 @@
 
 package com.dinggoapplication;
 
-import com.dinggoapplication.Utils.Config;
-import com.dinggoapplication.Utils.DAOUtil;
+import com.dinggoapplication.utils.Config;
+import com.dinggoapplication.utils.DAOUtil;
 import com.dinggoapplication.managers.DealManager;
 import com.parse.ParseUser;
 

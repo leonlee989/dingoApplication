@@ -1,4 +1,4 @@
-package com.dinggoapplication.Utils;
+package com.dinggoapplication.utils;
 
 import android.os.Bundle;
 import android.util.Log;
