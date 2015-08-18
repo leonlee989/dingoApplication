@@ -29,6 +29,7 @@ import com.dinggoapplication.R;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
+import com.dinggoapplication.managers.ReviewManager;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
@@ -169,7 +170,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             // fragment is attached to one) that an item has been selected.
             Deal deal = this.dealList.get((this.dealList.size()-1) - position);
             mListener.onDealFragmentInteraction(deal.getReferenceId());
-            //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
+
+            ReviewManager reviewManager = ReviewManager.getInstance();
+            reviewManager.retrieveReviews(deal.getBranch().getCompany());
 
             Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
             intent.putExtra("deal_referenceCode", deal.getReferenceId());
