@@ -73,6 +73,7 @@ public class ReviewManager {
                             Log.d("Review", "Size of the list: " + list.size());
 
                             if (list.isEmpty()) {
+
                             } else {
                                 for (ParseObject objects : list) {
                                     Log.d("Review", objects.getString("comments"));
