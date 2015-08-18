@@ -1,8 +1,11 @@
 package com.dinggoapplication.utilities;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.dinggoapplication.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -39,13 +42,22 @@ public class LoginRegisterUtils {
     /** Provides access to the photos a person has uploaded or been tagged in: Require review from facebook */
             FB_REQUEST_PHOTO = false;
 
+    private static ProgressDialog progress;
+
     public static String getLogTag() {
         return LOG_TAG;
     }
 
-    public static void loadingStart(boolean showSpinner) {}
+    public static void loadingStart(Context context) {
+        progress = new ProgressDialog(context, R.style.loadingTheme);
+        progress.setCancelable(false);
+        progress.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+        progress.show();
+    }
 
-    public static void loadingFinish() {}
+    public static void loadingFinish() {
+        progress.dismiss();
+    }
 
     public static List<String> getFacebookPermissions() {
         List<String> permissions =  Arrays.asList("email", "public_profile");
