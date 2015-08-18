@@ -11,17 +11,24 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.dinggoapplication.custom_ui.DividerItemDecoration;
 import com.dinggoapplication.R;
+import com.dinggoapplication.custom_ui.DividerItemDecoration;
+import com.dinggoapplication.entities.Review;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
+/**
+ * @author Lee Quee Leong & Seah Siu Ngee
+ * @version 2.1
+ * Created by Siu Ngee on 8/8/2015.
+ */
 public class MerchantReviews extends BaseActivity {
-
+//TODO use review class in adapter list
     private static final String TAG = makeLogTag(MerchantReviews.class);
 
     private RecyclerView mRecyclerView;
@@ -53,7 +60,7 @@ public class MerchantReviews extends BaseActivity {
         mRecyclerView.setLayoutManager(mRVLayoutManager);
 
         // specify an adapter (see also next example)
-        mRVAdapter = new ReviewListAdapter(getDataSet());
+        mRVAdapter = new ReviewListAdapter(getReviewList());
         mRecyclerView.setAdapter(mRVAdapter);
 
         RecyclerView.ItemDecoration itemDecoration =
@@ -62,18 +69,23 @@ public class MerchantReviews extends BaseActivity {
 
     }
 
-    private ArrayList<String> getDataSet() {
-        ArrayList<String> results = new ArrayList<>();
-        results.add("user1");
-        results.add("user2");
-        results.add("user3");
-        results.add("user4");
+    private List<Review> getReviewList() {
+        List<Review> results = new ArrayList<>();
+        results.add(new Review());
         return results;
+    }
+    public  ReviewHeader getHeader()
+    {
+        ReviewHeader header = new ReviewHeader();
+        header.setHeader("I'm header");
+        return header;
     }
 
     private class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.ViewHolder> {
-        private ArrayList<String> mDataset;
+        private List<Review> mReviewList;
 
+        private static final int TYPE_HEADER = 0;
+        private static final int TYPE_ITEM = 1;
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
@@ -95,20 +107,20 @@ public class MerchantReviews extends BaseActivity {
             }
         }
 
-        public void add(int position, String item) {
-            mDataset.add(position, item);
+        public void add(int position, Review item) {
+            mReviewList.add(position, item);
             notifyItemInserted(position);
         }
 
         public void remove(String item) {
-            int position = mDataset.indexOf(item);
-            mDataset.remove(position);
+            int position = mReviewList.indexOf(item);
+            mReviewList.remove(position);
             notifyItemRemoved(position);
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public ReviewListAdapter(ArrayList<String> myDataset) {
-            mDataset = myDataset;
+        public ReviewListAdapter(List<Review> myReviewList) {
+            mReviewList = myReviewList;
         }
 
         /**
@@ -140,7 +152,7 @@ public class MerchantReviews extends BaseActivity {
             holder.mUsername.setText(mDataset.get(position));
 
             holder.txtFooter.setText("Footer: " + mDataset.get(position));*/
-            holder.mUsername.setText(mDataset.get(position));
+            holder.mUsername.setText((CharSequence) mReviewList.get(position));
         }
 
         /**
@@ -149,7 +161,7 @@ public class MerchantReviews extends BaseActivity {
          */
         @Override
         public int getItemCount() {
-            return mDataset.size();
+            return mReviewList.size();
         }
 
     }
@@ -167,6 +179,20 @@ public class MerchantReviews extends BaseActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    public class ReviewHeader {
+        //    More fields can be defined here after your need
+        private String header;
+
+        public ReviewHeader(){}
+
+        public String getHeader() {
+            return header;
+        }
+        public void setHeader(String header) {
+            this.header = header;
+        }
     }
 }
 

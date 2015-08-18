@@ -1,19 +1,11 @@
-/*
- * Copyright (C) Technify Pte Ltd - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
- * Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
- */
-
 package com.dinggoapplication.fragments;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.dinggoapplication.activities.DealDetailsActivity;
 import com.dinggoapplication.R;
+import com.dinggoapplication.activities.DealDetailsActivity;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
@@ -34,22 +26,16 @@ import com.parse.ParseException;
 import java.util.ArrayList;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * Large screen devices (such as tablets) are supported by replacing the ListView
- * with a GridView.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnDealFragmentInteractionListener}
- * interface.
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link DingedDealsRewards.OnFragmentInteractionListener} interface
+ * to handle interaction events.
  *
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
- * Created by leon on 18/02/15.
+ * Created by Siu Ngee on 18/8/2015.
  */
-public class CustomerViewAll extends Fragment implements AbsListView.OnItemClickListener {
-
-    /** Fragment listener for the activity that calls this fragment */
-    private OnDealFragmentInteractionListener mListener;
+public class DingedDealsRewards extends Fragment implements AbsListView.OnItemClickListener{
 
     /** The fragment's ListView/GridView */
     private AbsListView mListView;
@@ -57,61 +43,31 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     private ListAdapter mAdapter;
     /** All available deals in the system */
     private ArrayList<Deal> dealList;
+    /** Fragment listener for the activity that calls this fragment */
+    private OnFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CustomerViewAll() {
+    public DingedDealsRewards() {
         dealList = new ArrayList<>();
     }
 
-    /**
-     * Called to do initial creation of a fragment.  This is called after
-     * {@link #onAttach(Activity)} and before
-     * {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * <p/>
-     * <p>Note that this can be called while the fragment's activity is
-     * still in the process of being created.  As such, you can not rely
-     * on things like the activity's content view hierarchy being initialized
-     * at this point.  If you want to do work once the activity itself is
-     * created, see {@link #onActivityCreated(Bundle)}.
-     *
-     * @param savedInstanceState If the fragment is being re-created from
-     *                           a previous saved state, this is the state.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //TODO retrieve list of dingedDeals from parse filtered by status == completed && reviewed == false
         DealManager dealManager = DealManager.getInstance();
         this.dealList = dealManager.getDealList();
         mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
     }
 
-
-    /**
-     * Called to have the fragment instantiate its user interface view.
-     * This is optional, and non-graphical fragments can return null (which
-     * is the default implementation).  This will be called between
-     * {@link #onCreate(Bundle)} and {@link #onActivityCreated(Bundle)}.
-     * <p/>
-     * <p>If you return a View from here, you will later be called in
-     * {@link #onDestroyView} when the view is being released.
-     *
-     * @param inflater           The LayoutInflater object that can be used to inflate
-     *                           any views in the fragment,
-     * @param container          If non-null, this is the parent view that the fragment's
-     *                           UI should be attached to.  The fragment should not add the view itself,
-     *                           but this can be used to generate the LayoutParams of the view.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     *                           from a previous saved state as given here.
-     * @return Return the View for the fragment's UI, or null.
-     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.customer_all_tab, container, false);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_dinged_deals_rewards, container, false);
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.dealList);
         mListView.setAdapter(mAdapter);
@@ -122,27 +78,17 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         return view;
     }
 
-    /**
-     * Called when a fragment is first attached to its activity.
-     * {@link #onCreate(Bundle)} will be called after this.
-     *
-     * @param activity  Activity class that the fragment is attached to
-     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnDealFragmentInteractionListener) activity;
+            mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
 
-    /**
-     * Called when the fragment is no longer attached to its activity.  This
-     * is called after {@link #onDestroy()}.
-     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -168,7 +114,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             Deal deal = this.dealList.get((this.dealList.size()-1) - position);
-            mListener.onDealFragmentInteraction(deal.getReferenceId());
+            mListener.onFragmentInteraction(deal.getReferenceId());
             //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
@@ -198,14 +144,14 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      * to the activity and potentially other fragments contained in that
      * activity.
      */
-    public interface OnDealFragmentInteractionListener {
+    public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
 
         /**
          * This method allows interactions with the activity class who implements this listener by its id
          * @param id    ID of the fragment to be identify in the activity class
          */
-        void onDealFragmentInteraction(String id);
+        void onFragmentInteraction(String id);
     }
 
     /**
@@ -261,6 +207,8 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
                 dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
 
                 TextView additionInfo = (TextView) rowView.findViewById(R.id.addtionalInfo);
+
+                //TODO set to timeLeft
                 additionInfo.setText("500 m");
 
             } catch (ParseException e) {
@@ -270,4 +218,5 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             return rowView;
         }
     }
+
 }

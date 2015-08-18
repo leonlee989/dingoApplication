@@ -42,7 +42,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
 
     private EditText txtUsername;
     private EditText txtPassword;
-
+    Context mContext;
     /**
      * Called when the activity is starting.  This is where most initializationboss
      * should go: calling {@link #setContentView(int)} to inflate the
@@ -81,6 +81,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         findViewById(R.id.login).setOnClickListener(loginListener);
         findViewById(R.id.register).setOnClickListener(registerListener);
         findViewById(R.id.skip).setOnClickListener(skipListener);
+        mContext = this;
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {
@@ -91,14 +92,14 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
          */
         @Override
         public void onClick(View v) {
-            String username = txtUsername.getText().toString();
-            String password = txtPassword.getText().toString();
+            String username = "seahsiungee";
+            String password = "1234567";
 
-            //LoginRegisterUtils.loadingStart(true);
             if (editTextExceptionHandler(username, password)) {
+                LoginRegisterUtils.loadingStart(mContext);
                 // TODO: Login in by email address
                 if (username.contains("@")) {
-                    Log.d("Login", "Login with email address");
+
                 } else {
                     // Login by user name
                     ParseUser.logInInBackground(username, password, manualLoginCallBack);
@@ -150,7 +151,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
                     parseUser.setPassword(password);
                     LoginRegisterUtils.setOtherInfo(parseUser);
 
-                    //LoginRegisterUtils.loadingStart(true);
+                    LoginRegisterUtils.loadingStart(mContext);
                     parseUser.signUpInBackground(manualSignUpCallBack);
                 } else {
                     showToast(R.string.sign_up_failed_invalid_email);
@@ -382,4 +383,5 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
     protected void showToast(CharSequence text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
+
 }

@@ -73,7 +73,7 @@ public class EatDrinkActivity extends BaseActivity implements
         setContentView(R.layout.activity_eat_drink);
         getActionBarToolbar();
 
-        // Create the adapter that will return a fragment for each of the three primary sections
+        // Create the adapter that will return a fragment for each of the two primary sections
         mAppSectionPagerAdapter = new AppSectionPagerAdapter(getSupportFragmentManager(), getApplicationContext());
 
         //Set up the viewpager, attaching the adapter and setting up a listener for when the user
