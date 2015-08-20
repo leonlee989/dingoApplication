@@ -19,9 +19,10 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.dinggoapplication.R;
+import com.dinggoapplication.fragments.AllCompanies;
 import com.dinggoapplication.fragments.CustomerViewAll;
 import com.dinggoapplication.fragments.CustomerViewMap;
-import com.dinggoapplication.R;
 import com.dinggoapplication.widget.SlidingTabLayout;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -42,7 +43,8 @@ import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
  */
 public class EatDrinkActivity extends BaseActivity implements
         CustomerViewAll.OnDealFragmentInteractionListener,
-        CustomerViewMap.OnMapFragmentInteractionListener {
+        CustomerViewMap.OnMapFragmentInteractionListener,
+        AllCompanies.OnCompanyFragmentInteractionListener{
 
     private static final String TAG = makeLogTag(EatDrinkActivity.class);
 
@@ -153,6 +155,10 @@ public class EatDrinkActivity extends BaseActivity implements
                     fragment = new CustomerViewAll();
                     break;
                 case 1:
+                    //fragment = new CustomerViewMap();
+                    fragment = new AllCompanies();
+                    break;
+                case 2:
                     fragment = new CustomerViewMap();
                     break;
             }
@@ -164,7 +170,7 @@ public class EatDrinkActivity extends BaseActivity implements
          */
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         /**
@@ -201,11 +207,25 @@ public class EatDrinkActivity extends BaseActivity implements
     /**
      * This method allows interactions with the activity class who implements this listener by its id
      * <p>
-     * Fragment interaction from Map Fragment
+     * Fragment interaction from all deals fragment
+     *
+     * @param id ID of the fragment to be identify in the activity class
      */
     @Override
-    public void onMapFragmentInteraction() {
-        // Fragment interaction from Map Fragment
+    public void onMapFragmentInteraction(String id) {
+
+    }
+
+    /**
+     * This method allows interactions with the activity class who implements this listener by its id
+     * <p>
+     * Fragment interaction from all deals fragment
+     *
+     * @param id ID of the fragment to be identify in the activity class
+     */
+    @Override
+    public void OnCompanyFragmentInteraction(String id) {
+
     }
 
     /**

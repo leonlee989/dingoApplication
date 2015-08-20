@@ -302,9 +302,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         protected ArrayList<Deal> doInBackground(Void... params) {
             Log.d(TAG, "doInBackground() invoked");
             HashMap<String, Deal> cachedDealList = new HashMap<>();
-            new Thread(new Runnable() {
+            //dealManager.updateCacheList();
+            /*new Thread(new Runnable() {
                 public void run() {
-                    dealManager.updateCacheList();
+                    Log.d(TAG, "new thread run() invoked");
+
 
                 }
             }).start();
@@ -312,14 +314,16 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
                 cachedDealList = dealManager.getFromCache();
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
-            return new ArrayList<>(cachedDealList.values());
+            }*/
+            //return new ArrayList<>(cachedDealList.values());
+            return new ArrayList<>(dealManager.updateCacheList().values());
         }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(TAG, "onPreExecute() invoked");
             this.progress.show();
+
             //progress.setVisibility(View.VISIBLE);
             //progress.setIndeterminate(true);
             Log.d(TAG, progress.toString());
@@ -329,9 +333,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         protected void onPostExecute(ArrayList<Deal> deals) {
             Log.d(TAG, "onPostExecute() invoked: " + deals.toString());
             this.progress.hide();
-            dealList = dealManager.getDealList();
-            Log.d(TAG, dealList.toString());
-            mAdapter = new DealArrayAdapter(getActivity(), dealList);
+            //dealList = dealManager.getDealList();
+            Log.d(TAG, deals.toString());
+            mAdapter = new DealArrayAdapter(getActivity(), deals);
             mListView.setAdapter(mAdapter);
 
             // Set OnItemClickListener so we can be notified on item clicks

@@ -16,7 +16,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -117,14 +116,7 @@ public class DealDetailsActivity extends BaseActivity{
 
         final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
-        final Toolbar toolbar = getActionBarToolbar();
-        toolbar.setNavigationIcon(R.drawable.ic_up);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        setToolbarNavigationUp(getActionBarToolbar());
 
         dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
 

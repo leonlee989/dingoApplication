@@ -93,6 +93,10 @@
             android:name=".activities.MerchantReviews"
             android:label="@string/title_activity_merchant_reviews" >
         </activity>
+        <activity
+            android:name=".activities.MerchantDetails"
+            android:label="@string/title_activity_merchant_details" >
+        </activity>
     </application>
 
 </manifest>

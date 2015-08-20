@@ -15,6 +15,7 @@
     <string name="display_fragment">Hello fragment</string>
     <string name="collection">Collection</string>
     <string name="external_activity">External Activity</string>
+    <string name="companyName">Four Seasons Chicken</string>
     <string name="url">www.google.com</string>
     <string name="tel">60001234</string>
     <string name="address">"Peach Garden @ Thomson Plaza\n301 Upper Thomson Road\n#01-88, Thomson Plaza\nSingapore 574408"</string>
@@ -68,7 +69,8 @@
 
     <!-- ActionBar Titles -->
     <string name="eatDrink_tabText_1">All</string>
-    <string name="eatDrink_tabText_2">Map</string>
+    <string name="eatDrink_tabText_2">Merchants</string>
+    <string name="eatDrink_tabText_3">Map</string>
     <string name="dingedDeals_tabText_1">Ongoing</string>
     <string name="dingedDeals_tabText_2">Rewards</string>
     <string name="title_activity_customer">CustomerActivity</string>
@@ -121,15 +123,15 @@
     <string name="title_activity_customer_dinged_deal">Dinged Deal Detail</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_customer_preferences">Preferences</string>
-    <string name="title_activity_customer_preference_manage_deals">CustomerPreferenceManageDeals
-    </string>
+    <string name="title_activity_customer_preference_manage_deals">CustomerPreferenceManageDeals</string>
     <string name="title_activity_customer_preference_eat">CustomerPreferenceEat</string>
     <string name="demo_min_label">Min</string>
     <string name="demo_max_label">Max</string>
     <string name="title_activity_landing">LandingActivity</string>
     <string name="title_activity_dinged_deals">Dinged Deals</string>
-    <string name="title_activity_customer_preference">CustomerPreference</string>
-    <string name="title_activity_merchant_reviews">MerchantReviews</string>
+    <string name="title_activity_customer_preference">Customer Preference</string>
+    <string name="title_activity_merchant_reviews">Merchant Reviews</string>
+    <string name="title_activity_merchant_details">Merchant Details</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

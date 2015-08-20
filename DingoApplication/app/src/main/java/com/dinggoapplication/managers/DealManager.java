@@ -5,8 +5,6 @@ import android.util.Log;
 import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
-import com.parse.DeleteCallback;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -70,29 +68,34 @@ public class DealManager {
      * Update the deal list and the local database pulled from Parse database according to user's
      * settings and preferences
      */
-    public void updateCacheList() {
+    public HashMap<String, Deal> updateCacheList(){
         ParseQuery<ParseObject> query = ParseQuery.getQuery(parseClassName);
+        List<ParseObject> parseObjects = new ArrayList<>();
+        try {
 
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(final List<ParseObject> parseObjects, ParseException e) {
-                if (e != null) {
-                    Log.e("Deal", "Unable to find deals from Parse Database:\n" + e.getMessage());
-                    return;
+            parseObjects = query.find();
+
+            rePinInBackground(parseObjects);
+
+            return getFromCache();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new HashMap<>();
+
+    }
+    private void rePinInBackground(final List<ParseObject> parseObjects) {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    ParseObject.unpinAll("dealList");
+                    ParseObject.pinAll("dealList", parseObjects);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
                 }
-
-                // Remove previously cache data
-                ParseObject.unpinAllInBackground("dealList", new DeleteCallback() {
-
-                    @Override
-                    public void done(ParseException e) {
-                        // Cache new results
-                        ParseObject.pinAllInBackground("dealList", parseObjects);
-                        afterQueryProcessing(parseObjects);
-                    }
-                });
             }
-        });
+        }).start();
     }
 
     /**
