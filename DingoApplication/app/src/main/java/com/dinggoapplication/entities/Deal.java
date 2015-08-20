@@ -15,7 +15,7 @@ import java.util.Date;
 @ParseClassName("deal")
 public class Deal extends ParseObject {
 
-    /** Column name for cuisine name field */
+    /** Column name for Deal field */
     private final String COLUMN_BRANCH_ID = "branch_id",
             COLUMN_DEAL_NAME = "dealName",
             COLUMN_DESC = "description",
