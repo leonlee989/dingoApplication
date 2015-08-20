@@ -12,8 +12,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ContentLoadingProgressBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +27,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.dinggoapplication.activities.DealDetailsActivity;
 import com.dinggoapplication.R;
+import com.dinggoapplication.activities.DealDetailsActivity;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
@@ -33,6 +36,9 @@ import com.dinggoapplication.managers.ReviewManager;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * A fragment representing a list of Items.
@@ -59,6 +65,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     /** All available deals in the system */
     private ArrayList<Deal> dealList;
 
+
+    DealManager dealManager;
+    private static final String TAG = makeLogTag(CustomerViewAll.class);
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -84,10 +93,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate() invoked");
+        dealManager = DealManager.getInstance();
+        /*this.dealList = dealManager.getDealList();
+        mAdapter = new DealArrayAdapter(getActivity(), this.dealList);*/
 
-        DealManager dealManager = DealManager.getInstance();
-        this.dealList = dealManager.getDealList();
-        mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
     }
 
 
@@ -111,14 +121,17 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView() invoked");
         View view = inflater.inflate(R.layout.customer_all_tab, container, false);
 
+        new loadDealList(view, this).execute();
+
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(R.id.dealList);
+        /*mListView = (AbsListView) view.findViewById(R.id.dealList);
         mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+        mListView.setOnItemClickListener(this);*/
 
         return view;
     }
@@ -168,7 +181,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            Deal deal = this.dealList.get((this.dealList.size()-1) - position);
+            Deal deal = this.dealList.get((this.dealList.size() - 1) - position);
             mListener.onDealFragmentInteraction(deal.getReferenceId());
             //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
 
@@ -228,6 +241,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
          */
         public DealArrayAdapter(Context context, ArrayList<Deal> dealList) {
             super(context, R.layout.deal_view_row, dealList);
+            Log.d(TAG, "DealArrayAdapter() invoked");
             this.context = context;
             this.dealList = dealList;
         }
@@ -242,6 +256,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
          */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            Log.d(TAG, "getView() invoked");
             LayoutInflater inflater = getActivity().getLayoutInflater();
 
             View rowView = inflater.inflate(R.layout.deal_view_row, parent, false);
@@ -272,6 +287,59 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             }
 
             return rowView;
+        }
+    }
+
+    private class loadDealList extends AsyncTask<Void, ArrayList<Deal>, ArrayList<Deal>> {
+
+        ContentLoadingProgressBar progress;
+        AdapterView.OnItemClickListener listener;
+        public loadDealList( View view, AdapterView.OnItemClickListener listener){
+            Log.d(TAG, "loadDealList() invoked");
+            this.progress = (ContentLoadingProgressBar) view.findViewById(R.id.loading);
+            // Set the adapter
+            mListView = (AbsListView) view.findViewById(R.id.dealList);
+            this.listener = listener;
+        }
+
+        @Override
+        protected ArrayList<Deal> doInBackground(Void... params) {
+            Log.d(TAG, "doInBackground() invoked");
+            HashMap<String, Deal> cachedDealList = new HashMap<>();
+            new Thread(new Runnable() {
+                public void run() {
+                    dealManager.updateCacheList();
+
+                }
+            }).start();
+            try {
+                cachedDealList = dealManager.getFromCache();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return new ArrayList<>(cachedDealList.values());
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.d(TAG, "onPreExecute() invoked");
+            this.progress.show();
+            //progress.setVisibility(View.VISIBLE);
+            //progress.setIndeterminate(true);
+            Log.d(TAG, progress.toString());
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Deal> deals) {
+            Log.d(TAG, "onPostExecute() invoked: " + deals.toString());
+            this.progress.hide();
+            dealList = dealManager.getDealList();
+            Log.d(TAG, dealList.toString());
+            mAdapter = new DealArrayAdapter(getActivity(), dealList);
+            mListView.setAdapter(mAdapter);
+
+            // Set OnItemClickListener so we can be notified on item clicks
+            mListView.setOnItemClickListener(this.listener);
         }
     }
 }

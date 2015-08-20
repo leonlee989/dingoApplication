@@ -95,6 +95,8 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
             String username = "seahsiungee";
             String password = "1234567";
 
+            loginSuccess();
+            /*
             if (editTextExceptionHandler(username, password)) {
                 LoginRegisterUtils.loadingStart(mContext);
                 // TODO: Login in by email address
@@ -105,6 +107,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
                     ParseUser.logInInBackground(username, password, manualLoginCallBack);
                 }
             }
+             */
         }
     };
 

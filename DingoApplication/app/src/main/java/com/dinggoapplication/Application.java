@@ -51,7 +51,7 @@ public class Application extends android.app.Application {
 
         // Cache deal information according to user preferences
         DealManager dealManager = DealManager.getInstance();
-        dealManager.updateCacheList();
+        //dealManager.updateCacheList();
 
         // Initializing custom font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
