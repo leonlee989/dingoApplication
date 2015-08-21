@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,14 +39,7 @@ public class MerchantReviews extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchant_reviews);
 
-        final Toolbar toolbar = getActionBarToolbar();
-        toolbar.setNavigationIcon(R.drawable.ic_up);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        setToolbarNavigationUp(getActionBarToolbar());
 
         mRecyclerView = (RecyclerView) findViewById(R.id.merchant_reviews_recycler_view);
 

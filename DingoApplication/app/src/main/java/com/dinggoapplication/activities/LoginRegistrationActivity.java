@@ -99,12 +99,12 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
             LoginRegisterUtils.loadingStart(mContext);
             // TODO: Login in by email address
             if (username.contains("@")) {
-
             } else {
                 // Login by user name
                 ParseUser.logInInBackground(username, password, manualLoginCallBack);
             }
         }
+
         }
     };
 

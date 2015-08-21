@@ -136,8 +136,9 @@ public class CustomerViewMap extends Fragment {
     public interface OnMapFragmentInteractionListener {
         /**
          * This method allows interactions with the activity class who implements this listener by its id
+         * @param id    ID of the fragment to be identify in the activity class
          */
-        void onMapFragmentInteraction();
+        void onMapFragmentInteraction(String id);
     }
 
     /**

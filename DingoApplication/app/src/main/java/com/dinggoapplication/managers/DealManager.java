@@ -70,52 +70,32 @@ public class DealManager {
      * Update the deal list and the local database pulled from Parse database according to user's
      * settings and preferences
      */
-    public HashMap<String, Deal> updateCacheList() throws ParseException {
-        //Handler mHandler = new Handler(Looper.myLooper());
-        //ExecutorService executorService = Executors.newFixedThreadPool(1);
-        //final Runnable worker = new UpdateCache();
-        //mHandler.post(worker);
-        //executorService.execute(worker);
+    public HashMap<String, Deal> updateCacheList(){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(parseClassName);
+        List<ParseObject> parseObjects = new ArrayList<>();
+        try {
 
-        //while (!executorService.isTerminated()) {}
-        //activity.runOnUiThread(worker);
+            parseObjects = query.find();
+            rePinInBackground(parseObjects);
+            return getFromCache();
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new HashMap<>();
+
+    }
+    private void rePinInBackground(final List<ParseObject> parseObjects) {
         new Thread(new Runnable() {
-            @Override
             public void run() {
                 try {
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery(parseClassName);
-                    Deal.pinAll(query.find());
-                    Log.d("CustomerViewAll", "Deal Retrieved");
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                    ParseObject.unpinAll("dealList");
+                    ParseObject.pinAll("dealList", parseObjects);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
                 }
             }
         }).start();
-
-        return getFromCache();
-
-        /*
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(final List<ParseObject> parseObjects, ParseException e) {
-                if (e != null) {
-                    Log.e("Deal", "Unable to find deals from Parse Database:\n" + e.getMessage());
-                    return;
-                }
-                // Remove previously cache data
-                ParseObject.unpinAllInBackground("dealList", new DeleteCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        // Cache new results
-                        ParseObject.pinAllInBackground("dealList", parseObjects);
-
-                        Log.d("CustomerViewAll", "Retrieve Deals 2");
-                    }
-                });
-            }
-        });
-        */
     }
 
     /**

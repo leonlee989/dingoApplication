@@ -417,6 +417,18 @@ public abstract class BaseActivity extends AppCompatActivity implements
         return mActionBarToolbar;
     }
 
+    protected void setToolbarNavigationUp(Toolbar toolbar) {
+        if (toolbar != null) {
+            toolbar.setNavigationIcon(R.drawable.ic_up);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+        }
+    }
+
     protected void autoShowOrHideActionBar(boolean show) {
         if (show == mActionBarShown) {
             return;
@@ -518,5 +530,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
             LOGW(TAG, "No view with ID main_content to fade in.");
         }
     }
+
+
 
 }

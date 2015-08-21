@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:text="@string/long_text"
         android:maxLines="5"
+        android:ellipsize="end"
         android:textSize="16sp"
         android:paddingBottom="10dp"
         android:paddingTop="5dp"

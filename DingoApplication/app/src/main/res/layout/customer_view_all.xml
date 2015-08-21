@@ -16,7 +16,6 @@
     <ListView android:id="@+id/dealList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-        <!--android:layout_below="@+id/dealHeader"-->
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id='@+id/loading'
@@ -30,5 +29,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center" />
-        <!--android:layout_below="@+id/dealHeader"-->
+
 </RelativeLayout>
