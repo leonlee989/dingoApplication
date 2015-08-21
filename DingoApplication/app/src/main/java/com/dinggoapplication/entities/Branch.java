@@ -13,8 +13,11 @@ import com.parse.ParseObject;
  */
 @ParseClassName("branch")
 public class Branch extends ParseObject {
+    /** Name of the table */
+    public static final String TABLE_NAME = "branch";
+
     /** Column name in the Parse Database */
-    private final String COLUMN_COMPANY_ID = "companyId",
+    public static final String COLUMN_COMPANY_ID = "companyId",
             COLUMN_ADDRESS1 = "address1",
             COLUMN_ADDRESS2 = "address2",
             COLUMN_CITY = "city",

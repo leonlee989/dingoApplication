@@ -17,6 +17,8 @@ import com.parse.ParseObject;
  */
 @ParseClassName("company")
 public class Company extends ParseObject {
+    /** Mame of the table */
+    public static final String TABLE_NAME = "company";
 
     /** Column name in the Parse Database */
     private final String COLUMN_COMPANY_NAME = "companyName",

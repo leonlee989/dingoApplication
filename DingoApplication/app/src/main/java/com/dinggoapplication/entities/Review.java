@@ -13,8 +13,11 @@ import com.parse.ParseUser;
 @ParseClassName("review")
 public class Review extends ParseObject {
 
+    /** Name of the table */
+    public static final String TABLE_NAME = "review";
+
     /** Column names for Review fields */
-    private final String COLUMN_USER = "user",
+    public static final String COLUMN_USER = "user",
             COLUMN_DEAL_ID = "referenceId",
             COLUMN_COMPANY_ID = "companyId",
             COLUMN_FOOD_RATING = "food_drink",

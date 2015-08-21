@@ -18,8 +18,11 @@ import com.parse.ParseObject;
 @ParseClassName("deal_type")
 public class DealType extends ParseObject {
 
+    /** Name of the table */
+    public static final String TABLE_NAME = "deal_type";
+
     /** Column name for cuisine name field */
-    private final String COLUMN_NAME = "typeName",
+    public static final String COLUMN_NAME = "typeName",
             COLUMN_IMAGE = "image",
             COLUMN_DESC = "description";
 

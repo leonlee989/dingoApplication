@@ -18,7 +18,6 @@ import com.parse.ParseObject;
  * Created by Leon on 27/6/2015.
  */
 public class DAOUtil {
-
     /**
      * Initialization of Parse database for the application
      * @param context   Context object that contains all resources in the application

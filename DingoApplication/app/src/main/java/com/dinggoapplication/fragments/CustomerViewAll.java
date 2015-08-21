@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.util.Log;
@@ -65,6 +67,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     /** All available deals in the system */
     private ArrayList<Deal> dealList;
 
+    private View view;
 
     DealManager dealManager;
     private static final String TAG = makeLogTag(CustomerViewAll.class);
@@ -122,10 +125,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView() invoked");
-        View view = inflater.inflate(R.layout.customer_all_tab, container, false);
+        view = inflater.inflate(R.layout.customer_all_tab, container, false);
 
         new loadDealList(view, this).execute();
 
+        Log.d(TAG, "Testing 123");
         // Set the adapter
         /*mListView = (AbsListView) view.findViewById(R.id.dealList);
         mListView.setAdapter(mAdapter);
@@ -294,9 +298,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
 
         ContentLoadingProgressBar progress;
         AdapterView.OnItemClickListener listener;
-        public loadDealList( View view, AdapterView.OnItemClickListener listener){
+
+        public loadDealList(View view, AdapterView.OnItemClickListener listener){
             Log.d(TAG, "loadDealList() invoked");
             this.progress = (ContentLoadingProgressBar) view.findViewById(R.id.loading);
+
             // Set the adapter
             mListView = (AbsListView) view.findViewById(R.id.dealList);
             this.listener = listener;
@@ -304,7 +310,10 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
 
         @Override
         protected ArrayList<Deal> doInBackground(Void... params) {
+
             Log.d(TAG, "doInBackground() invoked");
+            DealManager dealManager = DealManager.getInstance();
+            /*
             HashMap<String, Deal> cachedDealList = new HashMap<>();
             new Thread(new Runnable() {
                 public void run() {
@@ -312,18 +321,25 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
 
                 }
             }).start();
+
+            */
+
             try {
-                cachedDealList = dealManager.getFromCache();
+                ArrayList<Deal> deals = new ArrayList<>(dealManager.updateCacheList().values());
+                return deals;
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            return new ArrayList<>(cachedDealList.values());
+
+            return new ArrayList<>();
+
         }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(TAG, "onPreExecute() invoked");
-            this.progress.show();
+
+            progress.show();
             //progress.setVisibility(View.VISIBLE);
             //progress.setIndeterminate(true);
             Log.d(TAG, progress.toString());
@@ -333,9 +349,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         protected void onPostExecute(ArrayList<Deal> deals) {
             Log.d(TAG, "onPostExecute() invoked: " + deals.toString());
             this.progress.hide();
-            dealList = dealManager.getDealList();
-            Log.d(TAG, dealList.toString());
-            mAdapter = new DealArrayAdapter(getActivity(), dealList);
+
+            Log.d(TAG, deals.toString());
+            mAdapter = new DealArrayAdapter(getActivity(), deals);
             mListView.setAdapter(mAdapter);
 
             // Set OnItemClickListener so we can be notified on item clicks

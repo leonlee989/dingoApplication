@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +59,14 @@ public class DingedDealsOngoing extends Fragment implements AbsListView.OnItemCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO retrieve list of dingedDeals from parse filtered by status == ongoing
-        DealManager dealManager = DealManager.getInstance();
-        this.dealList = dealManager.getDealList();
-        mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
+        try {
+            //TODO retrieve list of dingedDeals from parse filtered by status == ongoing
+            DealManager dealManager = DealManager.getInstance();
+            this.dealList = dealManager.getDealList();
+            mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
+        } catch (ParseException e) {
+            Log.e("DingedDealsOngoing", e.getMessage());
+        }
     }
 
     @Override

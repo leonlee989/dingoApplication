@@ -12,8 +12,11 @@ import com.parse.ParseObject;
  */
 @ParseClassName("cuisine_type")
 public class CuisineType extends ParseObject {
+    /** Name of the table */
+    public static final String TABLE_NAME = "cuisine_type";
+
     /** Column name for cuisine name field */
-    private final String CUISINE_NAME = "cuisineName";
+    public static final String CUISINE_NAME = "cuisineName";
 
     /** Default constructor to instantiate Cuisine Type */
     public CuisineType() {}

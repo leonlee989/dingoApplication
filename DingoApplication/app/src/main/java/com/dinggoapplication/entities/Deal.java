@@ -14,9 +14,11 @@ import java.util.Date;
  */
 @ParseClassName("deal")
 public class Deal extends ParseObject {
+    /** Mame of the table */
+    public final static String TABLE_NAME = "deal";
 
     /** Column name for Deal field */
-    private final String COLUMN_BRANCH_ID = "branch_id",
+    public final static String COLUMN_BRANCH_ID = "branch_id",
             COLUMN_DEAL_NAME = "dealName",
             COLUMN_DESC = "description",
             COLUMN_DEAL_TYPE = "dealType",

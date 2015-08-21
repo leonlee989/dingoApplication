@@ -133,11 +133,12 @@ public class DealDetailsActivity extends BaseActivity{
 
             // Retrieve deal from the deal manager class
             DealManager dealManager = DealManager.getInstance();
-            deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
-            branch = deal.getBranch();
-            merchant = branch.getCompany();
 
             try {
+                deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
+                branch = deal.getBranch();
+                merchant = branch.getCompany();
+
                 imageView = (ImageView) findViewById(R.id.dealImage);
                 toolbarLayout.setTitle(merchant.getCompanyName());
                 toolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
