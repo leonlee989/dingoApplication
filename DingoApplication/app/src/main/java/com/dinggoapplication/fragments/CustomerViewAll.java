@@ -161,7 +161,7 @@ public class CustomerViewAll extends Fragment
 
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
-        }*/s
+        }*/
     }
 
     /**
