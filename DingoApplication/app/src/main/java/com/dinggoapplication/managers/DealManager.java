@@ -69,13 +69,11 @@ public class DealManager {
      * settings and preferences
      */
     public HashMap<String, Deal> updateCacheList(){
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(parseClassName);
-        List<ParseObject> parseObjects = new ArrayList<>();
+
         try {
-
-            parseObjects = query.find();
-
-            rePinInBackground(parseObjects);
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(parseClassName);
+            ParseObject.unpinAll("dealList");
+            ParseObject.pinAll("dealList", query.find());
 
             return getFromCache();
 
@@ -84,18 +82,6 @@ public class DealManager {
         }
         return new HashMap<>();
 
-    }
-    private void rePinInBackground(final List<ParseObject> parseObjects) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    ParseObject.unpinAll("dealList");
-                    ParseObject.pinAll("dealList", parseObjects);
-                } catch (ParseException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        }).start();
     }
 
     /**

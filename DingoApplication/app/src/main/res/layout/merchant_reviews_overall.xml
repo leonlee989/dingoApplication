@@ -15,7 +15,7 @@
         android:paddingTop="10dp">
 
         <TextView
-            android:id="@+id/overallRating"
+            android:id="@+id/overallRatingScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="46sp"
@@ -24,7 +24,7 @@
             android:layout_gravity="center" />
 
         <RatingBar
-            android:id="@+id/merchantRating_small"
+            android:id="@+id/overallRB"
             style="@style/RatingBar.Small"
             android:isIndicator="true"
             android:rating="4"
@@ -35,7 +35,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal">
             <TextView
-                android:id="@+id/reviewCounter"
+                android:id="@+id/numberOfReviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -70,16 +70,16 @@
             android:layout_marginBottom="5dp"
             android:gravity="center_horizontal">
             <TextView
-                android:id="@+id/foodAndDrinkTV"
+                android:id="@+id/overallFoodDrinkTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:paddingLeft="5dp"
                 android:paddingRight="15dp"
-                android:text="Food/ Drink" />
+                android:text="@string/foodDrink" />
             <RatingBar
-                android:id="@+id/foodAndDrinkRB"
+                android:id="@+id/overallFoodDrinkRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
                 android:rating="4" />
@@ -91,16 +91,16 @@
             android:layout_marginBottom="5dp"
             android:gravity="center_horizontal">
             <TextView
-                android:id="@+id/valueTV"
+                android:id="@+id/overallValueTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:paddingLeft="5dp"
                 android:paddingRight="15dp"
-                android:text="Value" />
+                android:text="@string/value" />
             <RatingBar
-                android:id="@+id/valueRB"
+                android:id="@+id/overallValueRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
                 android:rating="4" />
@@ -112,16 +112,16 @@
             android:layout_marginBottom="5dp"
             android:gravity="center_horizontal">
             <TextView
-                android:id="@+id/ambienceTV"
+                android:id="@+id/overallAmbienceTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:paddingLeft="5dp"
                 android:paddingRight="15dp"
-                android:text="Ambience" />
+                android:text="@string/ambience" />
             <RatingBar
-                android:id="@+id/ambienceRB"
+                android:id="@+id/overallAmbienceRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
                 android:rating="4"/>
@@ -133,16 +133,16 @@
             android:layout_marginBottom="5dp"
             android:gravity="center_horizontal">
             <TextView
-                android:id="@+id/serviceTV"
+                android:id="@+id/overallServiceTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:paddingLeft="5dp"
                 android:paddingRight="15dp"
-                android:text="Food/ Drink" />
+                android:text="@string/service" />
             <RatingBar
-                android:id="@+id/serviceRB"
+                android:id="@+id/overallServiceRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
                 android:rating="4" />

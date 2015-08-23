@@ -37,10 +37,6 @@ public class AllCompanies extends Fragment{
     /** All available deals in the system */
     private ArrayList<Company> companyList;
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mRVAdapter;
-    private RecyclerView.LayoutManager mRVLayoutManager;
-
     private static final String TAG = makeLogTag(AllCompanies.class);
 
     /**
@@ -94,18 +90,18 @@ public class AllCompanies extends Fragment{
         Log.d(TAG, "onCreateView() invoked");
         View view = inflater.inflate(R.layout.fragment_all_companies, container, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.allCompaniesRV);
+        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.allCompaniesRV);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mRVLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mRVLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mRVLayoutManager);
 
         // specify an adapter
-        mRVAdapter = new CompanyListAdapter(getCompanyList());
+        RecyclerView.Adapter mRVAdapter = new CompanyListAdapter(getCompanyList());
         mRecyclerView.setAdapter(mRVAdapter);
 
         return view;
@@ -169,7 +165,7 @@ public class AllCompanies extends Fragment{
         void OnCompanyFragmentInteraction(String id);
     }
 
-    private List<Company> getCompanyList() {
+    private List<Company> getCompanyList() { //TODO get from ReviewManager Class
         List<Company> results = new ArrayList<>();
         results.add(new Company());
         results.add(new Company());
@@ -199,7 +195,6 @@ public class AllCompanies extends Fragment{
                 mCompanyDescription = (TextView) v.findViewById(R.id.companyDescription);
                 mCompanyCoverImage = (ImageView) v.findViewById(R.id.companyCoverImage);
                 mfavouriteIcon = (ImageView) v.findViewById(R.id.favouriteIcon);
-                //mCompanyLogo = (ImageView) v.findViewById(R.id.companyLogo);
                 mMerchantOverallRating = (RatingBar) v.findViewById(R.id.merchantOverallRating);
             }
 
@@ -294,20 +289,8 @@ public class AllCompanies extends Fragment{
         }
 
         @Override
-        protected ArrayList<Deal> doInBackground(Void... params) {
+        protected ArrayList<Company> doInBackground(Void... params) {
             Log.d(TAG, "doInBackground() invoked");
-            HashMap<String, Deal> cachedDealList = new HashMap<>();
-            new Thread(new Runnable() {
-                public void run() {
-                    dealManager.updateCacheList();
-
-                }
-            }).start();
-            try {
-                cachedDealList = dealManager.getFromCache();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
             return new ArrayList<>(cachedDealList.values());
         }
         @Override
@@ -315,9 +298,6 @@ public class AllCompanies extends Fragment{
             super.onPreExecute();
             Log.d(TAG, "onPreExecute() invoked");
             this.progress.show();
-            //progress.setVisibility(View.VISIBLE);
-            //progress.setIndeterminate(true);
-            Log.d(TAG, progress.toString());
         }
 
         @Override

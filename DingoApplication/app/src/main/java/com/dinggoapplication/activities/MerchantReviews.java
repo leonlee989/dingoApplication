@@ -15,6 +15,7 @@ import com.dinggoapplication.custom_ui.DividerItemDecoration;
 import com.dinggoapplication.entities.Review;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -30,10 +31,6 @@ public class MerchantReviews extends BaseActivity {
 //TODO use review class in adapter list
     private static final String TAG = makeLogTag(MerchantReviews.class);
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mRVAdapter;
-    private RecyclerView.LayoutManager mRVLayoutManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +38,18 @@ public class MerchantReviews extends BaseActivity {
 
         setToolbarNavigationUp(getActionBarToolbar());
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.merchant_reviews_recycler_view);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.merchant_reviews_recycler_view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mRVLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mRVLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mRVLayoutManager);
 
-        // specify an adapter (see also next example)
-        mRVAdapter = new ReviewListAdapter(getReviewList());
+        // specify an adapter
+        RecyclerView.Adapter mRVAdapter = new ReviewListAdapter(getHeader(), getReviewList());
         mRecyclerView.setAdapter(mRVAdapter);
 
         RecyclerView.ItemDecoration itemDecoration =
@@ -61,32 +58,52 @@ public class MerchantReviews extends BaseActivity {
 
     }
 
-    private List<Review> getReviewList() {
-        List<Review> results = new ArrayList<>();
-        results.add(new Review());
+    private List<String> getReviewList() { //TODO change List<String> to  List<Review>
+        List<String> results = new ArrayList<>();
+        results.add("test");
+        results.add("test2");
+        results.add("test3");
+        results.add("test4");
         return results;
     }
-    public  ReviewHeader getHeader()
-    {
-        ReviewHeader header = new ReviewHeader();
-        header.setHeader("I'm header");
-        return header;
+    private HashMap<String, Integer> getHeader() {
+        HashMap<String, Integer> reviewHeaderAttributes = new HashMap<>();
+        //TODO to be retrieved from ReviewsManager
+        reviewHeaderAttributes.put("overallRatingScore", 4);
+        reviewHeaderAttributes.put("numberOfReviews", 24);
+        reviewHeaderAttributes.put("foodDrinkAverageScore", 4);
+        reviewHeaderAttributes.put("valueAverageScore", 3);
+        reviewHeaderAttributes.put("ambienceAverageScore", 4);
+        reviewHeaderAttributes.put("serviceAverageScore", 5);
+        return reviewHeaderAttributes;
     }
 
-    private class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.ViewHolder> {
-        private List<Review> mReviewList;
+    private class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private List<String> mReviewList; //TODO change List<String> to List<Review>
+        private HashMap<String, Integer> mReviewHeaderAttributes;
 
         private static final int TYPE_HEADER = 0;
         private static final int TYPE_ITEM = 1;
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            // each data item is just a string in this case
+
+        class VHHeader extends RecyclerView.ViewHolder{
+            public TextView mOverallRatingScore, mNumberOfReviews;
+            public RatingBar mOverallRB, mOverallFoodDrinkRB, mOverallValueRB, mOverallAmbienceRB, mOverallServiceRB;
+            public VHHeader(View v) {
+                super(v);
+                mOverallRatingScore = (TextView) v.findViewById(R.id.overallRatingScore);
+                mNumberOfReviews = (TextView) v.findViewById(R.id.numberOfReviews);
+                mOverallRB = (RatingBar) v.findViewById(R.id.overallRB);
+                mOverallFoodDrinkRB = (RatingBar) v.findViewById(R.id.overallFoodDrinkRB);
+                mOverallValueRB = (RatingBar) v.findViewById(R.id.overallValueRB);
+                mOverallAmbienceRB = (RatingBar) v.findViewById(R.id.overallAmbienceRB);
+                mOverallServiceRB = (RatingBar) v.findViewById(R.id.overallServiceRB);
+            }
+        }
+
+        class VHItem extends RecyclerView.ViewHolder{
             public TextView mUsername, mReviewedDate, mUserReviewDescription;
             public RatingBar mUserOverallRB, mFoodAndDrinkRB, mValueRB, mAmbienceRB, mServiceRB;
-
-            public ViewHolder(View v) {
+            public VHItem(View v) {
                 super(v);
                 mUsername = (TextView) v.findViewById(R.id.username);
                 mReviewedDate = (TextView) v.findViewById(R.id.reviewedDate);
@@ -99,19 +116,19 @@ public class MerchantReviews extends BaseActivity {
             }
         }
 
-        public void add(int position, Review item) {
+        public void add(int position, String item) { //TODO change String to Review
             mReviewList.add(position, item);
             notifyItemInserted(position);
         }
 
-        public void remove(String item) {
+        public void remove(Review item) {
             int position = mReviewList.indexOf(item);
             mReviewList.remove(position);
             notifyItemRemoved(position);
         }
 
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public ReviewListAdapter(List<Review> myReviewList) {
+        public ReviewListAdapter(HashMap<String, Integer> myHeader, List<String> myReviewList) { //TODO change List<String> to List<Review>
+            mReviewHeaderAttributes = myHeader;
             mReviewList = myReviewList;
         }
 
@@ -122,13 +139,15 @@ public class MerchantReviews extends BaseActivity {
          * @return
          */
         @Override
-        public ReviewListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                       int viewType) {
-            // create a new view
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.merchant_reviews_single_row, parent, false);
-            // set the view's size, margins, paddings and layout parameters
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if(viewType == TYPE_HEADER) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.merchant_reviews_overall, parent, false);
+                return  new VHHeader(v);
+            } else if(viewType == TYPE_ITEM) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.merchant_reviews_single_row, parent, false);
+                return new VHItem(v);
+            }
+            throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
         }
 
         /**
@@ -137,14 +156,40 @@ public class MerchantReviews extends BaseActivity {
          * @param position
          */
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            // - get element from your dataset at this position
-            // - replace the contents of the view with that element
-            /*final String name = mDataset.get(position);
-            holder.mUsername.setText(mDataset.get(position));
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if(holder instanceof VHHeader) {
+                VHHeader VHheader = (VHHeader)holder;
 
-            holder.txtFooter.setText("Footer: " + mDataset.get(position));*/
-            holder.mUsername.setText((CharSequence) mReviewList.get(position));
+                VHheader.mOverallRatingScore.setText(String.valueOf(mReviewHeaderAttributes.get("overallRatingScore")));
+                VHheader.mNumberOfReviews.setText(String.valueOf(mReviewHeaderAttributes.get("numberOfReviews")));
+                VHheader.mOverallRB.setRating(Float.valueOf(mReviewHeaderAttributes.get("overallRatingScore")));
+                VHheader.mOverallFoodDrinkRB.setRating(Float.valueOf(mReviewHeaderAttributes.get("foodDrinkAverageScore")));
+                VHheader.mOverallValueRB.setRating(Float.valueOf(mReviewHeaderAttributes.get("valueAverageScore")));
+                VHheader.mOverallAmbienceRB.setRating(Float.valueOf(mReviewHeaderAttributes.get("ambienceAverageScore")));
+                VHheader.mOverallServiceRB.setRating(Float.valueOf(mReviewHeaderAttributes.get("serviceAverageScore")));
+
+            } else if(holder instanceof VHItem) {
+                String currentReview = getItem(position - 1); //TODO change String to Review
+                VHItem VHitem = (VHItem)holder;
+                //TODO set textview and ratingbar values for single review item
+            }
+        }
+
+        private String getItem(int position) {
+            return mReviewList.get(position);
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if(isPositionHeader(position)) {
+                return TYPE_HEADER;
+            } else {
+                return TYPE_ITEM;
+            }
+        }
+
+        private boolean isPositionHeader(int position) {
+            return position == 0;
         }
 
         /**
@@ -155,9 +200,7 @@ public class MerchantReviews extends BaseActivity {
         public int getItemCount() {
             return mReviewList.size();
         }
-
     }
-
 
     @Override
     public boolean canSwipeRefreshChildScrollUp() {
@@ -172,19 +215,4 @@ public class MerchantReviews extends BaseActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
-
-    public class ReviewHeader {
-        //    More fields can be defined here after your need
-        private String header;
-
-        public ReviewHeader(){}
-
-        public String getHeader() {
-            return header;
-        }
-        public void setHeader(String header) {
-            this.header = header;
-        }
-    }
 }
-

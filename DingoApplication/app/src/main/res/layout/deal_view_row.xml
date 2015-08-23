@@ -21,7 +21,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"/>
 
-    <RelativeLayout android:id="@+id/merchantDetails"
+    <RelativeLayout
+        android:id="@+id/merchantDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/merchantLogo"
@@ -46,7 +47,7 @@
             android:layout_below="@+id/merchantType"
             android:layout_marginTop="10dp">
 
-            <TextView android:id="@+id/dealDetail"
+            <TextView android:id="@+id/dealName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
