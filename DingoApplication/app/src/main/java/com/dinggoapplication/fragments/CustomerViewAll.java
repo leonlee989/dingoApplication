@@ -9,28 +9,23 @@
 package com.dinggoapplication.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.activities.DealDetailsActivity;
+import com.dinggoapplication.custom_ui.DividerItemDecoration;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
@@ -38,7 +33,6 @@ import com.dinggoapplication.managers.ReviewManager;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
@@ -55,29 +49,28 @@ import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
  * @version 2.1
  * Created by leon on 18/02/15.
  */
-public class CustomerViewAll extends Fragment implements AbsListView.OnItemClickListener {
+public class CustomerViewAll extends Fragment
+        //implements AbsListView.OnItemClickListener
+{
 
     /** Fragment listener for the activity that calls this fragment */
     private OnDealFragmentInteractionListener mListener;
 
     /** The fragment's ListView/GridView */
-    private AbsListView mListView;
+    //private AbsListView mListView;
     /** The Adapter which will be used to populate the ListView/GridView with Views */
-    private ListAdapter mAdapter;
-    /** All available deals in the system */
-    private ArrayList<Deal> dealList;
+    //private ListAdapter mAdapter;
 
-    private View view;
+    private RecyclerView mRecyclerView;
 
     DealManager dealManager;
     private static final String TAG = makeLogTag(CustomerViewAll.class);
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CustomerViewAll() {
-        dealList = new ArrayList<>();
-    }
+    public CustomerViewAll() {}
 
     /**
      * Called to do initial creation of a fragment.  This is called after
@@ -98,11 +91,8 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() invoked");
         dealManager = DealManager.getInstance();
-        /*this.dealList = dealManager.getDealList();
-        mAdapter = new DealArrayAdapter(getActivity(), this.dealList);*/
 
     }
-
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -125,17 +115,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView() invoked");
-        view = inflater.inflate(R.layout.customer_all_tab, container, false);
+        View view = inflater.inflate(R.layout.customer_all_tab, container, false);
 
-        new loadDealList(view, this).execute();
-
-        Log.d(TAG, "Testing 123");
-        // Set the adapter
-        /*mListView = (AbsListView) view.findViewById(R.id.dealList);
-        mListView.setAdapter(mAdapter);
-
-        // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);*/
+        new loadDealList(view).execute();
 
         return view;
     }
@@ -168,37 +150,6 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
     }
 
     /**
-     * Callback method to be invoked when an item in this AdapterView has
-     * been clicked.
-     * <p/>
-     * Implementers can call getItemAtPosition(position) if they need
-     * to access the data associated with the selected item.
-     *
-     * @param parent   The AdapterView where the click happened.
-     * @param view     The view within the AdapterView that was clicked (this
-     *                 will be a view provided by the adapter)
-     * @param position The position of the view in the adapter.
-     * @param id       The row id of the item that was clicked.
-     */
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            Deal deal = this.dealList.get((this.dealList.size() - 1) - position);
-            mListener.onDealFragmentInteraction(deal.getReferenceId());
-            //Toast.makeText(getActivity(), merchant.getMerchantId() + " : " + merchant.getCompanyName(), Toast.LENGTH_LONG).show();
-
-            ReviewManager reviewManager = ReviewManager.getInstance();
-            reviewManager.retrieveReviews(deal.getBranch().getCompany());
-
-            Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
-            intent.putExtra("deal_referenceCode", deal.getReferenceId());
-            startActivity(intent);
-        }
-    }
-
-    /**
      * The default content for this Fragment has a TextView that is shown when
      * the list is empty. If you would like to change the text, call this method
      * to supply the text it should use.
@@ -206,11 +157,11 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
      * @param emptyText     Text to display if the list is empty
      */
     public void setEmptyText(CharSequence emptyText) {
-        View emptyView = mListView.getEmptyView();
+        /*View emptyView = mListView.getEmptyView();
 
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
-        }
+        }*/s
     }
 
     /**
@@ -229,83 +180,139 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         void onDealFragmentInteraction(String id);
     }
 
-    /**
-     * Custom ArrayAdapter to display deal details in a list view
-     */
-    private class DealArrayAdapter extends ArrayAdapter<Deal> {
-        /** Context object that stores all the resources */
-        private final Context context;
-        /** A list of deals to be displayed onto the list view */
-        private final ArrayList<Deal> dealList;
+    private class DealListAdapter extends RecyclerView.Adapter<DealListAdapter.ViewHolder> {
+        private ArrayList<Deal> mDealList;
 
-        /**
-         * Constructor that initialize DealArrayAdapter with the following parameters
-         * @param context   Context object that stores all the resources
-         * @param dealList    A list of deals to be displayed onto the list view
-         */
-        public DealArrayAdapter(Context context, ArrayList<Deal> dealList) {
-            super(context, R.layout.deal_view_row, dealList);
-            Log.d(TAG, "DealArrayAdapter() invoked");
-            this.context = context;
-            this.dealList = dealList;
+        // Provide a reference to the views for each data item
+        // Complex data items may need more than one view per item, and
+        // you provide access to all the views for a data item in a view holder
+        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+            // each data item is just a string in this case
+            public ImageView mMerchantLogo;
+            public TextView mCompanyName, mMerchantType, mDealName, mAdditionInfo;
+
+            public ViewHolder(View v) {
+                super(v);
+                v.setClickable(true);
+                v.setOnClickListener(this);
+
+                mMerchantLogo = (ImageView) v.findViewById(R.id.merchantLogo);
+                mCompanyName = (TextView) v.findViewById(R.id.companyName);
+                mMerchantType = (TextView) v.findViewById(R.id.merchantType);
+                mDealName = (TextView) v.findViewById(R.id.dealName);
+                mAdditionInfo = (TextView) v.findViewById(R.id.addtionalInfo);
+            }
+
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick() invoked for deal at position " + String.valueOf(getPosition()));
+                if (null != mListener) {
+                    // Notify the active callbacks interface (the activity, if the fragment is attached to one) that an item has been selected.
+
+                    Deal deal = mDealList.get((mDealList.size() - 1) - getPosition());
+                    mListener.onDealFragmentInteraction(deal.getReferenceId());
+
+                    ReviewManager reviewManager = ReviewManager.getInstance();
+                    reviewManager.retrieveReviews(deal.getBranch().getCompany());
+
+                    Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
+                    intent.putExtra("deal_referenceCode", deal.getReferenceId());
+                    startActivity(intent);
+                }
+            }
+        }
+
+        public void add(int position, Deal item) {
+            mDealList.add(position, item);
+            notifyItemInserted(position);
+        }
+
+        public void set(ArrayList<Deal> dealListDataSet) {
+            mDealList = dealListDataSet;
+            notifyDataSetChanged();
+        }
+
+        public void remove(Deal item) {
+            int position = mDealList.indexOf(item);
+            mDealList.remove(position);
+            notifyItemRemoved(position);
+        }
+
+        // Provide a suitable constructor (depends on the kind of dataset)
+        public DealListAdapter(ArrayList<Deal> myDealList) {
+            mDealList = myDealList;
         }
 
         /**
-         * {@inheritDoc}
-         * Customized view for different deals
-         * @param position      Position/index of the row in the list view
-         * @param convertView   Customized row layout on the list view
-         * @param parent        Parent element of this view
-         * @return              View object that represents one of the row in the list view
+         * Create new views (invoked by the layout manager)
+         * @param parent    View group object that is the parent for this view holder
+         * @param viewType  Type of inflated view
+         * @return          ViewHolder object which contains a inflatable view
          */
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            Log.d(TAG, "getView() invoked");
-            LayoutInflater inflater = getActivity().getLayoutInflater();
+        public DealListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            // create a new view
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.deal_view_row, parent, false);
+            // set the view's size, margins, paddings and layout parameters
+            return new ViewHolder(v);
+        }
 
-            View rowView = inflater.inflate(R.layout.deal_view_row, parent, false);
+        /**
+         * Replace the contents of a view (invoked by the layout manager)
+         * @param holder    ViewHolder object that contains an inflatable view
+         * @param position  POsition of the ViewHolder object
+         */
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            // - get element from your dataset at this position
+            // - replace the contents of the view with that element
 
             try {
-                Deal deal = dealList.get((dealList.size() - 1) - position);
 
+                Deal deal = mDealList.get((mDealList.size() - 1) - position);
                 Company company = deal.getBranch().getCompany();
-
-                ImageView image = (ImageView) rowView.findViewById(R.id.merchantLogo);
-                image.setImageBitmap(company.getLogoImage());
-
-                TextView companyName = (TextView) rowView.findViewById(R.id.companyName);
-                companyName.setText(company.getCompanyName());
-
-                TextView merchantType = (TextView) rowView.findViewById(R.id.merchantType);
-                merchantType.setText(company.getCuisineType().getCuisineName());
-
-                TextView dealTextView = (TextView) rowView.findViewById(R.id.dealDetail);
-                dealTextView.setText(deal.getDealName());
-                dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
-
-                TextView additionInfo = (TextView) rowView.findViewById(R.id.addtionalInfo);
-                additionInfo.setText("500 m");
+                holder.mMerchantLogo.setImageBitmap(company.getLogoImage());
+                holder.mCompanyName.setText(company.getCompanyName());
+                holder.mMerchantType.setText(company.getCuisineType().getCuisineName());
+                holder.mDealName.setText(deal.getDealName());
+                holder.mAdditionInfo.setText("500m"); //TODO get distance between user & merchant
 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-            return rowView;
         }
+
+        /**
+         *
+         * @return the size of your dataset (invoked by the layout manager)
+         */
+        @Override
+        public int getItemCount() {
+            return mDealList.size();
+        }
+
     }
+
 
     private class loadDealList extends AsyncTask<Void, ArrayList<Deal>, ArrayList<Deal>> {
 
         ContentLoadingProgressBar progress;
-        AdapterView.OnItemClickListener listener;
+        DealListAdapter mRVAdapter;
 
-        public loadDealList(View view, AdapterView.OnItemClickListener listener){
+        public loadDealList(View view){
             Log.d(TAG, "loadDealList() invoked");
             this.progress = (ContentLoadingProgressBar) view.findViewById(R.id.loading);
 
             // Set the adapter
-            mListView = (AbsListView) view.findViewById(R.id.dealList);
-            this.listener = listener;
+            //mListView = (AbsListView) view.findViewById(R.id.dealList);
+            mRecyclerView = (RecyclerView) view.findViewById(R.id.deals_recycler_view);
+
+            // use a linear layout manager
+            RecyclerView.LayoutManager mRVLayoutManager = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(mRVLayoutManager);
+
+            mRVAdapter = new DealListAdapter(new ArrayList<Deal>());
+            mRecyclerView.setAdapter(mRVAdapter);
         }
 
         @Override
@@ -326,14 +333,14 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         @Override
         protected void onPostExecute(ArrayList<Deal> deals) {
             Log.d(TAG, "onPostExecute() invoked: " + deals.toString());
+
             this.progress.hide();
 
-            Log.d(TAG, deals.toString());
-            mAdapter = new DealArrayAdapter(getActivity(), deals);
-            mListView.setAdapter(mAdapter);
+            mRVAdapter.set(deals);
+            RecyclerView.ItemDecoration itemDecoration =
+                    new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+            mRecyclerView.addItemDecoration(itemDecoration);
 
-            // Set OnItemClickListener so we can be notified on item clicks
-            mListView.setOnItemClickListener(this.listener);
         }
     }
 }

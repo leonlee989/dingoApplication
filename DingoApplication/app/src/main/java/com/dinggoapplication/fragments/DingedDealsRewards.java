@@ -203,7 +203,7 @@ public class DingedDealsRewards extends Fragment implements AbsListView.OnItemCl
                 TextView merchantType = (TextView) rowView.findViewById(R.id.merchantType);
                 merchantType.setText(company.getCuisineType().getCuisineName());
 
-                TextView dealTextView = (TextView) rowView.findViewById(R.id.dealDetail);
+                TextView dealTextView = (TextView) rowView.findViewById(R.id.dealName);
                 dealTextView.setText(deal.getDealName());
                 dealTextView.setTypeface(dealTextView.getTypeface(), Typeface.BOLD);
 
