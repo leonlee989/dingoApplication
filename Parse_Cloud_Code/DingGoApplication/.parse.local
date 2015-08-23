@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "DingGoApplication": {
+      "applicationId": "knp8Hwmkxu7JoYA7fcZt6ABGT1Gw07W6Oyaxy4gn"
+    },
+    "_default": {
+      "link": "DingGoApplication"
+    }
+  }
+}
