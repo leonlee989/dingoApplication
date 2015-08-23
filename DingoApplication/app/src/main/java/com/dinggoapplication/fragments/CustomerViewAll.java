@@ -49,21 +49,13 @@ import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
  * @version 2.1
  * Created by leon on 18/02/15.
  */
-public class CustomerViewAll extends Fragment
-        //implements AbsListView.OnItemClickListener
-{
+public class CustomerViewAll extends Fragment {
 
     /** Fragment listener for the activity that calls this fragment */
     private OnDealFragmentInteractionListener mListener;
-
-    /** The fragment's ListView/GridView */
-    //private AbsListView mListView;
-    /** The Adapter which will be used to populate the ListView/GridView with Views */
-    //private ListAdapter mAdapter;
-
+    /** The fragment's recycler view to display deals */
     private RecyclerView mRecyclerView;
-
-    DealManager dealManager;
+    /** Log tag */
     private static final String TAG = makeLogTag(CustomerViewAll.class);
 
     /**
@@ -89,9 +81,6 @@ public class CustomerViewAll extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate() invoked");
-        dealManager = DealManager.getInstance();
-
     }
 
     /**
@@ -114,11 +103,8 @@ public class CustomerViewAll extends Fragment
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView() invoked");
         View view = inflater.inflate(R.layout.customer_all_tab, container, false);
-
         new loadDealList(view).execute();
-
         return view;
     }
 
@@ -180,17 +166,68 @@ public class CustomerViewAll extends Fragment
         void onDealFragmentInteraction(String id);
     }
 
+    /**
+     * Adapter class for recycler view to populate deals information onto the interface
+     */
     private class DealListAdapter extends RecyclerView.Adapter<DealListAdapter.ViewHolder> {
+        /** List of deals to be populated onto recycle view */
         private ArrayList<Deal> mDealList;
+
+        // Provide a suitable constructor (depends on the kind of data-set)
+        /**
+         * Constructor to instantiate the adapter
+         * @param myDealList    List of deals to be populated onto the recycler view
+         */
+        public DealListAdapter(ArrayList<Deal> myDealList) {
+            mDealList = myDealList;
+        }
+
+        /**
+         * Adding a new deal object into the deal list and display onto the recycler view
+         * @param position  Row index in the recycler view where the deal to be placed
+         * @param item      Deal object to be added
+         */
+        public void add(int position, Deal item) {
+            mDealList.add(position, item);
+            notifyItemInserted(position);
+        }
+
+        /**
+         * Setting and changing a new list of deals to be displayed onto the recycler view
+         * @param dealListDataSet   A new list of deals
+         */
+        public void set(ArrayList<Deal> dealListDataSet) {
+            mDealList = dealListDataSet;
+            notifyDataSetChanged();
+        }
+
+        /**
+         * Removing a Deal object from the recycler view
+         * @param item  Deal object to be removed from the list
+         */
+        public void remove(Deal item) {
+            int position = mDealList.indexOf(item);
+            mDealList.remove(position);
+            notifyItemRemoved(position);
+        }
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
+        /**
+         * View holder class that format individual rows in the recycler view according to the deal information
+         */
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
             // each data item is just a string in this case
+            /** View controller that contains merchant logo */
             public ImageView mMerchantLogo;
+            /** View controllers that contains all required information with regards to the deal */
             public TextView mCompanyName, mMerchantType, mDealName, mAdditionInfo;
 
+            /**
+             * Constructor that instantiate the View Holder object, creating a new row in the recycler view
+             * @param v     Inflatable view
+             */
             public ViewHolder(View v) {
                 super(v);
                 v.setClickable(true);
@@ -203,15 +240,21 @@ public class CustomerViewAll extends Fragment
                 mAdditionInfo = (TextView) v.findViewById(R.id.addtionalInfo);
             }
 
+            /**
+             * Called when a view has been clicked.
+             *
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick() invoked for deal at position " + String.valueOf(getPosition()));
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the fragment is attached to one) that an item has been selected.
-
-                    Deal deal = mDealList.get((mDealList.size() - 1) - getPosition());
+                    Deal deal = mDealList.get(getPosition());
                     mListener.onDealFragmentInteraction(deal.getReferenceId());
 
+                    // Get review according to deal reference Id
+                    // TODO: Move reviews loading to the next page
                     ReviewManager reviewManager = ReviewManager.getInstance();
                     reviewManager.retrieveReviews(deal.getBranch().getCompany());
 
@@ -220,27 +263,6 @@ public class CustomerViewAll extends Fragment
                     startActivity(intent);
                 }
             }
-        }
-
-        public void add(int position, Deal item) {
-            mDealList.add(position, item);
-            notifyItemInserted(position);
-        }
-
-        public void set(ArrayList<Deal> dealListDataSet) {
-            mDealList = dealListDataSet;
-            notifyDataSetChanged();
-        }
-
-        public void remove(Deal item) {
-            int position = mDealList.indexOf(item);
-            mDealList.remove(position);
-            notifyItemRemoved(position);
-        }
-
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public DealListAdapter(ArrayList<Deal> myDealList) {
-            mDealList = myDealList;
         }
 
         /**
@@ -253,23 +275,23 @@ public class CustomerViewAll extends Fragment
         public DealListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             // create a new view
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.deal_view_row, parent, false);
-            // set the view's size, margins, paddings and layout parameters
+            // set the view's size, margins, padding and layout parameters
             return new ViewHolder(v);
         }
 
         /**
          * Replace the contents of a view (invoked by the layout manager)
          * @param holder    ViewHolder object that contains an inflatable view
-         * @param position  POsition of the ViewHolder object
+         * @param position  Position of the ViewHolder object
          */
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            // - get element from your dataset at this position
+            // - get element from your data set at this position
             // - replace the contents of the view with that element
 
             try {
 
-                Deal deal = mDealList.get((mDealList.size() - 1) - position);
+                Deal deal = mDealList.get(position);
                 Company company = deal.getBranch().getCompany();
                 holder.mMerchantLogo.setImageBitmap(company.getLogoImage());
                 holder.mCompanyName.setText(company.getCompanyName());
@@ -283,28 +305,35 @@ public class CustomerViewAll extends Fragment
         }
 
         /**
-         *
-         * @return the size of your dataset (invoked by the layout manager)
+         * Retrieve the number of items in the recycler view
+         * @return the size of your data-set (invoked by the layout manager)
          */
         @Override
         public int getItemCount() {
             return mDealList.size();
         }
-
     }
 
-
+    /**
+     * Async activity to load the deal list from Parse database at the background and populate all
+     * the information onto the recycle view
+     * @deprecated TODO Move the loading of deal list from Parse database to the main activity
+     */
     private class loadDealList extends AsyncTask<Void, ArrayList<Deal>, ArrayList<Deal>> {
-
+        /** Object to activate loading bar */
         ContentLoadingProgressBar progress;
+        /** Adapter class using recycler view to populate deals information onto the interface */
         DealListAdapter mRVAdapter;
 
+        /**
+         * Constructor to instantiate loadDealList class with the following argument
+         * @param view  Inflatable view to inflate onto the recycle view
+         */
         public loadDealList(View view){
             Log.d(TAG, "loadDealList() invoked");
             this.progress = (ContentLoadingProgressBar) view.findViewById(R.id.loading);
 
             // Set the adapter
-            //mListView = (AbsListView) view.findViewById(R.id.dealList);
             mRecyclerView = (RecyclerView) view.findViewById(R.id.deals_recycler_view);
 
             // use a linear layout manager
@@ -315,32 +344,57 @@ public class CustomerViewAll extends Fragment
             mRecyclerView.setAdapter(mRVAdapter);
         }
 
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p/>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param params The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
         @Override
         protected ArrayList<Deal> doInBackground(Void... params) {
-            Log.d(TAG, "doInBackground() invoked");
             DealManager dealManager = DealManager.getInstance();
             return dealManager.updateCacheList();
         }
+
+        /**
+         * Runs on the UI thread before {@link #doInBackground}.
+         *
+         * @see #onPostExecute
+         * @see #doInBackground
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d(TAG, "onPreExecute() invoked");
-
             progress.show();
-            Log.d(TAG, progress.toString());
         }
 
+        /**
+         * <p>Runs on the UI thread after {@link #doInBackground}. The
+         * specified result is the value returned by {@link #doInBackground}.</p>
+         * <p/>
+         * <p>This method won't be invoked if the task was cancelled.</p>
+         *
+         * @param deals The result of the operation computed by {@link #doInBackground}.
+         * @see #onPreExecute
+         * @see #doInBackground
+         * @see #onCancelled(Object)
+         */
         @Override
         protected void onPostExecute(ArrayList<Deal> deals) {
-            Log.d(TAG, "onPostExecute() invoked: " + deals.toString());
-
             this.progress.hide();
 
             mRVAdapter.set(deals);
             RecyclerView.ItemDecoration itemDecoration =
                     new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
             mRecyclerView.addItemDecoration(itemDecoration);
-
         }
     }
 }

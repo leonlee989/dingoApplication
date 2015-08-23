@@ -115,7 +115,6 @@ public class DealDetailsActivity extends BaseActivity{
         setContentView(R.layout.activity_deal_details);
 
         final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-
         setToolbarNavigationUp(getActionBarToolbar());
 
         dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);

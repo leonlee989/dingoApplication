@@ -189,7 +189,7 @@ public class Review extends ParseObject {
      * Retrieve the comments given by the user to the deal
      * @return  String value that contains the comments given by the user to the deal
      */
-    public String getCommnets() {
+    public String getComments() {
         return getString(COLUMN_COMMENT);
     }
 

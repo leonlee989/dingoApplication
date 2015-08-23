@@ -7,6 +7,7 @@ import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.CuisineType;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.entities.DealType;
+import com.dinggoapplication.entities.Review;
 import com.parse.Parse;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseFacebookUtils;
@@ -49,5 +50,7 @@ public class DAOUtil {
 
         ParseObject.registerSubclass(DealType.class);
         ParseObject.registerSubclass(Deal.class);
+
+        ParseObject.registerSubclass(Review.class);
     }
  }

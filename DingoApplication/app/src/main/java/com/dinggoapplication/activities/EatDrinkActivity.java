@@ -44,16 +44,14 @@ import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 public class EatDrinkActivity extends BaseActivity implements
         CustomerViewAll.OnDealFragmentInteractionListener,
         CustomerViewMap.OnMapFragmentInteractionListener,
-        AllCompanies.OnCompanyFragmentInteractionListener{
+        AllCompanies.OnCompanyFragmentInteractionListener {
 
     private static final String TAG = makeLogTag(EatDrinkActivity.class);
 
     /** PagerAdapter that will provide fragments for each of the three primary section of the application */
     AppSectionPagerAdapter mAppSectionPagerAdapter;
-
     /** the {@link ViewPager} that will display the three primary sections of the application, one at a time */
     ViewPager mViewPager;
-
     /** Context variable to store resources */
     Context mContext;
 
@@ -115,7 +113,7 @@ public class EatDrinkActivity extends BaseActivity implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
-        LOGD(TAG, "sharedpreferences key " + key + " changed, maybe reloading data.");
+        LOGD(TAG, "shared preferences key " + key + " changed, maybe reloading data.");
         //TODO repopulate deals according to changed user prefs
     }
 
@@ -213,7 +211,7 @@ public class EatDrinkActivity extends BaseActivity implements
      */
     @Override
     public void onMapFragmentInteraction(String id) {
-
+        // Fragment interaction from all deals fragment on map
     }
 
     /**
@@ -225,7 +223,7 @@ public class EatDrinkActivity extends BaseActivity implements
      */
     @Override
     public void OnCompanyFragmentInteraction(String id) {
-
+        // Fragment interaction from all company fragment
     }
 
     /**

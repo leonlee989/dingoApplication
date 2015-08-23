@@ -22,7 +22,7 @@ public class ReviewManager {
     /** Number of checkout for the instance */
     private static int checkout;
     /** The name of the object the manager class is handling */
-    private final static String PARSE_NAME = "review";
+    private final static String PARSE_NAME = Review.TABLE_NAME;
 
     /**
      * Default constructor for Review Manager class
@@ -66,10 +66,10 @@ public class ReviewManager {
         try {
             ArrayList<Review> reviewList = new ArrayList<>(query.find());
             fetchRegionalDataIfNeeded(reviewList);
-            Review.pinAll(company.getCompanyID(), reviewList);
+            Review.pinAll(company.getCompanyId(), reviewList);
 
         } catch (ParseException e) {
-            Log.e(PARSE_NAME, "Unable to retrieve retrieve by the merchant ID: :" + company.getCompanyID() + "\n" + e.getMessage());
+            Log.e(PARSE_NAME, "Unable to retrieve retrieve by the merchant ID: :" + company.getCompanyId() + "\n" + e.getMessage());
         }
 
         return getReviewsFromCache(company);
@@ -115,6 +115,7 @@ public class ReviewManager {
      */
     private void fetchRegionalDataIfNeeded(ArrayList<Review> reviewList) {
         try {
+
             for (Review review : reviewList) {
                 if (!review.getDeal().isDataAvailable()) review.getDeal().fetchIfNeeded();
                 if (!review.getCompany().isDataAvailable()) review.getCompany().fetchIfNeeded();

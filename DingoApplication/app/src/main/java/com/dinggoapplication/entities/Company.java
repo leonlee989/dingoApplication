@@ -64,7 +64,7 @@ public class Company extends ParseObject {
      * Retrieve the ID of the company
      * @return  String value that contains the ID of the company
      */
-    public String getCompanyID() {
+    public String getCompanyId() {
         return getObjectId();
     }
 
