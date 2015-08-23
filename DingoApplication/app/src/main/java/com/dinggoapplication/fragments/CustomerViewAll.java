@@ -310,30 +310,9 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
 
         @Override
         protected ArrayList<Deal> doInBackground(Void... params) {
-
             Log.d(TAG, "doInBackground() invoked");
             DealManager dealManager = DealManager.getInstance();
-            /*
-            HashMap<String, Deal> cachedDealList = new HashMap<>();
-            //dealManager.updateCacheList();
-            /*new Thread(new Runnable() {
-                public void run() {
-                    Log.d(TAG, "new thread run() invoked");
-
-
-                }
-            }).start();
-
-            */
-
-            try {
-                ArrayList<Deal> deals = new ArrayList<>(dealManager.updateCacheList().values());
-                return deals;
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }*/
-            //return new ArrayList<>(cachedDealList.values());
-            return new ArrayList<>(dealManager.updateCacheList().values());
+            return dealManager.updateCacheList();
         }
         @Override
         protected void onPreExecute() {
@@ -341,9 +320,6 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
             Log.d(TAG, "onPreExecute() invoked");
 
             progress.show();
-
-            //progress.setVisibility(View.VISIBLE);
-            //progress.setIndeterminate(true);
             Log.d(TAG, progress.toString());
         }
 
@@ -351,7 +327,7 @@ public class CustomerViewAll extends Fragment implements AbsListView.OnItemClick
         protected void onPostExecute(ArrayList<Deal> deals) {
             Log.d(TAG, "onPostExecute() invoked: " + deals.toString());
             this.progress.hide();
-            //dealList = dealManager.getDealList();
+
             Log.d(TAG, deals.toString());
             mAdapter = new DealArrayAdapter(getActivity(), deals);
             mListView.setAdapter(mAdapter);

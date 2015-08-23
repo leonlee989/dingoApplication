@@ -59,14 +59,10 @@ public class DingedDealsRewards extends Fragment implements AbsListView.OnItemCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
-            //TODO retrieve list of dingedDeals from parse filtered by status == completed && reviewed == false
-            DealManager dealManager = DealManager.getInstance();
-            this.dealList = dealManager.getDealList();
-            mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
-        } catch (ParseException e) {
-            Log.e("DingedDealsOngoing", e.getMessage());
-        }
+        //TODO retrieve list of dingedDeals from parse filtered by status == completed && reviewed == false
+        DealManager dealManager = DealManager.getInstance();
+        this.dealList = dealManager.getDealsFromCache();
+        mAdapter = new DealArrayAdapter(getActivity(), this.dealList);
     }
 
     @Override

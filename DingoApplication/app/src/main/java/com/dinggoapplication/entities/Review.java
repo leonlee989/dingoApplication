@@ -90,11 +90,18 @@ public class Review extends ParseObject {
     }
 
     /**
+     * Retrieve Deal object that is being rated
+     * @return  Deal object that contains all the information with regards to the deal
+     */
+    public Deal getDeal() {
+        return (Deal) get(COLUMN_DEAL_ID);
+    }
+    /**
      * Retrieve the name of the deal that is being rated
      * @return  String value that contains the name of the deal
      */
     public String getDealName() {
-        return ((Deal) get(COLUMN_DEAL_ID)).getDealName();
+        return getDeal().getDealName();
     }
 
     /**

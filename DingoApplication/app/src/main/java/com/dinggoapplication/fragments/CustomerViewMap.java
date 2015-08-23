@@ -200,7 +200,7 @@ public class CustomerViewMap extends Fragment {
         try {
             // Sample displaying
             DealManager dealManager = DealManager.getInstance();
-            ArrayList<Deal> dealList = dealManager.getDealList();
+            ArrayList<Deal> dealList = dealManager.getDealsFromCache();
 
             for (Deal deal : dealList) {
                 Branch merchant = deal.getBranch();
