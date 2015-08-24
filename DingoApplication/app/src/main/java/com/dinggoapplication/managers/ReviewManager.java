@@ -11,6 +11,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Review Manager class handles all the reviews in the application
@@ -120,6 +121,7 @@ public class ReviewManager {
     /**
      * Retrieve the average rating received by the merchant
      * Format of the hash map is a follows:
+     * numReviews | x.x
      * service | x.x
      * value | x.x
      * ambience | x.x
@@ -139,7 +141,19 @@ public class ReviewManager {
     public HashMap<String, Float> getAverageRatings(String companyId) throws ParseException {
         HashMap<String, Object> params = new HashMap<>();
         params.put("company", companyId);
-        return ParseCloud.callFunction("averageStar", params);
+
+        HashMap<String, Float> valueList = new HashMap<>();
+        HashMap<String, Object> output = ParseCloud.callFunction("averageStar", params);
+        for (Map.Entry<String, Object> entry : output.entrySet()) {
+            float value = 0.0f;
+            if (entry.getValue() instanceof Integer)  value = (Integer) entry.getValue();
+            else if (entry.getValue() instanceof Double) value = ((Double) entry.getValue()).floatValue();
+            else Float.valueOf((String) entry.getValue());
+
+            valueList.put(entry.getKey(), value);
+        }
+
+        return valueList;
     }
 
     /**

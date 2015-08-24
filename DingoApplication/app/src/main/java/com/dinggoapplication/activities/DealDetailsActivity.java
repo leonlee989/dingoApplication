@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.NestedScrollView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
+import com.dinggoapplication.managers.ReviewManager;
+import com.dinggoapplication.utilities.TimeUtils;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,6 +45,8 @@ import com.parse.ParseException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -62,10 +67,13 @@ public class DealDetailsActivity extends BaseActivity{
     /** Element that contains the cover image for the deal */
     ImageView imageView;
     /** Text view that contains the information about the merchant */
-    TextView mCompanyName ,mMerchantDescription, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
-    dSeatOffered, dTimeLeft, dRedeemBy, dDealDescription, dDealDescriptionReadMore, dMerchantAllReviews;
-    /** Object that contains the resolution of the mobile's diaplay */
-    DisplayMetrics metrics;
+    TextView mMerchantDescription, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
+            dSeatOffered, dTimeLeft, dRedeemBy, dDealDescription, dDealDescriptionReadMore,
+            dMerchantAllReviews, mOverallRatingScore, mNumberOfReviews;
+    /** Controller for all rating bar in the summarize review section */
+    RatingBar mOverallRB, mOverallFoodDrinkRB, mOverallValueRB, mOverallAmbienceRB, mOverallServiceRB;
+    /** Object that contains the resolution of the mobile's display */
+    //DisplayMetrics metrics;
     /** Company object that contains information about the company whose branch is offering the respective deal */
     Company merchant;
     /** Branch object that contains information about the branch that offers the respective deal */
@@ -78,12 +86,11 @@ public class DealDetailsActivity extends BaseActivity{
     GoogleMap map;
     /** Object that contains the latitude and longitude of the merchant's location */
     LatLng mLatLng;
-
-    RatingBar merchantRatingBar;
-
+    /** Date format for display purpose */
     DateFormat dateFormat;
-
+    /** String value that contains the tag name for this activity */
     private static final String TAG = makeLogTag(DealDetailsActivity.class);
+
     /**
      * Called when the activity is starting.  This is where most initialization
      * should go: calling {@link #setContentView(int)} to inflate the
@@ -116,12 +123,10 @@ public class DealDetailsActivity extends BaseActivity{
 
         final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         setToolbarNavigationUp(getActionBarToolbar());
-
         dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-
             // Retrieve deal from the deal manager class
             DealManager dealManager = DealManager.getInstance();
 
@@ -130,7 +135,6 @@ public class DealDetailsActivity extends BaseActivity{
                 branch = deal.getBranch();
                 merchant = branch.getCompany();
 
-                imageView = (ImageView) findViewById(R.id.dealImage);
                 toolbarLayout.setTitle(merchant.getCompanyName());
                 toolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
                 toolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
@@ -142,15 +146,18 @@ public class DealDetailsActivity extends BaseActivity{
                 getWindowManager().getDefaultDisplay().getMetrics(metrics);
                 int width = metrics.widthPixels;
                 int height = width * 300 / 480;*/
-                imageView.setImageBitmap(merchant.getCoverImage());
 
+                imageView = (ImageView) findViewById(R.id.dealImage);
+                imageView.setImageBitmap(merchant.getCoverImage());
                 dDealName = (TextView) findViewById(R.id.dealName);
                 dDealName.setText(deal.getDealName());
 
                 dSeatOffered = (TextView) findViewById(R.id.seatsOffered);
                 dSeatOffered.setText("" + deal.getSeatToOffer());
+
                 dTimeLeft = (TextView) findViewById(R.id.timeLeft);
-                dTimeLeft.setText("1 H 25 M");
+                TimeUtils.setTimer(deal.getRedeemBy(), dTimeLeft).start();
+
                 dRedeemBy = (TextView) findViewById(R.id.redeemBy);
                 dRedeemBy.setText(dateFormat.format(deal.getRedeemBy()));
 
@@ -161,49 +168,63 @@ public class DealDetailsActivity extends BaseActivity{
                 dDealDescriptionReadMore.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d(TAG, "onclick for read more");
-
                         DealDescriptionDialogFragment frag = DealDescriptionDialogFragment
                                 .newInstance(deal.getDesciption(), deal.getTermConditions());
 
                         frag.show(getSupportFragmentManager(), "dialog");
-
                     }
                 });
 
                 //get xml elements
                 mMerchantDescription = (TextView) findViewById(R.id.companyDescription);
-                mAddressTextView = (TextView) findViewById(R.id.branchAddress);
-                mWebAddressTextView = (TextView) findViewById(R.id.companyWebsite);
-                mMobileNumber = (TextView) findViewById(R.id.branchPhoneNo);
-
-                //get & set merchant description, address, web address, mobile no.
-
                 mMerchantDescription.setText(merchant.getDescription());
 
+                mAddressTextView = (TextView) findViewById(R.id.branchAddress);
                 String mAddress = branch.getAddress1();
                 mAddressTextView.setText(mAddress + "\n" + "Singapore " + branch.getPostCode());
 
+                mWebAddressTextView = (TextView) findViewById(R.id.companyWebsite);
                 mWebAddressTextView.setText(merchant.getWebsiteUrl());
 
+                mMobileNumber = (TextView) findViewById(R.id.branchPhoneNo);
                 mMobileNumber.setText(String.valueOf(branch.getPhoneNo()));
 
                 dMerchantAllReviews = (TextView) findViewById(R.id.allReviews);
                 dMerchantAllReviews.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        Log.d(TAG, "onclick for all reviews");
-
                         Intent intent = new Intent(DealDetailsActivity.this, MerchantReviews.class);
-                        /*intent.putExtra("deal_referenceCode", deal.getReferenceCode());
-                        intent.putExtra("mCompanyName", merchant.getCompanyName());*/
                         startActivity(intent);
-
                     }
                 });
+
+                // Get review according to deal reference Id
+                ReviewManager reviewManager = ReviewManager.getInstance();
+                HashMap<String, Float> averageStars = reviewManager.getAverageRatings(deal.getBranch().getCompany().getCompanyId());
+
+                mOverallRatingScore = (TextView) findViewById(R.id.overallRatingScore);
+                mOverallRatingScore.setText(String.valueOf(averageStars.get("total")));
+
+                mNumberOfReviews = (TextView) findViewById(R.id.numberOfReviews);
+                mNumberOfReviews.setText(String.valueOf(averageStars.get("numReviews")));
+
+                mOverallRB = (RatingBar) findViewById(R.id.overallRB);
+                mOverallRB.setRating(averageStars.get("total"));
+
+                mOverallFoodDrinkRB = (RatingBar) findViewById(R.id.overallFoodDrinkRB);
+                mOverallFoodDrinkRB.setRating(averageStars.get("food_drink"));
+
+                mOverallValueRB = (RatingBar) findViewById(R.id.overallValueRB);
+                mOverallValueRB.setRating(averageStars.get("value"));
+
+                mOverallAmbienceRB = (RatingBar) findViewById(R.id.overallAmbienceRB);
+                mOverallAmbienceRB.setRating(averageStars.get("ambience"));
+
+                mOverallServiceRB = (RatingBar) findViewById(R.id.overallServiceRB);
+                mOverallServiceRB.setRating(averageStars.get("service"));
+
             } catch (ParseException e) {
-                Log.e(TAG, "Unable to parse cover image into Bitmap Object");
+                Log.e(TAG, e.getMessage());
             }
 
             // Gets the MapView from the XML layout and creates it

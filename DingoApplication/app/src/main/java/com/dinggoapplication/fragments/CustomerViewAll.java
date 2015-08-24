@@ -257,20 +257,6 @@ public class CustomerViewAll extends Fragment {
                     Deal deal = mDealList.get(getPosition());
                     mListener.onDealFragmentInteraction(deal.getReferenceId());
 
-                    // Get review according to deal reference Id
-                    // TODO: Move reviews loading to the next page
-                    ReviewManager reviewManager = ReviewManager.getInstance();
-
-                    try {
-                        HashMap<String, Float> averageStars = reviewManager.getAverageRatings(deal.getBranch().getCompany().getCompanyId());
-
-                        for (Map.Entry<String, Float> entry : averageStars.entrySet()) {
-                            Log.d("Review", entry.getKey() + " : " + entry.getValue());
-                        }
-                    } catch (ParseException e) {
-                        Log.d("Review", e.getMessage());
-                    }
-
                     Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
                     intent.putExtra("deal_referenceCode", deal.getReferenceId());
                     startActivity(intent);

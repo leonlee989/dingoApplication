@@ -6,9 +6,11 @@
     android:fitsSystemWindows="true">
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:focusable="false">
 
         <LinearLayout
             android:layout_width="match_parent"

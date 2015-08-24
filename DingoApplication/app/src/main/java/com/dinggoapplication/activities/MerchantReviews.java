@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dinggoapplication.R;
 import com.dinggoapplication.custom_ui.DividerItemDecoration;
 import com.dinggoapplication.entities.Review;
+import com.dinggoapplication.managers.ReviewManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
  * Created by Siu Ngee on 8/8/2015.
  */
 public class MerchantReviews extends BaseActivity {
-//TODO use review class in adapter list
+    private ReviewManager reviewManager = ReviewManager.getInstance();
     private static final String TAG = makeLogTag(MerchantReviews.class);
 
     @Override
@@ -66,6 +67,7 @@ public class MerchantReviews extends BaseActivity {
         results.add("test4");
         return results;
     }
+
     private HashMap<String, Integer> getHeader() {
         HashMap<String, Integer> reviewHeaderAttributes = new HashMap<>();
         //TODO to be retrieved from ReviewsManager
