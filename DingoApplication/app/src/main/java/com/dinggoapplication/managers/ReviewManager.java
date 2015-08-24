@@ -4,10 +4,12 @@ import android.util.Log;
 
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Review;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -103,10 +105,41 @@ public class ReviewManager {
         return new ArrayList<>();
     }
 
+    /**
+     * Retrieve Review object according to the ID of the review
+     * @param reviewId  ID of the review
+     * @return          Review object that contains the corresponding review information
+     * @throws ParseException
+     */
     public Review getReview (String reviewId) throws ParseException {
         ParseQuery<Review> query = ParseQuery.getQuery(PARSE_NAME);
         query.fromLocalDatastore();
         return query.get(reviewId);
+    }
+
+    /**
+     * Retrieve the average rating received by the merchant
+     * Format of the hash map is a follows:
+     * service | x.x
+     * value | x.x
+     * ambience | x.x
+     * food_drink | x.x
+     * total | x.x
+     *
+     * Parse exception will be thrown for the following reasons:
+     * No results found
+     * Unable to retrieve any reviews from Parse due to server error
+     * Unable to retrieve any company due to server error or invalid company Id
+     * Logic error in the cloud clouds
+     *
+     * @param companyId   ID of the company
+     * @return              Hash of average ratings according to the merchant
+     * @throws ParseException
+     */
+    public HashMap<String, Float> getAverageRatings(String companyId) throws ParseException {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("company", companyId);
+        return ParseCloud.callFunction("averageStar", params);
     }
 
     /**

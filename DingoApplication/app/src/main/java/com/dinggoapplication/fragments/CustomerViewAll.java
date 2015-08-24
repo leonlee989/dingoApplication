@@ -32,7 +32,11 @@ import com.dinggoapplication.managers.DealManager;
 import com.dinggoapplication.managers.ReviewManager;
 import com.parse.ParseException;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
@@ -256,7 +260,16 @@ public class CustomerViewAll extends Fragment {
                     // Get review according to deal reference Id
                     // TODO: Move reviews loading to the next page
                     ReviewManager reviewManager = ReviewManager.getInstance();
-                    reviewManager.retrieveReviews(deal.getBranch().getCompany());
+
+                    try {
+                        HashMap<String, Float> averageStars = reviewManager.getAverageRatings(deal.getBranch().getCompany().getCompanyId());
+
+                        for (Map.Entry<String, Float> entry : averageStars.entrySet()) {
+                            Log.d("Review", entry.getKey() + " : " + entry.getValue());
+                        }
+                    } catch (ParseException e) {
+                        Log.d("Review", e.getMessage());
+                    }
 
                     Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
                     intent.putExtra("deal_referenceCode", deal.getReferenceId());
