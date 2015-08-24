@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.NestedScrollView;
@@ -72,6 +73,8 @@ public class DealDetailsActivity extends BaseActivity{
             dMerchantAllReviews, mOverallRatingScore, mNumberOfReviews;
     /** Controller for all rating bar in the summarize review section */
     RatingBar mOverallRB, mOverallFoodDrinkRB, mOverallValueRB, mOverallAmbienceRB, mOverallServiceRB;
+
+    CountDownTimer countDownTimer;
     /** Object that contains the resolution of the mobile's display */
     //DisplayMetrics metrics;
     /** Company object that contains information about the company whose branch is offering the respective deal */
@@ -156,7 +159,8 @@ public class DealDetailsActivity extends BaseActivity{
                 dSeatOffered.setText("" + deal.getSeatToOffer());
 
                 dTimeLeft = (TextView) findViewById(R.id.timeLeft);
-                TimeUtils.setTimer(deal.getRedeemBy(), dTimeLeft).start();
+                countDownTimer = TimeUtils.setTimer(deal.getRedeemBy(), dTimeLeft);
+                countDownTimer.start();
 
                 dRedeemBy = (TextView) findViewById(R.id.redeemBy);
                 dRedeemBy.setText(dateFormat.format(deal.getRedeemBy()));
@@ -271,6 +275,12 @@ public class DealDetailsActivity extends BaseActivity{
 
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        countDownTimer.cancel();
     }
 
     /**

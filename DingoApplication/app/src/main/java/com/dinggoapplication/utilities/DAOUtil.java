@@ -1,6 +1,7 @@
 package com.dinggoapplication.utilities;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
@@ -33,10 +34,13 @@ public class DAOUtil {
         Parse.enableLocalDatastore(context);
         // Add DingGo initialization code
         Parse.initialize(context, Config.APPLICATION_ID, Config.CLIENT_ID);
+        Log.d("com.parse", "Parse is initialized!");
 
         // Initialize Facebook Utilities
         ParseFacebookUtils.initialize(context);
-        //ParseUser.enableAutomaticUser();
+        Log.d("com.parse", "Parse Facebook Utility is initialized!");
+
+
     }
 
     /**
@@ -52,5 +56,6 @@ public class DAOUtil {
         ParseObject.registerSubclass(Deal.class);
 
         ParseObject.registerSubclass(Review.class);
+        Log.d("com.parse", "All sub class for Parse Object has been registered");
     }
  }

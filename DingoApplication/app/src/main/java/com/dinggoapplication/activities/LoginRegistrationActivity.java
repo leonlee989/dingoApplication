@@ -43,6 +43,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
     private EditText txtUsername;
     private EditText txtPassword;
     Context mContext;
+
     /**
      * Called when the activity is starting.  This is where most initializationboss
      * should go: calling {@link #setContentView(int)} to inflate the
@@ -71,17 +72,22 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_registration);
 
-        // Entered username and password by users
-        txtUsername = (EditText) findViewById(R.id.username);
-        txtPassword = (EditText) findViewById(R.id.password);
+        if (ParseUser.getCurrentUser() == null) {
+            setContentView(R.layout.activity_login_registration);
 
-        // When login button is clicked
-        findViewById(R.id.login).setOnClickListener(loginListener);
-        findViewById(R.id.register).setOnClickListener(registerListener);
-        findViewById(R.id.skip).setOnClickListener(skipListener);
-        mContext = this;
+            // Entered username and password by users
+            txtUsername = (EditText) findViewById(R.id.username);
+            txtPassword = (EditText) findViewById(R.id.password);
+
+            // When login button is clicked
+            findViewById(R.id.login).setOnClickListener(loginListener);
+            findViewById(R.id.register).setOnClickListener(registerListener);
+            findViewById(R.id.skip).setOnClickListener(skipListener);
+            mContext = this;
+        } else {
+            loginSuccess();
+        }
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {

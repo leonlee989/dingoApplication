@@ -8,10 +8,15 @@
 
 package com.dinggoapplication;
 
+import android.util.Log;
+
 import com.dinggoapplication.utilities.Config;
 import com.dinggoapplication.utilities.DAOUtil;
-import com.dinggoapplication.managers.DealManager;
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -40,18 +45,28 @@ public class Application extends android.app.Application {
         DAOUtil.initialize(this);
 
         // TODO: To be remove (Remove any session available in order to deal with login and register testing)
-        ParseUser parseUser = ParseUser.getCurrentUser();
-        if (parseUser != null) {
-            parseUser.logOut();
-        }
+        //ParseUser parseUser = ParseUser.getCurrentUser();
+        //if (parseUser != null) {
+            //parseUser.logOut();
+        //}
 
         // Bootstrapping
         Bootstrap bootstrapping = new Bootstrap(this);
         bootstrapping.execute(false);
 
-        // Cache deal information according to user preferences
-        DealManager dealManager = DealManager.getInstance();
-        //dealManager.updateCacheList();
+        /* Subscribe a channel for Parse Push */
+        ParsePush.subscribeInBackground("", new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("com.parse.push", "Successfully subscribed to the broadcast channel");
+                } else {
+                    Log.e("com.parse.push", "Failed to subscribed for push:" + e.getMessage(), e);
+                }
+            }
+        });
+
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         // Initializing custom font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
