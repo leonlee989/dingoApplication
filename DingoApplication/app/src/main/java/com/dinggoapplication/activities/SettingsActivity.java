@@ -24,7 +24,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
 
@@ -50,7 +49,7 @@ public class SettingsActivity extends BaseActivity {
     private static final String TAG = makeLogTag(SettingsActivity.class);
 
     /** Manager class that handles shared settings */
-    PreferencesManager preferenceManager;
+    //PreferencesManager preferenceManager;
     /** Object that deals with caching data in the device per instance */
     SharedPreferences sp;
     /** Adapter that allows customization of rows in the list view */
@@ -95,13 +94,13 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_settings);
 
         getActionBarToolbar();
-
+        adapter = initializeOptions();
         //Instantiate preference manager and shared settings
-        preferenceManager = PreferencesManager.getInstance();
-        sp = preferenceManager.getSPInstance();
+        /*preferenceManager = PreferencesManager.getInstance();
+        sp = preferenceManager.getSPInstance();*/
 
         // Instantiate custom adapter
-        if (adapter == null) {
+        /*if (adapter == null) {
             adapter = initializeOptions();
             if (sp.contains("dealTypeToggleState")) {
                 try {
@@ -116,7 +115,7 @@ public class SettingsActivity extends BaseActivity {
                 toggleStateList.put("Play", false);
                 toggleStateList.put("Buy", false);
             }
-        }
+        }*/
 
         // Instantiate list view and bind the adapter
         ListView listView = (ListView) findViewById(R.id.settingsListView);
@@ -233,7 +232,6 @@ public class SettingsActivity extends BaseActivity {
 
         /**
          * How many items are in the data set represented by this Adapter.
-         *
          * @return Count of items.
          */
         @Override
@@ -243,9 +241,7 @@ public class SettingsActivity extends BaseActivity {
 
         /**
          * Get the data item associated with the specified position in the data set.
-         *
-         * @param position Position of the item whose data we want within the adapter's
-         *                 data set.
+         * @param position Position of the item whose data we want within the adapter's data set.
          * @return The data at the specified position.
          */
         @Override
@@ -261,7 +257,6 @@ public class SettingsActivity extends BaseActivity {
 
         /**
          * Get the row id associated with the specified position in the list.
-         *
          * @param position The position of the item within the adapter's data set whose row id we want.
          * @return The id of the item at the specified position.
          */
@@ -412,7 +407,7 @@ public class SettingsActivity extends BaseActivity {
         /** Row that is clickable */
         SELECTOR,
         /** Row that have a toggle button on it */
-        TOGGLE,
+        TOGGLE
     }
 
     /**
@@ -530,7 +525,7 @@ public class SettingsActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
         //save toggle state to shared settings
-        preferenceManager.setValue("dealTypeToggleState", toggleStateList);
+        //preferenceManager.setValue("dealTypeToggleState", toggleStateList);
     }
 
     /**
@@ -565,6 +560,6 @@ public class SettingsActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         //save toggle state to shared settings
-        preferenceManager.setValue("dealTypeToggleState", toggleStateList);
+        //preferenceManager.setValue("dealTypeToggleState", toggleStateList);
     }
 }

@@ -18,7 +18,6 @@ import android.os.CountDownTimer;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.NestedScrollView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,6 @@ import com.parse.ParseException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -73,6 +71,8 @@ public class DealDetailsActivity extends BaseActivity{
             dMerchantAllReviews, mOverallRatingScore, mNumberOfReviews;
     /** Controller for all rating bar in the summarize review section */
     RatingBar mOverallRB, mOverallFoodDrinkRB, mOverallValueRB, mOverallAmbienceRB, mOverallServiceRB;
+
+    NestedScrollView nestedScrollView;
 
     CountDownTimer countDownTimer;
     /** Object that contains the resolution of the mobile's display */
@@ -158,8 +158,9 @@ public class DealDetailsActivity extends BaseActivity{
                 dSeatOffered = (TextView) findViewById(R.id.seatsOffered);
                 dSeatOffered.setText("" + deal.getSeatToOffer());
 
+                nestedScrollView = (NestedScrollView) findViewById(R.id.scrollView);
                 dTimeLeft = (TextView) findViewById(R.id.timeLeft);
-                countDownTimer = TimeUtils.setTimer(deal.getRedeemBy(), dTimeLeft);
+                countDownTimer = TimeUtils.setTimer(deal.getRedeemBy(), dTimeLeft, nestedScrollView);
                 countDownTimer.start();
 
                 dRedeemBy = (TextView) findViewById(R.id.redeemBy);
