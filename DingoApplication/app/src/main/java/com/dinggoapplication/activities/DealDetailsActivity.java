@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.NestedScrollView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +44,6 @@ import com.parse.ParseException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -72,6 +70,8 @@ public class DealDetailsActivity extends BaseActivity{
             dMerchantAllReviews, mOverallRatingScore, mNumberOfReviews;
     /** Controller for all rating bar in the summarize review section */
     RatingBar mOverallRB, mOverallFoodDrinkRB, mOverallValueRB, mOverallAmbienceRB, mOverallServiceRB;
+
+    NestedScrollView nestedScrollView;
     /** Object that contains the resolution of the mobile's display */
     //DisplayMetrics metrics;
     /** Company object that contains information about the company whose branch is offering the respective deal */
@@ -155,8 +155,10 @@ public class DealDetailsActivity extends BaseActivity{
                 dSeatOffered = (TextView) findViewById(R.id.seatsOffered);
                 dSeatOffered.setText("" + deal.getSeatToOffer());
 
+                nestedScrollView = (NestedScrollView) findViewById(R.id.scrollView);
+
                 dTimeLeft = (TextView) findViewById(R.id.timeLeft);
-                TimeUtils.setTimer(deal.getRedeemBy(), dTimeLeft).start();
+                TimeUtils.setTimer(deal.getRedeemBy(), dTimeLeft, nestedScrollView).start();
 
                 dRedeemBy = (TextView) findViewById(R.id.redeemBy);
                 dRedeemBy.setText(dateFormat.format(deal.getRedeemBy()));

@@ -1,22 +1,14 @@
 package com.dinggoapplication.utilities;
 
-import android.app.Activity;
-import android.content.Context;
+import android.graphics.Rect;
 import android.os.CountDownTimer;
 import android.support.v4.widget.NestedScrollView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.text.format.Time;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
-import android.view.inputmethod.InputMethodManager;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Handler;
+
+import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * @author Lee Quee Leong & Seah Siu Ngee
@@ -24,24 +16,28 @@ import java.util.logging.Handler;
  * Created by Leon on 27/7/2015.
  */
 public class TimeUtils {
+    /** String value that contains the tag name for this activity */
+    private static final String TAG = makeLogTag(TimeUtils.class);
 
     public static long timeDiffInMilliseconds(Date dateFrom, Date dateTo) {
         return dateTo.getTime() - dateFrom.getTime();
     }
 
-    public static CountDownTimer setTimer(Date dateTo, final TextView textView) {
-        
+    public static CountDownTimer setTimer(Date dateTo, final TextView textView, final NestedScrollView nSV) {
+
         long timeLeft = timeDiffInMilliseconds(new Date(), dateTo);
         return new CountDownTimer(timeLeft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                if (isViewVisible(textView, nSV)) {
+                    String countdownFormat = String.format("%dH %dM\n%dS",
+                            (int) ((millisUntilFinished / (1000 * 60 * 60))),
+                            (int) ((millisUntilFinished / (1000 * 60)) % 60),
+                            (int) ((millisUntilFinished / 1000) % 60));
 
-                String countdownFormat = String.format("%dH %dM\n%dS",
-                        (int) ((millisUntilFinished / (1000 * 60 * 60))),
-                        (int) ((millisUntilFinished / (1000 * 60)) % 60),
-                        (int) ((millisUntilFinished / 1000) % 60));
+                    textView.setText(countdownFormat);
 
-                textView.setTextKeepStates(countdownFormat);
+                }
             }
 
             @Override
@@ -49,31 +45,17 @@ public class TimeUtils {
                 textView.setText("Expired!");
             }
         };
-        /*
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-
-                context.runOnUiThread(new Runnable() {
-                    long timeLeft = timeDiffInMilliseconds(new Date(), dateTo);
-
-                    @Override
-                    public void run() {
-
-                        String countdownFormat = String.format("%dH %dM\n%dS",
-                                (int) ((timeLeft / (1000*60*60))),
-                                (int) ((timeLeft / (1000*60)) % 60),
-                                (int) ((timeLeft / 1000) % 60));
-
-                        textView.setDuplicateParentStateEnabled(true);
-                        textView.setText(String.valueOf(countdownFormat));
-                        timeLeft -= 1;
-                    }
-
-                });
-            }
-        }, 0, 1000);
-        */
     }
+
+    private static boolean isViewVisible(View view, NestedScrollView mScrollView) {
+        //TODO getChildVisibleRect of ScrollView class
+        Rect scrollBounds = new Rect();
+        mScrollView.getDrawingRect(scrollBounds);
+
+        float top = view.getY();
+        float bottom = top + view.getHeight();
+
+        return scrollBounds.top <= top && scrollBounds.bottom >= bottom;
+    }
+
 }
