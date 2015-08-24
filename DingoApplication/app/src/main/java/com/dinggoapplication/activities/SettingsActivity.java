@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
+import com.parse.ParseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -144,15 +146,15 @@ public class SettingsActivity extends BaseActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             switch(position) {
-                case 5: // Manage Notification Settings
-                    Intent intent = new Intent(SettingsActivity.this, CustomerPreferenceManageNotifications.class);
+                case 10: // Eat Preferences Settings
+                    //ParseUser user = ParseUser.getCurrentUser();
+                    ParseUser.logOut();
+                    Intent intent = new Intent(SettingsActivity.this, LoginRegistrationActivity.class);
                     startActivity(intent);
-                    break;
-                case 7: // Eat Preferences Settings
-                    Intent eat = new Intent(SettingsActivity.this, CustomerPreferenceEat.class);
-                    startActivity(eat);
+
                     break;
                 default: // Default Interface: Toast box
+                    Log.d(TAG, String.valueOf(position));
                     TextView text = (TextView) view.findViewById(R.id.pOptionLabel);
                     Toast.makeText(SettingsActivity.this, text.getText(), Toast.LENGTH_SHORT).show();
                     break;
