@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.dinggoapplication.R;
 import com.dinggoapplication.activities.DealDetailsActivity;
 import com.dinggoapplication.custom_ui.DividerItemDecoration;
+import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
@@ -286,7 +287,8 @@ public class CustomerViewAll extends Fragment {
             try {
 
                 Deal deal = mDealList.get(position);
-                Company company = deal.getBranch().getCompany();
+                Branch branch = deal.getBranch().fetchIfNeeded();
+                Company company = branch.getCompany();
                 holder.mMerchantLogo.setImageBitmap(company.getLogoImage());
                 holder.mCompanyName.setText(company.getCompanyName());
                 holder.mMerchantType.setText(company.getCuisineType().getCuisineName());
@@ -384,11 +386,15 @@ public class CustomerViewAll extends Fragment {
         @Override
         protected void onPostExecute(ArrayList<Deal> deals) {
             this.progress.hide();
+            if(deals.isEmpty()) {
+                mRecyclerView.setVisibility(View.GONE);
+            } else {
+                mRVAdapter.set(deals);
+                RecyclerView.ItemDecoration itemDecoration =
+                        new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+                mRecyclerView.addItemDecoration(itemDecoration);
+            }
 
-            mRVAdapter.set(deals);
-            RecyclerView.ItemDecoration itemDecoration =
-                    new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-            mRecyclerView.addItemDecoration(itemDecoration);
         }
     }
 }

@@ -203,7 +203,7 @@ public class CustomerViewMap extends Fragment {
             ArrayList<Deal> dealList = dealManager.getDealsFromCache();
 
             for (Deal deal : dealList) {
-                Branch merchant = deal.getBranch();
+                Branch merchant = deal.getBranch().fetchIfNeeded();
 
                 mMap.addMarker(new MarkerOptions()
                         .position(merchant.getLatLng())

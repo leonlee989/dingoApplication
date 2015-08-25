@@ -1,5 +1,6 @@
 package com.dinggoapplication.utilities;
 
+import com.parse.LogOutCallback;
 import com.parse.ParseUser;
 
 /**
@@ -16,8 +17,8 @@ public class AccountUtils {
         return getUser() != null;
     }
 
-    public static void logOut() {
+    public static void logOut(LogOutCallback logOutCallback) {
         DeviceUtil.removeDevice();
-        ParseUser.logOut();
+        ParseUser.logOutInBackground(logOutCallback);
     }
 }

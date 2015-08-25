@@ -95,7 +95,7 @@ public class Bootstrap {
 
         // LatLng latLng_peachgarden = ApplicationFactory.getLocationFromAddress(address_peach_garden.toString(), mContext);
         Branch orientalGardenOutlet = new Branch(orientalGarden, "22 New Bridge Road Rd, #XX-XX Chinatown point",
-                "", "Singapore", "Singapore", "059413", "Singapore", 61234567, 1.2852, 103.8449);
+                "", "Singapore", "Singapore", "059413", "Singapore", "61234567", 1.2852, 103.8449);
 
         /* ==== Deals ==== */
         new Deal(orientalGardenOutlet,
@@ -104,7 +104,8 @@ public class Bootstrap {
                 percentage,
                 "Discount only applies to Ala Carts",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* *********************** Company details for Pho Pho ********************************* */
         Company phoPho = new Company("Pho Pho",
@@ -120,7 +121,7 @@ public class Bootstrap {
 
         //LatLng latLng_pho_pho = ApplicationFactory.getLocationFromAddress(address_pho_pho.toString(), mContext);
         Branch phoPhoOutlet = new Branch(phoPho, "82 Tanah Merah Kechil Ave, #XX-XX", "", "Singapore",
-                "Singapore", "465515", "Singapore", 67654321, 1.3285, 103.9445);
+                "Singapore", "465515", "Singapore", "67654321", 1.3285, 103.9445);
 
         /* ==== Deals ==== */
         new Deal(phoPhoOutlet,
@@ -129,7 +130,8 @@ public class Bootstrap {
                 oneForOne,
                 "One for one does not include set meals",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Four Seasons Chicken *************************** */
         Company fourSeasonChicken = new Company("Four Seasons Chicken",
@@ -144,10 +146,10 @@ public class Bootstrap {
 
         // LatLng latLng_fourseason_chicken = ApplicationFactory.getLocationFromAddress(address_four-season_chicken.toString(), mContext);
         Branch fourChickenOutlet_1 = new Branch(fourSeasonChicken, "23 Serangoon Central, Nex #XX-XX", "",
-                "Singapore", "Singapore", "556083", "Singapore", 66342130, 1.3506, 103.8718);
+                "Singapore", "Singapore", "556083", "Singapore", "66342130", 1.3506, 103.8718);
 
         Branch fourChickenOutlet_2 = new Branch(fourSeasonChicken, "68 Orchard Rd, Plaze Singapura #XX-XX",
-                "", "Singapore", "Singapore", "238839", "Singapore", 68998432, 1.3006139, 103.8451045);
+                "", "Singapore", "Singapore", "238839", "Singapore", "68998432", 1.3006139, 103.8451045);
 
         /* ==== Deals ==== */
         new Deal(fourChickenOutlet_1,
@@ -156,7 +158,8 @@ public class Bootstrap {
                 percentage,
                 "Only application from Monday to Friday from 12pm to 2pm",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(fourChickenOutlet_2,
                 "Dinner Promotion",
@@ -164,7 +167,8 @@ public class Bootstrap {
                 tierDiscount,
                 "",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(fourChickenOutlet_2,
                 "Lunch Set Meal",
@@ -172,7 +176,8 @@ public class Bootstrap {
                 setMeal,
                 "Combination for the set meal is only inclusive to a specific list of food",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Gold Thai *************************** */
         Company goldThai = new Company("Gold Thai",
@@ -187,10 +192,10 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covergoldthai));
 
         Branch goldThaiOutlet_1 = new Branch(goldThai,"91 Bencoolen Street, #XX-XX, Sunshine Plaza", "",
-                "Singapore", "Singapore", "189652", "Singapore", 61234567, 1.3007441, 103.8520604);
+                "Singapore", "Singapore", "189652", "Singapore", "61234567", 1.3007441, 103.8520604);
 
         Branch goldThaiOutlet_2 = new Branch(goldThai, "231 Bain Street, #XX-XX, Bras Basah Complex", "",
-                "Singapore", "Singapore", "180231", "Singapore", 61234567, 1.297105, 103.853681);
+                "Singapore", "Singapore", "180231", "Singapore", "61234567", 1.297105, 103.853681);
 
         /* ==== Deals ==== */
         new Deal(goldThaiOutlet_1,
@@ -199,7 +204,8 @@ public class Bootstrap {
                 tierDiscount,
                 "",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(goldThaiOutlet_2,
                 "One for one meal",
@@ -207,7 +213,8 @@ public class Bootstrap {
                 oneForOne,
                 "Only application to ice lemon tea, ice milo, ice lemon grass and ice earl grey",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Lerk Thai *************************** */
         Company lerkThai = new Company("Lerk Thai",
@@ -222,7 +229,7 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covergoldthai));
 
         Branch lerkThaiOutlet = new Branch(lerkThai, "3 New Bugis St", "", "Singapore", "Singapore",
-                "188867", "Singapore", 0, 1.300599, 103.854893);
+                "188867", "Singapore", "61234567", 1.300599, 103.854893);
 
         /* ==== Deals ==== */
         new Deal(lerkThaiOutlet,
@@ -231,7 +238,8 @@ public class Bootstrap {
                 percentage,
                 "Discount only valid on sundays",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(lerkThaiOutlet,
                 "Lunch Promotion",
@@ -239,7 +247,8 @@ public class Bootstrap {
                 percentage,
                 "Only applicable from Monday to Friday from 9am to 12pm",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Waffles & Souffles *************************** */
         Company wafflesSouffles = new Company("Waffles & Souffles",
@@ -252,7 +261,7 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coverwafflessouffles));
 
         Branch wafflesSoufflesOutlet = new Branch(wafflesSouffles, "10 Orchard Rd, #XX-XX Orchard Plaza",
-                "", "Singapore", "Singapore", "238841", "Singapore", 61234567, 1.301284, 103.841309);
+                "", "Singapore", "Singapore", "238841", "Singapore", "61234567", 1.301284, 103.841309);
 
         /* ==== Deals ==== */
         new Deal(wafflesSoufflesOutlet,
@@ -261,7 +270,8 @@ public class Bootstrap {
                 percentage,
                 "Deal is only application from 8am to 12pm every day",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Ice Cold Beer *************************** */
         Company icb = new Company("Ice Cold Beer",
@@ -276,7 +286,7 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covericb));
 
         Branch icbOutlet = new Branch(icb, "50 Stamford Rd, #XX-XX Lee Kong Chian School Of Business",
-                "", "Singapore", "Singapore", "178899", "Singapore", 61234567, 1.294866, 103.850259);
+                "", "Singapore", "Singapore", "178899", "Singapore", "61234567", 1.294866, 103.850259);
 
         /* ==== Deals ==== */
         new Deal(icbOutlet,
@@ -285,7 +295,8 @@ public class Bootstrap {
                 percentage,
                 "Deal is only applicable to SMU students",
                 200,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(icbOutlet,
                 "Happy Hour for all",
@@ -293,7 +304,8 @@ public class Bootstrap {
                 happyHour,
                 "Deal is only application from 6pm to 9pm every day",
                 200,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Sasuke Japan *************************** */
         Company sasukeJapan = new Company("Sasuke Japan",
@@ -307,10 +319,10 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coversasuke));
 
         Branch sasukeOutlet_1 = new Branch(sasukeJapan, "252 North Bridge Road, #XX-XX Raffles City", "",
-                "Singapore", "Singapore", "179103", "Singapore", 61234567, 1.2941178, 103.8528128);
+                "Singapore", "Singapore", "179103", "Singapore", "61234567", 1.2941178, 103.8528128);
 
         Branch sasukeOutlet_2 = new Branch(sasukeJapan, "930 Yishun Ave 2, #XX-XX Northpoint Shopping Centre",
-                "", "Singapore", "Singapore", "769098", "Singapore", 61234567, 1.4298358, 103.8355685);
+                "", "Singapore", "Singapore", "769098", "Singapore", "61234567", 1.4298358, 103.8355685);
 
         /* ==== Deals ==== */
         new Deal(sasukeOutlet_1,
@@ -319,7 +331,8 @@ public class Bootstrap {
                 tierDiscount,
                 "Deal is only application from 7pm to 9pm",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(sasukeOutlet_2,
                 "Dinner Special Promotion",
@@ -327,7 +340,8 @@ public class Bootstrap {
                 tierDiscount,
                 "Deal is only application from 7pm to 9pm",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         PreferencesManager.initializeInstance(mContext);
     }

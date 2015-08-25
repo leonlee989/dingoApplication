@@ -8,8 +8,12 @@
 
 package com.dinggoapplication;
 
+import android.util.Log;
+
+import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.utilities.Config;
 import com.dinggoapplication.utilities.DAOUtil;
+import com.parse.ParseInstallation;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -37,9 +41,18 @@ public class Application extends android.app.Application {
         // Instantiation of Parse Database
         DAOUtil.initialize(this);
 
+        /*
+        ParseUser parseUser = ParseUser.getCurrentUser();
+            if (parseUser != null) {
+                parseUser.logOut();
+            }
+        */
+
         // Bootstrapping
         Bootstrap bootstrapping = new Bootstrap(this);
         bootstrapping.execute(false);
+
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         // Initializing custom font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()

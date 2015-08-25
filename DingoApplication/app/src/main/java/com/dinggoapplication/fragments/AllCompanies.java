@@ -245,7 +245,7 @@ public class AllCompanies extends Fragment{
                 mCompanyName = (TextView) v.findViewById(R.id.companyName);
                 mCompanyDescription = (TextView) v.findViewById(R.id.companyDescription);
                 mCompanyCoverImage = (ImageView) v.findViewById(R.id.companyCoverImage);
-                mFavouriteIcon = (ImageView) v.findViewById(R.id.favouriteIcon);
+                //mFavouriteIcon = (ImageView) v.findViewById(R.id.favouriteIcon);
                 mMerchantOverallRating = (RatingBar) v.findViewById(R.id.merchantOverallRating);
             }
 

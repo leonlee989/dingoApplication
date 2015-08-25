@@ -1,12 +1,11 @@
 package com.dinggoapplication.fragments;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +70,7 @@ public class DingedDealsRewards extends Fragment implements AbsListView.OnItemCl
         View view = inflater.inflate(R.layout.fragment_dinged_deals_rewards, container, false);
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.dealList);
+        mListView.setVisibility(View.GONE);
         mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
