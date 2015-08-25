@@ -137,7 +137,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     }
 
-    private void trySetupSwipeRefresh() {
+    /*private void trySetupSwipeRefresh() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(
@@ -156,7 +156,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 mswrl.setCanChildScrollUpCallback(this);
             }
         }
-    }
+    }*/
 
     /** Returns the navigation drawer item that corresponds to this Activity.*/
     protected int getSelfNavDrawerItem() {
@@ -500,7 +500,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     protected void enableDisableSwipeRefresh(boolean enable) {
         if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setEnabled(enable);
+            mSwipeRefreshLayout.setEnabled(false);
         }
     }
 
@@ -520,8 +520,8 @@ public abstract class BaseActivity extends AppCompatActivity implements
         super.onPostCreate(savedInstanceState);
         setupNavDrawer();
 
-        trySetupSwipeRefresh();
-        updateSwipeRefreshProgressBarTop();
+        //trySetupSwipeRefresh();
+        //updateSwipeRefreshProgressBarTop();
 
         View mainContent = findViewById(R.id.main_content);
         if (mainContent != null) {
