@@ -11,6 +11,7 @@ package com.dinggoapplication.activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -154,7 +155,9 @@ public class DealDetailsActivity extends BaseActivity{
 
                 /* ************************ DEAL SECTION **************************************** */
                 imageView = (ImageView) findViewById(R.id.dealImage);
-                imageView.setImageBitmap(merchant.getCoverImage());
+                Bitmap coverImage = merchant.getCoverImage();
+                if (coverImage != null)
+                    imageView.setImageBitmap(merchant.getCoverImage());
                 dDealName = (TextView) findViewById(R.id.dealName);
                 dDealName.setText(deal.getDealName());
 

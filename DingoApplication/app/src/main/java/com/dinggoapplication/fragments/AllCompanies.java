@@ -2,6 +2,7 @@ package com.dinggoapplication.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -296,7 +297,9 @@ public class AllCompanies extends Fragment{
             Company company = mCompanyList.get(position);
 
             try {
-                holder.mCompanyCoverImage.setImageBitmap(company.getCoverImage());
+                Bitmap coverImage = company.getCoverImage();
+                if (coverImage != null)
+                    holder.mCompanyCoverImage.setImageBitmap(company.getCoverImage());
                 holder.mCompanyName.setText(company.getCompanyName());
                 holder.mCompanyDescription.setText(company.getDescription());
             } catch (ParseException e) {
