@@ -98,8 +98,13 @@
     <orderEntry type="library" exported="" name="play-services-safetynet-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-games-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="calligraphy-2.1.0" level="project" />
+<<<<<<< .mine
     <orderEntry type="library" exported="" name="ParseFacebookUtilsV4-1.9.2" level="project" />
     <orderEntry type="library" exported="" name="ParseCrashReporting-1.9.2" level="project" />
+=======
+    <orderEntry type="library" exported="" name="ParseCrashReporting-1.9.2" level="project" />
+    <orderEntry type="library" exported="" name="ParseFacebookUtilsV4-1.9.2" level="project" />
+>>>>>>> .theirs
     <orderEntry type="library" exported="" name="play-services-plus-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-fitness-7.5.0" level="project" />
