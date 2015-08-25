@@ -26,17 +26,13 @@ import android.widget.TextView;
 import com.dinggoapplication.R;
 import com.dinggoapplication.activities.DealDetailsActivity;
 import com.dinggoapplication.custom_ui.DividerItemDecoration;
+import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
-import com.dinggoapplication.managers.ReviewManager;
 import com.parse.ParseException;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
@@ -291,7 +287,8 @@ public class CustomerViewAll extends Fragment {
             try {
 
                 Deal deal = mDealList.get(position);
-                Company company = deal.getBranch().getCompany();
+                Branch branch = deal.getBranch().fetchIfNeeded();
+                Company company = branch.getCompany();
                 holder.mMerchantLogo.setImageBitmap(company.getLogoImage());
                 holder.mCompanyName.setText(company.getCompanyName());
                 holder.mMerchantType.setText(company.getCuisineType().getCuisineName());

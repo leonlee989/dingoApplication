@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
+import com.parse.LogOutCallback;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import java.io.IOException;
@@ -148,9 +150,16 @@ public class SettingsActivity extends BaseActivity {
             switch(position) {
                 case 10: // Eat Preferences Settings
                     //ParseUser user = ParseUser.getCurrentUser();
-                    ParseUser.logOut();
-                    Intent intent = new Intent(SettingsActivity.this, LoginRegistrationActivity.class);
-                    startActivity(intent);
+                    ParseUser.logOutInBackground(new LogOutCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Intent intent = new Intent(SettingsActivity.this, LoginRegistrationActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Log.d(TAG, e.toString());
+                            }
+                        }
+                    });
 
                     break;
                 default: // Default Interface: Toast box

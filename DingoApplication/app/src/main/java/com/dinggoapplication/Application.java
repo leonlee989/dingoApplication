@@ -10,14 +10,12 @@ package com.dinggoapplication;
 
 import android.util.Log;
 
-import com.dinggoapplication.activities.EatDrinkActivity;
+import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.utilities.Config;
 import com.dinggoapplication.utilities.DAOUtil;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseUser;
-import com.parse.PushService;
 import com.parse.SaveCallback;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -46,11 +44,18 @@ public class Application extends android.app.Application {
         // Instantiation of Parse Database
         DAOUtil.initialize(this);
 
+        // TODO: To be remove (Remove any session available in order to deal with login and register testing)
 
+        ParseUser parseUser = ParseUser.getCurrentUser();
+        if (parseUser != null) {
+            parseUser.logOut();
+        }
 
         // Bootstrapping
         Bootstrap bootstrapping = new Bootstrap(this);
         bootstrapping.execute(false);
+
+        PreferencesManager.initializeInstance(getApplicationContext());
 
         /* Subscribe a channel for Parse Push */
         ParsePush.subscribeInBackground("", new SaveCallback() {
@@ -63,8 +68,6 @@ public class Application extends android.app.Application {
                 }
             }
         });
-
-        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         // Initializing custom font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()

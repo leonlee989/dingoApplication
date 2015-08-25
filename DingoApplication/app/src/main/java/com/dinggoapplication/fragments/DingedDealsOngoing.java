@@ -1,12 +1,11 @@
 package com.dinggoapplication.fragments;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.activities.DingedDealDetailsActivity;
+import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
@@ -193,7 +193,8 @@ public class DingedDealsOngoing extends Fragment implements AbsListView.OnItemCl
             try {
                 Deal deal = dealList.get((dealList.size() - 1) - position);
 
-                Company company = deal.getBranch().getCompany();
+                Branch branch = deal.getBranch().fetchIfNeeded();
+                Company company = branch.getCompany();
 
                 ImageView image = (ImageView) rowView.findViewById(R.id.merchantLogo);
                 image.setImageBitmap(company.getLogoImage());

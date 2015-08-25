@@ -3,6 +3,7 @@ package com.dinggoapplication.utilities;
 import android.graphics.Rect;
 import android.os.CountDownTimer;
 import android.support.v4.widget.NestedScrollView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,15 +31,14 @@ public class TimeUtils {
         return new CountDownTimer(timeLeft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                String countdownFormat = String.format("%dH %dM\n%dS",
+                        (int) ((millisUntilFinished / (1000 * 60 * 60))),
+                        (int) ((millisUntilFinished / (1000 * 60)) % 60),
+                        (int) ((millisUntilFinished / 1000) % 60));
                 if (isViewVisible(textView, nSV)) {
-                    String countdownFormat = String.format("%dH %dM\n%dS",
-                            (int) ((millisUntilFinished / (1000 * 60 * 60))),
-                            (int) ((millisUntilFinished / (1000 * 60)) % 60),
-                            (int) ((millisUntilFinished / 1000) % 60));
-
                     textView.setText(countdownFormat);
-
                 }
+                Log.d(TAG, String.valueOf(isViewVisible(textView, nSV)));
             }
 
             @Override
