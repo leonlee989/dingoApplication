@@ -144,11 +144,12 @@ public class MerchantReviews extends BaseActivity {
          * View holder class that format the individual item rows in the recycler view according to the review object
          */
         class VHItem extends RecyclerView.ViewHolder {
-            public TextView mUsername, mReviewedDate, mUserReviewDescription;
+            public TextView mUsername, mDealName, mReviewedDate, mUserReviewDescription;
             public RatingBar mUserOverallRB, mFoodAndDrinkRB, mValueRB, mAmbienceRB, mServiceRB;
             public VHItem(View v) {
                 super(v);
                 mUsername = (TextView) v.findViewById(R.id.username);
+                mDealName = (TextView) v.findViewById(R.id.review_dealName);
                 mReviewedDate = (TextView) v.findViewById(R.id.reviewedDate);
                 mUserReviewDescription = (TextView) v.findViewById(R.id.userReviewDescription);
                 mUserOverallRB = (RatingBar) v.findViewById(R.id.userOverallRating);
@@ -185,37 +186,38 @@ public class MerchantReviews extends BaseActivity {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if(holder instanceof VHHeader) {
-                VHHeader VHheader = (VHHeader)holder;
+                VHHeader header = (VHHeader)holder;
 
-                VHheader.mOverallRatingScore.setText(String.valueOf(mReviewHeaderAttributes.get("total")));
-                VHheader.mNumberOfReviews.setText(String.valueOf(mReviewHeaderAttributes.get("numReviews")));
+                header.mOverallRatingScore.setText(String.valueOf(mReviewHeaderAttributes.get("total")));
+                header.mNumberOfReviews.setText(String.valueOf(mReviewHeaderAttributes.get("numReviews")));
 
-                VHheader.mOverallRB.setRating(mReviewHeaderAttributes.get("total"));
-                VHheader.mOverallFoodDrinkRB.setRating(mReviewHeaderAttributes.get("food_drink"));
-                VHheader.mOverallValueRB.setRating(mReviewHeaderAttributes.get("value"));
-                VHheader.mOverallAmbienceRB.setRating(mReviewHeaderAttributes.get("ambience"));
-                VHheader.mOverallServiceRB.setRating(mReviewHeaderAttributes.get("service"));
+                header.mOverallRB.setRating(mReviewHeaderAttributes.get("total"));
+                header.mOverallFoodDrinkRB.setRating(mReviewHeaderAttributes.get("food_drink"));
+                header.mOverallValueRB.setRating(mReviewHeaderAttributes.get("value"));
+                header.mOverallAmbienceRB.setRating(mReviewHeaderAttributes.get("ambience"));
+                header.mOverallServiceRB.setRating(mReviewHeaderAttributes.get("service"));
 
             } else if(holder instanceof VHItem) {
                 Review currentReview = getItem(position - 1);
-                VHItem VHitem = (VHItem) holder;
+                VHItem item = (VHItem) holder;
 
-                VHitem.mUsername.setText(currentReview.getRaterName());
-                VHitem.mReviewedDate.setText(dateFormat.format(currentReview.getCreatedAt()));
+                item.mDealName.setText(currentReview.getDealName());
+                item.mUsername.setText(currentReview.getRaterName());
+                item.mReviewedDate.setText(dateFormat.format(currentReview.getCreatedAt()));
 
                 String reviewComments = currentReview.getComments();
 
                 if(reviewComments.length() == 0 || reviewComments.isEmpty()) {
-                    VHitem.mUserReviewDescription.setVisibility(View.GONE);
+                    item.mUserReviewDescription.setVisibility(View.GONE);
                 } else {
-                    VHitem.mUserReviewDescription.setText(reviewComments);
+                    item.mUserReviewDescription.setText(reviewComments);
                 }
 
-                VHitem.mUserOverallRB.setRating(currentReview.getAverageRating());
-                VHitem.mFoodAndDrinkRB.setRating(currentReview.getFoodRating());
-                VHitem.mValueRB.setRating(currentReview.getValueRating());
-                VHitem.mAmbienceRB.setRating(currentReview.getAmbienceRating());
-                VHitem.mServiceRB.setRating(currentReview.getServiceRating());
+                item.mUserOverallRB.setRating(currentReview.getAverageRating());
+                item.mFoodAndDrinkRB.setRating(currentReview.getFoodRating());
+                item.mValueRB.setRating(currentReview.getValueRating());
+                item.mAmbienceRB.setRating(currentReview.getAmbienceRating());
+                item.mServiceRB.setRating(currentReview.getServiceRating());
             }
         }
 

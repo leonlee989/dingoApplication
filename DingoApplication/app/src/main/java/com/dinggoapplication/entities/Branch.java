@@ -46,7 +46,7 @@ public class Branch extends ParseObject {
      * @param phoneNo   The phone number of the branch
      */
     public Branch(Company company, String address1, String address2, String city, String state, String postCode,
-                  String country, long phoneNo) {
+                  String country, String phoneNo) {
         this(company, address1, address2, city, state, postCode, country, phoneNo, 0, 0);
     }
 
@@ -64,7 +64,7 @@ public class Branch extends ParseObject {
      * @param longitude Longitude of the map the branch is located at
      */
     public Branch(Company company, String address1, String address2, String city, String state, String postCode,
-                  String country, long phoneNo, double latitude, double longitude) {
+                  String country, String phoneNo, double latitude, double longitude) {
         setCompany(company);
         setAddress1(address1);
         setAddress2(address2);
@@ -211,15 +211,15 @@ public class Branch extends ParseObject {
      * Retrieve the branch's contact number
      * @return  Integer value that contains branch's contact number
      */
-    public long getPhoneNo() {
-        return getLong(COLUMN_PHONE);
+    public String getPhoneNo() {
+        return getString(COLUMN_PHONE);
     }
 
     /**
      * Set and change the contact number for the branch
      * @param phoneNo   Integer value that contains the new phone number for the branch
      */
-    public void setPhoneNo(long phoneNo) {
+    public void setPhoneNo(String phoneNo) {
         put(COLUMN_PHONE, phoneNo);
     }
 

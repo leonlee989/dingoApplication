@@ -13,10 +13,7 @@ import android.util.Log;
 import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.utilities.Config;
 import com.dinggoapplication.utilities.DAOUtil;
-import com.parse.ParseException;
 import com.parse.ParseInstallation;
-import com.parse.ParsePush;
-import com.parse.SaveCallback;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -54,20 +51,6 @@ public class Application extends android.app.Application {
         // Bootstrapping
         Bootstrap bootstrapping = new Bootstrap(this);
         bootstrapping.execute(false);
-
-        PreferencesManager.initializeInstance(getApplicationContext());
-
-        /* Subscribe a channel for Parse Push */
-        ParsePush.subscribeInBackground("", new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("com.parse.push", "Successfully subscribed to the broadcast channel");
-                } else {
-                    Log.e("com.parse.push", "Failed to subscribed for push:" + e.getMessage(), e);
-                }
-            }
-        });
 
         ParseInstallation.getCurrentInstallation().saveInBackground();
 

@@ -1,8 +1,10 @@
 com.dinggoapplication
-com.dinggoapplication.Activities
-com.dinggoapplication.CustomInterface
-com.dinggoapplication.Entity
-com.dinggoapplication.ErrorHandling
-com.dinggoapplication.Fragments
-com.dinggoapplication.Fragments.Dialogs
-com.dinggoapplication.Manager
+com.dinggoapplication.activities
+com.dinggoapplication.custom_ui
+com.dinggoapplication.entities
+com.dinggoapplication.exceptions
+com.dinggoapplication.fragments
+com.dinggoapplication.fragments.dialogs
+com.dinggoapplication.managers
+com.dinggoapplication.utilities
+com.dinggoapplication.widget

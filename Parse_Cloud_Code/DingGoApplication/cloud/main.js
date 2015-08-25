@@ -61,6 +61,27 @@ var getCompanyObject = function(companyId, callback) {
 		});
 };
 
+Parse.Cloud.define("PushDealToAll", function(request, response) {
+	var query = new Parse.Query(Parse.Installation);
+	
+	var dealName = request.params.deal;
+	var companyName = request.params.company;
+	
+	Parse.Push.send({
+		where: query,
+		data: {
+			alert: companyName + " has pushed a new deal  called  " + dealName + "!"
+		}
+	}, {
+		success: function() {
+			response.success("Notification has been pushed")
+		}, 
+		error : function(error) {
+			response.error(error.getMessage);
+		}
+	});
+});
+
 Parse.Cloud.define("Logger", function(request, response) {
 	console.log(request.params);
 	response.success();

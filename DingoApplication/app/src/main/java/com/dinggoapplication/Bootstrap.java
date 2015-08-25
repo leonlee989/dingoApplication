@@ -10,6 +10,7 @@ package com.dinggoapplication;
 
 import android.content.Context;
 
+import com.dinggoapplication.managers.DealManager;
 import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.utilities.ImageUtils;
 import com.dinggoapplication.entities.Branch;
@@ -17,8 +18,11 @@ import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.CuisineType;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.entities.DealType;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Bootstrap class to initialize all entity and manager class
@@ -91,7 +95,7 @@ public class Bootstrap {
 
         // LatLng latLng_peachgarden = ApplicationFactory.getLocationFromAddress(address_peach_garden.toString(), mContext);
         Branch orientalGardenOutlet = new Branch(orientalGarden, "22 New Bridge Road Rd, #XX-XX Chinatown point",
-                "", "Singapore", "Singapore", "059413", "Singapore", 61234567, 1.2852, 103.8449);
+                "", "Singapore", "Singapore", "059413", "Singapore", "61234567", 1.2852, 103.8449);
 
         /* ==== Deals ==== */
         new Deal(orientalGardenOutlet,
@@ -100,7 +104,8 @@ public class Bootstrap {
                 percentage,
                 "Discount only applies to Ala Carts",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* *********************** Company details for Pho Pho ********************************* */
         Company phoPho = new Company("Pho Pho",
@@ -116,7 +121,7 @@ public class Bootstrap {
 
         //LatLng latLng_pho_pho = ApplicationFactory.getLocationFromAddress(address_pho_pho.toString(), mContext);
         Branch phoPhoOutlet = new Branch(phoPho, "82 Tanah Merah Kechil Ave, #XX-XX", "", "Singapore",
-                "Singapore", "465515", "Singapore", 67654321, 1.3285, 103.9445);
+                "Singapore", "465515", "Singapore", "67654321", 1.3285, 103.9445);
 
         /* ==== Deals ==== */
         new Deal(phoPhoOutlet,
@@ -125,7 +130,8 @@ public class Bootstrap {
                 oneForOne,
                 "One for one does not include set meals",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Four Seasons Chicken *************************** */
         Company fourSeasonChicken = new Company("Four Seasons Chicken",
@@ -140,10 +146,10 @@ public class Bootstrap {
 
         // LatLng latLng_fourseason_chicken = ApplicationFactory.getLocationFromAddress(address_four-season_chicken.toString(), mContext);
         Branch fourChickenOutlet_1 = new Branch(fourSeasonChicken, "23 Serangoon Central, Nex #XX-XX", "",
-                "Singapore", "Singapore", "556083", "Singapore", 66342130, 1.3506, 103.8718);
+                "Singapore", "Singapore", "556083", "Singapore", "66342130", 1.3506, 103.8718);
 
         Branch fourChickenOutlet_2 = new Branch(fourSeasonChicken, "68 Orchard Rd, Plaze Singapura #XX-XX",
-                "", "Singapore", "Singapore", "238839", "Singapore", 68998432, 1.3006139, 103.8451045);
+                "", "Singapore", "Singapore", "238839", "Singapore", "68998432", 1.3006139, 103.8451045);
 
         /* ==== Deals ==== */
         new Deal(fourChickenOutlet_1,
@@ -152,7 +158,8 @@ public class Bootstrap {
                 percentage,
                 "Only application from Monday to Friday from 12pm to 2pm",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(fourChickenOutlet_2,
                 "Dinner Promotion",
@@ -160,7 +167,8 @@ public class Bootstrap {
                 tierDiscount,
                 "",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(fourChickenOutlet_2,
                 "Lunch Set Meal",
@@ -168,7 +176,8 @@ public class Bootstrap {
                 setMeal,
                 "Combination for the set meal is only inclusive to a specific list of food",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Gold Thai *************************** */
         Company goldThai = new Company("Gold Thai",
@@ -183,10 +192,10 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covergoldthai));
 
         Branch goldThaiOutlet_1 = new Branch(goldThai,"91 Bencoolen Street, #XX-XX, Sunshine Plaza", "",
-                "Singapore", "Singapore", "189652", "Singapore", 61234567, 1.3007441, 103.8520604);
+                "Singapore", "Singapore", "189652", "Singapore", "61234567", 1.3007441, 103.8520604);
 
         Branch goldThaiOutlet_2 = new Branch(goldThai, "231 Bain Street, #XX-XX, Bras Basah Complex", "",
-                "Singapore", "Singapore", "180231", "Singapore", 61234567, 1.297105, 103.853681);
+                "Singapore", "Singapore", "180231", "Singapore", "61234567", 1.297105, 103.853681);
 
         /* ==== Deals ==== */
         new Deal(goldThaiOutlet_1,
@@ -195,7 +204,8 @@ public class Bootstrap {
                 tierDiscount,
                 "",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(goldThaiOutlet_2,
                 "One for one meal",
@@ -203,7 +213,8 @@ public class Bootstrap {
                 oneForOne,
                 "Only application to ice lemon tea, ice milo, ice lemon grass and ice earl grey",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Lerk Thai *************************** */
         Company lerkThai = new Company("Lerk Thai",
@@ -218,7 +229,7 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covergoldthai));
 
         Branch lerkThaiOutlet = new Branch(lerkThai, "3 New Bugis St", "", "Singapore", "Singapore",
-                "188867", "Singapore", 0, 1.300599, 103.854893);
+                "188867", "Singapore", "61234567", 1.300599, 103.854893);
 
         /* ==== Deals ==== */
         new Deal(lerkThaiOutlet,
@@ -227,7 +238,8 @@ public class Bootstrap {
                 percentage,
                 "Discount only valid on sundays",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(lerkThaiOutlet,
                 "Lunch Promotion",
@@ -235,7 +247,8 @@ public class Bootstrap {
                 percentage,
                 "Only applicable from Monday to Friday from 9am to 12pm",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Waffles & Souffles *************************** */
         Company wafflesSouffles = new Company("Waffles & Souffles",
@@ -248,7 +261,7 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coverwafflessouffles));
 
         Branch wafflesSoufflesOutlet = new Branch(wafflesSouffles, "10 Orchard Rd, #XX-XX Orchard Plaza",
-                "", "Singapore", "Singapore", "238841", "Singapore", 61234567, 1.301284, 103.841309);
+                "", "Singapore", "Singapore", "238841", "Singapore", "61234567", 1.301284, 103.841309);
 
         /* ==== Deals ==== */
         new Deal(wafflesSoufflesOutlet,
@@ -257,7 +270,8 @@ public class Bootstrap {
                 percentage,
                 "Deal is only application from 8am to 12pm every day",
                 100,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Ice Cold Beer *************************** */
         Company icb = new Company("Ice Cold Beer",
@@ -272,7 +286,7 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covericb));
 
         Branch icbOutlet = new Branch(icb, "50 Stamford Rd, #XX-XX Lee Kong Chian School Of Business",
-                "", "Singapore", "Singapore", "178899", "Singapore", 61234567, 1.294866, 103.850259);
+                "", "Singapore", "Singapore", "178899", "Singapore", "61234567", 1.294866, 103.850259);
 
         /* ==== Deals ==== */
         new Deal(icbOutlet,
@@ -281,7 +295,8 @@ public class Bootstrap {
                 percentage,
                 "Deal is only applicable to SMU students",
                 200,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(icbOutlet,
                 "Happy Hour for all",
@@ -289,7 +304,8 @@ public class Bootstrap {
                 happyHour,
                 "Deal is only application from 6pm to 9pm every day",
                 200,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         /* ***************** Company details for Sasuke Japan *************************** */
         Company sasukeJapan = new Company("Sasuke Japan",
@@ -303,10 +319,10 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coversasuke));
 
         Branch sasukeOutlet_1 = new Branch(sasukeJapan, "252 North Bridge Road, #XX-XX Raffles City", "",
-                "Singapore", "Singapore", "179103", "Singapore", 61234567, 1.2941178, 103.8528128);
+                "Singapore", "Singapore", "179103", "Singapore", "61234567", 1.2941178, 103.8528128);
 
         Branch sasukeOutlet_2 = new Branch(sasukeJapan, "930 Yishun Ave 2, #XX-XX Northpoint Shopping Centre",
-                "", "Singapore", "Singapore", "769098", "Singapore", 61234567, 1.4298358, 103.8355685);
+                "", "Singapore", "Singapore", "769098", "Singapore", "61234567", 1.4298358, 103.8355685);
 
         /* ==== Deals ==== */
         new Deal(sasukeOutlet_1,
@@ -315,7 +331,8 @@ public class Bootstrap {
                 tierDiscount,
                 "Deal is only application from 7pm to 9pm",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         new Deal(sasukeOutlet_2,
                 "Dinner Special Promotion",
@@ -323,8 +340,73 @@ public class Bootstrap {
                 tierDiscount,
                 "Deal is only application from 7pm to 9pm",
                 50,
-                new Date());
+                new Date(),
+                Deal.DealStatus.ACTIVE);
 
         PreferencesManager.initializeInstance(mContext);
+    }
+
+    protected void bootstrapReviewObjects() {
+        DealManager dealManager = DealManager.getInstance();
+
+        Random randomGenerator = new Random();
+        for (Deal deal : dealManager.getDealsFromCache()) {
+            Company company = deal.getBranch().getCompany();
+
+            ParseObject review = new ParseObject("review");
+            review.put("user", ParseUser.getCurrentUser());
+            review.put("referenceId", deal);
+            review.put("companyId", company);
+            review.put("food_drink", randomGenerator.nextInt(4) + 2);
+            review.put("value", randomGenerator.nextInt(4) + 2);
+            review.put("ambience", randomGenerator.nextInt(4) + 2);
+            review.put("service", randomGenerator.nextInt(4) + 2);
+            review.put("comments", randomComments(randomGenerator.nextInt(10)));
+
+            review.saveInBackground();
+        }
+    }
+
+    public String randomComments(int index) {
+        switch (index) {
+            case 0:
+                return "Their service is great, serving their customers with utmost respect and " +
+                        "courtesy. Their staffs are very friendly and lovely. More importantly, " +
+                        "their served great good that is really worth the amount!";
+            case 1:
+                return "Deal is very reasonable and affordable! I am glad I am able to grab the deal " +
+                        "so promptly to enjoy a great lunch! The serving portion is good and the " +
+                        "food is wonderful.";
+            case 2:
+                return "The ambiance in the restaurant is amazing! The place is cosy and relaxing, " +
+                        "and they serve delicious food which really made my day after a long day of " +
+                        "work! It will be worth going there for a good meal with or without any deals.";
+            case 3:
+                return "The food here is value for money and is worth going again. The food is great, " +
+                        "good ambiance, lovely staff and wonderful service.";
+            case 4:
+                return "This charming little restaurant has little to offer on the menu, which make " +
+                        "selection a breeze! Food is simple but great!";
+            case 5:
+                return "This restaurant is overpriced and overrated. Although some of their food is tasty, " +
+                        "but most are too oily for consumption. Will not go again since i don't think" +
+                        "it was a value for money lunch.";
+            case 6:
+                return "The food are more than ok, and it has done its best to combine itself with the " +
+                        "classy environment around it. The service is v good.  The restaurant is with " +
+                        "waiters and waitresses and they have been doing a good job here.";
+            case 7:
+                return "Great food, nice ambience, and attentive and friendly staff!";
+            case 8:
+                return "I find out the food is very delicious (not salty and not too sweet). Waiter " +
+                        "and waitress also friendly and good service). Price is very reasonable. " +
+                        "Restaurant's decoration also very peaceful and relaxing. When my friends " +
+                        "pay the bills is no service charge and no GST. So I will be coming back " +
+                        "this restaurant with my family.";
+            case 9:
+                return "Awesome place!";
+            default:
+                return "";
+        }
     }
 }

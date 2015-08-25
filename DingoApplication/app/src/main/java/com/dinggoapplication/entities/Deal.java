@@ -27,7 +27,8 @@ public class Deal extends ParseObject {
             COLUMN_DEAL_TYPE = "dealType",
             COLUMN_TERM_CONDITIONS = "term_conditions",
             COLUMN_SEAT_OFFER = "seatToOffer",
-            COLUMN_REDEEM_BY = "redeemBy";
+            COLUMN_REDEEM_BY = "redeemBy",
+            COLUMN_STATUS = "dealStatus";
 
     /** Default constructor that instantiate the Deal Object */
     public Deal() {}
@@ -42,7 +43,7 @@ public class Deal extends ParseObject {
      * @param seatToOffer       Number of seats offered for the deal
      * @param redeemBy          Date and time to be redeemed by
      */
-    public Deal(Branch branch, String dealName, String description, DealType dealType, String termConditions, int seatToOffer, Date redeemBy) {
+    public Deal(Branch branch, String dealName, String description, DealType dealType, String termConditions, int seatToOffer, Date redeemBy, DealStatus status) {
         setBranch(branch);
         setDealName(dealName);
         setDescription(description);
@@ -50,6 +51,7 @@ public class Deal extends ParseObject {
         setTermConditions(termConditions);
         setSeatToOffer(seatToOffer);
         setRedeemBy(redeemBy);
+        setDealStatus(status);
 
         saveInBackground(LogUtils.saveCallback(Deal.class.getName()));
     }
@@ -190,5 +192,18 @@ public class Deal extends ParseObject {
      */
     public void setRedeemBy(Date redeemBy) {
         put(COLUMN_REDEEM_BY, redeemBy);
+    }
+
+    public DealStatus getDealStatus() {
+        String status = getString(COLUMN_STATUS);
+        return DealStatus.valueOf(status);
+    }
+
+    public void setDealStatus(DealStatus status) {
+        put(COLUMN_STATUS, status.name());
+    }
+
+    public enum DealStatus {
+        ACTIVE, WITHDRAWN, EXPIRED
     }
 }
