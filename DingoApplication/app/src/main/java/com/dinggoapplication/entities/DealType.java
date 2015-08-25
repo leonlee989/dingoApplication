@@ -91,7 +91,7 @@ public class DealType extends ParseObject {
      * Retrieve the description of the deal type
      * @return  String value that contains the description of the deal type
      */
-    public String getDecription() {
+    public String getDescription() {
         return getString(COLUMN_DESC);
     }
 

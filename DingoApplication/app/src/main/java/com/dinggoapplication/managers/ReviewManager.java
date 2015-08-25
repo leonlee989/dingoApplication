@@ -27,9 +27,7 @@ public class ReviewManager {
     /** The name of the object the manager class is handling */
     private final static String PARSE_NAME = Review.TABLE_NAME;
 
-    /**
-     * Default constructor for Review Manager class
-     */
+    /** Default constructor for Review Manager class */
     private ReviewManager() {}
 
     /**
@@ -62,7 +60,7 @@ public class ReviewManager {
      * @param company   Company object that contains all the information with regards to the merchant
      * @return          A array of Review objects
      */
-    public ArrayList<Review> retrieveReviews(Company company) {
+    public ArrayList<Review> updateCacheList(Company company) {
 
         ParseQuery<Review> query = ParseQuery.getQuery(PARSE_NAME);
         query.whereEqualTo("companyId", company);
@@ -145,10 +143,11 @@ public class ReviewManager {
         HashMap<String, Float> valueList = new HashMap<>();
         HashMap<String, Object> output = ParseCloud.callFunction("averageStar", params);
         for (Map.Entry<String, Object> entry : output.entrySet()) {
-            float value = 0.0f;
+            float value;
+
             if (entry.getValue() instanceof Integer)  value = (Integer) entry.getValue();
             else if (entry.getValue() instanceof Double) value = ((Double) entry.getValue()).floatValue();
-            else Float.valueOf((String) entry.getValue());
+            else value = Float.valueOf((String) entry.getValue());
 
             valueList.put(entry.getKey(), value);
         }
@@ -164,6 +163,7 @@ public class ReviewManager {
         try {
 
             for (Review review : reviewList) {
+                if (!review.getRater().isDataAvailable()) review.getRater().fetchIfNeeded();
                 if (!review.getDeal().isDataAvailable()) review.getDeal().fetchIfNeeded();
                 if (!review.getCompany().isDataAvailable()) review.getCompany().fetchIfNeeded();
             }

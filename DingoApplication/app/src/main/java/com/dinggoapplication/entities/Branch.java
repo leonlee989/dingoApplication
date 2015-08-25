@@ -1,8 +1,11 @@
 package com.dinggoapplication.entities;
 
+import android.util.Log;
+
 import com.dinggoapplication.utilities.LogUtils;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 /**
@@ -88,7 +91,16 @@ public class Branch extends ParseObject {
      * @return  Company object that contains all the information about the company
      */
     public Company getCompany() {
-        return (Company) get(COLUMN_COMPANY_ID);
+        Company company = (Company) get(COLUMN_COMPANY_ID);
+
+        if (!company.isDataAvailable()) {
+            try {
+                company.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+        return company;
     }
 
     /**

@@ -170,7 +170,7 @@ public class CustomerViewAll extends Fragment {
      * Adapter class for recycler view to populate deals information onto the interface
      */
     private class DealListAdapter extends RecyclerView.Adapter<DealListAdapter.ViewHolder> {
-        /** List of deals to be populated onto recycle view */
+        /** List of deals to be populated onto recycler view */
         private ArrayList<Deal> mDealList;
 
         // Provide a suitable constructor (depends on the kind of data-set)

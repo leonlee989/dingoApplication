@@ -1,7 +1,10 @@
 package com.dinggoapplication.entities;
 
+import android.util.Log;
+
 import com.dinggoapplication.utilities.LogUtils;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 import java.util.Date;
@@ -64,7 +67,16 @@ public class Deal extends ParseObject {
      * @return  Branch object that contains the information about the branch who offered the deal
      */
     public Branch getBranch() {
-        return (Branch) get(COLUMN_BRANCH_ID);
+        Branch branch = (Branch) get(COLUMN_BRANCH_ID);
+
+        if (!branch.isDataAvailable()) {
+            try {
+                branch.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+        return branch;
     }
 
     /**
@@ -95,7 +107,7 @@ public class Deal extends ParseObject {
      * Retrieve the description about the deal
      * @return  String value that contains the description about the deal
      */
-    public String getDesciption() {
+    public String getDescription() {
         return getString(COLUMN_DESC);
     }
 
@@ -112,7 +124,16 @@ public class Deal extends ParseObject {
      * @return  DealType object that contains the information about the type of deal
      */
     public DealType getDealType() {
-        return (DealType) get(COLUMN_DEAL_TYPE);
+        DealType dealType = (DealType) get(COLUMN_DEAL_TYPE);
+
+        if (!dealType.isDataAvailable()) {
+            try {
+                dealType.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+        return dealType;
     }
 
     /**

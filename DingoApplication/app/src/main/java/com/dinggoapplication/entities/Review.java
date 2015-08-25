@@ -1,6 +1,9 @@
 package com.dinggoapplication.entities;
 
+import android.util.Log;
+
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -74,11 +77,29 @@ public class Review extends ParseObject {
     }
 
     /**
+     * Retrieve user object from parse
+     * @return  ParseUser which contains information about the user
+     */
+    public ParseUser getRater() {
+        ParseUser parseUser = (ParseUser) get(COLUMN_USER);
+
+        if (!parseUser.isDataAvailable()) {
+            try {
+                parseUser.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+
+        return parseUser;
+    }
+
+    /**
      * The name of the user who give the rating for the deal
      * @return  String value that contains the name of the user
      */
     public String getRaterName() {
-        return (String) ((ParseUser) get(COLUMN_USER)).get("name");
+        return (String) getRater().get("name");
     }
 
     /**
@@ -94,7 +115,17 @@ public class Review extends ParseObject {
      * @return  Deal object that contains all the information with regards to the deal
      */
     public Deal getDeal() {
-        return (Deal) get(COLUMN_DEAL_ID);
+        Deal deal = (Deal) get(COLUMN_DEAL_ID);
+
+        if (!deal.isDataAvailable()) {
+            try {
+                deal.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+
+        return deal;
     }
     /**
      * Retrieve the name of the deal that is being rated
@@ -118,14 +149,30 @@ public class Review extends ParseObject {
      * @return  Company object that contains all the information with regards to the company
      */
     public Company getCompany() {
-        return (Company) get(COLUMN_COMPANY_ID);
+        Company company = (Company) get(COLUMN_COMPANY_ID);
+        if (!company.isDataAvailable()) {
+            try {
+                company.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+        return company;
+    }
+
+    /**
+     * Retrieve the average ratings given by the rater
+     * @return  Float value that contains the average rating given by the rater
+     */
+    public float getAverageRating() {
+        return (getFoodRating() + getValueRating() + getAmbienceRating() + getServiceRating()) / 4;
     }
 
     /**
      * Retrieve the rating given for the food and drinks
      * @return  Integer value that contains the ratings given for food and drinks
      */
-    public int getFoodRating() {
+    public float getFoodRating() {
         return getInt(COLUMN_FOOD_RATING);
     }
 
@@ -141,7 +188,7 @@ public class Review extends ParseObject {
      * Retrieve the rating value for the value worth for the deal
      * @return  Integer value that contains the rating given for the value of the deal
      */
-    public int getValueRating() {
+    public float getValueRating() {
         return getInt(COLUMN_VALUE_RATING);
     }
 
@@ -157,7 +204,7 @@ public class Review extends ParseObject {
      * Retrieve the rating value for the ambience of the restaurant
      * @return  Integer value that contains the rating value for the ambience of the restaurant
      */
-    public int getAmbienceRating() {
+    public float getAmbienceRating() {
         return getInt(COLUMN_AMBIENCE_RATING);
     }
 
@@ -173,7 +220,7 @@ public class Review extends ParseObject {
      * Retrieve the rating value for merchant's customer service
      * @return  Integer value that contains the rating value for merchant's customer service
      */
-    public int getServiceRating() {
+    public float getServiceRating() {
         return getInt(COLUMN_SERVICE_RATING);
     }
 
