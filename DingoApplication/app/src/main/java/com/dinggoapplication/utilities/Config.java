@@ -25,13 +25,13 @@ public class Config {
     public static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
     /** Application Key for Parse Database */
-    public static final String APPLICATION_ID = "knp8Hwmkxu7JoYA7fcZt6ABGT1Gw07W6Oyaxy4gn";
+    //public static final String APPLICATION_ID = "knp8Hwmkxu7JoYA7fcZt6ABGT1Gw07W6Oyaxy4gn";
     // Big hero 5 data store
-    //public static final String APPLICATION_ID = "VCw8ZRb336o2cEvsJDmKcpDwrCtNXXlZN63ABE5i";
+    public static final String APPLICATION_ID = "VCw8ZRb336o2cEvsJDmKcpDwrCtNXXlZN63ABE5i";
     /** Client Key */
-    public static final String CLIENT_ID = "MJUWjMhwj5pUKaOCWXoyQOyhHphPYRe8PowhFjXU";
-    // Big hero 5 data store
-    //public static final String CLIENT_ID = "jk1zoN9tU30FNgOTUJUubKM98BP6XJbTODMg00xl";
+    //public static final String CLIENT_ID = "MJUWjMhwj5pUKaOCWXoyQOyhHphPYRe8PowhFjXU";
+    //Big hero 5 data store
+    public static final String CLIENT_ID = "jk1zoN9tU30FNgOTUJUubKM98BP6XJbTODMg00xl";
 
     /** Custom font path for the application */
     public static final String FONT_PATH = "fonts/Nexa Light.otf";
