@@ -195,6 +195,10 @@ public class SettingsActivity extends BaseActivity {
         return adapter;
     }
 
+    /**
+     * Methods to trigger when scrollable view is being swipe
+     * @return  Boolean object with regards to the status of the swipe
+     */
     @Override
     public boolean canSwipeRefreshChildScrollUp() {
         return false;

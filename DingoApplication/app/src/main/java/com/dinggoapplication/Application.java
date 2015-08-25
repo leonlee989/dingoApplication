@@ -10,14 +10,10 @@ package com.dinggoapplication;
 
 import android.util.Log;
 
-import com.dinggoapplication.activities.EatDrinkActivity;
 import com.dinggoapplication.utilities.Config;
 import com.dinggoapplication.utilities.DAOUtil;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParsePush;
-import com.parse.ParseUser;
-import com.parse.PushService;
 import com.parse.SaveCallback;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
