@@ -181,7 +181,8 @@ public class Company extends ParseObject {
      */
     public Bitmap getLogoImage() throws ParseException {
         ParseFile logoImage = getParseFile(COLUMN_LOGO);
-        return ImageUtils.convertBytesToImage(logoImage.getData());
+        if (logoImage != null) return ImageUtils.convertBytesToImage(logoImage.getData());
+        else return null;
     }
 
     /**
@@ -189,9 +190,13 @@ public class Company extends ParseObject {
      * @param image Byte array that contains the new image of the company
      */
     public void setLogoImage(byte[] image){
-        ParseFile logoImage = new ParseFile(image);
-        logoImage.saveInBackground(LogUtils.saveCallback(Company.class.getName()));
-        put(COLUMN_LOGO, logoImage);
+        if (image != null) {
+            ParseFile logoImage = new ParseFile(image);
+            logoImage.saveInBackground(LogUtils.saveCallback(Company.class.getName()));
+            put(COLUMN_LOGO, logoImage);
+        } else {
+            Log.e(TABLE_NAME, "Image cannot be null to set the logo image");
+        }
     }
 
     /**
@@ -201,7 +206,8 @@ public class Company extends ParseObject {
      */
     public Bitmap getCoverImage() throws ParseException {
         ParseFile coverImage = getParseFile(COLUMN_COVER_IMAGE);
-        return ImageUtils.convertBytesToImage(coverImage.getData());
+        if (coverImage != null) return ImageUtils.convertBytesToImage(coverImage.getData());
+        else return null;
     }
 
     /**
@@ -209,9 +215,13 @@ public class Company extends ParseObject {
      * @param image    Byte array that contains the cover image for the company
      */
     public void setCoverImage(byte[] image) {
-        ParseFile coverImage = new ParseFile(image);
-        coverImage.saveInBackground(LogUtils.saveCallback(Company.class.getName()));
-        put(COLUMN_COVER_IMAGE, coverImage);
+        if (image != null) {
+            ParseFile coverImage = new ParseFile(image);
+            coverImage.saveInBackground(LogUtils.saveCallback(Company.class.getName()));
+            put(COLUMN_COVER_IMAGE, coverImage);
+        } else {
+            Log.e(TABLE_NAME, "Image cannot be null to set the cover image");
+        }
     }
 
     /**

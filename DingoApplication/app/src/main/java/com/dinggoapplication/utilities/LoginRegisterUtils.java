@@ -141,7 +141,6 @@ public class LoginRegisterUtils {
         user.put("latitude", 103.234354);
         user.put("longitude", 1.943892);
         user.put("lastVisited", new Date().getTime());
-        user.put("cuisine_pref", "");
     }
 
     public enum ProfileAccess {

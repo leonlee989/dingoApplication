@@ -100,18 +100,21 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
          */
         @Override
         public void onClick(View v) {
-        String username = "seahsiungee";
-        String password = "1234567";
+            //String username = "seahsiungee";
+            //String password = "1234567";
 
-        if (editTextExceptionHandler(username, password)) {
-            LoginRegisterUtils.loadingStart(mContext);
-            // TODO: Login in by email address
-            if (username.contains("@")) {
-            } else {
-                // Login by user name
-                ParseUser.logInInBackground(username, password, manualLoginCallBack);
+            String username = txtUsername.getText().toString();
+            String password = txtPassword.getText().toString();
+
+            if (editTextExceptionHandler(username, password)) {
+                LoginRegisterUtils.loadingStart(mContext);
+                // TODO: Login in by email address
+                if (username.contains("@")) {
+                } else {
+                    // Login by user name
+                    ParseUser.logInInBackground(username, password, manualLoginCallBack);
+                }
             }
-        }
 
         }
     };
@@ -315,6 +318,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
                 showToast(R.string.login_failed_server_error_toast);
                 break;
             default:
+                Log.d("Error", "" + errorCode);
                 showToast(R.string.login_failed_unknown_toast);
         }
     }
