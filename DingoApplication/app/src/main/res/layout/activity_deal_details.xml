@@ -95,9 +95,10 @@
             android:fitsSystemWindows="true"
             app:expandedTitleTextAppearance="@style/TextAppearance.FontPath_Light">
             <ImageView
+                android:id="@+id/dealImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/dealImage"
+                android:src="@drawable/sample_merchant_cover"
                 android:scaleType="centerCrop"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 android:gravity="bottom|center_horizontal"

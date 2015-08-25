@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- body content -->
+    <dimen name="element_spacing_normal">8dp</dimen>
+    <dimen name="content_padding_normal">16dp</dimen>
+    <dimen name="text_size_xsmall">7sp</dimen>
+    <dimen name="text_size_small">9sp</dimen>
+    <dimen name="text_size_medium">10sp</dimen>
+    <dimen name="text_size_large">13sp</dimen>
+    <dimen name="text_size_xlarge">17sp</dimen>
+</resources>

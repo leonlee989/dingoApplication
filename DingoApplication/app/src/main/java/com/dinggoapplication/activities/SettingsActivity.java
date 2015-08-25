@@ -30,7 +30,6 @@ import com.dinggoapplication.R;
 import com.dinggoapplication.utilities.AccountUtils;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
-import com.parse.ParseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -149,7 +148,7 @@ public class SettingsActivity extends BaseActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             switch(position) {
-                case 10: // Eat Preferences Settings
+                case 2: // Eat Preferences Settings
                     AccountUtils.logOut(new LogOutCallback() {
                         @Override
                         public void done(ParseException e) {
@@ -181,6 +180,7 @@ public class SettingsActivity extends BaseActivity {
 
         adapter.addOption(new PreferenceItem("Profile", RowType.HEADER));
         adapter.addOption(new PreferenceItem("Edit Profile", RowType.SELECTOR));
+        adapter.addOption(new PreferenceItem("Logout", RowType.SELECTOR));
 
         /*adapter.addOption(new PreferenceItem("Deals", RowType.HEADER));
         adapter.addOption(new PreferenceItem("Manage Notifications", RowType.SELECTOR));
@@ -200,7 +200,7 @@ public class SettingsActivity extends BaseActivity {
         adapter.addOption(new PreferenceItem("Privacy Policy", RowType.SELECTOR));
         adapter.addOption(new PreferenceItem("Terms of Service", RowType.SELECTOR));
         adapter.addOption(new PreferenceItem("Open Source Libraries", RowType.SELECTOR));
-        adapter.addOption(new PreferenceItem("Logout", RowType.SELECTOR));
+
         return adapter;
     }
 

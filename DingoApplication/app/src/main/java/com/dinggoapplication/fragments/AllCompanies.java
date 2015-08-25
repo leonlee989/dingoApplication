@@ -3,13 +3,18 @@ package com.dinggoapplication.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +23,7 @@ import android.widget.TextView;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.activities.MerchantDetails;
+import com.dinggoapplication.custom_ui.DividerItemDecoration;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.managers.CompanyManager;
 import com.parse.ParseException;
@@ -37,6 +43,12 @@ public class AllCompanies extends Fragment{
 
     /** Fragment listener for the activity that calls this fragment */
     private OnCompanyFragmentInteractionListener mListener;
+
+    private View mView;
+
+    /** The fragment's recycler view to display deals */
+    private RecyclerView mRecyclerView;
+
     /** Name of the Log Tag for this class */
     private static final String TAG = makeLogTag(AllCompanies.class);
 
@@ -63,6 +75,7 @@ public class AllCompanies extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     /**
@@ -88,6 +101,8 @@ public class AllCompanies extends Fragment{
         View view = inflater.inflate(R.layout.fragment_all_companies, container, false);
         /* The fragment's recycler view to display company */
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.allCompaniesRV);
+
+        mView = view;
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -159,6 +174,25 @@ public class AllCompanies extends Fragment{
          * @param id    ID of the fragment to be identify in the activity class
          */
         void OnCompanyFragmentInteraction(String id);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.eat_and_drink, menu);
+        Log.d(TAG, "onCreateOptionsMenu() invoked");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected() invoked");
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.eat_drink_menu:
+                new loadCompanyList(mView).execute();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -317,7 +351,7 @@ public class AllCompanies extends Fragment{
         }
     }
 
-    /*
+
     private class loadCompanyList extends AsyncTask<Void, ArrayList<Company>, ArrayList<Company>> {
 
         ContentLoadingProgressBar progress;
@@ -350,7 +384,7 @@ public class AllCompanies extends Fragment{
          * @see #onPreExecute()
          * @see #onPostExecute
          * @see #publishProgress
-         * /
+         */
         @Override
         protected ArrayList<Company> doInBackground(Void... params) {
             CompanyManager companyManager = CompanyManager.getInstance();
@@ -362,7 +396,7 @@ public class AllCompanies extends Fragment{
          *
          * @see #onPostExecute
          * @see #doInBackground
-         * /
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -379,7 +413,7 @@ public class AllCompanies extends Fragment{
          * @see #onPreExecute
          * @see #doInBackground
          * @see #onCancelled(Object)
-         * /
+         */
         @Override
         protected void onPostExecute(ArrayList<Company> companies) {
             progress.hide();
@@ -390,5 +424,5 @@ public class AllCompanies extends Fragment{
             mRecyclerView.addItemDecoration(itemDecoration);
         }
     }
-    */
+
 }

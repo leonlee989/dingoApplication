@@ -18,6 +18,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -58,6 +61,8 @@ public class CustomerViewAll extends Fragment {
     /** Log tag */
     private static final String TAG = makeLogTag(CustomerViewAll.class);
 
+    private View mView;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -81,6 +86,7 @@ public class CustomerViewAll extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     /**
@@ -104,6 +110,7 @@ public class CustomerViewAll extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.customer_all_tab, container, false);
+        mView = view;
         new loadDealList(view).execute();
         return view;
     }
@@ -164,6 +171,25 @@ public class CustomerViewAll extends Fragment {
          * @param id    ID of the fragment to be identify in the activity class
          */
         void onDealFragmentInteraction(String id);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.eat_and_drink, menu);
+        Log.d(TAG, "onCreateOptionsMenu() invoked");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected() invoked");
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.eat_drink_menu:
+                new loadDealList(mView).execute();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
