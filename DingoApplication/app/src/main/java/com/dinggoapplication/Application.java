@@ -8,8 +8,6 @@
 
 package com.dinggoapplication;
 
-import android.util.Log;
-
 import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.utilities.Config;
 import com.dinggoapplication.utilities.DAOUtil;
@@ -47,6 +45,8 @@ public class Application extends android.app.Application {
                 parseUser.logOut();
             }
         */
+
+        PreferencesManager.initializeInstance(getApplicationContext());
 
         // Bootstrapping
         Bootstrap bootstrapping = new Bootstrap(this);
