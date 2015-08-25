@@ -240,6 +240,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         // Start activity for customer view
         Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /**
