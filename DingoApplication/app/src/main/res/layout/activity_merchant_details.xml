@@ -18,7 +18,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:adjustViewBounds="true"
-                android:src="@drawable/fourseasonschicken"
+                android:src="@drawable/sample_merchant_cover"
                 android:scaleType="fitStart"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 android:gravity="bottom|center_horizontal"

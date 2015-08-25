@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
-  ~ Unauthorized copying of this file, via any medium is strictly prohibited
-  ~ Proprietary and confidential
-  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
-  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
-  -->
-
 <resources>
+    <!-- body content -->
     <dimen name="element_spacing_normal">8dp</dimen>
     <dimen name="content_padding_normal">16dp</dimen>
-    <dimen name="text_size_xsmall">6sp</dimen>
-    <dimen name="text_size_small">8sp</dimen>
+    <dimen name="text_size_xsmall">7sp</dimen>
+    <dimen name="text_size_small">9sp</dimen>
     <dimen name="text_size_medium">10sp</dimen>
-    <dimen name="text_size_large">12sp</dimen>
-    <dimen name="text_size_xlarge">14sp</dimen>
+    <dimen name="text_size_large">13sp</dimen>
+    <dimen name="text_size_xlarge">17sp</dimen>
 </resources>
