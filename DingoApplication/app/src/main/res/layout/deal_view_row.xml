@@ -11,6 +11,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?android:attr/selectableItemBackground"
     tools:context="com.dinggoapplication.activities.EatDrinkActivity">
 
     <ImageView
