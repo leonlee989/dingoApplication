@@ -17,11 +17,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="?android:attr/progressBarStyleLarge"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_gravity="center"/>
 
     <TextView android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center" />
+        android:gravity="center"
+        android:text="@string/noMerchants"
+        android:textSize="@dimen/text_size_xlarge"/>
 
 </LinearLayout>

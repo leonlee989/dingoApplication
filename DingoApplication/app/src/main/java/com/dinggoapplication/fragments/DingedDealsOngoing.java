@@ -58,7 +58,7 @@ public class DingedDealsOngoing extends Fragment implements AbsListView.OnItemCl
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //TODO change listview to recycleview
         //TODO retrieve list of dingedDeals from parse filtered by status == ongoing
         DealManager dealManager = DealManager.getInstance();
         this.dealList = dealManager.getDealsFromCache();
@@ -72,6 +72,7 @@ public class DingedDealsOngoing extends Fragment implements AbsListView.OnItemCl
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.dealList);
+        mListView.setVisibility(View.GONE);
         mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks

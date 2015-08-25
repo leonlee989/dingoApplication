@@ -386,11 +386,15 @@ public class CustomerViewAll extends Fragment {
         @Override
         protected void onPostExecute(ArrayList<Deal> deals) {
             this.progress.hide();
+            if(deals.isEmpty()) {
+                mRecyclerView.setVisibility(View.GONE);
+            } else {
+                mRVAdapter.set(deals);
+                RecyclerView.ItemDecoration itemDecoration =
+                        new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+                mRecyclerView.addItemDecoration(itemDecoration);
+            }
 
-            mRVAdapter.set(deals);
-            RecyclerView.ItemDecoration itemDecoration =
-                    new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-            mRecyclerView.addItemDecoration(itemDecoration);
         }
     }
 }

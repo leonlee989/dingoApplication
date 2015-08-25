@@ -46,12 +46,15 @@ public class MerchantReviews extends BaseActivity {
     /** Date to format into for display */
     DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
 
+    TextView emptyTextView;
+
     @Override
     @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchant_reviews);
         setToolbarNavigationUp(getActionBarToolbar());
+        emptyTextView = (TextView) findViewById(R.id.empty);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -200,7 +203,14 @@ public class MerchantReviews extends BaseActivity {
                 VHitem.mUsername.setText(currentReview.getRaterName());
                 VHitem.mReviewedDate.setText(dateFormat.format(currentReview.getCreatedAt()));
 
-                VHitem.mUserReviewDescription.setText(currentReview.getComments());
+                String reviewComments = currentReview.getComments();
+
+                if(reviewComments.length() == 0 || reviewComments.isEmpty()) {
+                    VHitem.mUserReviewDescription.setVisibility(View.GONE);
+                } else {
+                    VHitem.mUserReviewDescription.setText(reviewComments);
+                }
+
                 VHitem.mUserOverallRB.setRating(currentReview.getAverageRating());
                 VHitem.mFoodAndDrinkRB.setRating(currentReview.getFoodRating());
                 VHitem.mValueRB.setRating(currentReview.getValueRating());
@@ -359,11 +369,15 @@ public class MerchantReviews extends BaseActivity {
         @Override
         protected void onPostExecute(ArrayList<Review> reviews) {
             this.progress.hide();
+            if(reviews.isEmpty()){
+                mRecyclerView.setVisibility(View.GONE);
+            } else {
+                mRVAdapter.set(reviews);
+                RecyclerView.ItemDecoration itemDecoration =
+                        new DividerItemDecoration(MerchantReviews.this, LinearLayoutManager.VERTICAL);
+                mRecyclerView.addItemDecoration(itemDecoration);
+            }
 
-            mRVAdapter.set(reviews);
-            RecyclerView.ItemDecoration itemDecoration =
-                    new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-            mRecyclerView.addItemDecoration(itemDecoration);
         }
     }
 }

@@ -3,7 +3,6 @@ package com.dinggoapplication.utilities;
 import android.graphics.Rect;
 import android.os.CountDownTimer;
 import android.support.v4.widget.NestedScrollView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,7 +37,7 @@ public class TimeUtils {
                 if (isViewVisible(textView, nSV)) {
                     textView.setText(countdownFormat);
                 }
-                Log.d(TAG, String.valueOf(isViewVisible(textView, nSV)));
+                //Log.d(TAG, String.valueOf(isViewVisible(textView, nSV)));
             }
 
             @Override

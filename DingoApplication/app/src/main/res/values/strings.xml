@@ -85,6 +85,9 @@
     <string name="navdrawer_item_image">icon</string>
     <string name="navdrawer_item_menu">Menu</string>
 
+    <!--CustomerViewAll-->
+    <string name="noDeals">There are no deals at this moment, try again later.</string>
+
     <!--DealDetails-->
     <string name="dealImage">dealImage</string>
     <string name="seatsOffered">"Seats \nOffered"</string>
@@ -104,6 +107,14 @@
     <string name="value">Value</string>
     <string name="ambience">Ambience</string>
     <string name="service">Service</string>
+    <string name="noReviews">There are no reviews for this merchant.</string>
+
+    <!-- Dinged Deals -->
+    <string name="noDingedDeals">You have no dinged deals at this moment.</string>
+    <string name="noRewards">You have no rewards to claim at this moment.</string>
+
+    <!--All Merchant-->
+    <string name="noMerchants">There are currently no merchants to be displayed.</string>
 
     <!-- Dialog String Config -->
     <string name="response_yes">Yes</string>
