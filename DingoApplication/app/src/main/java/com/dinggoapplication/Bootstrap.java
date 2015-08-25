@@ -10,6 +10,7 @@ package com.dinggoapplication;
 
 import android.content.Context;
 
+import com.dinggoapplication.managers.DealManager;
 import com.dinggoapplication.managers.PreferencesManager;
 import com.dinggoapplication.utilities.ImageUtils;
 import com.dinggoapplication.entities.Branch;
@@ -17,8 +18,11 @@ import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.CuisineType;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.entities.DealType;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Bootstrap class to initialize all entity and manager class
@@ -326,5 +330,69 @@ public class Bootstrap {
                 new Date());
 
         PreferencesManager.initializeInstance(mContext);
+    }
+
+    protected void bootstrapReviewObjects() {
+        DealManager dealManager = DealManager.getInstance();
+
+        Random randomGenerator = new Random();
+        for (Deal deal : dealManager.getDealsFromCache()) {
+            Company company = deal.getBranch().getCompany();
+
+            ParseObject review = new ParseObject("review");
+            review.put("user", ParseUser.getCurrentUser());
+            review.put("referenceId", deal);
+            review.put("companyId", company);
+            review.put("food_drink", randomGenerator.nextInt(4) + 2);
+            review.put("value", randomGenerator.nextInt(4) + 2);
+            review.put("ambience", randomGenerator.nextInt(4) + 2);
+            review.put("service", randomGenerator.nextInt(4) + 2);
+            review.put("comments", randomComments(randomGenerator.nextInt(10)));
+
+            review.saveInBackground();
+        }
+    }
+
+    public String randomComments(int index) {
+        switch (index) {
+            case 0:
+                return "Their service is great, serving their customers with utmost respect and " +
+                        "courtesy. Their staffs are very friendly and lovely. More importantly, " +
+                        "their served great good that is really worth the amount!";
+            case 1:
+                return "Deal is very reasonable and affordable! I am glad I am able to grab the deal " +
+                        "so promptly to enjoy a great lunch! The serving portion is good and the " +
+                        "food is wonderful.";
+            case 2:
+                return "The ambiance in the restaurant is amazing! The place is cosy and relaxing, " +
+                        "and they serve delicious food which really made my day after a long day of " +
+                        "work! It will be worth going there for a good meal with or without any deals.";
+            case 3:
+                return "The food here is value for money and is worth going again. The food is great, " +
+                        "good ambiance, lovely staff and wonderful service.";
+            case 4:
+                return "This charming little restaurant has little to offer on the menu, which make " +
+                        "selection a breeze! Food is simple but great!";
+            case 5:
+                return "This restaurant is overpriced and overrated. Although some of their food is tasty, " +
+                        "but most are too oily for consumption. Will not go again since i don't think" +
+                        "it was a value for money lunch.";
+            case 6:
+                return "The food are more than ok, and it has done its best to combine itself with the " +
+                        "classy environment around it. The service is v good.  The restaurant is with " +
+                        "waiters and waitresses and they have been doing a good job here.";
+            case 7:
+                return "Great food, nice ambience, and attentive and friendly staff!";
+            case 8:
+                return "I find out the food is very delicious (not salty and not too sweet). Waiter " +
+                        "and waitress also friendly and good service). Price is very reasonable. " +
+                        "Restaurant's decoration also very peaceful and relaxing. When my friends " +
+                        "pay the bills is no service charge and no GST. So I will be coming back " +
+                        "this restaurant with my family.";
+            case 9:
+                return "Awesome place!";
+            default:
+                return "";
+        }
     }
 }

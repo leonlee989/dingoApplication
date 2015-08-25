@@ -2,6 +2,7 @@ package com.dinggoapplication.managers;
 
 import android.util.Log;
 
+import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
