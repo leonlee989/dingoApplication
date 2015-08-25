@@ -17,6 +17,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -136,7 +137,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     }
 
-    private void trySetupSwipeRefresh() {
+    /*private void trySetupSwipeRefresh() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(
@@ -155,7 +156,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 mswrl.setCanChildScrollUpCallback(this);
             }
         }
-    }
+    }*/
 
     /** Returns the navigation drawer item that corresponds to this Activity.*/
     protected int getSelfNavDrawerItem() {
@@ -499,7 +500,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     protected void enableDisableSwipeRefresh(boolean enable) {
         if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setEnabled(enable);
+            mSwipeRefreshLayout.setEnabled(false);
         }
     }
 
@@ -519,8 +520,8 @@ public abstract class BaseActivity extends AppCompatActivity implements
         super.onPostCreate(savedInstanceState);
         setupNavDrawer();
 
-        trySetupSwipeRefresh();
-        updateSwipeRefreshProgressBarTop();
+        //trySetupSwipeRefresh();
+        //updateSwipeRefreshProgressBarTop();
 
         View mainContent = findViewById(R.id.main_content);
         if (mainContent != null) {
@@ -531,6 +532,16 @@ public abstract class BaseActivity extends AppCompatActivity implements
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, String.valueOf(isTaskRoot()));
+        finish();
+        if(isTaskRoot()){
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+        }
+    }
 
 }

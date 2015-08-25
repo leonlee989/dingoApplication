@@ -104,7 +104,7 @@ public class EatDrinkActivity extends BaseActivity implements
 
                 @Override
                 public void onPageScrollStateChanged(int state) {
-                    enableDisableSwipeRefresh(state == ViewPager.SCROLL_STATE_IDLE);
+                    //enableDisableSwipeRefresh(state == ViewPager.SCROLL_STATE_IDLE);
                 }
             });
         }
