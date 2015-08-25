@@ -29,14 +29,9 @@ import com.dinggoapplication.custom_ui.DividerItemDecoration;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
-import com.dinggoapplication.managers.ReviewManager;
 import com.parse.ParseException;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
@@ -174,7 +169,7 @@ public class CustomerViewAll extends Fragment {
      * Adapter class for recycler view to populate deals information onto the interface
      */
     private class DealListAdapter extends RecyclerView.Adapter<DealListAdapter.ViewHolder> {
-        /** List of deals to be populated onto recycle view */
+        /** List of deals to be populated onto recycler view */
         private ArrayList<Deal> mDealList;
 
         // Provide a suitable constructor (depends on the kind of data-set)

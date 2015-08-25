@@ -1,6 +1,7 @@
 package com.dinggoapplication.entities;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.dinggoapplication.utilities.ImageUtils;
 import com.dinggoapplication.utilities.LogUtils;
@@ -121,7 +122,16 @@ public class Company extends ParseObject {
      * @return  CuisineType object that contains the name of the cuisine
      */
     public CuisineType getCuisineType() {
-        return (CuisineType) get(COLUMN_CUISINE_TYPE);
+        CuisineType cuisineType = (CuisineType) get(COLUMN_CUISINE_TYPE);
+
+        if (!cuisineType.isDataAvailable()) {
+            try {
+                cuisineType.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+        return cuisineType;
     }
 
     /**

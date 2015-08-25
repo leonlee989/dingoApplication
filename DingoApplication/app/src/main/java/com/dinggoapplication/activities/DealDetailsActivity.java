@@ -167,14 +167,14 @@ public class DealDetailsActivity extends BaseActivity{
                 dRedeemBy.setText(dateFormat.format(deal.getRedeemBy()));
 
                 dDealDescription = (TextView) findViewById(R.id.dealDescription);
-                dDealDescription.setText(deal.getDesciption());
+                dDealDescription.setText(deal.getDescription());
 
                 dDealDescriptionReadMore = (TextView) findViewById(R.id.readMore);
                 dDealDescriptionReadMore.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         DealDescriptionDialogFragment frag = DealDescriptionDialogFragment
-                                .newInstance(deal.getDesciption(), deal.getTermConditions());
+                                .newInstance(deal.getDescription(), deal.getTermConditions());
 
                         frag.show(getSupportFragmentManager(), "dialog");
                     }
@@ -194,18 +194,10 @@ public class DealDetailsActivity extends BaseActivity{
                 mMobileNumber = (TextView) findViewById(R.id.branchPhoneNo);
                 mMobileNumber.setText(String.valueOf(branch.getPhoneNo()));
 
-                dMerchantAllReviews = (TextView) findViewById(R.id.allReviews);
-                dMerchantAllReviews.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(DealDetailsActivity.this, MerchantReviews.class);
-                        startActivity(intent);
-                    }
-                });
-
                 // Get review according to deal reference Id
+                final Company company = deal.getBranch().getCompany();
                 ReviewManager reviewManager = ReviewManager.getInstance();
-                HashMap<String, Float> averageStars = reviewManager.getAverageRatings(deal.getBranch().getCompany().getCompanyId());
+                final HashMap<String, Float> averageStars = reviewManager.getAverageRatings(company.getCompanyId());
 
                 mOverallRatingScore = (TextView) findViewById(R.id.overallRatingScore);
                 mOverallRatingScore.setText(String.valueOf(averageStars.get("total")));
@@ -227,6 +219,17 @@ public class DealDetailsActivity extends BaseActivity{
 
                 mOverallServiceRB = (RatingBar) findViewById(R.id.overallServiceRB);
                 mOverallServiceRB.setRating(averageStars.get("service"));
+
+                dMerchantAllReviews = (TextView) findViewById(R.id.allReviews);
+                dMerchantAllReviews.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(DealDetailsActivity.this, MerchantReviews.class);
+                        intent.putExtra("companyId", company.getCompanyId());
+                        intent.putExtra("averageStars", averageStars);
+                        startActivity(intent);
+                    }
+                });
 
             } catch (ParseException e) {
                 Log.e(TAG, e.getMessage());

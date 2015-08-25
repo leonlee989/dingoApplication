@@ -46,8 +46,6 @@ public class Application extends android.app.Application {
         // Instantiation of Parse Database
         DAOUtil.initialize(this);
 
-
-
         // Bootstrapping
         Bootstrap bootstrapping = new Bootstrap(this);
         bootstrapping.execute(false);
@@ -63,8 +61,6 @@ public class Application extends android.app.Application {
                 }
             }
         });
-
-        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         // Initializing custom font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
