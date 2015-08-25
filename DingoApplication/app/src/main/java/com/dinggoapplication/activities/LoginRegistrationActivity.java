@@ -238,7 +238,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
     };
 
     protected void loginSuccess() {
-        DeviceUtil.installDevice();
+        DeviceUtil.installDevice(getApplicationContext());
         showToast(R.string.login_success_toast);
         // Start activity for customer view
         Intent intent = new Intent(LoginRegistrationActivity.this, EatDrinkActivity.class);

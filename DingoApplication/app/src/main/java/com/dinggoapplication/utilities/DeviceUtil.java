@@ -1,5 +1,8 @@
 package com.dinggoapplication.utilities;
 
+import android.content.Context;
+import android.provider.Settings;
+
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
@@ -17,9 +20,16 @@ public class DeviceUtil {
         return ParseInstallation.getCurrentInstallation();
     }
 
-    public static void installDevice() {
+    public static void installDevice(Context context) {
         if (AccountUtils.isLogin()) {
             final ParseInstallation installation = getDeviceInstallation();
+            /*
+            if (installation.get("deviceToken") == null) {
+                String deviceId = Settings.System.getString(context.getContentResolver(),
+                        Settings.System.ANDROID_ID);
+                installation.put("deviceToken", deviceId);
+            }
+            */
             installation.put("user", AccountUtils.getUser());
 
             installation.saveInBackground(new SaveCallback() {
