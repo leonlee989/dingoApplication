@@ -1,0 +1,157 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:baselineAligned="false">
+    <LinearLayout
+        android:id="@+id/overallRatingContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/overallRatingScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="46sp"
+            android:textStyle="bold"
+            android:text="4.1"
+            android:layout_gravity="center" />
+
+        <RatingBar
+            android:id="@+id/overallRB"
+            style="@style/RatingBar.Small"
+            android:isIndicator="true"
+            android:rating="4.5"
+            android:layout_gravity="center"
+            android:stepSize="0.5" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:id="@+id/numberOfReviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:text="24"
+                android:layout_gravity="center" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="Reviews"
+                android:padding="5dp"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/overallFoodDrinkTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="@string/foodDrink" />
+            <RatingBar
+                android:id="@+id/overallFoodDrinkRB"
+                style="@style/RatingBar.Small"
+                android:isIndicator="true"
+                android:rating="4"
+                android:stepSize="0.5" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/overallValueTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="@string/value" />
+            <RatingBar
+                android:id="@+id/overallValueRB"
+                style="@style/RatingBar.Small"
+                android:isIndicator="true"
+                android:rating="4"
+                android:stepSize="0.5" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/overallAmbienceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="@string/ambience" />
+            <RatingBar
+                android:id="@+id/overallAmbienceRB"
+                style="@style/RatingBar.Small"
+                android:isIndicator="true"
+                android:rating="4"
+                android:stepSize="0.5" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/overallServiceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="15dp"
+                android:text="@string/service" />
+            <RatingBar
+                android:id="@+id/overallServiceRB"
+                style="@style/RatingBar.Small"
+                android:isIndicator="true"
+                android:rating="4"
+                android:stepSize="0.5" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

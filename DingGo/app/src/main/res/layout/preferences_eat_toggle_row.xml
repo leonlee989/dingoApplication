@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rowId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView android:id="@+id/eatToggleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="toggle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="45dp"
+            android:textSize="16dp"
+            android:textIsSelectable="false"
+            />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:switchMinWidth="45dp"
+            android:textOff=""
+            android:textOn=""
+            android:textColor="@color/black"
+            android:id="@+id/eatToggle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:thumb="@drawable/toggle_thumb_indicator"
+            android:track="@drawable/toggle_bg_indicator"/>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- States when the button is not pressed -->
+
+    <!-- Non focused states -->
+    <item android:state_focused="false"
+        android:state_selected="false"
+        android:state_pressed="false"
+        android:drawable="@color/white" />
+
+    <item android:state_focused="false"
+        android:state_selected="true"
+        android:state_pressed="false"
+        android:drawable="@color/red" />
+
+    <!-- Focused States -->
+    <item android:state_focused="true"
+        android:state_selected="false"
+        android:state_pressed="false"
+        android:drawable="@color/grey" />
+
+    <item android:state_focused="true"
+        android:state_selected="true"
+        android:state_pressed="false"
+        android:drawable="@color/red" />
+
+    <!-- States when the button is pressed -->
+
+    <!-- Non focused states -->
+    <item android:state_focused="false"
+        android:state_selected="false"
+        android:state_pressed="true"
+        android:drawable="@color/grey" />
+
+    <item android:state_focused="false"
+        android:state_selected="true"
+        android:state_pressed="true"
+        android:drawable="@color/red" />
+
+    <!-- Focused States -->
+    <item android:state_focused="true"
+        android:state_selected="false"
+        android:state_pressed="true"
+        android:drawable="@color/grey" />
+
+    <item android:state_focused="true"
+        android:state_selected="true"
+        android:state_pressed="true"
+        android:drawable="@color/red" />
+
+</selector>

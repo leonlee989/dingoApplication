@@ -7,8 +7,9 @@
   ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dinggoapplication" >
+    package="com.dinggo" >
 
+    <!-- User permission to use DingGo Application -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,9 +22,8 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission android:protectionLevel="signature"
-        android:name="com.dinggoapplication.permission.C2D_MESSAGE" />
-    <uses-permission android:name="com.dinggoapplication.permission.C2D_MESSAGE" />
-
+        android:name="com.dinggo.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.dinggo.permission.C2D_MESSAGE" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -113,7 +113,6 @@
             android:name=".activities.MerchantReviews"
             android:label="@string/title_activity_merchant_reviews" >
         </activity>
-
         <activity
             android:name=".activities.MerchantDetails"
             android:label="@string/title_activity_merchant_details" >

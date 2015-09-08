@@ -1,0 +1,23 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+   <include layout="@layout/merchant_reviews_overall"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/allReviews"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/theme_primary"
+        android:id="@+id/allReviews" />
+
+</LinearLayout>

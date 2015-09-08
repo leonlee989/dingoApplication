@@ -1,0 +1,60 @@
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!-- Main layout -->
+    <LinearLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/HeaderBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/toolbar"/>
+
+            <com.dinggoapplication.widget.SlidingTabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+        </LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"/>
+        <!--<com.dinggoapplication.widget.MultiSwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:foreground="@drawable/header_shadow">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"/>
+
+        </com.dinggoapplication.widget.MultiSwipeRefreshLayout>-->
+
+    </LinearLayout>
+
+    <!-- Nav drawer -->
+    <include layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

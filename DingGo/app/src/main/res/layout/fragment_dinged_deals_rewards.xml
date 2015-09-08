@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dinggoapplication.activities.DingedDealsActivity"
+    android:background="@color/white">
+
+    <ListView android:id="@+id/dealList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id='@+id/loading'
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+    <TextView android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/noRewards"
+        android:textSize="@dimen/text_size_xlarge"/>
+
+</RelativeLayout>

@@ -1,0 +1,117 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:focusable="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/details"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dealName"
+                android:gravity="center_horizontal|center_vertical"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <include layout="@layout/deal_details_circle_items"/>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/dingFor"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Ding For:"/>
+                <com.dinggoapplication.custom_ui.HorizontalNumberPicker
+                    android:id ="@+id/horizontal_number_picker"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_width ="wrap_content"
+                    android:layout_height ="wrap_content" />
+            </LinearLayout>
+            <RelativeLayout
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dingItButton"
+                android:background="@color/red"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/dingThisDeal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:layout_centerInParent="true" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/right_arrow"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <include layout="@layout/deal_details_description"/>
+            <include layout="@layout/deal_details_about_merchant"/>
+            <include layout="@layout/deal_details_merchant_reviews"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="240dp"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
+            app:expandedTitleTextAppearance="@style/TextAppearance.FontPath_Light">
+            <ImageView
+                android:id="@+id/dealImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/sample_merchant_cover"
+                android:scaleType="centerCrop"
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                android:gravity="bottom|center_horizontal"
+                android:contentDescription="@string/dealImage"
+                app:layout_collapseMode="parallax"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradientbackground"
+                app:layout_collapseMode="parallax"/>
+            <include layout="@layout/toolbar_actionbar" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>
