@@ -32,13 +32,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!--suppress AndroidUnknownAttribute -->
     <application
         android:name=".Application"
         android:allowBackup="true"
         android:allowTaskReparenting="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:theme="@style/DinggoTheme" >
+        android:theme="@style/DinggoTheme">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -132,7 +133,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="com.dinggoapplication" />
+                <category android:name="com.dinggo" />
             </intent-filter>
         </receiver>
 

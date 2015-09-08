@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Ding For:"/>
-                <com.dinggoapplication.custom_ui.HorizontalNumberPicker
+                <com.dinggo.custom_ui.HorizontalNumberPicker
                     android:id ="@+id/horizontal_number_picker"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"

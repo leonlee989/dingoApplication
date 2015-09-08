@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
+  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
+  -->
+
+<full-backup-content xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This file is referenced from android:fullBackupContent in AndroidManifest.xml, and controls
+         exclusions/inclusions for the default backup policy. -->
+
+    <!-- Shared preferences files can be excluded using the "sharedpref" domain. -->
+    <!-- Be sure to exclude any device-specific identifiers, such as the GCM registration key. -->
+    <!-- You may also wish to exclude directories that contain device-specific session tokens or
+         sensitive user credentials. -->
+    <exclude domain="sharedpref" path="gcm"/>
+    <exclude domain="sharedpref" path="user_credentials"/>
+
+    <!-- Databases can be excluded using the "database" domain. -->
+    <exclude domain="database" path="local_secrets.db"/>
+
+    <!-- Additional domains include "file", "external", "root", and "path". See
+         http://developer.android.com/preview/backup/index.html for more details.
+         Additionally, content in the cache directory, external storage, and the no_backup directory
+         (see android.content.Context#getNoBackupFilesDir()) are excluded by default. If you need
+         to backup data in one of these locations, use the <include> directive. -->
+
+</full-backup-content>

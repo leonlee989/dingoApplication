@@ -19,7 +19,7 @@
 
             <include layout="@layout/toolbar"/>
 
-            <com.dinggoapplication.widget.SlidingTabLayout
+            <com.dinggo.widget.SlidingTabLayout
                 android:id="@+id/sliding_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
