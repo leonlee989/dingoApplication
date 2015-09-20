@@ -28,8 +28,7 @@
             style="@style/RatingBar.Small"
             android:isIndicator="true"
             android:rating="4.5"
-            android:layout_gravity="center"
-            android:stepSize="0.5" />
+            android:layout_gravity="center" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,18 +38,18 @@
                 android:id="@+id/numberOfReviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold"
-                android:padding="5dp"
                 android:text="24"
+                android:padding="3dp"
                 android:layout_gravity="center" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold"
-                android:text="Reviews"
-                android:padding="5dp"
+                android:text="@string/reviews"
+                android:padding="3dp"
                 android:layout_gravity="center" />
         </LinearLayout>
 
@@ -65,92 +64,52 @@
         android:layout_weight="1">
 
         <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal">
+            style="@style/Review.CategoryTableRow">
             <TextView
                 android:id="@+id/overallFoodDrinkTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
-                android:paddingRight="15dp"
+                style="@style/Review.CategoryTextView"
                 android:text="@string/foodDrink" />
             <RatingBar
                 android:id="@+id/overallFoodDrinkRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
-                android:rating="4"
-                android:stepSize="0.5" />
+                android:rating="4" />
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal">
+            style="@style/Review.CategoryTableRow">
             <TextView
                 android:id="@+id/overallValueTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
-                android:paddingRight="15dp"
+                style="@style/Review.CategoryTextView"
                 android:text="@string/value" />
             <RatingBar
                 android:id="@+id/overallValueRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
-                android:rating="4"
-                android:stepSize="0.5" />
+                android:rating="4" />
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal">
+            style="@style/Review.CategoryTableRow">
             <TextView
                 android:id="@+id/overallAmbienceTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
-                android:paddingRight="15dp"
+                style="@style/Review.CategoryTextView"
                 android:text="@string/ambience" />
             <RatingBar
                 android:id="@+id/overallAmbienceRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
-                android:rating="4"
-                android:stepSize="0.5" />
+                android:rating="4" />
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal">
+            style="@style/Review.CategoryTableRow">
             <TextView
                 android:id="@+id/overallServiceTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
-                android:paddingRight="15dp"
+                style="@style/Review.CategoryTextView"
                 android:text="@string/service" />
             <RatingBar
                 android:id="@+id/overallServiceRB"
                 style="@style/RatingBar.Small"
                 android:isIndicator="true"
-                android:rating="4"
-                android:stepSize="0.5" />
+                android:rating="4" />
         </TableRow>
     </TableLayout>
 

@@ -1,8 +1,9 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dealDetailItems"
     android:layout_width="match_parent"
     android:layout_height="150dp"
+    android:orientation="horizontal"
     android:padding="10dp">
     <LinearLayout
         android:id="@+id/seatsLayout"
@@ -10,8 +11,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
+        android:layout_weight="1"
         android:padding="10dp"
-        android:layout_toLeftOf="@+id/timeLayout"
         android:background="@drawable/deal_circle"
         android:gravity="center_vertical">
         <TextView
@@ -30,12 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textStyle="normal"
-            android:gravity="center_horizontal"
+            android:gravity="center_horizontal|bottom"
             android:text="@string/seatsOffered"
             android:paddingBottom="1dp"
             android:paddingTop="5dp"
             android:textSize="@dimen/text_size_medium"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal|bottom" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/timeLayout"
@@ -43,11 +44,10 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
+        android:layout_weight="1"
         android:padding="10dp"
         android:background="@drawable/deal_circle"
-        android:gravity="center_vertical"
-        android:layout_centerHorizontal="true"
-        >
+        android:gravity="center_vertical">
         <TextView
             android:id="@+id/timeLeft"
             android:layout_height="wrap_content"
@@ -68,7 +68,6 @@
             android:layout_gravity="center_horizontal|bottom"
             android:paddingBottom="1dp"
             android:paddingTop="5dp"
-            android:textIsSelectable="true"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="normal" />
     </LinearLayout>
@@ -79,7 +78,7 @@
         android:layout_height="100dp"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:layout_toRightOf="@+id/timeLayout"
+        android:layout_weight="1"
         android:background="@drawable/deal_circle"
         android:gravity="center_vertical">
         <TextView
@@ -99,10 +98,10 @@
             android:layout_width="wrap_content"
             android:textStyle="normal"
             android:text="@string/redeemBy"
-            android:gravity="center_horizontal"
+            android:gravity="center_horizontal|bottom"
             android:layout_gravity="center_horizontal|bottom"
             android:paddingBottom="1dp"
             android:textSize="@dimen/text_size_medium"
             android:paddingTop="5dp" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

@@ -100,11 +100,11 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
          */
         @Override
         public void onClick(View v) {
-            //String username = "seahsiungee";
-            //String password = "1234567";
+            String username = "seahsiungee";
+            String password = "1234567";
 
-            String username = txtUsername.getText().toString();
-            String password = txtPassword.getText().toString();
+            //String username = txtUsername.getText().toString();
+            //String password = txtPassword.getText().toString();
 
             if (editTextExceptionHandler(username, password)) {
                 LoginRegisterUtils.loadingStart(mContext);
