@@ -5,7 +5,7 @@
     <dimen name="content_padding_normal">16dp</dimen>
     <dimen name="text_size_xsmall">7sp</dimen>
     <dimen name="text_size_small">9sp</dimen>
-    <dimen name="text_size_medium">10sp</dimen>
+    <dimen name="text_size_medium">11sp</dimen>
     <dimen name="text_size_large">13sp</dimen>
     <dimen name="text_size_xlarge">17sp</dimen>
 </resources>

@@ -93,6 +93,7 @@
     <string name="seatsOffered">"Seats \nOffered"</string>
     <string name="timeLeft">"To Claim"</string>
     <string name="redeemBy">"Redeem \nBy"</string>
+    <string name="dingFor">"Ding For:"</string>
     <string name="dingThisDeal">Ding This Deal</string>
     <string name="dealDescriptionDivider">Deal Description</string>
     <string name="readMore">Read More</string>
@@ -108,6 +109,7 @@
     <string name="ambience">Ambience</string>
     <string name="service">Service</string>
     <string name="noReviews">There are no reviews for this merchant.</string>
+    <string name="reviews">Reviews</string>
 
     <!-- Dinged Deals -->
     <string name="noDingedDeals">You have no dinged deals at this moment.</string>

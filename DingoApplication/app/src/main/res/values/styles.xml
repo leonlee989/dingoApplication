@@ -173,7 +173,7 @@
         <item name="android:scaleX">1</item>
         <item name="android:scaleY">1</item>
         <item name="android:rating">0</item>
-        <item name="android:stepSize">1</item>
+        <item name="android:stepSize">0.5</item>
     </style>
     <style name="RatingBar.Small">
         <item name="android:progressDrawable">@drawable/ratingbar_small</item>
@@ -229,6 +229,45 @@
         <item name="android:windowActionModeOverlay">true</item>
     </style>
 
+    <!-- Deal Description Styles-->
+    <style name="DealDescriptionHeader">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="DealDescriptionHeaderDivider">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/darkgrey</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <!--Review Styles-->
+    <style name="Review.CategoryTextView" parent="Review">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">15dp</item>
+    </style>
+    <style name="Review.CategoryTableRow" parent="Review">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+    <style name="Review"></style>
+
     <!--Transparent Loading Dialog -->
     <style name="CustomLoadingDialogStyle">
         <item name="android:bottomBright">@android:color/transparent</item>
@@ -257,6 +296,14 @@
     <style name="EmptyText">
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:textColor">@color/body_text_disabled</item>
+    </style>
+
+    <!-- Circle Item Layout -->
+    <style name="CircleItemLayout">
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/deal_circle</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <!-- Body content -->

@@ -21,7 +21,8 @@ public class Deal extends ParseObject {
     public final static String TABLE_NAME = "deal";
 
     /** Column name for Deal field */
-    public final static String COLUMN_BRANCH_ID = "branchId",
+    //public final static String COLUMN_BRANCH_ID = "branchId",
+    public final static String COLUMN_BRANCH_ID = "branch_id",
             COLUMN_DEAL_NAME = "dealName",
             COLUMN_DESC = "description",
             COLUMN_DEAL_TYPE = "dealType",

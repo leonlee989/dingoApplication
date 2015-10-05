@@ -22,7 +22,7 @@
                 android:id="@+id/dealName"
                 android:gravity="center_horizontal|center_vertical"
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size_xlarge"
                 android:padding="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
@@ -39,7 +39,8 @@
                     android:id="@+id/dingFor"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Ding For:"/>
+                    android:text="@string/dingFor"
+                    android:textSize="@dimen/text_size_medium" />
                 <com.dinggoapplication.custom_ui.HorizontalNumberPicker
                     android:id ="@+id/horizontal_number_picker"
                     android:paddingTop="5dp"
@@ -60,7 +61,7 @@
                     android:text="@string/dingThisDeal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_xlarge"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
                     android:layout_centerInParent="true" />
