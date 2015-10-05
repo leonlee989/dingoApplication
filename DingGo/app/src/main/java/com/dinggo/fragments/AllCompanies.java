@@ -43,14 +43,14 @@ public class AllCompanies extends Fragment{
 
     /** Fragment listener for the activity that calls this fragment */
     private OnCompanyFragmentInteractionListener mListener;
-
+    /** View control for viewing all customers */
     private View mView;
-
     /** The fragment's recycler view to display deals */
     private RecyclerView mRecyclerView;
-
     /** Name of the Log Tag for this class */
     private static final String TAG = makeLogTag(AllCompanies.class);
+    /** Recycle View Adapter */
+    CompanyListAdapter mRVAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -187,11 +187,32 @@ public class AllCompanies extends Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected() invoked");
         super.onOptionsItemSelected(item);
+
         switch (item.getItemId()) {
             case R.id.eat_drink_menu:
-                new loadCompanyList(mView).execute();
+                // TODO Contains the block of codes into a method to call upon
+                //new loadCompanyList(mView).execute();
+
+                // Set the adapter
+                mRecyclerView = (RecyclerView) mView.findViewById(R.id.allCompaniesRV);
+
+                // use a linear layout manager
+                RecyclerView.LayoutManager mRVLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setLayoutManager(mRVLayoutManager);
+
+                mRVAdapter = new CompanyListAdapter(new ArrayList<Company>());
+                mRecyclerView.setAdapter(mRVAdapter);
+
+                CompanyManager companyManager = CompanyManager.getInstance();
+                mRVAdapter.set(companyManager.getCompaniesFromCache());
+
+                RecyclerView.ItemDecoration itemDecoration =
+                        new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+                mRecyclerView.addItemDecoration(itemDecoration);
+
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -352,6 +373,7 @@ public class AllCompanies extends Fragment{
     }
 
 
+    /*
     private class loadCompanyList extends AsyncTask<Void, ArrayList<Company>, ArrayList<Company>> {
 
         ContentLoadingProgressBar progress;
@@ -371,7 +393,7 @@ public class AllCompanies extends Fragment{
             mRecyclerView.setAdapter(mRVAdapter);
         }
 
-        /**
+        **
          * Override this method to perform a computation on a background thread. The
          * specified parameters are the parameters passed to {@link #execute}
          * by the caller of this task.
@@ -384,26 +406,26 @@ public class AllCompanies extends Fragment{
          * @see #onPreExecute()
          * @see #onPostExecute
          * @see #publishProgress
-         */
+         *
         @Override
         protected ArrayList<Company> doInBackground(Void... params) {
             CompanyManager companyManager = CompanyManager.getInstance();
             return companyManager.updateCacheList();
         }
 
-        /**
+        **
          * Runs on the UI thread before {@link #doInBackground}.
          *
          * @see #onPostExecute
          * @see #doInBackground
-         */
+         *
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             progress.show();
         }
 
-        /**
+        **
          * <p>Runs on the UI thread after {@link #doInBackground}. The
          * specified result is the value returned by {@link #doInBackground}.</p>
          * <p/>
@@ -413,7 +435,7 @@ public class AllCompanies extends Fragment{
          * @see #onPreExecute
          * @see #doInBackground
          * @see #onCancelled(Object)
-         */
+         *
         @Override
         protected void onPostExecute(ArrayList<Company> companies) {
             progress.hide();
@@ -424,5 +446,5 @@ public class AllCompanies extends Fragment{
             mRecyclerView.addItemDecoration(itemDecoration);
         }
     }
-
+    */
 }

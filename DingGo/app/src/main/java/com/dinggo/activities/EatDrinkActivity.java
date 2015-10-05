@@ -8,19 +8,26 @@
 
 package com.dinggo.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.ContentLoadingProgressBar;
+import android.util.Log;
+import android.view.View;
 
 import com.dinggo.R;
 import com.dinggo.fragments.AllCompanies;
 import com.dinggo.fragments.CustomerViewAll;
 import com.dinggo.fragments.CustomerViewMap;
+import com.dinggo.managers.CompanyManager;
+import com.dinggo.managers.DealManager;
 import com.dinggo.widget.SlidingTabLayout;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -50,8 +57,6 @@ public class EatDrinkActivity extends BaseActivity implements
     AppSectionPagerAdapter mAppSectionPagerAdapter;
     /** the {@link ViewPager} that will display the three primary sections of the application, one at a time */
     ViewPager mViewPager;
-    /** Context variable to store resources */
-    Context mContext;
 
     SlidingTabLayout mSlidingTabLayout = null;
 
@@ -69,46 +74,57 @@ public class EatDrinkActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eat_drink);
+
+        Log.d("DataFlow", "Loading cache...");
+        new LoadData(this).execute();
+        Log.d("DataFlow", "Load cache completed");
+
         getActionBarToolbar();
+    }
 
-        // Create the adapter that will return a fragment for each of the two primary sections
-        mAppSectionPagerAdapter = new AppSectionPagerAdapter(getSupportFragmentManager(), getApplicationContext());
+    public void inflateFragments() {
+        if (mAppSectionPagerAdapter == null) {
+            // Create the adapter that will return a fragment for each of the two primary sections
+            mAppSectionPagerAdapter = new AppSectionPagerAdapter(getSupportFragmentManager(), getApplicationContext());
 
-        //Set up the viewpager, attaching the adapter and setting up a listener for when the user
-        // swipe between the sections
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mAppSectionPagerAdapter);
+            // Set up the viewpager, attaching the adapter and setting up a listener for when the user
+            // swipe between the sections
+            mViewPager = (ViewPager) findViewById(R.id.pager);
+            mViewPager.setAdapter(mAppSectionPagerAdapter);
 
-        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+            mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+            mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
 
-        Resources res = getResources();
-        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.red));
-        mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setViewPager(mViewPager);
+            Resources res = getResources();
+            mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.red));
+            mSlidingTabLayout.setDistributeEvenly(true);
+            mSlidingTabLayout.setViewPager(mViewPager);
 
-        if (mSlidingTabLayout != null) {
-            mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset,
-                                           int positionOffsetPixels) {
+            if (mSlidingTabLayout != null) {
+                mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset,
+                                               int positionOffsetPixels) {
+                    }
 
-                }
+                    @Override
+                    public void onPageSelected(int position) {
+                    }
 
-                @Override
-                public void onPageSelected(int position) {
-
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                    //enableDisableSwipeRefresh(state == ViewPager.SCROLL_STATE_IDLE);
-                }
-            });
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                        //enableDisableSwipeRefresh(state == ViewPager.SCROLL_STATE_IDLE);
+                    }
+                });
+            }
         }
     }
 
-
+    /**
+     * On shared preference changed in the backend
+     * @param sp        Shared Preferences object
+     * @param key       Key for the shared preferences
+     */
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
         LOGD(TAG, "shared preferences key " + key + " changed, maybe reloading data.");
@@ -141,7 +157,7 @@ public class EatDrinkActivity extends BaseActivity implements
         /**
          * Return the Fragment associated with a specified position.
          *
-         * @param position
+         * @param position  Position of item clicked
          */
         @Override
         public Fragment getItem(int position) {
@@ -240,5 +256,67 @@ public class EatDrinkActivity extends BaseActivity implements
         return true;
     }*/
 
+    public class LoadData extends AsyncTask<Void, Integer, Integer> {
+        ContentLoadingProgressBar progress;
+
+        public LoadData(Activity activity) {
+            Log.d("DataFlow", "Load data invoked");
+            this.progress = (ContentLoadingProgressBar) activity.findViewById(R.id.eat_drink_loading);
+        }
+
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p/>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param params The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
+        @Override
+        protected Integer doInBackground(Void... params) {
+            Log.d("DataFlow", "Do in background");
+            CompanyManager companyManager = CompanyManager.getInstance();
+            companyManager.updateCacheList();
+
+            DealManager dealManager = DealManager.getInstance();
+            return dealManager.updateCacheList().size();
+        }
+
+        /**
+         * Runs on the UI thread before {@link #doInBackground}.
+         *
+         * @see #onPostExecute
+         * @see #doInBackground
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress.show();
+        }
+
+        /**
+         * <p>Runs on the UI thread after {@link #doInBackground}. The
+         * specified result is the value returned by {@link #doInBackground}.</p>
+         * <p/>
+         * <p>This method won't be invoked if the task was cancelled.</p>
+         *
+         * @param dealsSize The size oft the deals
+         * @see #onPreExecute
+         * @see #doInBackground
+         * @see #onCancelled(Object)
+         */
+        @Override
+        protected void onPostExecute(Integer dealsSize) {
+            progress.hide();
+            Log.d("DataFlow", dealsSize + " deals are available in cache system");
+            inflateFragments();
+        }
+    }
 
 }

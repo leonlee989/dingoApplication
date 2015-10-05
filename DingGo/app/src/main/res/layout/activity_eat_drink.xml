@@ -34,11 +34,22 @@
             android:layout_height="wrap_content"
             android:background="@color/white"/>
         </LinearLayout>
+
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id='@+id/eat_drink_loading'
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleLarge"
+            android:visibility="visible"
+            android:layout_gravity="center_horizontal"/>
+
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
             android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:visibility="visible" />
+
         <!--<com.dinggo.widget.MultiSwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
@@ -54,6 +65,7 @@
         </com.dinggo.widget.MultiSwipeRefreshLayout>-->
 
     </LinearLayout>
+
 
     <!-- Nav drawer -->
     <include layout="@layout/nav_drawer" />

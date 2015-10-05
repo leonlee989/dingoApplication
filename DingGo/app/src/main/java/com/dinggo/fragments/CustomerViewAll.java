@@ -60,8 +60,8 @@ public class CustomerViewAll extends Fragment {
     private RecyclerView mRecyclerView;
     /** Log tag */
     private static final String TAG = makeLogTag(CustomerViewAll.class);
-
-    private View mView;
+    /** Adapter class using recycler view to populate deals information onto the interface */
+    DealListAdapter mRVAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -109,10 +109,34 @@ public class CustomerViewAll extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.customer_all_tab, container, false);
-        mView = view;
-        new loadDealList(view).execute();
-        return view;
+        Log.d("DataFlow", "Open Customer View All");
+        /* View of the fragment to be inflated */
+        View mView = inflater.inflate(R.layout.customer_all_tab, container, false);
+
+        // Set the adapter
+        mRecyclerView = (RecyclerView) mView.findViewById(R.id.deals_recycler_view);
+
+        // use a linear layout manager
+        RecyclerView.LayoutManager mRVLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mRVLayoutManager);
+
+        mRVAdapter = new DealListAdapter(new ArrayList<Deal>());
+        mRecyclerView.setAdapter(mRVAdapter);
+
+        //new loadDealList(view).execute();
+        DealManager dealManager = DealManager.getInstance();
+        ArrayList<Deal> dealArrayList = dealManager.getDealsFromCache();
+
+        if(dealArrayList.isEmpty()) {
+            mRecyclerView.setVisibility(View.GONE);
+        } else {
+            mRVAdapter.set(dealArrayList);
+            RecyclerView.ItemDecoration itemDecoration =
+                    new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+            mRecyclerView.addItemDecoration(itemDecoration);
+        }
+
+        return mView;
     }
 
     /**
@@ -182,6 +206,7 @@ public class CustomerViewAll extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        /*
         Log.d(TAG, "onOptionsItemSelected() invoked");
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
@@ -189,6 +214,7 @@ public class CustomerViewAll extends Fragment {
                 new loadDealList(mView).execute();
                 break;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
 

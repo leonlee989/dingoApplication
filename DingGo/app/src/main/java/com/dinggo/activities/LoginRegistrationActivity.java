@@ -26,8 +26,11 @@ import com.dinggo.utilities.LoginRegisterUtils;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -41,13 +44,15 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by leon on 10/2/2015.
  */
 public class LoginRegistrationActivity extends Activity implements View.OnClickListener {
-
+    /** Edit text control that contains user name */
     private EditText txtUsername;
+    /** Edit text control that contains user's password */
     private EditText txtPassword;
+    /** Context of the application */
     Context mContext;
 
     /**
-     * Called when the activity is starting.  This is where most initializationboss
+     * Called when the activity is starting.  This is where most initialization
      * should go: calling {@link #setContentView(int)} to inflate the
      * activity's UI, using {@link #findViewById} to programmatically interact
      * with widgets in the UI, calling
@@ -92,6 +97,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         }
     }
 
+    /** Login listener for user to access the application */
     private View.OnClickListener loginListener = new View.OnClickListener() {
         /**
          * Called when a view has been clicked.
@@ -103,22 +109,51 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
             //String username = "seahsiungee";
             //String password = "1234567";
 
-            String username = txtUsername.getText().toString();
-            String password = txtPassword.getText().toString();
+            String username = txtUsername.getText().toString().trim();
+            String password = txtPassword.getText().toString().trim();
 
+            Log.d(LoginRegistrationActivity.class.getName(), username);
             if (editTextExceptionHandler(username, password)) {
                 LoginRegisterUtils.loadingStart(mContext);
-                // TODO: Login in by email address
+
                 if (username.contains("@")) {
+                    // Login by email address
+                    logInByEmail(username, password);
                 } else {
                     // Login by user name
                     ParseUser.logInInBackground(username, password, manualLoginCallBack);
                 }
-            }
 
+            }
         }
     };
 
+    /**
+     * Login user by their email address
+     * @param username  String that contains email address
+     * @param password  String that contains user password
+     */
+    public void logInByEmail(String username, String password) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("email", username);
+
+        try {
+            List<ParseUser> userList = query.find();
+
+            if (userList.size() != 0) {
+                ParseUser parseUser = userList.get(0);
+                ParseUser.logInInBackground(parseUser.getUsername(), password, manualLoginCallBack);
+            } else {
+                LoginRegisterUtils.loadingFinish();
+                showToast(R.string.sign_up_failed_invalid_email);
+            }
+
+        } catch (ParseException e) {
+            parseExceptionHandler(e.getCode());
+        }
+    }
+
+    /** Login call back for user to access the application */
     public LogInCallback manualLoginCallBack = new LogInCallback() {
         @Override
         public void done(ParseUser parseUser, ParseException e) {
@@ -140,6 +175,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         }
     };
 
+    /** Register listener for user to register a account for login access */
     private View.OnClickListener registerListener = new View.OnClickListener() {
         /**
          * Called when a view has been clicked.
@@ -171,6 +207,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         }
     };
 
+    /** Manual sign up call back for user to register a account for login access */
     private SignUpCallback manualSignUpCallBack = new SignUpCallback() {
         @Override
         public void done(ParseException e) {
@@ -195,6 +232,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
             ParseFacebookUtils.logInWithReadPermissionsInBackground(this, LoginRegisterUtils.getFacebookPermissions(), facebookLoginCallBack);
     }
 
+    /** Facebook log in call back for user to log into the account using facebook account */
     private LogInCallback facebookLoginCallBack = new LogInCallback() {
         @Override
         public void done(ParseUser parseUser, ParseException e) {
@@ -222,9 +260,7 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         }
     };
 
-    /**
-     * Skip registration, allow user to trial use app with dinging related features blocked
-     */
+    /** Skip registration, allow user to trial use app with dinging related features blocked */
     private View.OnClickListener skipListener = new View.OnClickListener() {
         /**
          * Called when a view has been clicked.
@@ -237,6 +273,9 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         }
     };
 
+    /**
+     * Method to execute upon success login, allowing user to access the Eat and Drink Activity
+     */
     protected void loginSuccess() {
         DeviceUtil.installDevice(getApplicationContext());
         showToast(R.string.login_success_toast);
@@ -282,6 +321,12 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    /**
+     * Exception handling for user input to log into the application
+     * @param username  String value that contains the username
+     * @param password  String value that contains user's password
+     * @return          Boolean value that determines is user input valid for either login or register
+     */
     protected boolean editTextExceptionHandler(String username, String password) {
         boolean isValid = true;
         Resources resources = getResources();
@@ -301,6 +346,10 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
         return isValid;
     }
 
+    /**
+     * Parse Database exception handling for different error code
+     * @param errorCode Integer value that contains the error code that represents a particular Parse Error
+     */
     protected void parseExceptionHandler(int errorCode) {
         switch (errorCode) {
             case ParseException.OBJECT_NOT_FOUND:
@@ -323,12 +372,20 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
                 showToast(R.string.login_failed_unknown_toast);
         }
     }
+
+    /**
+     * Show toast box in the application
+     * @param id    ID of the resource string
+     */
     protected void showToast(int id) {
         showToast(getString(id));
     }
 
+    /**
+     * Show toast box in the application
+     * @param text  Text to display in the toast
+     */
     protected void showToast(CharSequence text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
-
 }

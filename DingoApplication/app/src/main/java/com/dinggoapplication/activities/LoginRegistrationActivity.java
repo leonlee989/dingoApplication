@@ -108,8 +108,9 @@ public class LoginRegistrationActivity extends Activity implements View.OnClickL
 
             if (editTextExceptionHandler(username, password)) {
                 LoginRegisterUtils.loadingStart(mContext);
-                // TODO: Login in by email address
-                if (username.contains("@")) {
+
+                if (username.contains("@")) { // TODO: Login in by email address
+
                 } else {
                     // Login by user name
                     ParseUser.logInInBackground(username, password, manualLoginCallBack);

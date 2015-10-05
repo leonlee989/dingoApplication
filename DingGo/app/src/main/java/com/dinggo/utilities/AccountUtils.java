@@ -1,5 +1,7 @@
 package com.dinggo.utilities;
 
+import android.content.Context;
+
 import com.parse.LogOutCallback;
 import com.parse.ParseUser;
 
