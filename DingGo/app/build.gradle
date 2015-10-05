@@ -15,11 +15,11 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.dinggo"
+        applicationId "com.dinggoapplication"
         minSdkVersion 17
         targetSdkVersion 21
-        versionCode 10
-        versionName "2.0"
+        versionCode 11
+        versionName "2.1"
     }
     buildTypes {
         release {

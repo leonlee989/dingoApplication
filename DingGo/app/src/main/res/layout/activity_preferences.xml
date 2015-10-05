@@ -53,7 +53,7 @@
                     android:layout_marginBottom="10dp"
                     android:id="@+id/priceRangeTextView" />
 
-                <com.dinggo.custom_ui.RangeSeekBar
+                <com.dinggoapplication.custom_ui.RangeSeekBar
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/eatRangeSeekBar"
