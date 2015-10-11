@@ -80,6 +80,8 @@
     </style>
 
     <style name="DinggoTheme" parent="DinggoTheme.Base">
+        <item name="fontPath">fonts/Nexa Light.otf</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
     <!-- Base theme applied no matter what API -->
     <style name="DinggoTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
@@ -238,6 +240,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.FontPath_Bold.</item>
         <item name="android:layout_weight">2</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -342,5 +345,7 @@
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/body_text_2</item>
     </style>
-
+    <style name="TextAppearance.FontPath_Bold." parent="android:TextAppearance">
+        <item name="fontPath">fonts/Nexa Bold.otf</item> b
+    </style>
 </resources>
