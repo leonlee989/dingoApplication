@@ -94,8 +94,8 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coverorientalgarden));
 
         // LatLng latLng_peachgarden = ApplicationFactory.getLocationFromAddress(address_peach_garden.toString(), mContext);
-        Branch orientalGardenOutlet = new Branch(orientalGarden, "22 New Bridge Road Rd, #XX-XX Chinatown point",
-                "", "Singapore", "Singapore", "059413", "Singapore", "61234567", 1.2852, 103.8449);
+        Branch orientalGardenOutlet = new Branch("Oriental Garden deal", orientalGarden, "22 New Bridge Road Rd, #XX-XX Chinatown point",
+                "", "Singapore", "Singapore", "059413", "Singapore", "61234567", 1.2852, 103.8449, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(orientalGardenOutlet,
@@ -120,8 +120,8 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coverpho));
 
         //LatLng latLng_pho_pho = ApplicationFactory.getLocationFromAddress(address_pho_pho.toString(), mContext);
-        Branch phoPhoOutlet = new Branch(phoPho, "82 Tanah Merah Kechil Ave, #XX-XX", "", "Singapore",
-                "Singapore", "465515", "Singapore", "67654321", 1.3285, 103.9445);
+        Branch phoPhoOutlet = new Branch("Pho Pho's Deal", phoPho, "82 Tanah Merah Kechil Ave, #XX-XX", "", "Singapore",
+                "Singapore", "465515", "Singapore", "67654321", 1.3285, 103.9445, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(phoPhoOutlet,
@@ -145,11 +145,11 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coverfourseasonschicken));
 
         // LatLng latLng_fourseason_chicken = ApplicationFactory.getLocationFromAddress(address_four-season_chicken.toString(), mContext);
-        Branch fourChickenOutlet_1 = new Branch(fourSeasonChicken, "23 Serangoon Central, Nex #XX-XX", "",
-                "Singapore", "Singapore", "556083", "Singapore", "66342130", 1.3506, 103.8718);
+        Branch fourChickenOutlet_1 = new Branch("Four Season Chicken's Deal 1", fourSeasonChicken, "23 Serangoon Central, Nex #XX-XX", "",
+                "Singapore", "Singapore", "556083", "Singapore", "66342130", 1.3506, 103.8718, "", null, null);
 
-        Branch fourChickenOutlet_2 = new Branch(fourSeasonChicken, "68 Orchard Rd, Plaze Singapura #XX-XX",
-                "", "Singapore", "Singapore", "238839", "Singapore", "68998432", 1.3006139, 103.8451045);
+        Branch fourChickenOutlet_2 = new Branch("Four Season Chicken's Deal 2", fourSeasonChicken, "68 Orchard Rd, Plaze Singapura #XX-XX",
+                "", "Singapore", "Singapore", "238839", "Singapore", "68998432", 1.3006139, 103.8451045, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(fourChickenOutlet_1,
@@ -191,11 +191,11 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.goldthai),
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covergoldthai));
 
-        Branch goldThaiOutlet_1 = new Branch(goldThai,"91 Bencoolen Street, #XX-XX, Sunshine Plaza", "",
-                "Singapore", "Singapore", "189652", "Singapore", "61234567", 1.3007441, 103.8520604);
+        Branch goldThaiOutlet_1 = new Branch("Gold Thai's Deal 1", goldThai,"91 Bencoolen Street, #XX-XX, Sunshine Plaza", "",
+                "Singapore", "Singapore", "189652", "Singapore", "61234567", 1.3007441, 103.8520604, "", null, null);
 
-        Branch goldThaiOutlet_2 = new Branch(goldThai, "231 Bain Street, #XX-XX, Bras Basah Complex", "",
-                "Singapore", "Singapore", "180231", "Singapore", "61234567", 1.297105, 103.853681);
+        Branch goldThaiOutlet_2 = new Branch("Gold Thai's Deal 2", goldThai, "231 Bain Street, #XX-XX, Bras Basah Complex", "",
+                "Singapore", "Singapore", "180231", "Singapore", "61234567", 1.297105, 103.853681, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(goldThaiOutlet_1,
@@ -228,8 +228,8 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.lerkthai),
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covergoldthai));
 
-        Branch lerkThaiOutlet = new Branch(lerkThai, "3 New Bugis St", "", "Singapore", "Singapore",
-                "188867", "Singapore", "61234567", 1.300599, 103.854893);
+        Branch lerkThaiOutlet = new Branch("Lerk Thai's Deal", lerkThai, "3 New Bugis St", "", "Singapore", "Singapore",
+                "188867", "Singapore", "61234567", 1.300599, 103.854893, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(lerkThaiOutlet,
@@ -260,8 +260,8 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.wafflessouffleslogo),
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coverwafflessouffles));
 
-        Branch wafflesSoufflesOutlet = new Branch(wafflesSouffles, "10 Orchard Rd, #XX-XX Orchard Plaza",
-                "", "Singapore", "Singapore", "238841", "Singapore", "61234567", 1.301284, 103.841309);
+        Branch wafflesSoufflesOutlet = new Branch("Waffles Souffles' Deal", wafflesSouffles, "10 Orchard Rd, #XX-XX Orchard Plaza",
+                "", "Singapore", "Singapore", "238841", "Singapore", "61234567", 1.301284, 103.841309, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(wafflesSoufflesOutlet,
@@ -285,8 +285,8 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.icblogo),
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.covericb));
 
-        Branch icbOutlet = new Branch(icb, "50 Stamford Rd, #XX-XX Lee Kong Chian School Of Business",
-                "", "Singapore", "Singapore", "178899", "Singapore", "61234567", 1.294866, 103.850259);
+        Branch icbOutlet = new Branch("Ice Cold Beer's Deal", icb, "50 Stamford Rd, #XX-XX Lee Kong Chian School Of Business",
+                "", "Singapore", "Singapore", "178899", "Singapore", "61234567", 1.294866, 103.850259, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(icbOutlet,
@@ -318,11 +318,11 @@ public class Bootstrap {
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.sasukelogo),
                 ImageUtils.convertImageToBytes(mContext.getResources(), R.drawable.coversasuke));
 
-        Branch sasukeOutlet_1 = new Branch(sasukeJapan, "252 North Bridge Road, #XX-XX Raffles City", "",
-                "Singapore", "Singapore", "179103", "Singapore", "61234567", 1.2941178, 103.8528128);
+        Branch sasukeOutlet_1 = new Branch("Sasuke Japan's Deal 1", sasukeJapan, "252 North Bridge Road, #XX-XX Raffles City", "",
+                "Singapore", "Singapore", "179103", "Singapore", "61234567", 1.2941178, 103.8528128, "", null, null);
 
-        Branch sasukeOutlet_2 = new Branch(sasukeJapan, "930 Yishun Ave 2, #XX-XX Northpoint Shopping Centre",
-                "", "Singapore", "Singapore", "769098", "Singapore", "61234567", 1.4298358, 103.8355685);
+        Branch sasukeOutlet_2 = new Branch("Sasuke Japan's Deal 1", sasukeJapan, "930 Yishun Ave 2, #XX-XX Northpoint Shopping Centre",
+                "", "Singapore", "Singapore", "769098", "Singapore", "61234567", 1.4298358, 103.8355685, "", null, null);
 
         /* ==== Deals ==== */
         new Deal(sasukeOutlet_1,

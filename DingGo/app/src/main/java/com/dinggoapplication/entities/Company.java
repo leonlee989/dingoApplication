@@ -23,14 +23,15 @@ public class Company extends ParseObject {
 
     /** Column name in the Parse Database */
     private final String COLUMN_COMPANY_NAME = "companyName",
-            COLUMN_REG_NUM = "regNo",
             COLUMN_DESC = "description",
+            COLUMN_REG_NUM = "regNo",
             COLUMN_CUISINE_TYPE = "cuisineType",
             COLUMN_EMAIL = "email",
             COLUMN_WEBSITE_URL = "websiteURL",
             COLUMN_LOGO = "logoImage",
             COLUMN_COVER_IMAGE = "coverImage",
-            COLUMN_NUM_OF_LIKES = "numOfLikes";
+            COLUMN_NUM_OF_LIKES = "numOfLikes",
+            COLUMN_AVERAGE_SPENDING = "companyAverageSpending";
 
     /** Default constructor to instantiate Company Object and store into Parse Database without data */
     public Company() {}
@@ -57,6 +58,7 @@ public class Company extends ParseObject {
         setLogoImage(logoImage);
         setCoverImage(coverImage);
         setNumOfLikes(0);
+        setCompanyAverageSpending(0);
 
         saveInBackground(LogUtils.saveCallback(Company.class.getName()));
     }
@@ -238,5 +240,21 @@ public class Company extends ParseObject {
      */
     public void setNumOfLikes(int numOfLikes) {
         put(COLUMN_NUM_OF_LIKES, numOfLikes);
+    }
+
+    /**
+     * Retrieve the average spending from every customers
+     * @param averageSpending   Double value that contains the average amount of spending
+     */
+    public void setCompanyAverageSpending(double averageSpending) {
+        put(COLUMN_COMPANY_NAME, averageSpending);
+    }
+
+    /**
+     * Retrieve the average spending of the company
+     * @return  Double value that contains the average spending of the company
+     */
+    public double getCompanyAverageSpending() {
+        return getDouble(COLUMN_COMPANY_NAME);
     }
 }
