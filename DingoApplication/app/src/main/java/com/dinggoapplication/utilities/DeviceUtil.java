@@ -1,7 +1,6 @@
 package com.dinggoapplication.utilities;
 
 import android.content.Context;
-import android.provider.Settings;
 
 import com.parse.ParseException;
 import com.parse.ParseInstallation;

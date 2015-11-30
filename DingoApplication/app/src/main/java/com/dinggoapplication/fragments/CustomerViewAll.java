@@ -36,6 +36,8 @@ import com.dinggoapplication.managers.DealManager;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
@@ -60,8 +62,8 @@ public class CustomerViewAll extends Fragment {
     private RecyclerView mRecyclerView;
     /** Log tag */
     private static final String TAG = makeLogTag(CustomerViewAll.class);
-
-    private View mView;
+    /** Adapter class using recycler view to populate deals information onto the interface */
+    DealListAdapter mRVAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -109,10 +111,41 @@ public class CustomerViewAll extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.customer_all_tab, container, false);
-        mView = view;
-        new loadDealList(view).execute();
-        return view;
+        Log.d("DataFlow", "Open Customer View All");
+        /* View of the fragment to be inflated */
+        View mView = inflater.inflate(R.layout.customer_all_tab, container, false);
+
+        // Set the adapter
+        mRecyclerView = (RecyclerView) mView.findViewById(R.id.deals_recycler_view);
+
+        // use a linear layout manager
+        RecyclerView.LayoutManager mRVLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mRVLayoutManager);
+
+        mRVAdapter = new DealListAdapter(new ArrayList<Deal>());
+        mRecyclerView.setAdapter(mRVAdapter);
+
+        //new loadDealList(view).execute();
+        DealManager dealManager = DealManager.getInstance();
+        ArrayList<Deal> dealArrayList = dealManager.getDealsFromCache();
+        Collections.reverse(dealArrayList);
+        ArrayList<Deal> deals = new ArrayList<Deal>();
+        Deal.DealStatus status = Deal.DealStatus.ACTIVE;
+        for(int i =0;i<dealArrayList.size();i++){
+            if(dealArrayList.get(i).getDealStatus()==status) {
+                deals.add(dealArrayList.get(i));
+            }
+        }
+        if(deals.isEmpty()) {
+            mRecyclerView.setVisibility(View.GONE);
+        } else {
+            mRVAdapter.set(deals);
+            RecyclerView.ItemDecoration itemDecoration =
+                    new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+            mRecyclerView.addItemDecoration(itemDecoration);
+        }
+
+        return mView;
     }
 
     /**
@@ -182,6 +215,7 @@ public class CustomerViewAll extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        /*
         Log.d(TAG, "onOptionsItemSelected() invoked");
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
@@ -189,6 +223,7 @@ public class CustomerViewAll extends Fragment {
                 new loadDealList(mView).execute();
                 break;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
 
@@ -277,7 +312,7 @@ public class CustomerViewAll extends Fragment {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the fragment is attached to one) that an item has been selected.
                     Deal deal = mDealList.get(getPosition());
-                    mListener.onDealFragmentInteraction(deal.getReferenceId());
+                    //mListener.onDealFragmentInteraction(deal.getReferenceId());
 
                     Intent intent = new Intent(getActivity().getBaseContext(), DealDetailsActivity.class);
                     intent.putExtra("deal_referenceCode", deal.getReferenceId());
@@ -332,6 +367,7 @@ public class CustomerViewAll extends Fragment {
          */
         @Override
         public int getItemCount() {
+            Log.d("DEAL LIST", String.valueOf(mDealList.size()));
             return mDealList.size();
         }
     }
@@ -383,7 +419,9 @@ public class CustomerViewAll extends Fragment {
         @Override
         protected ArrayList<Deal> doInBackground(Void... params) {
             DealManager dealManager = DealManager.getInstance();
-            return dealManager.updateCacheList();
+            ArrayList<Deal> resultList = dealManager.updateCacheList();
+            Collections.reverse(resultList);
+            return resultList;
         }
 
         /**

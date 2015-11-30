@@ -14,12 +14,27 @@
         android:orientation="horizontal"
         android:id="@+id/dealDescriptionDivider">
 
-        <View style="@style/DealDescriptionHeaderDivider" />
+        <View style="@style/hDivider"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical" />
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/dealDescriptionDividerTV"
-            style="@style/DealDescriptionHeader"
-            android:text="@string/dealDescriptionDivider" />
-        <View style="@style/DealDescriptionHeaderDivider" />
+            android:text="@string/dealDescriptionDivider"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:layout_weight="2"
+            android:gravity="center"/>
+        <View style="@style/hDivider"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical" />
 
     </LinearLayout>
 
@@ -30,7 +45,7 @@
         android:text="@string/long_text"
         android:maxLines="5"
         android:ellipsize="end"
-        android:textSize="@dimen/text_size_medium"
+        android:textSize="16sp"
         android:paddingBottom="10dp"
         android:paddingTop="5dp"
         android:gravity="center"/>
@@ -38,8 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/readMore"
-        android:textSize="@dimen/text_size_large"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/theme_primary"
         android:id="@+id/readMore" />

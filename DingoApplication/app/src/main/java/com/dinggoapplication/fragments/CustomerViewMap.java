@@ -9,6 +9,7 @@
 package com.dinggoapplication.fragments;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,10 +20,12 @@ import android.view.ViewGroup;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.entities.Branch;
+import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.managers.DealManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,19 +42,24 @@ import java.util.ArrayList;
  *
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
- * Created by leon on 18/02/15.
+ *          Created by leon on 18/02/15.
  */
-public class CustomerViewMap extends Fragment {
-    /** Fragment listener for the activity that calls this fragment */
+public class CustomerViewMap extends Fragment{
+    /**
+     * Fragment listener for the activity that calls this fragment
+     */
     private OnMapFragmentInteractionListener mListener;
-    /** GoogleMap object that handles geo services from Google */
+    /**
+     * GoogleMap object that handles geo services from Google
+     */
     private GoogleMap mMap;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CustomerViewMap() {}
+    public CustomerViewMap() {
+    }
 
     /**
      * Called to do initial creation of a fragment.  This is called after
@@ -104,7 +112,7 @@ public class CustomerViewMap extends Fragment {
      * Called when a fragment is first attached to its activity.
      * {@link #onCreate(Bundle)} will be called after this.
      *
-     * @param activity  Activity class that the fragment is attached to
+     * @param activity Activity class that the fragment is attached to
      */
     @Override
     public void onAttach(Activity activity) {
@@ -127,6 +135,8 @@ public class CustomerViewMap extends Fragment {
         mListener = null;
     }
 
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -136,7 +146,8 @@ public class CustomerViewMap extends Fragment {
     public interface OnMapFragmentInteractionListener {
         /**
          * This method allows interactions with the activity class who implements this listener by its id
-         * @param id    ID of the fragment to be identify in the activity class
+         *
+         * @param id ID of the fragment to be identify in the activity class
          */
         void onMapFragmentInteraction(String id);
     }
@@ -165,7 +176,7 @@ public class CustomerViewMap extends Fragment {
      */
     public void setUpMap() {
         // enabling location marking
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setMyLocationEnabled(true);
 
         // Set current location tracking on map view
@@ -185,9 +196,10 @@ public class CustomerViewMap extends Fragment {
          */
         @Override
         public void onMyLocationChange(Location location) {
+            Log.d("longitude", String.valueOf(location.getLongitude()));
             LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
 
-            if(mMap != null){
+            if (mMap != null) {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 14.0f));
             }
         }
@@ -198,21 +210,38 @@ public class CustomerViewMap extends Fragment {
      */
     public void setAllDeals() {
         try {
-            // Sample displaying
-            DealManager dealManager = DealManager.getInstance();
-            ArrayList<Deal> dealList = dealManager.getDealsFromCache();
+            if (mMap != null) {
+                // Sample displaying
+                DealManager dealManager = DealManager.getInstance();
+                ArrayList<Deal> dealList = dealManager.getDealsFromCache();
 
-            for (Deal deal : dealList) {
-                Branch merchant = deal.getBranch().fetchIfNeeded();
+                for (Deal deal : dealList) {
 
-                mMap.addMarker(new MarkerOptions()
-                        .position(merchant.getLatLng())
-                        .title(merchant.getCompany().getCompanyName())
-                        .snippet(deal.toString())
-                        .icon(BitmapDescriptorFactory.fromBitmap(merchant.getCompany().getLogoImage())));
+                    Branch merchant = deal.getBranch().fetchIfNeeded();
+                    Company company = merchant.getCompany();
+//                    Branch merchant = deal.getBranch();
+//                    Company company = merchant.getCompany();
+
+//                    MarkerOptions marker = new MarkerOptions()
+//                            .position(merchant.getLatLng())
+//                            .title(company.getCompanyName())
+//                            .snippet(deal.getDealName());
+
+                    Bitmap companyLogo = company.getLogoImage();
+                    if (companyLogo != null)
+                        //ßß  marker.icon(BitmapDescriptorFactory.fromBitmap(companyLogo));
+
+                        mMap.addMarker(new MarkerOptions().title(company.getCompanyName())
+                                .snippet(deal.getDealName())
+                                .position(merchant.getLatLng())
+                                .icon(BitmapDescriptorFactory.fromBitmap(companyLogo)));
+
+                }
             }
         } catch (ParseException e) {
             Log.e("Map", e.getMessage());
         }
     }
+
 }
+

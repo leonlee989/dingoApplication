@@ -3,10 +3,8 @@ package com.dinggoapplication.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,34 +27,49 @@ import com.dinggoapplication.managers.CompanyManager;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * A fragment that display all merchants' information into a view list
+ *
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
- * Created by siungee on 20/8/15.
+ *          Created by siungee on 20/8/15.
  */
-public class AllCompanies extends Fragment{
+public class AllCompanies extends Fragment {
 
-    /** Fragment listener for the activity that calls this fragment */
+    /**
+     * Fragment listener for the activity that calls this fragment
+     */
     private OnCompanyFragmentInteractionListener mListener;
-
+    /**
+     * View control for viewing all customers
+     */
     private View mView;
-
-    /** The fragment's recycler view to display deals */
+    /**
+     * The fragment's recycler view to display deals
+     */
     private RecyclerView mRecyclerView;
-
-    /** Name of the Log Tag for this class */
+    /**
+     * Name of the Log Tag for this class
+     */
     private static final String TAG = makeLogTag(AllCompanies.class);
+    /**
+     * Recycle View Adapter
+     */
+    CompanyListAdapter mRVAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public AllCompanies() {}
+    public AllCompanies() {
+    }
 
     /**
      * Called to do initial creation of a fragment.  This is called after
@@ -123,7 +136,7 @@ public class AllCompanies extends Fragment{
      * Called when a fragment is first attached to its activity.
      * {@link #onCreate(Bundle)} will be called after this.
      *
-     * @param activity  Activity class that the fragment is attached to
+     * @param activity Activity class that the fragment is attached to
      */
     @Override
     public void onAttach(Activity activity) {
@@ -151,7 +164,7 @@ public class AllCompanies extends Fragment{
      * the list is empty. If you would like to change the text, call this method
      * to supply the text it should use.
      *
-     * @param emptyText     Text to display if the list is empty
+     * @param emptyText Text to display if the list is empty
      */
     public void setEmptyText(CharSequence emptyText) {
         /*View emptyView = mListView.getEmptyView();
@@ -169,9 +182,11 @@ public class AllCompanies extends Fragment{
      */
     public interface OnCompanyFragmentInteractionListener {
         // TODO: Update argument type and name
+
         /**
          * This method allows interactions with the activity class who implements this listener by its id
-         * @param id    ID of the fragment to be identify in the activity class
+         *
+         * @param id ID of the fragment to be identify in the activity class
          */
         void OnCompanyFragmentInteraction(String id);
     }
@@ -187,53 +202,93 @@ public class AllCompanies extends Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected() invoked");
         super.onOptionsItemSelected(item);
+
         switch (item.getItemId()) {
             case R.id.eat_drink_menu:
-                new loadCompanyList(mView).execute();
+                // TODO Contains the block of codes into a method to call upon
+                //new loadCompanyList(mView).execute();
+
+                // Set the adapter
+                mRecyclerView = (RecyclerView) mView.findViewById(R.id.allCompaniesRV);
+
+                // use a linear layout manager
+                RecyclerView.LayoutManager mRVLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setLayoutManager(mRVLayoutManager);
+
+                mRVAdapter = new CompanyListAdapter(new ArrayList<Company>());
+                mRecyclerView.setAdapter(mRVAdapter);
+
+                CompanyManager companyManager = CompanyManager.getInstance();
+                mRVAdapter.set(companyManager.getCompaniesFromCache());
+
+                RecyclerView.ItemDecoration itemDecoration =
+                        new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+                mRecyclerView.addItemDecoration(itemDecoration);
+
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
     /**
      * Retrieve all companies from Parse and populate the recycle view
-     * @return  A list of companies retrieve from Parse
+     *
+     * @return A list of companies retrieve from Parse
      * TODO: Leverage on Fragment Interaction Listener to retrieve the deals Parse on the main activity, where this method will be pulling from cache
      */
     private List<Company> getCompanyList() {
         CompanyManager companyManager = CompanyManager.getInstance();
-        return companyManager.updateCacheList();
+        Log.d("Company List", companyManager.updateCacheList().toString());
+        ArrayList<Company> companies = companyManager.updateCacheList();
+      //  Collections.reverse(companies);
+
+        Collections.sort(companies, new Comparator<Company>() {
+            @Override
+            public int compare(Company lhs, Company rhs) {
+                return ((Date) lhs.getCreatedAt()).compareTo(((Date) rhs.getCreatedAt()));
+            }
+        });
+        return companies;
     }
 
     /**
      * Adapter class for Recycler view to populate company information onto the interface
      */
     private class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.ViewHolder> {
-        /** List of companies that will be populated onto recycle view */
+        /**
+         * List of companies that will be populated onto recycle view
+         */
         private List<Company> mCompanyList;
 
         // Provide a suitable constructor (depends on the kind of data-set)
+
         /**
          * Constructor to instantiate the adapter with the following argument
-         * @param myCompanyList     List of companies' that will be populated onto the recycler view
+         *
+         * @param myCompanyList List of companies' that will be populated onto the recycler view
          */
         public CompanyListAdapter(List<Company> myCompanyList) {
             mCompanyList = myCompanyList;
+            Log.d("myCompanyList", String.valueOf(mCompanyList.size()));
         }
 
         /**
          * Adding a new company object into the company list and display onto the recycler view
-         * @param position  Row index in the recycle view where the company will be placed on
-         * @param item      Company object to be placed
-         */
-        public void add(int position, Company item) {
-            mCompanyList.add(position, item);
-            notifyItemInserted(position);
-        }
+         *
+         * @param position Row index in the recycle view where the company will be placed on
+         * @param item     Company object to be placed
+//         */
+//        public void add(int position, Company item) {
+//            Log.d("COMPANY ITEM",item.getCompanyName());
+//            mCompanyList.add(position, item);
+//            notifyItemInserted(position);
+//        }
 
         /**
          * Setting and changing a new list of companies to be displayed onto the recycler view
-         * @param mCompanyList   A new list of companies
+         *
+         * @param mCompanyList A new list of companies
          */
         public void set(ArrayList<Company> mCompanyList) {
             this.mCompanyList = mCompanyList;
@@ -242,13 +297,14 @@ public class AllCompanies extends Fragment{
 
         /**
          * Removing a Company object from the recycler view
-         * @param item  Company object to be removed from list
+         *
+         * @param item Company object to be removed from list
          */
-        public void remove(Company item) {
-            int position = mCompanyList.indexOf(item);
-            mCompanyList.remove(position);
-            notifyItemRemoved(position);
-        }
+//        public void remove(Company item) {
+//            int position = mCompanyList.indexOf(item);
+//            mCompanyList.remove(position);
+//            notifyItemRemoved(position);
+//        }
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -260,16 +316,23 @@ public class AllCompanies extends Fragment{
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             // each data item is just a string in this case
             public CardView mCardView;
-            /** Text information with regards to the company */
+            /**
+             * Text information with regards to the company
+             */
             public TextView mCompanyName, mCompanyDescription;
-            /** Image requried for the company */
+            /**
+             * Image requried for the company
+             */
             public ImageView mCompanyCoverImage, mFavouriteIcon;
-            /** Average rating values for the company */
+            /**
+             * Average rating values for the company
+             */
             public RatingBar mMerchantOverallRating;
 
             /**
              * Constructor that instantiates the View Holder object, creating a new row in the recycler view
-             * @param v     Inflatable view object
+             *
+             * @param v Inflatable view object
              */
             public ViewHolder(View v) {
                 super(v);
@@ -280,7 +343,6 @@ public class AllCompanies extends Fragment{
                 mCompanyName = (TextView) v.findViewById(R.id.companyName);
                 mCompanyDescription = (TextView) v.findViewById(R.id.companyDescription);
                 mCompanyCoverImage = (ImageView) v.findViewById(R.id.companyCoverImage);
-                //mFavouriteIcon = (ImageView) v.findViewById(R.id.favouriteIcon);
                 mMerchantOverallRating = (RatingBar) v.findViewById(R.id.merchantOverallRating);
             }
 
@@ -307,9 +369,10 @@ public class AllCompanies extends Fragment{
 
         /**
          * Create new views (invoked by the layout manager)
-         * @param parent    View group object that is the parent for this view holder
-         * @param viewType  Type of inflated view
-         * @return          ViewHolder object which contains a inflatable view
+         *
+         * @param parent   View group object that is the parent for this view holder
+         * @param viewType Type of inflated view
+         * @return ViewHolder object which contains a inflatable view
          */
         @Override
         public CompanyListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -321,14 +384,17 @@ public class AllCompanies extends Fragment{
 
         /**
          * Replace the contents of a view (invoked by the layout manager)
-         * @param holder        ViewHolder object that contains an inflatable view
-         * @param position      Position of the ViewHolder object
+         *
+         * @param holder   ViewHolder object that contains an inflatable view
+         * @param position Position of the ViewHolder object
          */
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your data set at this position
             // - replace the contents of the view with that element
             Company company = mCompanyList.get(position);
+            Log.d("Merchant Company Name:",company.getCompanyName());
+            Log.d("Merchant Company Date", company.getCreatedAt().toString());
 
             try {
                 Bitmap coverImage = company.getCoverImage();
@@ -343,6 +409,7 @@ public class AllCompanies extends Fragment{
 
         /**
          * Retrieve the number of items in the recycler view
+         *
          * @return the size of your dataset (invoked by the layout manager)
          */
         @Override
@@ -352,6 +419,7 @@ public class AllCompanies extends Fragment{
     }
 
 
+    /*
     private class loadCompanyList extends AsyncTask<Void, ArrayList<Company>, ArrayList<Company>> {
 
         ContentLoadingProgressBar progress;
@@ -371,7 +439,7 @@ public class AllCompanies extends Fragment{
             mRecyclerView.setAdapter(mRVAdapter);
         }
 
-        /**
+        **
          * Override this method to perform a computation on a background thread. The
          * specified parameters are the parameters passed to {@link #execute}
          * by the caller of this task.
@@ -384,26 +452,26 @@ public class AllCompanies extends Fragment{
          * @see #onPreExecute()
          * @see #onPostExecute
          * @see #publishProgress
-         */
+         *
         @Override
         protected ArrayList<Company> doInBackground(Void... params) {
             CompanyManager companyManager = CompanyManager.getInstance();
             return companyManager.updateCacheList();
         }
 
-        /**
+        **
          * Runs on the UI thread before {@link #doInBackground}.
          *
          * @see #onPostExecute
          * @see #doInBackground
-         */
+         *
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             progress.show();
         }
 
-        /**
+        **
          * <p>Runs on the UI thread after {@link #doInBackground}. The
          * specified result is the value returned by {@link #doInBackground}.</p>
          * <p/>
@@ -413,7 +481,7 @@ public class AllCompanies extends Fragment{
          * @see #onPreExecute
          * @see #doInBackground
          * @see #onCancelled(Object)
-         */
+         *
         @Override
         protected void onPostExecute(ArrayList<Company> companies) {
             progress.hide();
@@ -424,5 +492,6 @@ public class AllCompanies extends Fragment{
             mRecyclerView.addItemDecoration(itemDecoration);
         }
     }
+    */
 
 }

@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.dinggoapplication.ObjectSerializer;
 import com.dinggoapplication.R;
 import com.dinggoapplication.utilities.AccountUtils;
+import com.dinggoapplication.utilities.LoginRegisterUtils;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
 
@@ -60,6 +61,8 @@ public class SettingsActivity extends BaseActivity {
     CustomAdapter adapter;
     /** Hash of boolean values to track the toggle values in customer settings */
     LinkedHashMap<String,Boolean> toggleStateList;
+    /** Context of the application */
+    Context mContext;
 
     @Override
     protected int getSelfNavDrawerItem() {
@@ -125,6 +128,7 @@ public class SettingsActivity extends BaseActivity {
         ListView listView = (ListView) findViewById(R.id.settingsListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(itemActions);
+        mContext = this;
     }
 
     /**
@@ -149,6 +153,7 @@ public class SettingsActivity extends BaseActivity {
 
             switch(position) {
                 case 2: // Eat Preferences Settings
+                    LoginRegisterUtils.loadingStart(mContext);
                     AccountUtils.logOut(new LogOutCallback() {
                         @Override
                         public void done(ParseException e) {
@@ -157,7 +162,10 @@ public class SettingsActivity extends BaseActivity {
                                 startActivity(intent);
                             } else {
                                 Log.e(TAG, "Unable to log out due to:" + e.getMessage());
+                                Toast.makeText(mContext, "Unable to Log out due to network error. Please try again", Toast.LENGTH_LONG).show();
                             }
+
+                            LoginRegisterUtils.loadingFinish();
                         }
                     });
                     break;

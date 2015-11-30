@@ -43,12 +43,27 @@
                 android:paddingBottom="10dp"
                 android:id="@+id/dealDescriptionDivider">
 
-                <View style="@style/DealDescriptionHeaderDivider" />
+                <View style="@style/hDivider"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical" />
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/dealDescriptionDividerTV"
-                    style="@style/DealDescriptionHeader"
-                    android:text="@string/dealDescriptionDivider"/>
-                <View style="@style/DealDescriptionHeaderDivider" />
+                    android:text="@string/dealDescriptionDivider"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_weight="2"
+                    android:gravity="center"/>
+                <View style="@style/hDivider"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <TextView
@@ -56,7 +71,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
-                android:textSize="@dimen/text_size_medium"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp" />
 
@@ -67,12 +81,28 @@
                 android:paddingTop="10dp"
                 android:id="@+id/dealTCDivider"
                 android:paddingBottom="10dp">
-                <View style="@style/DealDescriptionHeaderDivider" />
+
+                <View style="@style/hDivider"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical" />
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/dealTCDividerTV"
-                    style="@style/DealDescriptionHeader"
-                    android:text="@string/dealTCDivider" />
-                <View style="@style/DealDescriptionHeaderDivider" />
+                    android:text="@string/dealTCDivider"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_weight="3"
+                    android:gravity="center"/>
+                <View style="@style/hDivider"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <TextView
@@ -80,7 +110,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/very_long_text"
-                android:textSize="@dimen/text_size_medium"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp" />
         </LinearLayout>

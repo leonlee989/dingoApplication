@@ -9,15 +9,36 @@
 package com.dinggoapplication.activities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dinggoapplication.R;
+import com.dinggoapplication.entities.Branch;
+import com.dinggoapplication.entities.Company;
+import com.dinggoapplication.entities.Deal;
+import com.dinggoapplication.entities.DingedDeal;
+import com.dinggoapplication.managers.DealManager;
+import com.dinggoapplication.managers.DingnedDealManager;
+import com.parse.ParseException;
+
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within dinged deal page
@@ -31,8 +52,22 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class DingedDealDetailsActivity extends BaseActivity {
 
     /** TextView object that displays the company name and discount offered */
-    TextView redeemByTV, dDiscountTV, referenceID;
+    TextView redeemByTV, dDiscountTV, referenceID,textTNC;
+    ImageView dingeddealImage;
+    Deal deal;
+    Company merchant;
+    Branch branch;
+    DingedDeal dingedDeal;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    /**
+     * String value that contains the tag name for this activity
+     */
+    private static final String TAG = makeLogTag(DingedDealDetailsActivity.class);
 
+    /**
+     * Date format for display purpose
+     */
+    DateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
     /**
      * Called when the activity is starting.  This is where most initialization
      * should go: calling {@link #setContentView(int)} to inflate the
@@ -63,28 +98,55 @@ public class DingedDealDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dinged_deal_details);
 
-        final Toolbar toolbar = getActionBarToolbar();
-        toolbar.setNavigationIcon(R.drawable.ic_up);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
+        //TODO retrieve and set TV to display dynamic values
         redeemByTV = (TextView) findViewById(R.id.redeemBy);
         referenceID = (TextView) findViewById(R.id.referenceID);
         dDiscountTV = (TextView) findViewById(R.id.dDiscountTextView);
+        textTNC = (TextView) findViewById(R.id.termnCondition);
+        dingeddealImage = (ImageView) findViewById(R.id.dingdealImage);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            DealManager dealManager = DealManager.getInstance();
+            DingnedDealManager dingnedDealManager = DingnedDealManager.getInstance();
 
-            //TODO retrieve and set TV to display dynamic values
-            dDiscountTV.setText(extras.getString("discountString") + " Your Bill");
-            redeemByTV.setText("Redeem by 2.00pm");
-            referenceID.setText("D1234567");
-            //referenceID.setText(extras.getString("referenceID"));
+            try {
+                // Retrieve deal from the deal manager class
+                int ref = extras.getInt("dingdeal_confirmationId");
+                Log.d("REF", String.valueOf(ref));
+
+                deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
+                Log.d("DEal RID",deal.getReferenceId());
+              // String conId = String.valueOf(dingedDeal.getConfirmationId());
+                branch = deal.getBranch().fetchIfNeeded();
+                merchant = branch.getCompany();
+                Bitmap coverImage = deal.getDealImage();
+                if (coverImage != null)
+                    dingeddealImage.setImageBitmap(deal.getDealImage());
+                dDiscountTV.setText(deal.getDescription().toString());
+                redeemByTV.setText("Redeem by "+dateFormat.format(deal.getRedeemBy()));
+                textTNC.setText(deal.getTermConditions().toString());
+                    referenceID.setText(String.valueOf(ref));
+
+
+            }catch (ParseException e) {
+                Log.e(TAG, e.getMessage());
+            }
         }
+        else{
+            Log.d("DINGEDDETAIL","Bundle null");
+        }
+
+//
+//        final Toolbar toolbar = getActionBarToolbar();
+//        toolbar.setNavigationIcon(R.drawable.ic_up);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
+
     }
 
     /**

@@ -1,10 +1,13 @@
 package com.dinggoapplication.entities;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.dinggoapplication.utilities.ImageUtils;
 import com.dinggoapplication.utilities.LogUtils;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 import java.util.Date;
@@ -21,15 +24,18 @@ public class Deal extends ParseObject {
     public final static String TABLE_NAME = "deal";
 
     /** Column name for Deal field */
-    //public final static String COLUMN_BRANCH_ID = "branchId",
-    public final static String COLUMN_BRANCH_ID = "branch_id",
+    public final static String COLUMN_BRANCH_ID = "branchId",
+            COLUMN_STATUS = "dealStatus",
             COLUMN_DEAL_NAME = "dealName",
             COLUMN_DESC = "description",
+            COLUMN_CUISINE_TYPE = "cuisineType",
             COLUMN_DEAL_TYPE = "dealType",
-            COLUMN_TERM_CONDITIONS = "term_conditions",
             COLUMN_SEAT_OFFER = "seatToOffer",
             COLUMN_REDEEM_BY = "redeemBy",
-            COLUMN_STATUS = "dealStatus";
+            COLUMN_TERM_CONDITIONS = "term_conditions",
+            COLUMN_DEAL_AVERAGE_SPENDING = "dealAverageSpending",
+            COLUMN_IMAGE = "image",
+            COLUMN_START_TIME = "startTime";
 
     /** Default constructor that instantiate the Deal Object */
     public Deal() {}
@@ -123,6 +129,31 @@ public class Deal extends ParseObject {
     }
 
     /**
+     * Retrieve the cuisine type the deal provides
+     * @return  CuisineType object that contains the name of the cuisine
+     */
+    public CuisineType getCuisineType() {
+        CuisineType cuisineType = (CuisineType) get(COLUMN_CUISINE_TYPE);
+
+        if (!cuisineType.isDataAvailable()) {
+            try {
+                cuisineType.fetchIfNeeded();
+            } catch (ParseException e) {
+                Log.e(TABLE_NAME, e.getMessage());
+            }
+        }
+        return cuisineType;
+    }
+
+    /**
+     * Set and change the type of cuisine the company serves
+     * @param cuisineType   CuisineType object that the company serves
+     */
+    public void setCuisineType(CuisineType cuisineType) {
+        put(COLUMN_CUISINE_TYPE, cuisineType);
+    }
+
+    /**
      * Retrieve the type of deal offered
      * @return  DealType object that contains the information about the type of deal
      */
@@ -195,13 +226,80 @@ public class Deal extends ParseObject {
         put(COLUMN_REDEEM_BY, redeemBy);
     }
 
+    /**
+     * Retrieve the status of the deal
+     * @return  DealStatus Enumerator object that contains the status of the deal
+     */
     public DealStatus getDealStatus() {
         String status = getString(COLUMN_STATUS);
-        return DealStatus.valueOf(status);
+        if(status.equals("Withdrawed"))
+        {
+            status = "WITHDRAWN";
+        }
+        return DealStatus.valueOf(status.toUpperCase());
     }
 
+    /**
+     * Set the deal status for the deal
+     * @param status    Enumerator object for deal status
+     */
     public void setDealStatus(DealStatus status) {
         put(COLUMN_STATUS, status.name());
+    }
+
+    /**
+     * Set and change the average spending of the deal
+     * @param averageSpending   Double value that contains the average spending of the deal
+     */
+    public void setDealAverageSpending(double averageSpending) {
+        put(COLUMN_DEAL_AVERAGE_SPENDING, averageSpending);
+    }
+
+    /**
+     * Retrieve the deal's average spending
+     * @return Double value the contains the average spending of the deal
+     */
+    public double getDealAverageSpending() {
+        return getDouble(COLUMN_DEAL_AVERAGE_SPENDING);
+    }
+
+    /**
+     * Set the image of the deal
+     * @param image Byte value that containe the binary of the image
+     */
+    public void setDealImage(byte[] image) {
+        if (image != null) {
+            ParseFile dealImage = new ParseFile(image);
+            dealImage.saveInBackground(LogUtils.saveCallback(Deal.class.getName()));
+            put(COLUMN_IMAGE, dealImage);
+        } else Log.e(TABLE_NAME, "Image cannot be null to set the logo image");
+    }
+
+    /**
+     * Retrieve the image related to the deal
+     * @return  Bitmap object that contains the image related to the deal
+     * @throws ParseException
+     */
+    public Bitmap getDealImage() throws ParseException {
+        ParseFile dealImage = getParseFile(COLUMN_IMAGE);
+        if (dealImage != null) return ImageUtils.convertBytesToImage(dealImage.getData());
+        else return null;
+    }
+
+    /**
+     * Set the start time of the deal
+     * @param startTime Date object that contains the start time of the deal
+     */
+    public void setStartTime(Date startTime) {
+        put(COLUMN_START_TIME, startTime);
+    }
+
+    /**
+     * Retrieve the start time of the deal
+     * @return  Date object that contains the start time of the deal
+     */
+    public Date getStartTime() {
+        return getDate(COLUMN_START_TIME);
     }
 
     public enum DealStatus {

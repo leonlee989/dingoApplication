@@ -48,10 +48,6 @@ public class LoginRegisterUtils {
         return LOG_TAG;
     }
 
-    public static void loginByEmailAddress(String username, String password) {
-
-    }
-
     public static void loadingStart(Context context) {
         progress = new ProgressDialog(context, R.style.loadingTheme);
         progress.setCancelable(false);

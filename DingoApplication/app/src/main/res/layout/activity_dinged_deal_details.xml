@@ -1,72 +1,81 @@
-<!--
-  ~ Copyright (C) Technify Pte Ltd - All Rights Reserved
-  ~ Unauthorized copying of this file, via any medium is strictly prohibited
-  ~ Proprietary and confidential
-  ~ Written by Lee Quee Leong <leequeeleong@technify.com.sg> and
-  ~ Seah Siu Ngee <seahsiungee@techinify.com.sg, May 2015
-  -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
-
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:padding="20dp"
-        android:layout_gravity="bottom">
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:weightSum="1">
 
-        <TextView
-            android:text="You dinged a deal for"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"
-            android:textSize="@dimen/text_size_xlarge"
-            android:gravity="center" />
 
-        <TextView
-            android:id="@+id/dDiscountTextView"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:textSize="@dimen/text_size_xlarge"
-            android:textStyle="bold"
-            android:gravity="center" />
-        <TextView
-            android:id="@+id/redeemBy"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:textSize="@dimen/text_size_large"
-            android:gravity="center" />
-        <TextView
-            android:text="Reference ID"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:textSize="@dimen/text_size_large"
-            android:gravity="center" />
-        <TextView
-            android:id="@+id/referenceID"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:textSize="@dimen/text_size_large"
-            android:textStyle="bold"
-            android:textColor="@color/theme_primary_dark"
-            android:gravity="center" />
-        <TextView
-            android:text="Show this screen to your waiter/ waitress"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:textSize="@dimen/text_size_xlarge"
-            android:gravity="center" />
+        <ImageView
+            android:id="@+id/dingdealImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/dealImage"
+            android:gravity="bottom|center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_merchant_cover"
+            app:layout_collapseMode="parallax"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed" />
+
 
     </LinearLayout>
 
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:text="You dinged a deal for"
+        android:textSize="@dimen/text_size_xlarge" />
+
+    <TextView
+        android:id="@+id/dDiscountTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/redeemBy"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:text="Confirmation ID"
+        android:textSize="@dimen/text_size_large" />
+
+    <TextView
+        android:id="@+id/referenceID"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:gravity="center"
+        android:textColor="@color/theme_primary_dark"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/termnCondition"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_xlarge" />
+
 </LinearLayout>
+
+

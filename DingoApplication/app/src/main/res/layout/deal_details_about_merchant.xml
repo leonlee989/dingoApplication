@@ -1,29 +1,48 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/dealAboutMerchantDivider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/dealAboutMerchantDivider">
+            android:orientation="horizontal">
 
-            <View style="@style/DealDescriptionHeaderDivider" />
+            <View
+                style="@style/hDivider"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/dealAboutMerchantDividerTV"
-                style="@style/DealDescriptionHeader"
-                android:text="@string/aboutMerchantDivider"/>
-            <View style="@style/DealDescriptionHeaderDivider" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp"
+                android:text="@string/aboutMerchantDivider"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                style="@style/hDivider"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -31,11 +50,11 @@
             android:id="@+id/companyDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/description"
             android:gravity="center"
-            android:textSize="@dimen/text_size_medium"
             android:paddingBottom="10dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:text="@string/description"
+            android:textSize="16sp" />
 
 
         <TableLayout
@@ -47,78 +66,87 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="30dp">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/web"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_gravity="center_vertical"/>
-                    <TextView
-                        android:id="@+id/companyWebsite"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/url"
-                        android:textSize="@dimen/text_size_medium"
-                        android:layout_gravity="center_vertical"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="30dp">
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp">
+
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/tel"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:src="@drawable/web" />
+
+                <TextView
+                    android:id="@+id/companyWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/url" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/tel" />
+
                 <TextView
                     android:id="@+id/branchPhoneNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/tel"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/tel" />
             </TableRow>
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
                 android:paddingEnd="10dp">
+
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/marker"
-                    android:tint="@color/grey"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:src="@drawable/marker"
+                    android:tint="@color/grey" />
+
                 <TextView
                     android:id="@+id/branchAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/address"
-                    android:textSize="@dimen/text_size_medium"
                     android:layout_gravity="center_vertical"
-                    android:singleLine="false"
                     android:maxLines="8"
-                    android:maxWidth="250dp" />
+                    android:maxWidth="250dp"
+                    android:singleLine="false"
+                    android:text="@string/address" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
 
+
     <com.google.android.gms.maps.MapView
-    android:id="@+id/mapview"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp"/>
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:clickable="true"
+        android:enabled="true"
+        android:apiKey="AIzaSyACcaEfVNwJMNCl4IFg2Ko3c89yjiz4gsg"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
 </LinearLayout>

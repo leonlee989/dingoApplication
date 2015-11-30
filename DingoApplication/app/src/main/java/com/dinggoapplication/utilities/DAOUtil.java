@@ -8,6 +8,7 @@ import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.CuisineType;
 import com.dinggoapplication.entities.Deal;
 import com.dinggoapplication.entities.DealType;
+import com.dinggoapplication.entities.DingedDeal;
 import com.dinggoapplication.entities.Review;
 import com.parse.Parse;
 import com.parse.ParseCrashReporting;
@@ -56,6 +57,7 @@ public class DAOUtil {
         ParseObject.registerSubclass(Deal.class);
 
         ParseObject.registerSubclass(Review.class);
+        ParseObject.registerSubclass(DingedDeal.class);
         Log.d("com.parse", "All sub class for Parse Object has been registered");
     }
  }

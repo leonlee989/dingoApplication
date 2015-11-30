@@ -8,9 +8,12 @@
 
 package com.dinggoapplication.activities;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,28 +28,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dinggoapplication.R;
 import com.dinggoapplication.entities.Branch;
 import com.dinggoapplication.entities.Company;
 import com.dinggoapplication.entities.Deal;
+import com.dinggoapplication.entities.DingedDeal;
 import com.dinggoapplication.managers.DealManager;
+import com.dinggoapplication.managers.DingnedDealManager;
 import com.dinggoapplication.managers.ReviewManager;
 import com.dinggoapplication.utilities.TimeUtils;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -56,46 +69,91 @@ import static com.dinggoapplication.utilities.LogUtils.makeLogTag;
 
 /**
  * Activity class that executes activities within the single detail page for deals
- * <p>
+ * <p/>
  * Inflated layout that displays full details on a particular deal
  *
  * @author Lee Quee Leong & Seah Siu Ngee
  * @version 2.1
- * Created by siungee on 20/2/2015.
+ *          Created by siungee on 20/2/2015.
  */
-public class DealDetailsActivity extends BaseActivity{
+public class DealDetailsActivity extends BaseActivity implements View.OnClickListener {
 
-    /** Element that contains the cover image for the deal */
+    int numDings,dingSeat,dingseat2;
+
+    String dingstatus;
+    ParseUser user;
+
+    public static final String MyPREFERENCES = "MyPrefs";
+
+    DingedDeal dingedDeal2;
+
+    /**
+     * Element that contains the cover image for the deal
+     */
     ImageView imageView;
-    /** Text view that contains the information about the merchant */
+
+    /**
+     * Element that contains the number of seat to ding
+     */
+    EditText seatNumberText;
+
+    /**
+     * Text view that contains the information about the merchant
+     */
     TextView mMerchantDescription, mAddressTextView, mWebAddressTextView, mMobileNumber, dDealName,
             dSeatOffered, dTimeLeft, dRedeemBy, dDealDescription, dDealDescriptionReadMore,
             dMerchantAllReviews, mOverallRatingScore, mNumberOfReviews;
-    /** Controller for all rating bar in the summarize review section */
+    /**
+     * Controller for all rating bar in the summarize review section
+     */
     RatingBar mOverallRB, mOverallFoodDrinkRB, mOverallValueRB, mOverallAmbienceRB, mOverallServiceRB;
-    /** Controller for the nested scroll view in the view */
+    /**
+     * Controller for the nested scroll view in the view
+     */
     NestedScrollView nestedScrollView;
-    /** Count down timer object to count down the expiry of the deal */
+    /**
+     * Count down timer object to count down the expiry of the deal
+     */
     CountDownTimer countDownTimer;
     /** Object that contains the resolution of the mobile's display */
     //DisplayMetrics metrics;
-    /** Company object that contains information about the company whose branch is offering the respective deal */
+    /**
+     * Company object that contains information about the company whose branch is offering the respective deal
+     */
     Company merchant;
-    /** Branch object that contains information about the branch that offers the respective deal */
+    /**
+     * Branch object that contains information about the branch that offers the respective deal
+     */
     Branch branch;
-    /** Deal object that contains information about the deals */
-    Deal deal;
-    /** Element that contains a map view to display the location of the merchant */
+    /**
+     * Deal object that contains information about the deals
+     */
+    Deal deal, deal1;
+    /**
+     * Element that contains a map view to display the location of the merchant
+     */
     MapView mapView;
-    /** Object /  instance that provide geo services */
+    /**
+     * Object /  instance that provide geo services
+     */
     GoogleMap map;
-    /** Object that contains the latitude and longitude of the merchant's location */
+    /**
+     * Object that contains the latitude and longitude of the merchant's location
+     */
     LatLng mLatLng;
-    /** Date format for display purpose */
+    /**
+     * Date format for display purpose
+     */
     DateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
-    /** Average ratings given to the merchant */
+    /**
+     * Average ratings given to the merchant
+     */
     HashMap<String, Float> averageStars;
-    /** String value that contains the tag name for this activity */
+
+    DingedDeal dingedDeal1,dingedDeal;
+    /**
+     * String value that contains the tag name for this activity
+     */
     private static final String TAG = makeLogTag(DealDetailsActivity.class);
 
     /**
@@ -137,9 +195,9 @@ public class DealDetailsActivity extends BaseActivity{
             try {
                 // Retrieve deal from the deal manager class
                 deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
-                branch = deal.getBranch();
+                branch = deal.getBranch().fetchIfNeeded();
                 merchant = branch.getCompany();
-
+                Log.d("STATUS", deal.getDealStatus().toString());
                 /* ************************* HEADER SECTION ************************************* */
                 toolbarLayout.setTitle(merchant.getCompanyName());
                 toolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
@@ -155,9 +213,9 @@ public class DealDetailsActivity extends BaseActivity{
 
                 /* ************************ DEAL SECTION **************************************** */
                 imageView = (ImageView) findViewById(R.id.dealImage);
-                Bitmap coverImage = merchant.getCoverImage();
+                Bitmap coverImage = deal.getDealImage();
                 if (coverImage != null)
-                    imageView.setImageBitmap(merchant.getCoverImage());
+                    imageView.setImageBitmap(deal.getDealImage());
                 dDealName = (TextView) findViewById(R.id.dealName);
                 dDealName.setText(deal.getDealName());
 
@@ -177,6 +235,10 @@ public class DealDetailsActivity extends BaseActivity{
 
                 dDealDescriptionReadMore = (TextView) findViewById(R.id.readMore);
                 dDealDescriptionReadMore.setOnClickListener(dealDescriptionReadMoreOnClick);
+
+                /* ******************* DING DEAL SECTION ***************************************** */
+                seatNumberText = (EditText) findViewById(R.id.pickerNumberText);
+
 
                 /* ******************* MERCHANT SECTION ***************************************** */
                 mMerchantDescription = (TextView) findViewById(R.id.companyDescription);
@@ -202,9 +264,6 @@ public class DealDetailsActivity extends BaseActivity{
                 map.getUiSettings().setMyLocationButtonEnabled(false);
                 map.setMyLocationEnabled(true);
 
-                GoogleMapOptions options = new GoogleMapOptions();
-                options.mapType(GoogleMap.MAP_TYPE_NORMAL).liteMode(true);
-
                 // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
                 try {
                     MapsInitializer.initialize(DealDetailsActivity.this);
@@ -212,10 +271,15 @@ public class DealDetailsActivity extends BaseActivity{
                     Log.e(TAG, e.getMessage());
                 }
                 mLatLng = branch.getLatLng();
-
+                Log.d("LatLng", mLatLng.toString());
                 // Updates the location and zoom of the MapView
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 10);
-                map.animateCamera(cameraUpdate);
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng, 10));
+                map.addMarker(new MarkerOptions().title(String.valueOf(deal.getDealName()))
+                        .snippet(deal.getDealName())
+                        .position(mLatLng));
+                mapView.onResume();
+
+                //map.animateCamera(cameraUpdate);
 
                 /* *********************** REVIEW SECTION *************************************** */
                 // Get review according to deal reference Id
@@ -255,7 +319,9 @@ public class DealDetailsActivity extends BaseActivity{
 
     }
 
-    /** On click listener for "Read More" text view when user plans to read more about deal details */
+    /**
+     * On click listener for "Read More" text view when user plans to read more about deal details
+     */
     private View.OnClickListener dealDescriptionReadMoreOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -265,7 +331,9 @@ public class DealDetailsActivity extends BaseActivity{
             frag.show(getSupportFragmentManager(), "dialog");
         }
     },
-    /** On click listener for "All Reviews" text view when user plans to view the reviews */
+    /**
+     * On click listener for "All Reviews" text view when user plans to view the reviews
+     */
     merchantAllReviewOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -275,29 +343,119 @@ public class DealDetailsActivity extends BaseActivity{
             startActivity(intent);
         }
     },
-    /** On click listener for Ding It button when user plans to ding this deal */
+    /**
+     * On click listener for Ding It button when user plans to ding this deal
+     */
     dingItOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            /*Intent intent = new Intent(DealDetailsActivity.this, DingedDealDetailsActivity.class);
-            intent.putExtra("deal_referenceCode", deal.getReferenceCode());
-            intent.putExtra("mCompanyName", merchant.getCompanyName());
-            if(!discount.isEmpty()) {
-                intent.putExtra("discountString", discount);
+
+            Deal.DealStatus status = Deal.DealStatus.WITHDRAWN;
+            int seat = Integer.parseInt(dSeatOffered.getText().toString());
+            dingSeat = Integer.parseInt(seatNumberText.getText().toString());
+            dingseat2 = seat - dingSeat;
+            if (dingSeat > seat) {
+                Toast.makeText(getApplicationContext(), "Offers are taken", Toast.LENGTH_LONG).show();
+            } else if (dTimeLeft.getText().toString().equals("Expired!")) {
+                Toast.makeText(getApplicationContext(), "Deal has expired", Toast.LENGTH_LONG).show();
+            } else if (deal.getDealStatus() == status) {
+                Toast.makeText(getApplicationContext(), "Deal has expired", Toast.LENGTH_LONG).show();
+            } else {
+                SharedPreferences preferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                String userid = preferences.getString("USERID", "");
+                numDings++;
+                dingstatus = "Not Redeemed";
+                DingnedDealManager dingnedDealManager = DingnedDealManager.getInstance();
+
+                try {
+                    dingedDeal = dingnedDealManager.getLastDeal();
+                    Log.d("Confirmation ID", String.valueOf(dingedDeal.getConfirmationId()));
+                    user = ParseUser.getCurrentUser();
+                    Date today = new Date();
+                    String format = "yyyy-MM-dd HH:mm:ss";
+                    SimpleDateFormat date = new SimpleDateFormat(format,Locale.US);
+                    Calendar now = Calendar.getInstance();
+                    now.set(Calendar.HOUR, 0);
+                    now.set(Calendar.MINUTE, 1);
+                    now.set(Calendar.SECOND, 0);
+
+                    String todaydate = date.format(today);
+                    Date setDate= null;
+
+                        setDate = now.getTime();
+                        Log.d("Date",setDate.toString());
+
+                    dingedDeal2 = dingnedDealManager.getLastDeal();
+                    Boolean ding = dingnedDealManager.isDing(user, setDate);
+                    Log.d("ding RID", String.valueOf(dingedDeal2.getConfirmationId()));
+                    if (dingnedDealManager.isDing(user, setDate)) {
+                         dingedDeal1 = new DingedDeal((dingedDeal.getConfirmationId() + 1), false, numDings, deal, dingstatus, user);
+                        DealManager dealManager = DealManager.getInstance();
+                        dealManager.updateSeatOffer(dingseat2,deal.getReferenceId());
+                        Intent intent = new Intent(DealDetailsActivity.this, DingedDealDetailsActivity.class);
+                        intent.putExtra("deal_referenceCode", deal.getReferenceId().toString());
+                        intent.putExtra("dingdeal_confirmationId", dingedDeal2.getConfirmationId());
+                        intent.putExtra("mCompanyName", merchant.getCompanyName());
+                        startActivity(intent);
+
+                    } else {
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                               DealDetailsActivity.this);
+
+                        // set title
+                        alertDialogBuilder.setTitle("Are you sure want to ding this deal?");
+
+                        // set dialog message
+                        alertDialogBuilder
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dingedDeal1 = new DingedDeal((dingedDeal.getConfirmationId() + 1), false, numDings, deal, dingstatus, user);
+                                        DealManager dealManager = DealManager.getInstance();
+                                        dealManager.updateSeatOffer(dingseat2,deal.getReferenceId());
+                                        Intent intent = new Intent(DealDetailsActivity.this, DingedDealDetailsActivity.class);
+                                        intent.putExtra("deal_referenceCode", deal.getReferenceId().toString());
+                                        intent.putExtra("dingdeal_confirmationId", dingedDeal2.getConfirmationId());
+                                        intent.putExtra("mCompanyName", merchant.getCompanyName());
+                                        startActivity(intent);
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // if this button is clicked, just close
+                                        // the dialog box and do nothing
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        // show it
+                        alertDialog.show();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
             }
-            startActivity(intent);*/
         }
     };
 
-    /** Upon the destruction of the activity, count down timer will be cancelled */
+    /**
+     * Upon the destruction of the activity, count down timer will be cancelled
+     */
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
         countDownTimer.cancel();
     }
 
     /**
      * Customization for the UI settings
+     *
      * @param newBase New context object for the UI
      */
     @Override
@@ -307,11 +465,17 @@ public class DealDetailsActivity extends BaseActivity{
 
     /**
      * Methods to trigger when scrollable view is being swipe
-     * @return  Boolean object with regards to the status of the swipe
+     *
+     * @return Boolean object with regards to the status of the swipe
      */
     @Override
     public boolean canSwipeRefreshChildScrollUp() {
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     /**
@@ -321,9 +485,10 @@ public class DealDetailsActivity extends BaseActivity{
 
         /**
          * Method to return a newly created instance of this dialog fragment back to the invoker
-         * @param dealDescription   String value that contains the description of the deal
-         * @param dealTC            String value that contains the term and conditions of the deal
-         * @return                  Dialog fragment that will display the description and term and conditions of the deal
+         *
+         * @param dealDescription String value that contains the description of the deal
+         * @param dealTC          String value that contains the term and conditions of the deal
+         * @return Dialog fragment that will display the description and term and conditions of the deal
          */
         public static DealDescriptionDialogFragment newInstance(String dealDescription, String dealTC) {
             DealDescriptionDialogFragment frag = new DealDescriptionDialogFragment();
@@ -337,9 +502,10 @@ public class DealDetailsActivity extends BaseActivity{
 
         /**
          * Methods to execute during the creation of the dialog fragment
-         * @param savedInstanceState    If the dialog fragment is being re-initialized after
-         *                              previously being shut down then this Bundle contains the data it most
-         *                              recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+         *
+         * @param savedInstanceState If the dialog fragment is being re-initialized after
+         *                           previously being shut down then this Bundle contains the data it most
+         *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
          */
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -354,7 +520,7 @@ public class DealDetailsActivity extends BaseActivity{
         public void onStart() {
             super.onStart();
             Dialog d = getDialog();
-            if (d!=null){
+            if (d != null) {
                 int width = ViewGroup.LayoutParams.MATCH_PARENT;
                 int height = ViewGroup.LayoutParams.MATCH_PARENT;
                 d.getWindow().setLayout(width, height);
@@ -417,7 +583,7 @@ public class DealDetailsActivity extends BaseActivity{
 
         /**
          * The system calls this only when creating the layout in a dialog.
-         *
+         * <p/>
          * Override to build your own custom Dialog container.  This is typically
          * used to show an AlertDialog instead of a generic Dialog; when doing so,
          * {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)} does not need
@@ -444,5 +610,43 @@ public class DealDetailsActivity extends BaseActivity{
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             return dialog;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        DealManager dealManager = DealManager.getInstance();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            try {
+                deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
+                Log.d("ONPAUSE", deal.getDealStatus().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DealManager dealManager = DealManager.getInstance();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            try {
+                deal = dealManager.getDeal(extras.getString("deal_referenceCode"));
+                Log.d("OnResume", deal.getDealStatus().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
     }
 }
