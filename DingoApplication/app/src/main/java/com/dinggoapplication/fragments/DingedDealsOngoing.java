@@ -95,15 +95,18 @@ public class DingedDealsOngoing extends Fragment  {
 
         // Set the adapter
         mListView = (ListView) view.findViewById(R.id.dealList);
-        emptyText = (TextView) view.findViewById(R.id.empty);
+        emptyText = (TextView) view.findViewById(R.id.emptyid);
         if (dealList.size() == 0) {
             mListView.setVisibility(View.GONE);
-            setEmptyText("You have no dinged deals at this moment.");
+            setEmptyText("You have no ongoing deals at this moment.");
+            Log.d("Rewards", "DealList is null");
+            emptyText.setText("You have no dinged deals at this moment.");
         }
-        else {
-            setEmptyText("");
+        else{
+            mListView.setAdapter(mAdapter);
+            emptyText.setText("");
         }
-        mListView.setAdapter(mAdapter);
+
 
         // Set OnItemClickListener so we can be notified on item clicks
 

@@ -17,7 +17,7 @@
         android:visibility="gone"
         android:layout_gravity="center"/>
 
-    <TextView android:id="@android:id/empty"
+    <TextView android:id="@+id/emptyid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

@@ -83,14 +83,17 @@ public class DingedDealsRewards extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dinged_deals_rewards, container, false);
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.dealList);
-        emptyText = (TextView) view.findViewById(R.id.empty);
+        emptyText = (TextView) view.findViewById(R.id.emptyid2);
         if (dealList.size() == 0) {
             mListView.setVisibility(View.GONE);
-            setEmptyText("You have no reward deals at this moment.");
-            Log.d("Rewards","DealList is null");
+//            setEmptyText("You have no reward deals at this moment.");
+//            Log.d("Rewards","DealList is null");
+            emptyText.setText("You have no reward deals at this moment.");
         }
-        mListView.setAdapter(mAdapter);
-
+        else {
+            mListView.setAdapter(mAdapter);
+            emptyText.setText("");
+        }
         // Set OnItemClickListener so we can be notified on item clicks
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
