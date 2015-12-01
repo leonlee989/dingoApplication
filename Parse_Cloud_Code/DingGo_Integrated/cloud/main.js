@@ -70,7 +70,7 @@ Parse.Cloud.define("PushDealToAll", function(request, response) {
 	Parse.Push.send({
 		where: query,
 		data: {
-			alert: companyName + " has pushed a new deal  called  " + dealName + "!"
+			alert: "Ding! " + companyName + ": " + dealName + "!"
 		}
 	}, {
 		success: function() {
